@@ -8,3 +8,10 @@ scripts/environment/afile.txt
 outme
 outme.log
 out
+
+.vscode/
+.idea/
+.DS_Store
+
+save/
+*.log
