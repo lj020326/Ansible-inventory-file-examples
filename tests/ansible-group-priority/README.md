@@ -366,9 +366,9 @@ Then setup the following [playbook](./example5/playbook.yml):
 Now run to validate the same results:
 
 ```output
-ansible-playbook -i hosts.ini playbook.yml 
+ansible-playbook -i ./example5/hosts.ini ./example5/playbook.yml 
 
-PLAY [Run play for host1] ************************************************************************************************************************************************************************************************************************************************
+PLAY [Run play] **********************************************************************************************************************************************************************************************************************************************************
 
 TASK [debug] *************************************************************************************************************************************************************************************************************************************************************
 ok: [host1] => {
@@ -381,15 +381,52 @@ ok: [host2] => {
 PLAY RECAP ***************************************************************************************************************************************************************************************************************************************************************
 host1                      : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 host2                      : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-
 ```
 
 ## Example 6 - Using group_by key groups with ansible_group_priority
 
 Copy the files used in the prior example for example 6.
 
-Then modify the playbook to set the group_by key to 'cluster' for host2 as follows:
+Then modify the playbook to set the group_by key to 'cluster' for all hosts as follows:
 
+```yaml
+- name: "Run play"
+  hosts: all
+  gather_facts: false
+  connection: local
+  tasks:
+    - name: Group hosts into 'cluster' group under 'override'
+      changed_when: no
+      group_by:
+        key: "cluster"
+        parents: "override"
+    - debug: var=test
+```
+
+Confirm that the new value 'cluster' should now appear for the variable 'test' for both hosts.
+
+```output
+ansible-playbook -i ./example6/hosts.ini ./example6/playbook.yml 
+
+PLAY [Run play] **********************************************************************************************************************************************************************************************************************************************************
+
+TASK [Group hosts into 'cluster' group under 'override'] *****************************************************************************************************************************************************************************************************************
+ok: [host1]
+ok: [host2]
+
+TASK [debug] *************************************************************************************************************************************************************************************************************************************************************
+ok: [host1] => {
+    "test": "cluster"
+}
+ok: [host2] => {
+    "test": "cluster"
+}
+
+PLAY RECAP ***************************************************************************************************************************************************************************************************************************************************************
+host1                      : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+host2                      : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+```
 
 
 ## Conclusion
