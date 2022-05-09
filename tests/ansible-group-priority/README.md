@@ -509,6 +509,74 @@ TODO: Need to understand why group_by works for ini but does not work for yaml b
 The variable set method [set_variable used in the group.py source](https://github.com/ansible/ansible/blob/97e574fe6ea7a73ef8e42140e8be32c8cdbcaece/lib/ansible/inventory/group.py#L244) uses the [util method combine_vars](https://github.com/ansible/ansible/blob/97e574fe6ea7a73ef8e42140e8be32c8cdbcaece/lib/ansible/utils/vars.py#L81). 
 In turn, the combine_vars method uses the method [merge_hash](https://github.com/ansible/ansible/blob/97e574fe6ea7a73ef8e42140e8be32c8cdbcaece/lib/ansible/utils/vars.py#L96).
 
+The ansible-inventory graph shows the same results for both plugins (ini/yaml):
+```output
+ansible-inventory --graph --vars -i ./example6/hosts.ini
+@all:
+  |--@top_group:
+  |  |--@foo:
+  |  |  |--@override:
+  |  |  |  |--@cluster:
+  |  |  |  |  |--host1
+  |  |  |  |  |  |--{ansible_connection = local}
+  |  |  |  |  |  |--{test = cluster}
+  |  |  |  |  |--{ansible_group_priority = 10}
+  |  |  |  |  |--{test = cluster}
+  |  |  |  |--{ansible_group_priority = 9}
+  |  |  |  |--{test = override}
+  |  |--@product:
+  |  |  |--@product1:
+  |  |  |  |--host1
+  |  |  |  |  |--{ansible_connection = local}
+  |  |  |  |  |--{test = cluster}
+  |  |  |  |--{ansible_group_priority = 3}
+  |  |  |  |--{test = product1}
+  |  |  |--@product2:
+  |  |  |  |--host2
+  |  |  |  |  |--{ansible_connection = local}
+  |  |  |  |  |--{test = product2}
+  |  |  |  |--{ansible_group_priority = 3}
+  |  |  |  |--{test = product2}
+  |  |  |--{ansible_group_priority = 2}
+  |  |  |--{test = product}
+  |  |--{ansible_connection = local}
+  |  |--{test = top_group}
+  |--@ungrouped:
+
+ansible-inventory --graph --vars -i ./example6/hosts.yml
+@all:
+  |--@top_group:
+  |  |--@foo:
+  |  |  |--@override:
+  |  |  |  |--@cluster:
+  |  |  |  |  |--host1
+  |  |  |  |  |  |--{ansible_connection = local}
+  |  |  |  |  |  |--{test = cluster}
+  |  |  |  |  |--{ansible_group_priority = 10}
+  |  |  |  |  |--{test = cluster}
+  |  |  |  |--{ansible_group_priority = 9}
+  |  |  |  |--{test = override}
+  |  |--@product:
+  |  |  |--@product1:
+  |  |  |  |--host1
+  |  |  |  |  |--{ansible_connection = local}
+  |  |  |  |  |--{test = cluster}
+  |  |  |  |--{ansible_group_priority = 3}
+  |  |  |  |--{test = product1}
+  |  |  |--@product2:
+  |  |  |  |--host2
+  |  |  |  |  |--{ansible_connection = local}
+  |  |  |  |  |--{test = product2}
+  |  |  |  |--{ansible_group_priority = 3}
+  |  |  |  |--{test = product2}
+  |  |  |--{ansible_group_priority = 2}
+  |  |  |--{test = product}
+  |  |--{ansible_connection = local}
+  |  |--{test = top_group}
+  |--@ungrouped:
+
+```
+
 Best guess is that when using the yaml-based inventory, the [merge hash method used by group.py ](https://github.com/ansible/ansible/blob/97e574fe6ea7a73ef8e42140e8be32c8cdbcaece/lib/ansible/inventory/group.py#L116) cannot properly resolve the group based on the parent-child group ancestory.
 Whereas in the case of the ini-based inventory, the merge_hash succeeds.
 
