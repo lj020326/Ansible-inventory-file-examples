@@ -26,7 +26,8 @@ I'm getting some unexpected results when I use `ansible_group_priority` in inven
   |--@ungrouped:
 ```
 
-Inventory file 'hosts.ex1.ini' that implements the aforementioned hierarchy:
+Inventory that implements the aforementioned hierarchy as ini inventory [hosts.ex1.ini](./hosts.ex1.ini):
+
 ```
 [top_group:vars]
 test=top_group
@@ -114,7 +115,7 @@ In the last test, the group override is not at the same level as product.
 override is directly below top_group, while the product1 is group is below product which is below top_group.
 
 
-When converting the initial hosts.ex1.ini to yaml in hosts.ex1.yml:
+Convert the initial hosts.ex1.ini to a yaml inventory as [hosts.ex1.yml](./hosts.ex1.yml):
 
 ```yaml
 all:
@@ -187,7 +188,7 @@ Viewing the parent/child hierarchy in a tree format visualizes this well:
  host1                     host1
 ```
 
-It appears that priority does not work well with nested parent/child relationships.
+The priority does not follow an intuitive path with nested parent/child relationships.
 
 ## Testing without parent-child nested groups.
 
@@ -207,7 +208,7 @@ Remove the parent/child relationship of '[override]' from '[top_group]' group, i
   host1 
 ```
 
-The inventory implementing this:
+The inventory yml implementing this as [hosts.ex3.yml](./hosts.ex3.yml):
 
 ```
 all:
