@@ -266,7 +266,7 @@ The priority does not follow an intuitive path with groups having different chil
 
 In fact, the child group having the greatest child depth and greatest priority within that depth will always win.
 
-## ansible_group_priority for child groups
+## Example 4 - Validate prioritization with child groups having same depths.
 
 The next example seeks to validate the following rule observed in the prior example:
 
@@ -278,7 +278,7 @@ So make the groups 'override', 'product1', and 'product2' have the same depth.
 
 Add a group 'foo' between 'override' and 'top_group', such that 'override' is the same depth, 3 levels deep, as 'product1' and 'product2'.  
 
-The resulting yaml inventory with this hierarchy can be found in [hosts.ex3.yml](./hosts.ex3.yml):
+The resulting yaml inventory with this hierarchy can be found in [hosts.ex4.yml](./hosts.ex4.yml):
 
 ```yaml
 all:
@@ -324,7 +324,7 @@ all:
 
 ```
 
-The ini inventory implementing this hierarchy can be found in [hosts.ex3.ini](./hosts.ex3.ini):
+The ini inventory implementing this hierarchy can be found in [hosts.ex4.ini](./hosts.ex4.ini):
 
 ```ini
 [top_group:vars]
