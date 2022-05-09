@@ -85,6 +85,18 @@ host1 | SUCCESS => {
 ```
 
 So far so good, since the `cluster` group priority is '10'. 
+The same results can be confirmed when you convert the same to a yaml inventory as [hosts.ex1.yml](./hosts.ex1.yml):
+
+```
+# ansible-inventory -i hosts.ex1.yml --list host1
+ansible -i hosts.ex1.yml -m debug -a var=test host1
+host1 | SUCCESS => {
+    "test": "cluster"
+}
+```
+
+
+## Example 2 - Remove the variable setting from the initial child group
 
 On the next test, unset `test` from `[cluster:vars]` as ini inventory [hosts.ex2.ini](./hosts.ex2.ini):
 
