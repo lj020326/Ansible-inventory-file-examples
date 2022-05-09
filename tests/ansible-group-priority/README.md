@@ -206,7 +206,7 @@ Remove the parent/child relationship of '[override]' from '[top_group]' group, i
   host1 
 ```
 
-As can be clearly seen above, the 'cluster' group has a child depth of 2 while the product1 and product2 group have child depths of 3.
+As can be clearly seen above, the 'cluster' group has a child depth of 2 while the 'product1' and 'product2' groups each have child depths of 3.
 
 The yaml inventory implementing this hierarchy can be found in [hosts.ex2.yml](./hosts.ex2.yml):
 
