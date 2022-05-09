@@ -167,7 +167,7 @@ Viewing the parent/child hierarchy in a tree format visualizes this well:
  host1                     host1
 ```
 
-## <a id="Example-03"></a>Example 3: Validate prioritization with child groups having same depths
+## <a id="Example-03"></a>Example 3: Validate prioritization with child groups having different depths
 
 In the next example, set the group 'override' such that it is not set at the same child 'depth' or 'level' as the 'product' group. 
 
