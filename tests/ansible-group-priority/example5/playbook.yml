@@ -1,4 +1,4 @@
-- name: "Deploy something"
+- name: "Run play for host1"
   hosts: host1
   gather_facts: false
   connection: local
