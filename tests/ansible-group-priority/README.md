@@ -347,6 +347,46 @@ host1 | SUCCESS => {
 
 ```
 
+## Example 5 - playbook using inventory
+
+For the next example, use the inventory from example 4. 
+
+Then setup the following [playbook](./example5/playbook.yml):
+
+```yaml
+- name: "Run play for host1"
+  hosts: all
+  gather_facts: false
+  connection: local
+  tasks:
+    - debug: var=test
+
+```
+
+Now run to validate the same results:
+
+```output
+ansible-playbook -i hosts.ini playbook.yml 
+
+PLAY [Run play for host1] ************************************************************************************************************************************************************************************************************************************************
+
+TASK [debug] *************************************************************************************************************************************************************************************************************************************************************
+ok: [host1] => {
+    "test": "cluster"
+}
+ok: [host2] => {
+    "test": "product2"
+}
+
+PLAY RECAP ***************************************************************************************************************************************************************************************************************************************************************
+host1                      : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+host2                      : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+
+```
+
+
+
 
 ## Conclusion
 
