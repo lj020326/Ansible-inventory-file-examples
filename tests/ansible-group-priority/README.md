@@ -251,6 +251,62 @@ Even in this example, the results are the same, the variable set in `product1` g
 
 Even if the priority of '[override]' and all of its child groups were set to the highest, in this case, 10, the 'test' variable will be set to the `product1` group and product1 will still continue to win.
 
+## Priority applies only to child group peers having the same depth
+
+For the next example, make the groups possessing the test variable have the same depth. 
+
+So add a group 'foo' between 'override' and 'top_group', such that 'override' is 3 levels deep similar to 'product1' and 'product2'.  
+
+The yaml inventory implementing this hierarchy can be found in [hosts.ex5.yml](./hosts.ex5.yml):
+
+```yaml
+all:
+  children:
+    top_group:
+      vars:
+        test: top_group
+        ansible_connection: local
+        ansible_group_priority: 1
+      children:
+        foo:
+          children:
+            override:
+              vars:
+                test: "override"
+                ansible_group_priority: 9
+              children:
+                cluster:
+                  vars:
+                    test: "cluster"
+                    ansible_group_priority: 10
+                  hosts:
+                    host1:
+                      # test: cluster
+        product:
+          vars:
+            test: "product"
+            ansible_group_priority: 2
+          children:
+            product1:
+              vars:
+                test: "product1"
+                ansible_group_priority: 3
+              hosts:
+                host1: {}
+            product2:
+              vars:
+                test: "product2"
+                ansible_group_priority: 3
+              hosts:
+                host2:
+                  test: product2
+
+```
+
+The ini inventory implementing this hierarchy can be found in [hosts.ex5.ini](./hosts.ex5.ini):
+
+```yaml
 
 
+As can be seen on the prior example, the ansible_group_priority applies only to child group peers having the same depth.
 
