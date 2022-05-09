@@ -120,52 +120,9 @@ host1 | SUCCESS => {
 
 It is not immediately intuitive why the `ansible_group_priority` does not result in the expected value.
 
-The same results can be confirmed when you convert the same to a yaml inventory as [hosts.ex2.yml](./hosts.ex2.yml):
+The same results can be confirmed when you convert the same to a yaml inventory as [hosts.ex2.yml](./hosts.ex2.yml).
 
-```yaml
-all:
-  children:
-    top_group:
-      vars:
-        test: top_group
-        ansible_connection: local
-        ansible_group_priority: 1
-      children:
-        override:
-          vars:
-            test: "override"
-            ansible_group_priority: 9
-          children:
-            cluster:
-              vars:
-#                test: "cluster"
-                ansible_group_priority: 10
-              hosts:
-                host1:
-                  ansible_connection: local
-                  test: cluster
-        product:
-          vars:
-            test: "product"
-            ansible_group_priority: 2
-          children:
-            product1:
-              vars:
-                test: "product1"
-                ansible_group_priority: 3
-              hosts:
-                host1: {}
-            product2:
-              vars:
-                test: "product2"
-                ansible_group_priority: 3
-              hosts:
-                host2:
-                  ansible_connection: local
-                  test: product2
-```
-
-When querying variable `test` for [hosts.ex2.yml](./hosts.ex2.yml), we get the same results as the ini inventory example:
+When querying variable `test` in [hosts.ex2.yml](./hosts.ex2.yml), the same results as the ini inventory example:
 
 ```
 # ansible-inventory -i hosts.ex2.yml --list host1
