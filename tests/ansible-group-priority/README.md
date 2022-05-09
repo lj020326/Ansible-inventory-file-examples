@@ -98,9 +98,9 @@ host1 | SUCCESS => {
 }
 ```
 
-## Example 2 - Unset variable from initial group to validate if expected result occurs
+## Example 2 - Unset variable 'test' from the initial 'cluster' group to validate if expected result occurs.
 
-On the next test, unset `test` from `[cluster:vars]` as ini inventory [hosts.ex2.ini](./hosts.ex2.ini):
+On the next test, unset `test` from `[cluster:vars]` in the ini inventory [hosts.ex2.ini](./hosts.ex2.ini):
 
 ```
 ;test="cluster"
