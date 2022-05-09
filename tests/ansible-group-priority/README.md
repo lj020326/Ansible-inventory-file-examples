@@ -7,7 +7,23 @@ Starting in Ansible version 2.4, users can use the group variable ansible_group_
 > Note:
 > `ansible_group_priority` can only be set in the inventory source and not in 'group_vars/', as the variable is used in the loading of 'group_vars'.
 
-## Example 1 - Test with child groups having same depth
+
+On this page:
+
+* [Example 1 - Test with child groups having same depth](#Example-01)
+
+* [Example 2 - Unset variable 'test' from the initial 'cluster' group to validate if expected result occurs](#Example-02)
+
+* [Example 3 - Validate prioritization with child groups having same depths](#Example-03)
+
+* [Example 4 - Validate prioritization with child groups](#Example-04)
+
+* [Example 5 - playbook using inventory](#Example-05)
+
+* [Example 6 - Using group_by key groups with ansible_group_priority](#Example-06)
+
+
+## <a id="Example-01"></a>Example 1: Test with child groups having same depth
 
 One might observe what is believed to be unexpected results when `ansible_group_priority` is used in inventory inventory groups that have a parent/child relationship. 
 
@@ -96,7 +112,7 @@ host1 | SUCCESS => {
 }
 ```
 
-## Example 2 - Unset variable 'test' from the initial 'cluster' group to validate if expected result occurs.
+## <a id="Example-02"></a>Example 2: Unset variable 'test' from the initial 'cluster' group to validate if expected result occurs
 
 On the next test, unset `test` from `[cluster:vars]` in the ini inventory [hosts.ex2.ini](./hosts.ex2.ini):
 
@@ -129,7 +145,7 @@ host1 | SUCCESS => {
 ```
 
 
-# Groups and depth level
+### Groups and depth level
 
 The group 'cluster' is below group 'override' which is directly below 'top_group' making it 3 levels below the 'all' group, or put more simply as "3 levels deep".
 
@@ -151,7 +167,7 @@ Viewing the parent/child hierarchy in a tree format visualizes this well:
  host1                     host1
 ```
 
-## Example 3 - Validate prioritization with child groups having same depths.
+## <a id="Example-03"></a>Example 3: Validate prioritization with child groups having same depths
 
 In the next example, set the group 'override' such that it is not set at the same child 'depth' or 'level' as the 'product' group. 
 
@@ -222,7 +238,7 @@ The priority does not follow an intuitive merge path.  The deepest child group g
 
 To summarize, the child group having the greatest child depth and greatest priority within that depth will always win.
 
-## Example 4 - Validate prioritization with child groups
+## <a id="Example-04"></a>Example 4: Validate prioritization with child groups
 
 The next example validates the following rule observed in the prior example:
 
@@ -347,7 +363,7 @@ host1 | SUCCESS => {
 
 ```
 
-## Example 5 - playbook using inventory
+## <a id="Example-05"></a>Example 5: playbook using inventory
 
 For the next example, use the inventory from example 4. 
 
@@ -405,7 +421,7 @@ host2                      : ok=1    changed=0    unreachable=0    failed=0    s
 
 Looks good since both results are as expected.
 
-## Example 6 - Using group_by key groups with ansible_group_priority
+## <a id="Example-06"></a>Example 6: Using group_by key groups with ansible_group_priority
 
 Copy the files used in the prior example for example 6.
 
