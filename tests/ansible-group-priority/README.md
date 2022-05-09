@@ -260,7 +260,7 @@ all:
 
 In this example, the results may not be what are expected, since the variable set in `product1` group always wins. 
 
-Even if the priority of '[override]' and all of its child groups were set to the highest, in this case, 10, the 'test' variable will be set to the `product1` group.
+Even if the priority of the 'override' group and all of its child groups were set to the highest, in this case, 10, the 'test' variable results with the `product1` group.
 
 The priority does not follow an intuitive path with groups having different child depths.  
 
