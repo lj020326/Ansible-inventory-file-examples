@@ -6,5 +6,6 @@
     - name: Group hosts into 'cluster' group under 'override'
       group_by:
         key: "cluster"
-        parents: "top_group.foo.override"
+#        parents: "top_group.foo.override"
+        parents: "override"
     - debug: var=test
