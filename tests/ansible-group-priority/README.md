@@ -384,9 +384,9 @@ host2                      : ok=1    changed=0    unreachable=0    failed=0    s
 
 ```
 
-## Example 6 - ansible_group_priority and keyed groups using group_by
+## Example 6 - Using group_by key groups with ansible_group_priority
 
-Copy the files used in the prior example.
+Copy the files used in the prior example for example 6.
 
 Then modify the playbook to set the group_by key to 'cluster' for host2 as follows:
 
