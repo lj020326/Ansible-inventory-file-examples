@@ -252,11 +252,13 @@ In this example, the results may not be what are expected, since the variable se
 
 Even if the priority of '[override]' and all of its child groups were set to the highest, in this case, 10, the 'test' variable will be set to the `product1` group.
 
-In brief, the priority does not follow an intuitive path with groups having different child depths.
+The priority does not follow an intuitive path with groups having different child depths.  
 
-## ansible_group_priority for child groups having the same depth
+In fact, the child group having the greatest child depth and greatest priority within that depth will always win.
 
-For the next example, make the groups 'override', 'product1', and 'product2' have the same depth. 
+## ansible_group_priority for child groups
+
+To again validate this, in the next example, make the groups 'override', 'product1', and 'product2' have the same depth. 
 
 Add a group 'foo' between 'override' and 'top_group', such that 'override' is the same depth, 3 levels deep, as 'product1' and 'product2'.  
 
@@ -308,7 +310,56 @@ all:
 
 The ini inventory implementing this hierarchy can be found in [hosts.ex3.ini](./hosts.ex3.ini):
 
-```yaml
+```ini
+[top_group:vars]
+test=top_group
+ansible_connection=local
+ansible_group_priority=1
+
+[top_group:children]
+product
+foo
+
+[product:vars]
+test="product"
+ansible_group_priority=2
+
+[product:children]
+product1
+product2
+
+[product1]
+host1
+
+[product2]
+host2
+
+[product1:vars]
+test="product1"
+ansible_group_priority=3
+
+[product2:vars]
+test="product2"
+ansible_group_priority=3
+
+[override:vars]
+test="override"
+ansible_group_priority=9
+
+[override:children]
+cluster
+
+[foo:children]
+override
+
+[cluster]
+host1
+
+[cluster:vars]
+#test="cluster"
+ansible_group_priority=10
+```
+
 
 
 As can be seen on the prior example, the ansible_group_priority applies only to child group peers having the same depth.
