@@ -108,12 +108,6 @@ host1 | SUCCESS => {
 
 It may not be immediately intuitive why the `ansible_group_priority` does not result in the expected value.
 
-## Further testing
-
-In the last test, the group override is not at the same level as product. 
-
-override is directly below top_group, while the product1 is group is below product which is below top_group.
-
 Convert the initial hosts.ex1.ini to a yaml inventory as [hosts.ex1.yml](./hosts.ex1.yml):
 
 ```yaml
@@ -159,7 +153,7 @@ all:
                   test: product2
 ```
 
-Query variable `test` for hosts.ex1.yml and the same results of said query:
+When querying variable `test` for [hosts.ex1.yml](./hosts.ex1.yml), we get the same results as the ini inventory example:
 
 ```
 # ansible-inventory -i hosts.ex1.yml --list host1
@@ -170,6 +164,11 @@ host1 | SUCCESS => {
 ```
 
 
+## Groups and depth level
+
+The group 'cluster' is below group 'override' which is directly below 'top_group' making it 3 levels below the 'all' group, or simply 3 levels deep.
+
+Similarly, the 'product1' group is below 'product' which is below 'top_group' making it 3 levels below the 'all' group, or simply 3 levels deep.
 
 Viewing the parent/child hierarchy in a tree format visualizes this well:
 
@@ -187,9 +186,9 @@ Viewing the parent/child hierarchy in a tree format visualizes this well:
  host1                     host1
 ```
 
-The priority does not follow an intuitive path with nested parent/child relationships.
+## Testing group prioritization with groups having different depths.
 
-## Testing without parent-child nested groups.
+In the next test, set the group override such that it is not set at the same child 'depth' or 'level' as the 'product' group. 
 
 Consider the following case.
 
@@ -246,9 +245,13 @@ all:
                 host2: {}
 ```
 
-Even in this example, the results are the same, the variable set in `product1` group always wins. 
+
+In this example, the results may not be what are expected, since the variable set in `product1` group always wins. 
 
 Even if the priority of '[override]' and all of its child groups were set to the highest, in this case, 10, the 'test' variable will be set to the `product1` group and product1 will still continue to win.
+
+In brief, the priority does not follow an intuitive path with groups having different child depths.
+
 
 ## ansible_group_priority for child groups having the same depth
 
