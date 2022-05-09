@@ -257,7 +257,7 @@ For the next example, make the groups possessing the test variable have the same
 
 So add a group 'foo' between 'override' and 'top_group', such that 'override' is 3 levels deep similar to 'product1' and 'product2'.  
 
-The yaml inventory implementing this hierarchy can be found in [hosts.ex3.yml](./hosts.ex5.yml):
+The yaml inventory implementing this hierarchy can be found in [hosts.ex3.yml](./hosts.ex3.yml):
 
 ```yaml
 all:
@@ -303,7 +303,7 @@ all:
 
 ```
 
-The ini inventory implementing this hierarchy can be found in [hosts.ex3.ini](./hosts.ex5.ini):
+The ini inventory implementing this hierarchy can be found in [hosts.ex3.ini](./hosts.ex3.ini):
 
 ```yaml
 
