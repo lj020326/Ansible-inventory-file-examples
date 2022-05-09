@@ -159,6 +159,18 @@ all:
                   test: product2
 ```
 
+Query variable `test` for hosts.ex1.yml and the same results of said query:
+
+```
+# ansible-inventory -i hosts.ex1.yml --list host1
+ansible -i hosts.ex1.yml -m debug -a var=test host1
+host1 | SUCCESS => {
+    "test": "cluster"
+}
+```
+
+
+
 Viewing the parent/child hierarchy in a tree format visualizes this well:
 
 ```output
