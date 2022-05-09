@@ -186,7 +186,7 @@ Viewing the parent/child hierarchy in a tree format visualizes this well:
  host1                     host1
 ```
 
-## Testing group prioritization with groups having different depths.
+## Testing prioritization with groups having different depths.
 
 In the next test, set the group override such that it is not set at the same child 'depth' or 'level' as the 'product' group. 
 
