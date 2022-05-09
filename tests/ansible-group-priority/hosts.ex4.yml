@@ -19,7 +19,7 @@ all:
                     test: "cluster"
                     ansible_group_priority: 10
                   hosts:
-                    host1:
+                    host1: {}
         product:
           vars:
             test: "product"
