@@ -250,10 +250,9 @@ all:
 
 In this example, the results may not be what are expected, since the variable set in `product1` group always wins. 
 
-Even if the priority of '[override]' and all of its child groups were set to the highest, in this case, 10, the 'test' variable will be set to the `product1` group and product1 will still continue to win.
+Even if the priority of '[override]' and all of its child groups were set to the highest, in this case, 10, the 'test' variable will be set to the `product1` group.
 
 In brief, the priority does not follow an intuitive path with groups having different child depths.
-
 
 ## ansible_group_priority for child groups having the same depth
 
