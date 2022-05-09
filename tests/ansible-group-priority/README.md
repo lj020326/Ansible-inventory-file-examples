@@ -188,7 +188,7 @@ Viewing the parent/child hierarchy in a tree format visualizes this well:
 
 ## Testing prioritization with child groups having different depths.
 
-In the next test, set the group override such that it is not set at the same child 'depth' or 'level' as the 'product' group. 
+In the next example, set the group 'override' such that it is not set at the same child 'depth' or 'level' as the 'product' group. 
 
 Consider the following case.
 
@@ -205,6 +205,8 @@ Remove the parent/child relationship of '[override]' from '[top_group]' group, i
    |
   host1 
 ```
+
+As can be clearly seen above, the 'cluster' group has a child depth of 2 while the product1 and product2 group have child depths of 3.
 
 The yaml inventory implementing this hierarchy can be found in [hosts.ex3.yml](./hosts.ex3.yml):
 
