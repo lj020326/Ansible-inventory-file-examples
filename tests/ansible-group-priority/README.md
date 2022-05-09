@@ -10,17 +10,17 @@ Starting in Ansible version 2.4, users can use the group variable ansible_group_
 
 On this page:
 
-* [Example 1: Test with child groups having same depth](#Example-01)
+* [Example 1 - Test with child groups having same depth](#Example-01)
 
-* [Example 2: Unset variable 'test' from the initial 'cluster' group to validate if expected result occurs](#Example-02)
+* [Example 2 - Unset variable 'test' from the initial 'cluster' group to validate if expected result occurs](#Example-02)
 
-* [Example 3: Validate prioritization with child groups having same depths](#Example-03)
+* [Example 3 - Validate prioritization with child groups having same depths](#Example-03)
 
-* [Example 4: Validate prioritization with child groups](#Example-04)
+* [Example 4 - Validate prioritization with child groups](#Example-04)
 
-* [Example 5: playbook using inventory](#Example-05)
+* [Example 5 - playbook using inventory](#Example-05)
 
-* [Example 6: Using group_by key groups with ansible_group_priority](#Example-06)
+* [Example 6 - Using group_by key groups with ansible_group_priority](#Example-06)
 
 
 ## <a id="Example-01"></a>Example 1: Test with child groups having same depth
