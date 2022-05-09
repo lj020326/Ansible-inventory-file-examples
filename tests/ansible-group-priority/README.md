@@ -7,7 +7,7 @@ Starting in Ansible version 2.4, users can use the group variable ansible_group_
 > Note:
 > `ansible_group_priority` can only be set in the inventory source and not in 'group_vars/', as the variable is used in the loading of 'group_vars'.
 
-## Testing
+## Example 1 - Test with child groups having same depth
 
 I'm getting some unexpected results when I use `ansible_group_priority` in inventory groups that have a parent/child relationship. I create an inventory structurally looks like this:
 
@@ -95,8 +95,7 @@ host1 | SUCCESS => {
 }
 ```
 
-
-## Example 2 - Remove the variable setting from the initial child group
+## Example 2 - Unset variable from initial group to validate if expected result occurs
 
 On the next test, unset `test` from `[cluster:vars]` as ini inventory [hosts.ex2.ini](./hosts.ex2.ini):
 
@@ -174,7 +173,7 @@ host1 | SUCCESS => {
 ```
 
 
-## Groups and depth level
+# Groups and depth level
 
 The group 'cluster' is below group 'override' which is directly below 'top_group' making it 3 levels below the 'all' group, or simply 3 levels deep.
 
@@ -196,7 +195,7 @@ Viewing the parent/child hierarchy in a tree format visualizes this well:
  host1                     host1
 ```
 
-## Testing prioritization with child groups having different depths.
+## Example 3 - Validate prioritization with child groups having same depths.
 
 In the next example, set the group 'override' such that it is not set at the same child 'depth' or 'level' as the 'product' group. 
 
