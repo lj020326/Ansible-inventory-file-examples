@@ -106,14 +106,13 @@ host1 | SUCCESS => {
 }
 ```
 
-It is not immediately clear why `ansible_group_priority` is not set to the expected value.
+It may not be immediately intuitive why the `ansible_group_priority` does not result in the expected value.
 
 ## Further testing
 
 In the last test, the group override is not at the same level as product. 
 
 override is directly below top_group, while the product1 is group is below product which is below top_group.
-
 
 Convert the initial hosts.ex1.ini to a yaml inventory as [hosts.ex1.yml](./hosts.ex1.yml):
 
