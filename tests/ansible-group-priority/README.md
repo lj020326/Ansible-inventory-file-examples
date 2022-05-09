@@ -347,7 +347,6 @@ host1 | SUCCESS => {
 
 ```
 
-As can be seen on the prior example, the ansible_group_priority applies only to child group peers having the same depth.
 
 ## Conclusion
 
