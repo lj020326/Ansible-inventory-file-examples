@@ -222,16 +222,17 @@ The priority does not follow an intuitive merge path.  The deepest child group g
 
 To summarize, the child group having the greatest child depth and greatest priority within that depth will always win.
 
-## Example 4 - Validate prioritization with child groups having same depths.
+## Example 4 - Validate prioritization with child groups
 
 The next example validates the following rule observed in the prior example:
 
 >
 > the child group having the greatest child depth and greatest priority within that depth will always win.
 
-Make the groups 'override', 'product1', and 'product2' have the same depth. 
+With the inventory used in the prior example 3 as the starting point, make the groups 'override', 'product1', and 'product2' have the same depth. 
 
 Add a group 'foo' between 'override' and 'top_group', such that 'override' is the same depth, 3 levels deep, as 'product1' and 'product2'.  
+Note the 'cluster' child group now has a depth of 4, resulting in it have the greatest depth path.
 
 The resulting yaml inventory with this hierarchy can be found in [hosts.ex4.yml](./hosts.ex4.yml):
 
@@ -330,7 +331,9 @@ test="cluster"
 ansible_group_priority=10
 ```
 
-The results are now consistent with the stated rule:
+Since the 'cluster' group now has the greatest depth path, using the rule it would be expected that the 'test' variable value will be set to 'cluster'. 
+
+In fact, the observed results are now consistent with the stated rule:
 
 ```output
 ansible -i hosts.ex4.ini -m debug -a var=test host1
