@@ -78,7 +78,8 @@ ansible_group_priority=10
 Query variable `test` for host1 and results of said query:
 
 ```
-$ ansible -i hosts.ex1.ini -m debug -a var=test host1
+# ansible-inventory -i hosts.ex1.ini --list host1
+ansible -i hosts.ex1.ini -m debug -a var=test host1
 host1 | SUCCESS => {
     "test": "cluster"
 }
@@ -97,13 +98,14 @@ The expectation is that the variable set in the `[override]` group will win.
 But it does not. Instead, `product1` wins:
 
 ```
-# ansible-inventory -i hosts.ini --list
+# ansible-inventory -i hosts.ex2.ini --list host1
+ansible -i hosts.ex2.ini -m debug -a var=test host1
 host1 | SUCCESS => {
-    "msg": "product1"
+    "test": "product1"
 }
 ```
 
-Not sure why `ansible_group_priority` is being ignored, or what rule is being used to merge these variables, to my mind, incorrectly.
+It is not immediately clear why `ansible_group_priority` is not set to the expected value.
 
 ## Further testing
 
@@ -112,7 +114,7 @@ In the last test, the group override is not at the same level as product.
 override is directly below top_group, while the product1 is group is below product which is below top_group.
 
 
-When converting the same inventory to yaml:
+When converting the initial hosts.ex1.ini to yaml in hosts.ex1.yml:
 
 ```yaml
 all:
