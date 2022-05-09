@@ -9,7 +9,7 @@ Starting in Ansible version 2.4, users can use the group variable ansible_group_
 
 ## Example 1 - Test with child groups having same depth
 
-ONe might observe what is believed to be unexpected results when `ansible_group_priority` is used in inventory groups that have a parent/child relationship. 
+One might observe what is believed to be unexpected results when `ansible_group_priority` is used in inventory inventory groups that have a parent/child relationship. 
 
 For example, create an inventory structurally that looks like this:
 
