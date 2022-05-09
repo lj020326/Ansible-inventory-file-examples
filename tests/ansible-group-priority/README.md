@@ -363,4 +363,6 @@ ansible_group_priority=10
 
 As can be seen on the prior example, the ansible_group_priority applies only to child group peers having the same depth.
 
-And in the alternative scenario where child groups have different depths, the child group having the greatest child depth and greatest priority within that depth will always win.
+In conclusion, from the testing we have done, the following deterministic rule/behavior is exhibited by the using ansible_group_priority with child groups:
+
+The child group having the greatest child depth and greatest priority within that depth will always win.
