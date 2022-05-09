@@ -382,9 +382,13 @@ PLAY RECAP *********************************************************************
 host1                      : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 host2                      : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 
-
 ```
 
+## Example 6 - ansible_group_priority and keyed groups using group_by
+
+Copy the files used in the prior example.
+
+Then modify the playbook to set the group_by key to 'cluster' for host2 as follows:
 
 
 
