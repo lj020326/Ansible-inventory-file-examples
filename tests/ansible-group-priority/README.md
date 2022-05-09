@@ -264,7 +264,7 @@ Even if the priority of the 'override' group and all of its child groups were se
 
 The priority does not follow an intuitive depth-first path.  It is observed by this testing, that the deepest child group getting set and if multiple child group peers exist at the same depth, the one with the greatest priority in that peer group will be set.  
 
-In brief, the child group having the greatest child depth and greatest priority within that depth will always win.
+To summarize, the child group having the greatest child depth and greatest priority within that depth will always win.
 
 ## Example 4 - Validate prioritization with child groups having same depths.
 
