@@ -354,7 +354,7 @@ For the next example, use the inventory from example 4.
 Then setup the following [playbook](./example5/playbook.yml):
 
 ```yaml
-- name: "Run play for host1"
+- name: "Run play"
   hosts: all
   gather_facts: false
   connection: local
