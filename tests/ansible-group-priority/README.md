@@ -434,7 +434,6 @@ Then modify the playbook to set the group_by key to 'cluster' for all hosts as f
   connection: local
   tasks:
     - name: Group hosts into 'cluster' group under 'override'
-      changed_when: no
       group_by:
         key: "cluster"
         parents: "override"
