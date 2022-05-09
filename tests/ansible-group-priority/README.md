@@ -87,7 +87,8 @@ host1 | SUCCESS => {
 ```
 
 So far so good, since the `cluster` group priority is '10'. 
-The same results can be confirmed when you convert the same to a yaml inventory as [hosts.ex1.yml](./hosts.ex1.yml):
+
+The same results can be confirmed when you convert the same inventory to yaml as [hosts.ex1.yml](./hosts.ex1.yml):
 
 ```
 # ansible-inventory -i hosts.ex1.yml --list host1
