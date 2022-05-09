@@ -107,7 +107,7 @@ On the next test, unset `test` from `[cluster:vars]` in the ini inventory [hosts
 ansible_group_priority=10
 ```
 
-The expectation is that the variable set in the `[override]` group will win.
+The expectation is that the variable set in the `override` group will win.
 But it does not. Instead, `product1` wins:
 
 ```
