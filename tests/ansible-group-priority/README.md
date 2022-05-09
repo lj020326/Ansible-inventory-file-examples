@@ -26,7 +26,7 @@ I'm getting some unexpected results when I use `ansible_group_priority` in inven
   |--@ungrouped:
 ```
 
-Inventory file 'hosts.ini' that implements the aforementioned hierarchy:
+Inventory file 'hosts.ex1.ini' that implements the aforementioned hierarchy:
 ```
 [top_group:vars]
 test=top_group
@@ -75,17 +75,12 @@ ansible_group_priority=10
 
 ```
 
-Query `test` and results of said query:
+Query variable `test` for host1 and results of said query:
 
 ```
-ljohnson@Lees-MBP:[scenario1](develop-lj)$ ansible -i hosts.ini -m debug -a var=test host1
+$ ansible -i hosts.ex1.ini -m debug -a var=test host1
 host1 | SUCCESS => {
-    "test": "override"
-}
-
-ansible -i hosts.ini -m debug -a var=test
-host1 | SUCCESS => {
-    "msg": "cluster"
+    "test": "cluster"
 }
 ```
 
