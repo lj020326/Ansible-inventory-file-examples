@@ -9,7 +9,9 @@ Starting in Ansible version 2.4, users can use the group variable ansible_group_
 
 ## Example 1 - Test with child groups having same depth
 
-I'm getting some unexpected results when I use `ansible_group_priority` in inventory groups that have a parent/child relationship. I create an inventory structurally looks like this:
+ONe might observe what is believed to be unexpected results when `ansible_group_priority` is used in inventory groups that have a parent/child relationship. 
+
+For example, create an inventory structurally that looks like this:
 
 ```
   |--@top_group:
@@ -24,7 +26,7 @@ I'm getting some unexpected results when I use `ansible_group_priority` in inven
   |--@ungrouped:
 ```
 
-Inventory that implements the aforementioned hierarchy as ini inventory [hosts.ex1.ini](./hosts.ex1.ini):
+The inventory implementing the aforementioned hierarchy as an ini inventory [hosts.ex1.ini](./hosts.ex1.ini):
 
 ```
 [top_group:vars]
