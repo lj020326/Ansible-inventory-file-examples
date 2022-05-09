@@ -7,7 +7,7 @@ Starting in Ansible version 2.4, users can use the group variable ansible_group_
 ref: https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html#how-variables-are-merged
 
 > Note:
-> `ansible_group_priority` can only be set in the inventory source and not in group\_vars/, as the variable is used in the loading of group\_vars.
+> `ansible_group_priority` can only be set in the inventory source and not in 'group_vars/', as the variable is used in the loading of group\_vars.
 
 ## Testing
 
