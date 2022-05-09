@@ -224,13 +224,12 @@ To summarize, the child group having the greatest child depth and greatest prior
 
 ## Example 4 - Validate prioritization with child groups having same depths.
 
-The next example seeks to validate the following rule observed in the prior example:
+The next example validates the following rule observed in the prior example:
 
 >
 > the child group having the greatest child depth and greatest priority within that depth will always win.
->
 
-So make the groups 'override', 'product1', and 'product2' have the same depth. 
+Make the groups 'override', 'product1', and 'product2' have the same depth. 
 
 Add a group 'foo' between 'override' and 'top_group', such that 'override' is the same depth, 3 levels deep, as 'product1' and 'product2'.  
 
@@ -257,8 +256,7 @@ all:
                     test: "cluster"
                     ansible_group_priority: 10
                   hosts:
-                    host1:
-                      # test: cluster
+                    host1: {}
         product:
           vars:
             test: "product"
@@ -328,8 +326,22 @@ override
 host1
 
 [cluster:vars]
-#test="cluster"
+test="cluster"
 ansible_group_priority=10
+```
+
+The results are now consistent with the stated rule:
+
+```output
+ansible -i hosts.ex4.ini -m debug -a var=test host1
+host1 | SUCCESS => {
+    "test": "cluster"
+}
+ansible -i hosts.ex4.yml -m debug -a var=test host1
+host1 | SUCCESS => {
+    "test": "cluster"
+}
+
 ```
 
 As can be seen on the prior example, the ansible_group_priority applies only to child group peers having the same depth.
