@@ -262,9 +262,9 @@ In this example, the results may not be what are expected, since the variable se
 
 Even if the priority of the 'override' group and all of its child groups were set to the highest, in this case, 10, the 'test' variable results with the `product1` group.
 
-The priority does not follow an intuitive path with groups having different child depths.  
+The priority does not follow an intuitive depth-first path.  It is observed by this testing, that the deepest child group getting set and if multiple child group peers exist at the same depth, the one with the greatest priority in that peer group will be set.  
 
-In fact, the child group having the greatest child depth and greatest priority within that depth will always win.
+In brief, the child group having the greatest child depth and greatest priority within that depth will always win.
 
 ## Example 4 - Validate prioritization with child groups having same depths.
 
