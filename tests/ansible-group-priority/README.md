@@ -151,13 +151,13 @@ all:
                   test: product2
 ```
 
-When querying variable `test` for [hosts.ex1.yml](./hosts.ex1.yml), we get the same results as the ini inventory example:
+When querying variable `test` for [hosts.ex2.yml](./hosts.ex2.yml), we get the same results as the ini inventory example:
 
 ```
-# ansible-inventory -i hosts.ex1.yml --list host1
-ansible -i hosts.ex1.yml -m debug -a var=test host1
+# ansible-inventory -i hosts.ex2.yml --list host1
+ansible -i hosts.ex2.yml -m debug -a var=test host1
 host1 | SUCCESS => {
-    "test": "cluster"
+    "test": "product1"
 }
 ```
 
