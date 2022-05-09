@@ -4,8 +4,6 @@ ansible_group_priority
 
 Starting in Ansible version 2.4, users can use the group variable ansible_group_priority to change the merge order for groups of the same level (after the parent/child order is resolved).
 
-ref: https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html#how-variables-are-merged
-
 > Note:
 > `ansible_group_priority` can only be set in the inventory source and not in 'group_vars/', as the variable is used in the loading of 'group_vars'.
 
@@ -368,3 +366,8 @@ As can be seen on the prior example, the ansible_group_priority applies only to 
 In conclusion, from the testing we have done, the following deterministic rule/behavior is exhibited by the using ansible_group_priority with child groups:
 
 The child group having the greatest child depth and greatest priority within that depth will always win.
+
+## References
+
+* https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html#how-variables-are-merged
+* 
