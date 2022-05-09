@@ -20,7 +20,6 @@ all:
               hosts:
                 host1:
                   ansible_connection: local
-                  test: cluster
         product:
           vars:
             test: "product"

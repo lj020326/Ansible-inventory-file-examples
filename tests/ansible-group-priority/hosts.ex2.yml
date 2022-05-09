@@ -15,7 +15,7 @@ all:
           children:
             cluster:
               vars:
-                test: "cluster"
+#                test: "cluster"
                 ansible_group_priority: 10
               hosts:
                 host1:
