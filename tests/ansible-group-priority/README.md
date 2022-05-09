@@ -122,7 +122,7 @@ It is not immediately intuitive why the `ansible_group_priority` does not result
 
 The same results can be confirmed when you convert the same to a yaml inventory as [hosts.ex2.yml](./hosts.ex2.yml).
 
-When querying variable `test` in [hosts.ex2.yml](./hosts.ex2.yml), the same results as the ini inventory example:
+When querying variable `test` in [hosts.ex2.yml](./hosts.ex2.yml), the query results with the group 'product1' winning as the ini inventory example:
 
 ```
 # ansible-inventory -i hosts.ex2.yml --list host1
