@@ -79,7 +79,6 @@ ansible_group_priority=10
 Now run a simple query on the variable `test` for host1 and observe the results of the query:
 
 ```
-# ansible-inventory -i hosts.ex1.ini --list host1
 ansible -i hosts.ex1.ini -m debug -a var=test host1
 host1 | SUCCESS => {
     "test": "cluster"
@@ -91,7 +90,6 @@ So far so good, since the `cluster` group priority is '10'.
 The same results can be confirmed when you convert the same inventory to yaml as [hosts.ex1.yml](./hosts.ex1.yml):
 
 ```
-# ansible-inventory -i hosts.ex1.yml --list host1
 ansible -i hosts.ex1.yml -m debug -a var=test host1
 host1 | SUCCESS => {
     "test": "cluster"
@@ -111,7 +109,6 @@ The expectation is that the variable set in the `override` group will win.
 But it does not. Instead, `product1` wins:
 
 ```
-# ansible-inventory -i hosts.ex2.ini --list host1
 ansible -i hosts.ex2.ini -m debug -a var=test host1
 host1 | SUCCESS => {
     "test": "product1"
@@ -125,7 +122,6 @@ The same results can be confirmed when you convert the same to a yaml inventory 
 When querying variable `test` in [hosts.ex2.yml](./hosts.ex2.yml), the query results with the group 'product1' winning as the ini inventory example:
 
 ```
-# ansible-inventory -i hosts.ex2.yml --list host1
 ansible -i hosts.ex2.yml -m debug -a var=test host1
 host1 | SUCCESS => {
     "test": "product1"
@@ -340,9 +336,9 @@ As can be seen on the prior example, the ansible_group_priority applies only to 
 
 ## Conclusion
 
-In conclusion, from the testing we have done, the following deterministic rule/behavior is exhibited by the using ansible_group_priority with child groups:
+In conclusion, from the testing done, the following deterministic rule/behavior is exhibited by the using ansible_group_priority with child groups:
 
-The child group having the greatest child depth and greatest priority within that depth will always win.
+* The child group having the greatest child depth and greatest priority within that depth will win.
 
 While the rule is deterministic, it may lead results as noted above that do not intuitively make sense.   E.g., using the rule just described, if a child group with depth 2 has ansible_group_priority of 10, it will lose to a child group with depth 3 that has ansible_group_priority set to 1.  This result was best demonstrated with example 2.
 
