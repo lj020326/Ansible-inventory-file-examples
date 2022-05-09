@@ -373,7 +373,7 @@ In conclusion, from the testing we have done, the following deterministic rule/b
 
 The child group having the greatest child depth and greatest priority within that depth will always win.
 
-While the rule is deterministic, it may lead results as noted above that do not intuitively make sense.   E.g., using the rule just described, if a child group with depth 2 has ansible_group_priority of 10, it will lose to a child group with depth 3 that has ansible_group_priority set to 1.
+While the rule is deterministic, it may lead results as noted above that do not intuitively make sense.   E.g., using the rule just described, if a child group with depth 2 has ansible_group_priority of 10, it will lose to a child group with depth 3 that has ansible_group_priority set to 1.  This result was best demonstrated with example 2.
 
 ## References
 
