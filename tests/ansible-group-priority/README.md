@@ -88,7 +88,7 @@ host1 | SUCCESS => {
 
 So far so good, since the `cluster` group priority is '10'. 
 
-On the next test, unset `test` from `[cluster:vars]`
+On the next test, unset `test` from `[cluster:vars]` as ini inventory [hosts.ex2.ini](./hosts.ex2.ini):
 
 ```
 ;test="cluster"
@@ -208,7 +208,7 @@ Remove the parent/child relationship of '[override]' from '[top_group]' group, i
   host1 
 ```
 
-The inventory yml implementing this as [hosts.ex3.yml](./hosts.ex3.yml):
+The yaml inventory implementing this hierarchy can be found in [hosts.ex3.yml](./hosts.ex3.yml):
 
 ```
 all:
@@ -247,9 +247,9 @@ all:
                 host2: {}
 ```
 
-Even in this case, the results are the same, the variable set in `product1` group always wins. 
+Even in this example, the results are the same, the variable set in `product1` group always wins. 
 
-Apparently even if the priority of '[override]' and all of its child groups were set to the highest, in this case, 10, that `product1` will still continue to win.
+Even if the priority of '[override]' and all of its child groups were set to the highest, in this case, 10, the 'test' variable will be set to the `product1` group and product1 will still continue to win.
 
 
 
