@@ -76,7 +76,7 @@ ansible_group_priority=10
 
 ```
 
-Query variable `test` for host1 and results of said query:
+Now run a simple query on the variable `test` for host1 and observe the results of the query:
 
 ```
 # ansible-inventory -i hosts.ex1.ini --list host1
