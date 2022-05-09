@@ -78,7 +78,12 @@ ansible_group_priority=10
 Query `test` and results of said query:
 
 ```
-# ansible-inventory -i foo.ini --list
+ljohnson@Lees-MBP:[scenario1](develop-lj)$ ansible -i hosts.ini -m debug -a var=test host1
+host1 | SUCCESS => {
+    "test": "override"
+}
+
+ansible -i hosts.ini -m debug -a var=test
 host1 | SUCCESS => {
     "msg": "cluster"
 }
@@ -97,6 +102,7 @@ The expectation is that the variable set in the `[override]` group will win.
 But it does not. Instead, `product1` wins:
 
 ```
+# ansible-inventory -i hosts.ini --list
 host1 | SUCCESS => {
     "msg": "product1"
 }
