@@ -104,9 +104,9 @@ host1 | SUCCESS => {
 }
 ```
 
-It may not be immediately intuitive why the `ansible_group_priority` does not result in the expected value.
+It is not immediately intuitive why the `ansible_group_priority` does not result in the expected value.
 
-Convert the initial hosts.ex1.ini to a yaml inventory as [hosts.ex1.yml](./hosts.ex1.yml):
+The same results can be confirmed when you convert the same to a yaml inventory as [hosts.ex2.yml](./hosts.ex2.yml):
 
 ```yaml
 all:
@@ -124,7 +124,7 @@ all:
           children:
             cluster:
               vars:
-                test: "cluster"
+#                test: "cluster"
                 ansible_group_priority: 10
               hosts:
                 host1:
