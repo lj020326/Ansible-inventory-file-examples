@@ -251,7 +251,7 @@ Even in this example, the results are the same, the variable set in `product1` g
 
 Even if the priority of '[override]' and all of its child groups were set to the highest, in this case, 10, the 'test' variable will be set to the `product1` group and product1 will still continue to win.
 
-## Priority applies only to child group peers having the same depth
+## Priority for child groups having the same peer depth
 
 For the next example, make the groups possessing the test variable have the same depth. 
 
