@@ -257,7 +257,13 @@ In fact, the child group having the greatest child depth and greatest priority w
 
 ## ansible_group_priority for child groups
 
-To again validate this, in the next example, make the groups 'override', 'product1', and 'product2' have the same depth. 
+The next example seeks to validate the following rule observed in the prior example:
+
+>
+> the child group having the greatest child depth and greatest priority within that depth will always win.
+>
+
+So make the groups 'override', 'product1', and 'product2' have the same depth. 
 
 Add a group 'foo' between 'override' and 'top_group', such that 'override' is the same depth, 3 levels deep, as 'product1' and 'product2'.  
 
