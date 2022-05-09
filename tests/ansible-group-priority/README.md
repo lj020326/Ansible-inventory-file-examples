@@ -229,8 +229,23 @@ all:
                 host2: {}
 ```
 
+Now confirm that the results are as expected for the inventory:
 
-In this example, the results may not be what are expected, since the variable set in `product1` group always wins. 
+```output
+ansible -i hosts.ex3.ini -m debug -a var=test host1
+host1 | SUCCESS => {
+    "test": "product1"
+}
+...
+...
+
+ansible -i hosts.ex3.yml -m debug -a var=test host1
+host1 | SUCCESS => {
+    "test": "product1"
+}
+```
+
+The results may not be what are expected, since the variable set in `product1` group always wins. 
 
 Even if the priority of the 'override' group and all of its child groups were set to the highest, in this case, 10, the 'test' variable results with the `product1` group.
 
