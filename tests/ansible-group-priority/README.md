@@ -14,7 +14,7 @@ On this page:
 
 * [Example 2: Unset variable 'test' from the initial 'cluster' group to validate if expected result occurs](#Example-02)
 
-* [Example 3: Validate prioritization with child groups having same depths](#Example-03)
+* [Example 3: Validate prioritization with child groups having different depths](#Example-03)
 
 * [Example 4: Validate prioritization with child groups](#Example-04)
 
