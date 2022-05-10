@@ -603,13 +603,14 @@ In turn, the combine_vars method uses the method [merge_hash](https://github.com
 Best guess is that when using the yaml-based inventory, the [merge hash method used by group.py ](https://github.com/ansible/ansible/blob/97e574fe6ea7a73ef8e42140e8be32c8cdbcaece/lib/ansible/inventory/group.py#L116) cannot properly resolve the group based on the parent-child group ancestory.
 Whereas in the case of the ini-based inventory, the merge_hash succeeds.
 
-## Conclusion
+## Conclusions
 
-In conclusion, from the testing done, the following deterministic rule/behavior is exhibited by the using ansible_group_priority with child groups:
+In conclusion, from the testing done, the variable merge path behavior is consistent when using ansible_group_priority with child groups with 1 exception noted.
 
-* The child group having the greatest child depth and greatest priority among peer-level child groups having the same depth will win.
+The exception occurs when using ansible group_by and key child groups with the YAML inventory.
 
-While the rule is deterministic, it may lead results as noted above that do not intuitively make sense.   E.g., using the rule just described, if a child group with depth 2 has ansible_group_priority of 10, it will lose to a child group with depth 3 that has ansible_group_priority set to 1.  This result was best demonstrated with example 2.
+If the use case involving ansible group_by and key child groups is desired, then it is best to use the INI inventory and avoid using the YAML inventory plugin for those specific cases. 
+
 
 ## References
 
