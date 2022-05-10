@@ -79,7 +79,7 @@ In this example, if both groups have the same priority, the result would normall
 
 ## INI and YAML Inventory Examples
 
-On this page:
+The remaining sections will explore the following common child group prioritization example use cases:
 
 * [Example 1: Test with child groups having same depth](#Example-01)
 
@@ -93,6 +93,7 @@ On this page:
 
 * [Example 6: Using group_by key groups with ansible_group_priority](#Example-06)
 
+The purpose here is to fully understand how to leverage child group vars especially with respect to deriving the expected behavior for variable merging. 
 
 ## <a id="Example-01"></a>Example 1: Test with child groups having same depth
 
@@ -258,10 +259,9 @@ Remove the parent/child relationship of '[override]' from '[top_group]' group, i
   host1 
 ```
 
-As can be clearly seen above, the 'cluster' group has a child depth of 2 while the 'product1' and 'product2' groups each have child depths of 3.
+As can be clearly seen above, the 'cluster' group has a depth of 2 while the 'product1' and 'product2' groups each have depths of 3.
 
-The ini inventory implementing this hierarchy can be found in [hosts.ex3.ini](./hosts.ex2.ini):
-The yaml inventory implementing this hierarchy can be found in [hosts.ex3.yml](./hosts.ex2.yml):
+The INI inventory implementing this hierarchy can be found in [hosts.ex3.ini](./hosts.ex2.ini) and the equivalent YAML inventory implementing this hierarchy can be found in [hosts.ex3.yml](./hosts.ex2.yml):
 
 ```yaml
 all:
@@ -300,7 +300,7 @@ all:
                 host2: {}
 ```
 
-Now confirm that the results are as expected for the inventory:
+Now confirm that the results are as expected for the 2 equivalent inventory implementations:
 
 ```output
 ansible -i hosts.ex3.ini -m debug -a var=test host1
@@ -318,11 +318,11 @@ host1 | SUCCESS => {
 
 The results may not be what are expected, since the variable set in `product1` group always wins. 
 
-Even if the priority of the 'override' group and all of its child groups were set to the highest, in this case, 10, the 'test' variable results with the `product1` group.
+Even if the priority of the 'override' group and all of its child groups were set to the highest, in this case, 10, the 'test' variable is set by the `product1` group.
 
-The priority does not follow an intuitive merge path.  The deepest child group gets set and if multiple child group peers exist at the same depth, then the one with the greatest priority in that peer depth group will be set.  
+The priority does not follow an intuitive merge path.  The deepest child group gets set and if multiple child group peers exist at the same depth, then the one with the greatest priority in that peer depth group will be set.  If the priority is the same among multiple groups at the greatest depth, then alphabetical sort order is used with the last in the sort group winning. 
 
-To summarize, the child group having the greatest child depth and greatest priority within that depth will always win.
+To summarize in the case when using the ansible_group_priority variable, the child group having the greatest child depth and greatest priority within that depth will always win.
 
 ## <a id="Example-04"></a>Example 4: Validate prioritization with child groups
 
