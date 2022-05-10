@@ -98,7 +98,7 @@ The purpose here is to fully understand how to leverage child group vars especia
 The ansible environment used to perform the examples:
 
 ```output
-$ git clone https://github.com/lj020326/lj020326/ansible-inventory-file-examples.git
+$ git clone https://github.com/lj020326/ansible-inventory-file-examples.git
 $ cd ansible-inventory-file-examples/tests/ansible-group-priority
 $ ansible --version
 ansible [core 2.12.3]
