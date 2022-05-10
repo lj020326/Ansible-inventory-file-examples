@@ -22,7 +22,43 @@ Ansible [documentation](https://docs.ansible.com/ansible/latest/user_guide/playb
 
 > Within any section, redefining a var will overwrite the previous instance. If multiple groups have the same variable, the last one loaded wins. If you define a variable twice in a play’s vars: section, the 2nd one wins.
 
-## ansible_group_priority
+## Group Depth
+
+Take the following example inventory hosts.ini:
+
+```ini
+[bots-a]
+bot1
+
+[bots-b]
+bot2
+
+[bots:children]
+bots-a
+bots-b
+
+```
+
+With group vars defined in:
+
+```output
+./group_vars/bots.yml
+./group_vars/bots-a.yml
+./group_vars/bots-b.yml
+```
+
+There is a concept of group depth in Ansible (at least in recent versions). In this example, group variables for host `bot2` will be populated in the following order:
+
+depth 0: group `all`, `all.yml` (missing here, ignoring)  
+depth 1: group `bots`, `bots.yml`  
+depth 2: group `bots-b`, `bots-b.yml`
+
+You can see details for the [host group vars processing order](https://github.com/ansible/ansible/blob/4d984613f5e16e205434cdf7290572e62b40bf62/lib/ansible/plugins/vars/host_group_vars.py#L72) and the [combine_vars utility function it uses](https://github.com/ansible/ansible/blob/97e574fe6ea7a73ef8e42140e8be32c8cdbcaece/lib/ansible/utils/vars.py#L81) in the source code.
+
+So if you define defaults in `bots.yml` and specific values in `bots-b.yml`, you should achieve what you expect.
+
+
+## Special group variable 'ansible_group_priority'
 
 Starting in Ansible version 2.4, users can use the group variable ansible_group_priority to change the merge order for groups of the same level (after the parent/child order is resolved).
 
@@ -41,6 +77,7 @@ In this example, if both groups have the same priority, the result would normall
 > Note:
 > `ansible_group_priority` can only be set in the inventory source and not in 'group_vars/', as the variable is used in the loading of 'group_vars'.
 
+## INI and YAML Inventory Examples
 
 On this page:
 
