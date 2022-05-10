@@ -1,5 +1,5 @@
 
-Variable precedences in group vars
+Variable merge precedence in group vars
 ===
 
 Say you have 3 files in group_vars:
@@ -94,6 +94,24 @@ The remaining sections will explore the following common child group prioritizat
 * [Example 6: Using group_by key groups with ansible_group_priority](#Example-06)
 
 The purpose here is to fully understand how to leverage child group vars especially with respect to deriving the expected behavior for variable merging. 
+
+The ansible environment used to perform the examples:
+
+```output
+$ git clone https://github.com/lj020326/lj020326/ansible-inventory-file-examples.git
+$ cd ansible-inventory-file-examples/tests/ansible-group-priority
+$ ansible --version
+ansible [core 2.12.3]
+  config file = None
+  configured module search path = ['/Users/ljohnson/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+  ansible python module location = /Users/ljohnson/.pyenv/versions/3.10.2/lib/python3.10/site-packages/ansible
+  ansible collection location = /Users/ljohnson/.ansible/collections:/usr/share/ansible/collections
+  executable location = /Users/ljohnson/.pyenv/versions/3.10.2/bin/ansible
+  python version = 3.10.2 (main, Feb 21 2022, 15:35:10) [Clang 13.0.0 (clang-1300.0.29.30)]
+  jinja version = 3.1.0
+  libyaml = True
+```
+
 
 ## <a id="Example-01"></a>Example 1: Test with child groups having same depth
 
