@@ -53,7 +53,7 @@ depth 0: group `all`, `all.yml` (missing here, ignoring)
 depth 1: group `bots`, `bots.yml`  
 depth 2: group `bots-b`, `bots-b.yml`
 
-You can see details for the [host group vars processing order](https://github.com/ansible/ansible/blob/4d984613f5e16e205434cdf7290572e62b40bf62/lib/ansible/plugins/vars/host_group_vars.py#L72) and the [combine_vars utility function it uses](https://github.com/ansible/ansible/blob/97e574fe6ea7a73ef8e42140e8be32c8cdbcaece/lib/ansible/utils/vars.py#L81) in the source code.
+You can see details for the [host group vars processing order](https://github.com/ansible/ansible/blob/stable-2.13/lib/ansible/plugins/vars/host_group_vars.py#L72) and the [combine_vars utility function it uses](https://github.com/ansible/ansible/blob/stable-2.13/lib/ansible/utils/vars.py#L81) in the source code.
 
 So if you define defaults in `bots.yml` and specific values in `bots-b.yml`, you should achieve what you expect.
 
@@ -115,7 +115,7 @@ For example, create an inventory structurally that looks like this:
 
 The inventory implementing the aforementioned hierarchy as an ini inventory [hosts.ex1.ini](./hosts.ex1.ini):
 
-```
+```ini
 [top_group:vars]
 test=top_group
 ansible_connection=local
@@ -165,7 +165,7 @@ ansible_group_priority=10
 
 Now run a simple query on the variable `test` for host1 and observe the results of the query:
 
-```
+```output
 ansible -i hosts.ex1.ini -m debug -a var=test host1
 host1 | SUCCESS => {
     "test": "cluster"
@@ -176,7 +176,7 @@ So far so good, since the `cluster` group priority is '10'.
 
 The same results can be confirmed when you convert the same inventory to yaml as [hosts.ex1.yml](./hosts.ex1.yml):
 
-```
+```output
 ansible -i hosts.ex1.yml -m debug -a var=test host1
 host1 | SUCCESS => {
     "test": "cluster"
@@ -187,7 +187,7 @@ host1 | SUCCESS => {
 
 On the next test, unset `test` from `[cluster:vars]` in the ini inventory [hosts.ex2.ini](./hosts.ex2.ini):
 
-```
+```ini
 ;test="cluster"
 ansible_group_priority=10
 ```
@@ -195,7 +195,7 @@ ansible_group_priority=10
 The expectation is that the variable set in the `override` group will win.
 But it does not. Instead, `product1` wins:
 
-```
+```output
 ansible -i hosts.ex2.ini -m debug -a var=test host1
 host1 | SUCCESS => {
     "test": "product1"
@@ -208,7 +208,7 @@ The same results can be confirmed when you convert the same to a yaml inventory 
 
 When querying variable `test` in [hosts.ex2.yml](./hosts.ex2.yml), the query results with the group 'product1' winning as the ini inventory example:
 
-```
+```output
 ansible -i hosts.ex2.yml -m debug -a var=test host1
 host1 | SUCCESS => {
     "test": "product1"
@@ -263,7 +263,7 @@ As can be clearly seen above, the 'cluster' group has a child depth of 2 while t
 The ini inventory implementing this hierarchy can be found in [hosts.ex3.ini](./hosts.ex2.ini):
 The yaml inventory implementing this hierarchy can be found in [hosts.ex3.yml](./hosts.ex2.yml):
 
-```
+```yaml
 all:
   children:
     override:
@@ -594,4 +594,10 @@ While the rule is deterministic, it may lead results as noted above that do not 
 ## References
 
 * https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html#how-variables-are-merged
+* [combine_vars utility function](https://github.com/ansible/ansible/blob/stable-2.13/lib/ansible/utils/vars.py#L81)
 * https://github.com/ansible/ansible/blob/devel/lib/ansible/inventory/group.py
+* https://github.com/ansible/ansible/blob/stable-2.13/lib/ansible/plugins/vars/host_group_vars.py
+* https://stackoverflow.com/questions/38120793/ansible-group-vars-priority
+* [Managing "nested" group in Ansible YAML inventory files](https://github.com/lj020326/ansible-datacenter/blob/main/docs/ansible-nested-groups-in-YAML-inventory-files.md)
+* 
+
