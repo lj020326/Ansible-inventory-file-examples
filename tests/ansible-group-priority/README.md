@@ -218,9 +218,9 @@ host1 | SUCCESS => {
 
 ### Groups and depth level
 
-The group 'cluster' is below group 'override' which is directly below 'top_group' making it 3 levels below the 'all' group, or put more simply as "3 levels deep".
+The group 'cluster' is below group 'override' which is directly below 'top_group' making it 3 levels below the 'all' group; in other terms, 'top_group' has a depth level of 3.
 
-Similarly, the 'product1' group is below 'product' which is below 'top_group' making it 3 levels below the 'all' group, or 3 levels deep.
+Similarly, the 'product1' group is below 'product' which is below 'top_group' making it 3 levels below the 'all' group; in other terms, 'product1' has a depth level of 3.
 
 Viewing the parent/child hierarchy in a tree format visualizes this well:
 
