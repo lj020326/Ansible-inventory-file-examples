@@ -1,12 +1,9 @@
 subprocess/
 private/
 scripts/environment/afile.txt
-
 *.pyc
 *.retry
-
 outme
-outme.log
 out
 
 .vscode/
