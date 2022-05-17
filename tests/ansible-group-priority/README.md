@@ -598,6 +598,16 @@ host2                      : ok=2    changed=1    unreachable=0    failed=0    s
 
 While the INI inventory is as expected, the YAML inventory does not result as expected since the host2 did not appear with the 'test' variable set to 'cluster'.
 
+
+### AWX Testing - same results
+
+Running this test case example in AWX for both hosts.ini and hosts.yml yields the same results.  
+
+* [AWX test with hosts.ini results](example6/awx_job_results.hosts-ini.txt)
+* [AWX test with hosts.ini results](example6/awx_job_results.hosts-yml.txt)
+
+
+
 ### TODO 
 Need to understand why group_by works for the INI but does not work for the YAML based inventory.
 
