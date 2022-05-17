@@ -604,7 +604,7 @@ While the INI inventory is as expected, the YAML inventory does not result as ex
 Running this test case example in AWX for both hosts.ini and hosts.yml yields the same results.  
 
 * [AWX test with hosts.ini results](example6/awx_job_results.hosts-ini.txt)
-* [AWX test with hosts.ini results](example6/awx_job_results.hosts-yml.txt)
+* [AWX test with hosts.yml results](example6/awx_job_results.hosts-yml.txt)
 
 
 
