@@ -5,7 +5,7 @@
   tasks:
     - name: First group hosts into parent group 'foo'
       group_by:
-        key: "override"
+        key: "foo"
     - debug: var=test
 
     - name: First group hosts into next parent group 'override'
