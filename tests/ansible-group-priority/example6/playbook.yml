@@ -3,6 +3,11 @@
   gather_facts: false
   connection: local
   tasks:
+    - name: First group hosts into parent group 'override'
+      group_by:
+        key: "override"
+    - debug: var=test
+
     - name: Group hosts into 'cluster' group under 'override'
       group_by:
         key: "cluster"
