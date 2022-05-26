@@ -47,7 +47,7 @@ graph TD;
     C --> D[hosts]
     C --> E[rhel7]
     C --> F[environment_qa]
-    C --> G[location_mem]
+    C --> G["location_site[1|2]"]
     D --> I["web-net[1|2]-q1-s[1|2].example.int"]
     D --> J["web-net[1|2]-q2-s[1|2].example.int"]
     E --> K[hosts]
