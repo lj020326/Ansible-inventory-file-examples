@@ -299,4 +299,10 @@ all:
       hosts:
         web-q1-net2-s1.example.int: {}
         web-q2-net2-s1.example.int: {}
+    network2:
+      vars:
+        trace_var: network2/site1/network2
+      hosts:
+        web-q1-net2-s1.example.int: {}
+        web-q2-net2-s1.example.int: {}
     ungrouped: {}
