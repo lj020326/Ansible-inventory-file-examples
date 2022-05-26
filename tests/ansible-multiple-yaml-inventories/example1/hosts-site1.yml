@@ -7,7 +7,7 @@ all:
       hosts:
         web-q1.example.int:
           trace_var: hosts-site1/rhel7/web-q1.example.int
-          scan_results:
+          foreman:
             architecture_id: 1
             architecture_name: x86_64
             build: false
@@ -146,7 +146,7 @@ all:
           facts: {}
         web-q2.example.int:
           trace_var: hosts-site1/rhel7/web-q2.example.int
-          scan_results:
+          foreman:
             architecture_id: 1
             architecture_name: x86_64
             build: false
