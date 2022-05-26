@@ -25,18 +25,20 @@ graph TD;
     C --> G["site2<br>network2/site2.yml"]
 ```
 
+In this example, there is a desire to have the network expressed as a group for use in playbooks.
 
 For each of the 4 inventory files, the following group/host hierarchy will be implemented:
 
 ```mermaid
 graph TD;
-    A[all] --> C[hosts]
-    A[all] --> D[children]
-    C --> I["web-net[1|2]-q1-s[1|2].example.int"]
-    C --> J["web-net[1|2]-q2-s[1|2].example.int"]
-    D --> E[rhel7]
-    D --> F[environment_qa]
-    D --> G[location_mem]
+    A[all] --> B[children]
+    B --> C["network[1|2]"]
+    C --> D[hosts]
+    C --> E[rhel7]
+    C --> F[environment_qa]
+    C --> G[location_mem]
+    D --> I["web-net[1|2]-q1-s[1|2].example.int"]
+    D --> J["web-net[1|2]-q2-s[1|2].example.int"]
     E --> K[hosts]
     K --> L["web-net[1|2]-q1-s[1|2].example.int"]
     K --> M["web-net[1|2]-q2-s[1|2].example.int"]
