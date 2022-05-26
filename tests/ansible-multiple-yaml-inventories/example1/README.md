@@ -107,23 +107,20 @@ With the 4 inventories, mentioned, we now seek to confirm that the expected valu
 ```output
 ansible-playbook -i ./network1/site1.yml playbook.yml
 
-PLAY [Run play] **********************************************************************************************************************************************************************************************************************************************************
-
-TASK [Group hosts into 'cluster' group under 'override'] *****************************************************************************************************************************************************************************************************************
-ok: [host1]
-changed: [host2]
+PLAY [Run trace var play] ************************************************************************************************************************************************************************************************************************************************
 
 TASK [debug] *************************************************************************************************************************************************************************************************************************************************************
-ok: [host1] => {
-    "test": "cluster"
+ok: [web-q1-net1-s1.example.int] => {
+    "trace_var": "network1/hosts-site1/web-q1-net1-s1.example.int"
 }
-ok: [host2] => {
-    "test": "cluster"
+ok: [web-q2-net1-s2.example.int] => {
+    "trace_var": "network1/hosts-site1/rhel7/web-q2-net1-s2.example.int"
 }
 
 PLAY RECAP ***************************************************************************************************************************************************************************************************************************************************************
-host1                      : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-host2                      : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+web-q1-net1-s1.example.int : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+web-q2-net1-s2.example.int : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
 ```
 
 Confirm that the results are as expected for the yaml inventory:
