@@ -37,4 +37,4 @@ See the details for this example [here](./example1/README.md)
 
 ## <a id="Example-02"></a>Example 2: Playbook using 2 YAML inventories with non-overlapping parent groups
 
-See the details for this example [here](./example1/README.md)
+See the details for this example [here](./example2/README.md)
