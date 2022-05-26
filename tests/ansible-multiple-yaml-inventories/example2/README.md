@@ -71,19 +71,19 @@ all:
             facts: {}
         rhel7:
           vars:
-            trace_var: hosts-site1/rhel7
+            trace_var: hosts-site[1|2]/rhel7
           hosts:
             web-q1.example.int: {}
             web-q2.example.int: {}
         environment_qa:
           vars:
-            trace_var: hosts-site1/environment_qa
+            trace_var: hosts-site[1|2]/environment_qa
           hosts:
             web-q1.example.int: {}
             web-q2.example.int: {}
-        location_site1:
+        location_site[1|2]:
           vars:
-            trace_var: hosts-site1/location_site1
+            trace_var: hosts-site[1|2]/location_site[1|2]
           hosts:
             web-q1.example.int: {}
             web-q2.example.int: {}

@@ -11,6 +11,8 @@ The playbook as follows:
   tasks:
     - debug:
         var: trace_var
+    - debug:
+        var: group_names
 ```
 
 In this example there are 2 networks located at 2 sites resulting in 4 YAML inventory files, with hierarchy diagrammed as follows:
@@ -75,9 +77,9 @@ all:
       hosts:
         web-net[1|2]-q1-s[1|2].example.int: {}
         web-net[1|2]-q2-s[1|2].example.int: {}
-    location_site1:
+    location_site[1|2]:
       vars:
-        trace_var: hosts-site[1|2]/location_site1
+        trace_var: hosts-site[1|2]/location_site[1|2]
       hosts:
         web-net[1|2]-q1-s[1|2].example.int: {}
         web-net[1|2]-q2-s[1|2].example.int: {}
