@@ -5,3 +5,5 @@
   tasks:
     - debug:
         var: trace_var
+    - debug:
+        var: group_names
