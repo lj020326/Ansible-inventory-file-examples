@@ -2,7 +2,7 @@
 ## ref: https://docs.ansible.com/ansible/latest/collections/ansible/builtin/yaml_inventory.html
 all:
   children:
-    network[1|2]:
+    network2:
       children:
         hosts:
           web-q1-net2-s1.example.int:
