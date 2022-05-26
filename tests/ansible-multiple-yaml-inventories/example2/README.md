@@ -120,6 +120,7 @@ ok: [web-q1-net1-s1.example.int] => {
     "group_names": [
         "environment_qa",
         "location_site1",
+        "network1",
         "rhel7"
     ]
 }
@@ -127,6 +128,7 @@ ok: [web-q2-net1-s1.example.int] => {
     "group_names": [
         "environment_qa",
         "location_site1",
+        "network1",
         "rhel7"
     ]
 }
