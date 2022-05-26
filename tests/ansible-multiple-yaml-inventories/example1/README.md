@@ -156,11 +156,10 @@ all:
 
 ```
 
-
-Confirm that the new value 'cluster' should now appear for the variable 'test' for both hosts.
+With the 4 inventories, mentioned, we now seek to confirm that the expected value appears for the 'trace_var' variable for both hosts.
 
 ```output
-ansible-playbook -i ./example6/hosts.ini ./example6/playbook.yml 
+ansible-playbook -i ./network1/site1.yml playbook.yml
 
 PLAY [Run play] **********************************************************************************************************************************************************************************************************************************************************
 
