@@ -440,6 +440,18 @@ web-q2-net2-s1.example.int | SUCCESS => {
 
 ```
 
+Run for group(s) matching multiple groups 'location_site1,&network1'
+```shell
+ansible -i ./inventory/ -m debug -a var=trace_var location_site1,\&network1
+web-q1-net1-s1.example.int | SUCCESS => {
+    "trace_var": "network1/site1/web-q1-net1-s1.example.int"
+}
+web-q2-net1-s1.example.int | SUCCESS => {
+    "trace_var": "network1/site1/web-q2-net1-s1.example.int"
+}
+
+```
+
 
 ## Limit hosts in a group
 
