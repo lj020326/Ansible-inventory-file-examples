@@ -18,7 +18,7 @@ The ansible environment used to perform the examples:
 $ git clone https://github.com/lj020326/ansible-inventory-file-examples.git
 $ cd ansible-inventory-file-examples
 $ git switch develop-lj
-$ cd tests/ansible-group-priority
+$ cd tests/ansible-multiple-yaml-inventories
 $ ansible --version
 ansible [core 2.12.3]
   config file = None
