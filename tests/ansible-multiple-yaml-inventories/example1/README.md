@@ -38,16 +38,13 @@ Copy the files used in the prior example for example 6.
 Then modify the playbook to set the group_by key to 'cluster' for all hosts as follows:
 
 ```yaml
-- name: "Run play"
+- name: "Run trace var play"
   hosts: all
   gather_facts: false
   connection: local
   tasks:
-    - name: Group hosts into 'cluster' group under 'override'
-      group_by:
-        key: "cluster"
-        parents: "override"
-    - debug: var=test
+    - debug:
+        var: trace_var
 ```
 
 In this example there are 2 networks located at 2 sites resulting in 4 YAML inventory files, with hierarchy diagrammed as follows:
