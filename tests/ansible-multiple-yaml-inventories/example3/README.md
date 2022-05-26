@@ -382,7 +382,7 @@ web-q2-net2-s2.example.int : ok=2    changed=0    unreachable=0    failed=0    s
 
 ```
 
-## Using the host groups to debug host vars
+## Debug host vars using groups to target sets of hosts
 
 Now target a set of hosts using a group
 
