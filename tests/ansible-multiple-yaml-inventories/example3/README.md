@@ -421,3 +421,18 @@ web-q2-net2-s1.example.int | SUCCESS => {
 }
 
 ```
+
+
+## Limit hosts in a group
+
+Run for group 'site1' with a specified limit
+```shell
+ansible -i ./inventory/ -m debug -a var=trace_var location_site1 -l web-q2*
+web-q2-net1-s1.example.int | SUCCESS => {
+    "trace_var": "network1/site1/web-q2-net1-s1.example.int"
+}
+web-q2-net2-s1.example.int | SUCCESS => {
+    "trace_var": "network2/site1/web-q2-net2-s1.example.int"
+}
+
+```
