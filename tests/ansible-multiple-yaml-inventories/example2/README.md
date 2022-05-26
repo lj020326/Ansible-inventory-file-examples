@@ -50,30 +50,21 @@ graph TD;
     Q --> S["web-net[1|2]-q2-s[1|2].example.int"]
 ```
 
-```yaml
-- hosts: all
-  gather_facts: no
-  tasks:
-    - fail:
-        msg: 'Use --limit, Luke!'
-      when: ansible_limit is not defined
-```
-
 
 Each site.yml inventory will be setup similar to the following with the "[1|2]" regex pattern evaluated for each of the 4 cases:
 
 ```yaml
 all:
-  hosts:
-    web-net[1|2]-q1-s[1|2].example.int:
-      trace_var: hosts-site[1|2]/web-net[1|2]-q1-s[1|2].example.int
-      foreman: <94 keys>
-      facts: {}
-    web-net[1|2]-q2-s[1|2].example.int:
-      trace_var: hosts-site[1|2]/rhel7/web-net[1|2]-q2-s[1|2].example.int
-      foreman: <94 keys>
-      facts: {}
   children:
+    hosts:
+      web-net[1|2]-q1-s[1|2].example.int:
+        trace_var: hosts-site[1|2]/web-net[1|2]-q1-s[1|2].example.int
+        foreman: <94 keys>
+        facts: {}
+      web-net[1|2]-q2-s[1|2].example.int:
+        trace_var: hosts-site[1|2]/rhel7/web-net[1|2]-q2-s[1|2].example.int
+        foreman: <94 keys>
+        facts: {}
     rhel7:
       vars:
         trace_var: hosts-site1/rhel7
