@@ -451,3 +451,76 @@ web-q1-net2-s1.example.int | SUCCESS => {
 }
 
 ```
+
+```shell
+ansible -i ./inventory/ -m debug -a var=foreman.content_facet_attributes network2 -l web-q1*
+web-q1-net2-s1.example.int | SUCCESS => {
+    "foreman.content_facet_attributes": {
+        "applicable_module_stream_count": 0,
+        "applicable_package_count": 7,
+        "content_source": null,
+        "content_source_id": null,
+        "content_source_name": null,
+        "content_view": {
+            "id": 8,
+            "name": "RHEL7_composite"
+        },
+        "content_view_id": 8,
+        "content_view_name": "RHEL7_composite",
+        "errata_counts": {
+            "bugfix": 0,
+            "enhancement": 0,
+            "security": 0,
+            "total": 0
+        },
+        "id": 105,
+        "kickstart_repository": null,
+        "kickstart_repository_id": null,
+        "kickstart_repository_name": null,
+        "lifecycle_environment": {
+            "id": 3,
+            "name": "QA"
+        },
+        "lifecycle_environment_id": 3,
+        "lifecycle_environment_name": "QA",
+        "upgradable_module_stream_count": 0,
+        "upgradable_package_count": 0,
+        "uuid": "7a1cb585-1265-4232-baf1-eee16f2cf819"
+    }
+}
+web-q1-net2-s2.example.int | SUCCESS => {
+    "foreman.content_facet_attributes": {
+        "applicable_module_stream_count": 0,
+        "applicable_package_count": 7,
+        "content_source": null,
+        "content_source_id": null,
+        "content_source_name": null,
+        "content_view": {
+            "id": 8,
+            "name": "RHEL7_composite"
+        },
+        "content_view_id": 8,
+        "content_view_name": "RHEL7_composite",
+        "errata_counts": {
+            "bugfix": 0,
+            "enhancement": 0,
+            "security": 0,
+            "total": 0
+        },
+        "id": 105,
+        "kickstart_repository": null,
+        "kickstart_repository_id": null,
+        "kickstart_repository_name": null,
+        "lifecycle_environment": {
+            "id": 3,
+            "name": "QA"
+        },
+        "lifecycle_environment_id": 3,
+        "lifecycle_environment_name": "QA",
+        "upgradable_module_stream_count": 0,
+        "upgradable_package_count": 0,
+        "uuid": "7a1cb585-1265-4232-baf1-eee16f2cf819"
+    }
+}
+
+```
