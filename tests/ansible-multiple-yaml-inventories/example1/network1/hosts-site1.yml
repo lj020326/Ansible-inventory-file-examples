@@ -2,7 +2,7 @@
 all:
   children:
     hosts:
-      web-q1.example.int:
+      web-q1-s2.example.int:
         trace_var: hosts-site1/web-q1-s1.example.int
         foreman:
           architecture_id: 1
