@@ -19,7 +19,7 @@ In this example there are 2 networks located at 2 sites resulting in 4 YAML inve
 graph TD;
     A[all] --> B[network1]
     A[all] --> C[network2]
-    B --> D[site1 (located in network1/]
+    B --> D["site1 (located in network1/site1.yml)"]
     B --> E[site2]
     C --> F[site1]
     C --> G[site2]
