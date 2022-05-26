@@ -71,17 +71,17 @@ graph TD;
     A[all] --> D[rhel7]
     A[all] --> E[environment_qa]
     A[all] --> F[location_mem]
-    C --> H[web-q1.example.int]
-    C --> I[web-q2.example.int]
+    C --> H[web-net[1|2]-q1.example.int]
+    C --> I[web-net[1|2]-q2.example.int]
     D --> J[hosts]
-    J --> K[web-q1.example.int]
-    J --> L[web-q2.example.int]
+    J --> K[web-net[1|2]-q1.example.int]
+    J --> L[web-net[1|2]-q2.example.int]
     E --> M[hosts]
-    M --> N[web-q1.example.int]
-    M --> O[web-q2.example.int]
+    M --> N[web-net[1|2]-q1.example.int]
+    M --> O[web-net[1|2]-q2.example.int]
     F --> P[hosts]
-    P --> Q[web-q1.example.int]
-    P --> R[web-q2.example.int]
+    P --> Q[web-net[1|2]-q1.example.int]
+    P --> R[web-net[1|2]-q2.example.int]
 ```
 
 The inventory for [site1.yml](./example1/hosts-site1.yml) , the corresponding YAML inventory implementing the site1 hierarchy is as follows:
@@ -90,32 +90,32 @@ The inventory for [site1.yml](./example1/hosts-site1.yml) , the corresponding YA
 all:
   children:
     hosts:
-      web-q1.example.int:
-        trace_var: hosts-site1/web-q1.example.int
+      web-net[1|2]-q1.example.int:
+        trace_var: hosts-site1/web-net[1|2]-q1.example.int
         foreman: <94 keys>
         facts: {}
-      web-q2.example.int:
-        trace_var: hosts-site1/rhel7/web-q2.example.int
+      web-net[1|2]-q2.example.int:
+        trace_var: hosts-site1/rhel7/web-net[1|2]-q2.example.int
         foreman: <94 keys>
         facts: {}
     rhel7:
       vars:
         trace_var: hosts-site1/rhel7
       hosts:
-        web-q1.example.int: {}
-        web-q2.example.int: {}
+        web-net[1|2]-q1.example.int: {}
+        web-net[1|2]-q2.example.int: {}
     environment_qa:
       vars:
         trace_var: hosts-site1/environment_qa
       hosts:
-        web-q1.example.int: {}
-        web-q2.example.int: {}
+        web-net[1|2]-q1.example.int: {}
+        web-net[1|2]-q2.example.int: {}
     location_site1:
       vars:
         trace_var: hosts-site1/location_site1
       hosts:
-        web-q1.example.int: {}
-        web-q2.example.int: {}
+        web-net[1|2]-q1.example.int: {}
+        web-net[1|2]-q2.example.int: {}
     ungrouped: {}
 
 ```
@@ -126,32 +126,32 @@ For the inventory for [site2.yml](./example1/hosts-site2.yml) , the correspondin
 all:
   children:
     hosts:
-      web-q1.example.int:
-        trace_var: hosts-site2/web-q1.example.int
+      web-net[1|2]-q1.example.int:
+        trace_var: hosts-site2/web-net[1|2]-q1.example.int
         foreman: <94 keys>
         facts: {}
-      web-q2.example.int:
-        trace_var: hosts-site2/rhel7/web-q2.example.int
+      web-net[1|2]-q2.example.int:
+        trace_var: hosts-site2/rhel7/web-net[1|2]-q2.example.int
         foreman: <94 keys>
         facts: {}
     rhel7:
       vars:
         trace_var: hosts-site2/rhel7
       hosts:
-        web-q1.example.int: {}
-        web-q2.example.int: {}
+        web-net[1|2]-q1.example.int: {}
+        web-net[1|2]-q2.example.int: {}
     environment_qa:
       vars:
         trace_var: hosts-site2/environment_qa
       hosts:
-        web-q1.example.int: {}
-        web-q2.example.int: {}
+        web-net[1|2]-q1.example.int: {}
+        web-net[1|2]-q2.example.int: {}
     location_site2:
       vars:
         trace_var: hosts-site2/location_site2
       hosts:
-        web-q1.example.int: {}
-        web-q2.example.int: {}
+        web-net[1|2]-q1.example.int: {}
+        web-net[1|2]-q2.example.int: {}
     ungrouped: {}
 
 ```
