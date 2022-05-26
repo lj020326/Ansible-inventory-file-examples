@@ -438,13 +438,13 @@ web-q2-net2-s1.example.int | SUCCESS => {
 ```
 
 ```shell
-ansible -i ./inventory/ -m debug -a var=foreman.capabilities location_site1 -l web-q2*
-web-q2-net1-s1.example.int | SUCCESS => {
+ansible -i ./inventory/ -m debug -a var=foreman.capabilities location_site1 -l web-q1*
+web-q1-net1-s1.example.int | SUCCESS => {
     "foreman.capabilities": [
         "build"
     ]
 }
-web-q2-net2-s1.example.int | SUCCESS => {
+web-q1-net2-s1.example.int | SUCCESS => {
     "foreman.capabilities": [
         "build"
     ]
