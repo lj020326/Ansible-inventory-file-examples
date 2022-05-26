@@ -299,3 +299,4 @@ all:
       hosts:
         web-q1-net2-s2.example.int: {}
         web-q2-net2-s2.example.int: {}
+    ungrouped: {}
