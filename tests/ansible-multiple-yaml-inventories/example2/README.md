@@ -160,6 +160,7 @@ ok: [web-q1-net1-s2.example.int] => {
     "group_names": [
         "environment_qa",
         "location_site2",
+        "network1",
         "rhel7"
     ]
 }
@@ -167,6 +168,7 @@ ok: [web-q2-net1-s2.example.int] => {
     "group_names": [
         "environment_qa",
         "location_site2",
+        "network1",
         "rhel7"
     ]
 }
@@ -199,6 +201,7 @@ ok: [web-q1-net2-s1.example.int] => {
     "group_names": [
         "environment_qa",
         "location_site1",
+        "network2",
         "rhel7"
     ]
 }
@@ -206,6 +209,7 @@ ok: [web-q2-net2-s1.example.int] => {
     "group_names": [
         "environment_qa",
         "location_site1",
+        "network2",
         "rhel7"
     ]
 }
@@ -237,6 +241,7 @@ ok: [web-q1-net2-s2.example.int] => {
     "group_names": [
         "environment_qa",
         "location_site2",
+        "network2",
         "rhel7"
     ]
 }
@@ -244,6 +249,7 @@ ok: [web-q2-net2-s2.example.int] => {
     "group_names": [
         "environment_qa",
         "location_site2",
+        "network2",
         "rhel7"
     ]
 }
@@ -297,6 +303,8 @@ ok: [web-q1-net1-s1.example.int] => {
     "group_names": [
         "environment_qa",
         "location_site1",
+        "network1",
+        "network2",
         "rhel7"
     ]
 }
@@ -304,6 +312,8 @@ ok: [web-q2-net1-s1.example.int] => {
     "group_names": [
         "environment_qa",
         "location_site1",
+        "network1",
+        "network2",
         "rhel7"
     ]
 }
@@ -311,6 +321,8 @@ ok: [web-q1-net1-s2.example.int] => {
     "group_names": [
         "environment_qa",
         "location_site2",
+        "network1",
+        "network2",
         "rhel7"
     ]
 }
@@ -318,6 +330,8 @@ ok: [web-q2-net1-s2.example.int] => {
     "group_names": [
         "environment_qa",
         "location_site2",
+        "network1",
+        "network2",
         "rhel7"
     ]
 }
@@ -325,6 +339,8 @@ ok: [web-q1-net2-s1.example.int] => {
     "group_names": [
         "environment_qa",
         "location_site1",
+        "network1",
+        "network2",
         "rhel7"
     ]
 }
@@ -332,6 +348,8 @@ ok: [web-q2-net2-s1.example.int] => {
     "group_names": [
         "environment_qa",
         "location_site1",
+        "network1",
+        "network2",
         "rhel7"
     ]
 }
@@ -339,6 +357,8 @@ ok: [web-q1-net2-s2.example.int] => {
     "group_names": [
         "environment_qa",
         "location_site2",
+        "network1",
+        "network2",
         "rhel7"
     ]
 }
@@ -346,6 +366,8 @@ ok: [web-q2-net2-s2.example.int] => {
     "group_names": [
         "environment_qa",
         "location_site2",
+        "network1",
+        "network2",
         "rhel7"
     ]
 }
