@@ -67,11 +67,10 @@ For each of the 4 inventory files, the following group/host hierarchy will be im
 
 ```mermaid
 graph TD;
-    A[all] --> B[network1]
-    B --> C[hosts]
-    B --> D[rhel7]
-    B --> E[environment_qa]
-    B --> F[location_mem]
+    A[all] --> C[hosts]
+    A[all] --> D[rhel7]
+    A[all] --> E[environment_qa]
+    A[all] --> F[location_mem]
     C --> H[web-q1.example.int]
     C --> I[web-q2.example.int]
     D --> J[hosts]
