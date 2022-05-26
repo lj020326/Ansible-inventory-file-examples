@@ -381,3 +381,24 @@ web-q2-net2-s1.example.int : ok=2    changed=0    unreachable=0    failed=0    s
 web-q2-net2-s2.example.int : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 
 ```
+
+## Using the host groups to debug host vars
+
+Now target a set of hosts using a group
+
+```shell
+ansible -i ./inventory/ -m debug -a var=trace_var network2
+web-q1-net2-s1.example.int | SUCCESS => {
+    "trace_var": "network2/site1/web-q1-net2-s1.example.int"
+}
+web-q2-net2-s1.example.int | SUCCESS => {
+    "trace_var": "network2/site1/web-q2-net2-s1.example.int"
+}
+web-q1-net2-s2.example.int | SUCCESS => {
+    "trace_var": "network2/site2/web-q1-net2-s2.example.int"
+}
+web-q2-net2-s2.example.int | SUCCESS => {
+    "trace_var": "network2/site2/web-q2-net2-s2.example.int"
+}
+
+```
