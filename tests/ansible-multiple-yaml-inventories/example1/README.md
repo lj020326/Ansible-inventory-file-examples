@@ -171,7 +171,7 @@ web-q2-net2-s1.example.int : ok=1    changed=0    unreachable=0    failed=0    s
 
 This is as expected.
 
-playbook run for network1/site2.yml:
+playbook run for network2/site2.yml:
 ```output
 ansible-playbook -i ./network2/site2.yml playbook.yml
 
