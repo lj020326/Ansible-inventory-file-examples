@@ -298,4 +298,3 @@ all:
       hosts:
         web-q1-net1-s1.example.int: {}
         web-q2-net1-s2.example.int: {}
-    ungrouped: {}
