@@ -438,15 +438,7 @@ web-q2-net2-s1.example.int | SUCCESS => {
 ```
 
 ```shell
-ansible -i ./inventory/ -m debug -a var=trace_var location_site1 -l web-q2*
-web-q2-net1-s1.example.int | SUCCESS => {
-    "trace_var": "network1/site1/web-q2-net1-s1.example.int"
-}
-web-q2-net2-s1.example.int | SUCCESS => {
-    "trace_var": "network2/site1/web-q2-net2-s1.example.int"
-}
-ljohnson@Lees-MBP:[example3](develop-lj)$ 
-ljohnson@Lees-MBP:[example3](develop-lj)$ ansible -i ./inventory/ -m debug -a var=foreman.capabilities location_site1 -l web-q2*
+ansible -i ./inventory/ -m debug -a var=foreman.capabilities location_site1 -l web-q2*
 web-q2-net1-s1.example.int | SUCCESS => {
     "foreman.capabilities": [
         "build"
