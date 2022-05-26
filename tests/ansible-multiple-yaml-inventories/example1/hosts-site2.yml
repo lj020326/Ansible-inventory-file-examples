@@ -291,8 +291,4 @@ all:
       hosts:
         web-q1.example.int: {}
         web-q2.example.int: {}
-    organization_alsac:
-      hosts:
-        web-q1.example.int: {}
-        web-q2.example.int: {}
     ungrouped: {}
