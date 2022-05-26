@@ -3,7 +3,7 @@ all:
   children:
     hosts:
       web-q1.example.int:
-        trace_var: hosts-site1/rhel7/web-q1.example.int
+        trace_var: hosts-site1/web-q1.example.int
         foreman:
           architecture_id: 1
           architecture_name: x86_64
@@ -287,10 +287,14 @@ all:
         web-q1.example.int: {}
         web-q2.example.int: {}
     environment_qa:
+      vars:
+        trace_var: hosts-site1/environment_qa
       hosts:
         web-q1.example.int: {}
         web-q2.example.int: {}
     location_mem:
+      vars:
+        trace_var: hosts-site1/location_mem
       hosts:
         web-q1.example.int: {}
         web-q2.example.int: {}
