@@ -453,7 +453,7 @@ web-q1-net2-s1.example.int | SUCCESS => {
 ```
 
 ```shell
-ansible -i ./inventory/ -m debug -a var=foreman.content_facet_attributes.lifecycle_environment network2 -l web-q1*
+ansible -i ./inventory/ network2 -l web-q1* -m debug -a var=foreman.content_facet_attributes.lifecycle_environment
 web-q1-net2-s1.example.int | SUCCESS => {
     "foreman.content_facet_attributes.lifecycle_environment": {
         "id": 3,
