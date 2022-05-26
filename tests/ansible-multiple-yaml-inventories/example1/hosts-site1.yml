@@ -2,8 +2,11 @@
 all:
   children:
     rhel7:
+      vars:
+        trace_var: hosts-site1/rhel7
       hosts:
         web-q1.example.int:
+          trace_var: hosts-site1/rhel7/web-q1.example.int
           scan_results:
             architecture_id: 1
             architecture_name: x86_64
@@ -141,99 +144,8 @@ all:
             use_image: null
             uuid: null
           facts: {}
-          params:
-            enable-epel: 'false'
-            enable-puppet5: 'true'
-          tower_resources: &id001
-            organizations:
-            - description: American Lebanese Syrian Associated Charities
-              name: ALSAC
-              teams:
-              - name: SG - Ansible-Admin
-                organization: ALSAC
-              - name: SG - Ansible-Database
-                organization: ALSAC
-                roles:
-                - role: project_admin
-                - role: inventory_admin
-                - role: credential_admin
-                - role: workflow_admin
-                - role: notification_admin
-                - role: job_template_admin
-                - inventory: Alsac Inventory
-                  role: use
-                - project: DB - DB_OPs_Playbooks
-                  role: admin
-                - project: DB - DB_OPs_Playbooks
-                  role: use
-                - credential: dbops bitbucket deploy key
-                  role: admin
-              - name: SG - Ansible-Linux
-                organization: ALSAC
-                roles:
-                - role: project_admin
-                - role: inventory_admin
-                - role: credential_admin
-                - role: workflow_admin
-                - role: notification_admin
-                - role: job_template_admin
-                - inventory: Alsac Inventory
-                  role: use
-              - name: SG - Ansible-Midwa
-                organization: ALSAC
-              - name: SG - Ansible-Network
-                organization: ALSAC
-                roles:
-                - role: project_admin
-                - role: inventory_admin
-                - role: credential_admin
-                - role: job_template_admin
-                - inventory: Alsac Inventory
-                  role: use
-                - project: NTW - Load Balancer Playbooks
-                  role: admin
-                - project: NTW - Firewalls
-                  role: admin
-                - project: NTW - Meraki
-                  role: admin
-                - job_template: NTW - get checkpoint facts - firewalls - master
-                  role: admin
-                - job_template: NTW - Get List of ltm Pools - master
-                  role: admin
-                - job_template: NTW - Create/Update OCP4 wideip in GTM - master
-                  role: admin
-                - job_template: NTW - Remove OCP4 wideip in GTM - master
-                  role: admin
-              - name: SG - Ansible-Openshift
-                organization: ALSAC
-                roles:
-                - project: Openshift Management
-                  role: admin
-              - name: SG - Ansible-Rely
-                organization: ALSAC
-                roles:
-                - credential: LNX - Ansible Linux
-                  role: use
-                - credential: ALSAC - JIRA PROD
-                  role: use
-                - credential: APP - AppValidation Ops - Git
-                  role: use
-                - inventory: Alsac Inventory
-                  role: use
-                - job_template: APP - Selenium Validation - master
-                  role: execute
-                - job_template: APP - ReadyAPI Validation Operations - master
-                  role: execute
-              - name: SG - Ansible-Windows
-                organization: ALSAC
-                roles:
-                - role: project_admin
-                - role: inventory_admin
-                - role: credential_admin
-                - role: workflow_admin
-                - role: notification_admin
-                - role: job_template_admin
         web-q2.example.int:
+          trace_var: hosts-site1/rhel7/web-q2.example.int
           scan_results:
             architecture_id: 1
             architecture_name: x86_64
@@ -371,10 +283,6 @@ all:
             use_image: null
             uuid: null
           facts: {}
-          params:
-            enable-epel: 'false'
-            enable-puppet5: 'true'
-          tower_resources: *id001
     environment_qa:
       hosts:
         web-q1.example.int: {}
