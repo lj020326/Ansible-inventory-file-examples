@@ -120,7 +120,7 @@ all:
 
 ```
 
-For the [network2 site1.yml inventory](./network1/site2.yml):
+For the [network2 site1.yml inventory](./network2/site1.yml):
 
 ```yaml
 all:
