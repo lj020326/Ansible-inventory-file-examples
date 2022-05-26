@@ -151,9 +151,25 @@ ok: [web-q2-net1-s2.example.int] => {
     "trace_var": "network1/site2/web-q2-net1-s2.example.int"
 }
 
+TASK [debug] *************************************************************************************************************************************************************************************************************************************************************
+ok: [web-q1-net1-s2.example.int] => {
+    "group_names": [
+        "environment_qa",
+        "location_site2",
+        "rhel7"
+    ]
+}
+ok: [web-q2-net1-s2.example.int] => {
+    "group_names": [
+        "environment_qa",
+        "location_site2",
+        "rhel7"
+    ]
+}
+
 PLAY RECAP ***************************************************************************************************************************************************************************************************************************************************************
-web-q1-net1-s2.example.int : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-web-q2-net1-s2.example.int : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+web-q1-net1-s2.example.int : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+web-q2-net1-s2.example.int : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 
 ```
 
@@ -174,9 +190,25 @@ ok: [web-q2-net2-s1.example.int] => {
     "trace_var": "network2/site1/web-q2-net2-s1.example.int"
 }
 
+TASK [debug] *************************************************************************************************************************************************************************************************************************************************************
+ok: [web-q1-net2-s1.example.int] => {
+    "group_names": [
+        "environment_qa",
+        "location_site1",
+        "rhel7"
+    ]
+}
+ok: [web-q2-net2-s1.example.int] => {
+    "group_names": [
+        "environment_qa",
+        "location_site1",
+        "rhel7"
+    ]
+}
+
 PLAY RECAP ***************************************************************************************************************************************************************************************************************************************************************
-web-q1-net2-s1.example.int : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-web-q2-net2-s1.example.int : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+web-q1-net2-s1.example.int : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+web-q2-net2-s1.example.int : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 
 ```
 
@@ -196,9 +228,25 @@ ok: [web-q2-net2-s2.example.int] => {
     "trace_var": "network2/site2/web-q2-net2-s2.example.int"
 }
 
+TASK [debug] *************************************************************************************************************************************************************************************************************************************************************
+ok: [web-q1-net2-s2.example.int] => {
+    "group_names": [
+        "environment_qa",
+        "location_site2",
+        "rhel7"
+    ]
+}
+ok: [web-q2-net2-s2.example.int] => {
+    "group_names": [
+        "environment_qa",
+        "location_site2",
+        "rhel7"
+    ]
+}
+
 PLAY RECAP ***************************************************************************************************************************************************************************************************************************************************************
-web-q1-net2-s2.example.int : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-web-q2-net2-s2.example.int : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+web-q1-net2-s2.example.int : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+web-q2-net2-s2.example.int : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 
 ```
 
@@ -240,14 +288,72 @@ ok: [web-q2-net2-s2.example.int] => {
     "trace_var": "network2/site2/web-q2-net2-s2.example.int"
 }
 
+TASK [debug] *************************************************************************************************************************************************************************************************************************************************************
+ok: [web-q1-net1-s1.example.int] => {
+    "group_names": [
+        "environment_qa",
+        "location_site1",
+        "rhel7"
+    ]
+}
+ok: [web-q2-net1-s1.example.int] => {
+    "group_names": [
+        "environment_qa",
+        "location_site1",
+        "rhel7"
+    ]
+}
+ok: [web-q1-net1-s2.example.int] => {
+    "group_names": [
+        "environment_qa",
+        "location_site2",
+        "rhel7"
+    ]
+}
+ok: [web-q2-net1-s2.example.int] => {
+    "group_names": [
+        "environment_qa",
+        "location_site2",
+        "rhel7"
+    ]
+}
+ok: [web-q1-net2-s1.example.int] => {
+    "group_names": [
+        "environment_qa",
+        "location_site1",
+        "rhel7"
+    ]
+}
+ok: [web-q2-net2-s1.example.int] => {
+    "group_names": [
+        "environment_qa",
+        "location_site1",
+        "rhel7"
+    ]
+}
+ok: [web-q1-net2-s2.example.int] => {
+    "group_names": [
+        "environment_qa",
+        "location_site2",
+        "rhel7"
+    ]
+}
+ok: [web-q2-net2-s2.example.int] => {
+    "group_names": [
+        "environment_qa",
+        "location_site2",
+        "rhel7"
+    ]
+}
+
 PLAY RECAP ***************************************************************************************************************************************************************************************************************************************************************
-web-q1-net1-s1.example.int : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-web-q1-net1-s2.example.int : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-web-q1-net2-s1.example.int : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-web-q1-net2-s2.example.int : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-web-q2-net1-s1.example.int : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-web-q2-net1-s2.example.int : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-web-q2-net2-s1.example.int : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-web-q2-net2-s2.example.int : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+web-q1-net1-s1.example.int : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+web-q1-net1-s2.example.int : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+web-q1-net2-s1.example.int : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+web-q1-net2-s2.example.int : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+web-q2-net1-s1.example.int : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+web-q2-net1-s2.example.int : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+web-q2-net2-s1.example.int : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+web-q2-net2-s2.example.int : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 
 ```
