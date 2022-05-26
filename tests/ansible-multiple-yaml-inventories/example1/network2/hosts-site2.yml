@@ -2,15 +2,15 @@
 all:
   children:
     hosts:
-      web-q1-s2.example.int:
-        trace_var: hosts-site2/web-q1-s2.example.int
+      web-q1-net2-s2.example.int:
+        trace_var: hosts-site2/web-q1-net2-s2.example.int
         foreman:
           architecture_id: 1
           architecture_name: x86_64
           build: false
           capabilities:
           - build
-          certname: web-q1-s2.example.int
+          certname: web-q1-net2-s2.example.int
           comment: null
           compute_profile_id: null
           compute_profile_name: null
@@ -75,7 +75,7 @@ all:
           medium_name: null
           model_id: 2
           model_name: VMware Virtual Platform
-          name: web-q1-s2.example.int
+          name: web-q1-net2-s2.example.int
           openscap_proxy: null
           openscap_proxy_id: null
           openscap_proxy_name: null
@@ -141,15 +141,15 @@ all:
           use_image: null
           uuid: null
         facts: {}
-      web-q2-s2.example.int:
-        trace_var: hosts-site2/rhel7/web-q2-s2.example.int
+      web-q2-net2-s2.example.int:
+        trace_var: hosts-site2/rhel7/web-q2-net2-s2.example.int
         foreman:
           architecture_id: 1
           architecture_name: x86_64
           build: false
           capabilities:
           - build
-          certname: web-q2-s2.example.int
+          certname: web-q2-net2-s2.example.int
           comment: null
           compute_profile_id: null
           compute_profile_name: null
@@ -214,7 +214,7 @@ all:
           medium_name: null
           model_id: 2
           model_name: VMware Virtual Platform
-          name: web-q2-s2.example.int
+          name: web-q2-net2-s2.example.int
           openscap_proxy: null
           openscap_proxy_id: null
           openscap_proxy_name: null
@@ -284,18 +284,18 @@ all:
       vars:
         trace_var: hosts-site2/rhel7
       hosts:
-        web-q1-s2.example.int: {}
-        web-q2-s2.example.int: {}
+        web-q1-net2-s2.example.int: {}
+        web-q2-net2-s2.example.int: {}
     environment_qa:
       vars:
         trace_var: hosts-site2/environment_qa
       hosts:
-        web-q1-s2.example.int: {}
-        web-q2-s2.example.int: {}
+        web-q1-net2-s2.example.int: {}
+        web-q2-net2-s2.example.int: {}
     location_site2:
       vars:
         trace_var: hosts-site2/location_site2
       hosts:
-        web-q1-s2.example.int: {}
-        web-q2-s2.example.int: {}
+        web-q1-net2-s2.example.int: {}
+        web-q2-net2-s2.example.int: {}
     ungrouped: {}
