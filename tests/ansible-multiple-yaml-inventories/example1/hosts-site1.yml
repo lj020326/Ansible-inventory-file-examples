@@ -292,9 +292,9 @@ all:
       hosts:
         web-q1.example.int: {}
         web-q2.example.int: {}
-    location_mem:
+    location_site1:
       vars:
-        trace_var: hosts-site1/location_mem
+        trace_var: hosts-site1/location_site1
       hosts:
         web-q1.example.int: {}
         web-q2.example.int: {}

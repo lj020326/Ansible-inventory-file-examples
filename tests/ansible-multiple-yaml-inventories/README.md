@@ -51,63 +51,64 @@ Then modify the playbook to set the group_by key to 'cluster' for all hosts as f
 ```
 
 
-In this example, the group 'override' such that it is not set at the same child 'depth' or 'level' as the 'product' group. 
+In this example, the following group/host hierarchy will be implemented in yaml as follows:
 
-Consider the following case.
-
-Remove the parent/child relationship of '[override]' from '[top_group]' group, in the following way:
-
-```output
-       [all]             [override] ansible_group_priority=10
-         |                    |
-     [product]           [cluster] ansible_group_priority=10
-         |                    |
-    ------------            host1
-   |            |            
-[product1] [product2]  
-   |
-  host1 
+```mermaid
+graph TD;
+    A[all] --> B[hosts]
+    A[all] --> C[rhel7]
+    A[all] --> D[environment_qa]
+    A[all] --> E[location_mem]
+    A[all] --> F[ungrouped]
+    B --> G[web-q1.example.int]
+    B --> H[web-q2.example.int]
+    C --> I[hosts]
+    I --> J[web-q1.example.int]
+    I --> K[web-q2.example.int]
+    D --> L[hosts]
+    L --> M[web-q1.example.int]
+    L --> N[web-q2.example.int]
+    E --> O[hosts]
+    O --> Q[web-q1.example.int]
+    O --> P[web-q2.example.int]
 ```
 
-As can be clearly seen above, the 'cluster' group has a depth of 2 while the 'product1' and 'product2' groups each have depths of 3.
+For this example we will use the same YAML inventory file representing machines at 2 different sites/locaitons.
 
-The INI inventory implementing this hierarchy can be found in [hosts.ex3.ini](./hosts.ex2.ini) and the equivalent YAML inventory implementing this hierarchy can be found in [hosts.ex3.yml](./hosts.ex2.yml):
+The corresponding YAML inventory implementing the hierarchy is in the [example1 directory](./example1):
 
 ```yaml
 all:
   children:
-    override:
+    hosts:
+      web-q1.example.int:
+        trace_var: hosts-site1/web-q1.example.int
+        foreman: <94 keys>
+        facts: {}
+      web-q2.example.int:
+        trace_var: hosts-site1/rhel7/web-q2.example.int
+        foreman: <94 keys>
+        facts: {}
+    rhel7:
       vars:
-        test: "override"
-        ansible_group_priority: 10
-      children:
-        cluster1:
-          vars:
-            test: "cluster1"
-            ansible_group_priority: 10
-          hosts:
-            host1: {}
-    top_group:
+        trace_var: hosts-site1/rhel7
+      hosts:
+        web-q1.example.int: {}
+        web-q2.example.int: {}
+    environment_qa:
       vars:
-        test: top_group
-        ansible_connection: local
-      children:
-        product:
-          vars:
-            ansible_group_priority: 1
-            test: "product"
-          children:
-            product1:
-              vars:
-                test: "product1"
-              hosts:
-                host1:
-                  host1: {}
-            product2:
-              vars:
-                test: "product2"
-              hosts:
-                host2: {}
+        trace_var: hosts-site1/environment_qa
+      hosts:
+        web-q1.example.int: {}
+        web-q2.example.int: {}
+    location_mem:
+      vars:
+        trace_var: hosts-site1/location_mem
+      hosts:
+        web-q1.example.int: {}
+        web-q2.example.int: {}
+    ungrouped: {}
+
 ```
 
 
