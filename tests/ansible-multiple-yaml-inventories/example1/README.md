@@ -105,7 +105,6 @@ Each of the respective inventory files:
 With the 4 inventories, mentioned, we now seek to confirm that the expected value appears for the 'trace_var' variable for both hosts.
 
 playbook run for network1/site1.yml:
-
 ```output
 ansible-playbook -i ./network1/site1.yml playbook.yml
 
@@ -128,7 +127,6 @@ web-q2-net1-s1.example.int : ok=1    changed=0    unreachable=0    failed=0    s
 This is as expected.
 
 playbook run for network1/site2.yml:
-
 ```output
 ansible-playbook -i ./network1/site2.yml playbook.yml
 
