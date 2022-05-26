@@ -96,17 +96,17 @@ all:
 
 Each of the respective inventory files:
 
-* [network1/site1 inventory](./network1/site1.yml)
-* [network1/site2 inventory](./network1/site2.yml)
-* [network2/site1 inventory](./network2/site1.yml)
-* [network2/site2 inventory](./network2/site2.yml)
+* [network1/site1 inventory](./inventory/network1/site1.yml)
+* [network1/site2 inventory](./inventory/network1/site2.yml)
+* [network2/site1 inventory](./inventory/network2/site1.yml)
+* [network2/site2 inventory](./inventory/network2/site2.yml)
 
 
 With the 4 inventories, mentioned, we now seek to confirm that the expected value appears for the 'trace_var' variable for both hosts.
 
-playbook run for network1/site1.yml:
+playbook run for inventory/network1/site1.yml:
 ```output
-ansible-playbook -i ./network1/site1.yml playbook.yml
+ansible-playbook -i ./inventory/network1/site1.yml playbook.yml
 
 PLAY [Run trace var play] ************************************************************************************************************************************************************************************************************************************************
 
@@ -126,9 +126,9 @@ web-q2-net1-s1.example.int : ok=1    changed=0    unreachable=0    failed=0    s
 
 This is as expected.
 
-playbook run for network1/site2.yml:
+playbook run for inventory/network1/site2.yml:
 ```output
-ansible-playbook -i ./network1/site2.yml playbook.yml
+ansible-playbook -i ./inventory/network1/site2.yml playbook.yml
 
 PLAY [Run trace var play] ************************************************************************************************************************************************************************************************************************************************
 
@@ -149,9 +149,9 @@ web-q2-net1-s2.example.int : ok=1    changed=0    unreachable=0    failed=0    s
 This is as expected.
 
 
-playbook run for network2/site1.yml:
+playbook run for inventory/network2/site1.yml:
 ```output
-ansible-playbook -i ./network2/site1.yml playbook.yml
+ansible-playbook -i ./inventory/network2/site1.yml playbook.yml
 
 PLAY [Run trace var play] ************************************************************************************************************************************************************************************************************************************************
 
@@ -171,9 +171,9 @@ web-q2-net2-s1.example.int : ok=1    changed=0    unreachable=0    failed=0    s
 
 This is as expected.
 
-playbook run for network2/site2.yml:
+playbook run for inventory/network2/site2.yml:
 ```output
-ansible-playbook -i ./network2/site2.yml playbook.yml
+ansible-playbook -i ./inventory/network2/site2.yml playbook.yml
 
 PLAY [Run trace var play] ************************************************************************************************************************************************************************************************************************************************
 
@@ -192,4 +192,8 @@ web-q2-net2-s2.example.int : ok=1    changed=0    unreachable=0    failed=0    s
 ```
 
 This is as expected.
+
+
+Combined inventory run.
+
 
