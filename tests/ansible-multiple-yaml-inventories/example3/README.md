@@ -97,7 +97,7 @@ all:
         web-net[1|2]-q2-s[1|2].example.int: {}
     network[1|2]:
       vars:
-        trace_var: site[1|2]/location_site[1|2]
+        trace_var: site[1|2]/network[1|2]
       hosts:
         web-net[1|2]-q1-s[1|2].example.int: {}
         web-net[1|2]-q2-s[1|2].example.int: {}
