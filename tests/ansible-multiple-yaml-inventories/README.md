@@ -73,9 +73,7 @@ graph TD;
     O --> P[web-q2.example.int]
 ```
 
-For this example we will use the same YAML inventory file representing machines at 2 different sites/locaitons.
-
-The corresponding YAML inventory implementing the hierarchy is in the [example1 directory](./example1):
+For the inventory for [site1.yml](./example1/hosts-site1.yml) , the corresponding YAML inventory implementing the site1 hierarchy is as follows:
 
 ```yaml
 all:
@@ -101,9 +99,45 @@ all:
       hosts:
         web-q1.example.int: {}
         web-q2.example.int: {}
-    location_mem:
+    location_site1:
       vars:
-        trace_var: hosts-site1/location_mem
+        trace_var: hosts-site1/location_site1
+      hosts:
+        web-q1.example.int: {}
+        web-q2.example.int: {}
+    ungrouped: {}
+
+```
+
+For the inventory for [site2.yml](./example1/hosts-site2.yml) , the corresponding YAML inventory implementing the site1 hierarchy is as follows:
+
+```yaml
+all:
+  children:
+    hosts:
+      web-q1.example.int:
+        trace_var: hosts-site2/web-q1.example.int
+        foreman: <94 keys>
+        facts: {}
+      web-q2.example.int:
+        trace_var: hosts-site2/rhel7/web-q2.example.int
+        foreman: <94 keys>
+        facts: {}
+    rhel7:
+      vars:
+        trace_var: hosts-site2/rhel7
+      hosts:
+        web-q1.example.int: {}
+        web-q2.example.int: {}
+    environment_qa:
+      vars:
+        trace_var: hosts-site2/environment_qa
+      hosts:
+        web-q1.example.int: {}
+        web-q2.example.int: {}
+    location_site2:
+      vars:
+        trace_var: hosts-site2/location_site2
       hosts:
         web-q1.example.int: {}
         web-q2.example.int: {}
