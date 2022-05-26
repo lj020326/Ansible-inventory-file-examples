@@ -388,7 +388,7 @@ Run debug using a group defined set of hosts.
 
 Run for group 'network2'
 ```shell
-ansible -i ./inventory/ -m debug -a var=trace_var network2
+ansible -i ./inventory/ network2 -m debug -a var=trace_var 
 web-q1-net2-s1.example.int | SUCCESS => {
     "trace_var": "network2/site1/web-q1-net2-s1.example.int"
 }
