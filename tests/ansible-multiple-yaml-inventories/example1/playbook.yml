@@ -3,8 +3,5 @@
   gather_facts: false
   connection: local
   tasks:
-    - fail:
-        msg: 'Use --limit, Luke!'
-      when: ansible_limit is not defined
     - debug:
         var: trace_var
