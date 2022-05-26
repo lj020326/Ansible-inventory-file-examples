@@ -50,6 +50,18 @@ Then modify the playbook to set the group_by key to 'cluster' for all hosts as f
     - debug: var=test
 ```
 
+In this example there are 2 networks located at 2 sites resulting in 4 YAML inventory files, diagrammed as follows:
+
+```mermaid
+graph TD;
+    A[all] --> B[network1]
+    A[all] --> C[network2]
+    B --> D[site1]
+    B --> E[site2]
+    C --> F[site1]
+    C --> G[site2]
+```
+
 
 In this example, the following group/host hierarchy will be implemented in yaml as follows:
 
@@ -74,7 +86,7 @@ graph TD;
     P --> R[web-q2.example.int]
 ```
 
-For the inventory for [site1.yml](./example1/hosts-site1.yml) , the corresponding YAML inventory implementing the site1 hierarchy is as follows:
+The inventory for [site1.yml](./example1/hosts-site1.yml) , the corresponding YAML inventory implementing the site1 hierarchy is as follows:
 
 ```yaml
 all:
