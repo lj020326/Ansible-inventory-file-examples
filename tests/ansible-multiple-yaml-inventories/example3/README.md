@@ -1,5 +1,5 @@
 
-# Example 1: Playbook using 2 YAML inventories with overlapping parent groups  
+# Example 3: Playbook using 3 YAML inventories meeting group requirement sufficiency  
 
 The playbook as follows:
 
