@@ -56,7 +56,7 @@ In this example there are 2 networks located at 2 sites resulting in 4 YAML inve
 graph TD;
     A[all] --> B[network1]
     A[all] --> C[network2]
-    B --> D[site1]
+    B --> D[site1 (located in network1/]
     B --> E[site2]
     C --> F[site1]
     C --> G[site2]
@@ -84,74 +84,74 @@ graph TD;
     P --> R["web-net[1|2]-q2.example.int"]
 ```
 
-The inventory for [site1.yml](./example1/hosts-site1.yml) , the corresponding YAML inventory implementing the site1 hierarchy is as follows:
+The [network1 site1.yml inventory](./network1/site1.yml) follows:
 
 ```yaml
 all:
   children:
     hosts:
-      web-net[1|2]-q1.example.int:
-        trace_var: hosts-site1/web-net[1|2]-q1.example.int
+      web-net1-q1-s1.example.int:
+        trace_var: hosts-site1/web-net1-q1-s1.example.int
         foreman: <94 keys>
         facts: {}
-      web-net[1|2]-q2.example.int:
-        trace_var: hosts-site1/rhel7/web-net[1|2]-q2.example.int
+      web-net1-q2-s1.example.int:
+        trace_var: hosts-site1/rhel7/web-net1-q2-s1.example.int
         foreman: <94 keys>
         facts: {}
     rhel7:
       vars:
         trace_var: hosts-site1/rhel7
       hosts:
-        web-net[1|2]-q1.example.int: {}
-        web-net[1|2]-q2.example.int: {}
+        web-net1-q1-s1.example.int: {}
+        web-net1-q2-s1.example.int: {}
     environment_qa:
       vars:
         trace_var: hosts-site1/environment_qa
       hosts:
-        web-net[1|2]-q1.example.int: {}
-        web-net[1|2]-q2.example.int: {}
+        web-net1-q1-s1.example.int: {}
+        web-net1-q2-s1.example.int: {}
     location_site1:
       vars:
         trace_var: hosts-site1/location_site1
       hosts:
-        web-net[1|2]-q1.example.int: {}
-        web-net[1|2]-q2.example.int: {}
+        web-net1-q1-s1.example.int: {}
+        web-net1-q2-s1.example.int: {}
     ungrouped: {}
 
 ```
 
-For the inventory for [site2.yml](./example1/hosts-site2.yml) , the corresponding YAML inventory implementing the site1 hierarchy is as follows:
+For the [network2 site1.yml inventory](./network1/site2.yml):
 
 ```yaml
 all:
   children:
     hosts:
-      web-net[1|2]-q1.example.int:
-        trace_var: hosts-site2/web-net[1|2]-q1.example.int
+      web-net2-q1-s1.example.int:
+        trace_var: hosts-site2/web-net2-q1-s1.example.int
         foreman: <94 keys>
         facts: {}
-      web-net[1|2]-q2.example.int:
-        trace_var: hosts-site2/rhel7/web-net[1|2]-q2.example.int
+      web-net2-q2-s1.example.int:
+        trace_var: hosts-site2/rhel7/web-net2-q2-s1.example.int
         foreman: <94 keys>
         facts: {}
     rhel7:
       vars:
         trace_var: hosts-site2/rhel7
       hosts:
-        web-net[1|2]-q1.example.int: {}
-        web-net[1|2]-q2.example.int: {}
+        web-net2-q1-s1.example.int: {}
+        web-net2-q2-s1.example.int: {}
     environment_qa:
       vars:
         trace_var: hosts-site2/environment_qa
       hosts:
-        web-net[1|2]-q1.example.int: {}
-        web-net[1|2]-q2.example.int: {}
+        web-net2-q1-s1.example.int: {}
+        web-net2-q2-s1.example.int: {}
     location_site2:
       vars:
         trace_var: hosts-site2/location_site2
       hosts:
-        web-net[1|2]-q1.example.int: {}
-        web-net[1|2]-q2.example.int: {}
+        web-net2-q1-s1.example.int: {}
+        web-net2-q2-s1.example.int: {}
     ungrouped: {}
 
 ```
