@@ -72,7 +72,6 @@ graph TD;
     B --> D[rhel7]
     B --> E[environment_qa]
     B --> F[location_mem]
-    B --> G[ungrouped]
     C --> H[web-q1.example.int]
     C --> I[web-q2.example.int]
     D --> J[hosts]
