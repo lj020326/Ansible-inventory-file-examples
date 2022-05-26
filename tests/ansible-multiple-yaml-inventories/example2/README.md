@@ -383,3 +383,15 @@ web-q2-net2-s1.example.int : ok=2    changed=0    unreachable=0    failed=0    s
 web-q2-net2-s2.example.int : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 
 ```
+
+
+## Conclusions/Next Steps
+
+In the last case, with running on the merged inventory, the expected results would be that only the appropriate network group would be assigned for each host.
+
+Instead, we found that all the hosts in both networks have both 'network' groups assigned.
+
+This is not the intended or expected behavior.
+
+The [next example](../example3/README.md) will look to solve this.
+
