@@ -56,35 +56,37 @@ Each site.yml inventory will be setup similar to the following with the "[1|2]" 
 ```yaml
 all:
   children:
-    hosts:
-      web-net[1|2]-q1-s[1|2].example.int:
-        trace_var: hosts-site[1|2]/web-net[1|2]-q1-s[1|2].example.int
-        foreman: <94 keys>
-        facts: {}
-      web-net[1|2]-q2-s[1|2].example.int:
-        trace_var: hosts-site[1|2]/rhel7/web-net[1|2]-q2-s[1|2].example.int
-        foreman: <94 keys>
-        facts: {}
-    rhel7:
-      vars:
-        trace_var: hosts-site1/rhel7
-      hosts:
-        web-q1.example.int: {}
-        web-q2.example.int: {}
-    environment_qa:
-      vars:
-        trace_var: hosts-site1/environment_qa
-      hosts:
-        web-q1.example.int: {}
-        web-q2.example.int: {}
-    location_site1:
-      vars:
-        trace_var: hosts-site1/location_site1
-      hosts:
-        web-q1.example.int: {}
-        web-q2.example.int: {}
-    ungrouped: {}
-
+    network[1|2]:
+      children:
+        hosts:
+          web-net[1|2]-q1-s[1|2].example.int:
+            trace_var: hosts-site[1|2]/web-net[1|2]-q1-s[1|2].example.int
+            foreman: <94 keys>
+            facts: {}
+          web-net[1|2]-q2-s[1|2].example.int:
+            trace_var: hosts-site[1|2]/rhel7/web-net[1|2]-q2-s[1|2].example.int
+            foreman: <94 keys>
+            facts: {}
+        rhel7:
+          vars:
+            trace_var: hosts-site1/rhel7
+          hosts:
+            web-q1.example.int: {}
+            web-q2.example.int: {}
+        environment_qa:
+          vars:
+            trace_var: hosts-site1/environment_qa
+          hosts:
+            web-q1.example.int: {}
+            web-q2.example.int: {}
+        location_site1:
+          vars:
+            trace_var: hosts-site1/location_site1
+          hosts:
+            web-q1.example.int: {}
+            web-q2.example.int: {}
+        ungrouped: {}
+    
 ```
 
 Each of the respective inventory files:
