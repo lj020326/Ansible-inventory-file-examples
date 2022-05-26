@@ -87,16 +87,16 @@ For the [network2 site1.yml inventory](./network2/site1.yml):
 
 ```yaml
 all:
+  hosts:
+    web-net2-q1-s1.example.int:
+      trace_var: hosts-site2/web-net2-q1-s1.example.int
+      foreman: <94 keys>
+      facts: {}
+    web-net2-q2-s1.example.int:
+      trace_var: hosts-site2/rhel7/web-net2-q2-s1.example.int
+      foreman: <94 keys>
+      facts: {}
   children:
-    hosts:
-      web-net2-q1-s1.example.int:
-        trace_var: hosts-site2/web-net2-q1-s1.example.int
-        foreman: <94 keys>
-        facts: {}
-      web-net2-q2-s1.example.int:
-        trace_var: hosts-site2/rhel7/web-net2-q2-s1.example.int
-        foreman: <94 keys>
-        facts: {}
     rhel7:
       vars:
         trace_var: hosts-site2/rhel7
