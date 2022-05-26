@@ -32,20 +32,20 @@ For each of the 4 inventory files, the following group/host hierarchy will be im
 
 ```mermaid
 graph TD;
-    A[all] --> C[hosts]
-    A[all] --> D[children]
-    C --> I["web-net[1|2]-q1-s[1|2].example.int"]
-    C --> J["web-net[1|2]-q2-s[1|2].example.int"]
-    D --> E[rhel7]
-    D --> F[environment_qa]
-    D --> G[location_mem]
-    E --> K[hosts]
-    K --> L["web-net[1|2]-q1-s[1|2].example.int"]
-    K --> M["web-net[1|2]-q2-s[1|2].example.int"]
-    F --> N[hosts]
-    N --> O["web-net[1|2]-q1-s[1|2].example.int"]
-    N --> P["web-net[1|2]-q2-s[1|2].example.int"]
-    G --> Q[hosts]
+    A[all] --> B[hosts]
+    A[all] --> C[children]
+    B --> D["web-net[1|2]-q1-s[1|2].example.int"]
+    B --> E["web-net[1|2]-q2-s[1|2].example.int"]
+    C --> F[rhel7]
+    C --> G[environment_qa]
+    C --> H[location_mem]
+    F --> I[hosts]
+    I --> J["web-net[1|2]-q1-s[1|2].example.int"]
+    I --> K["web-net[1|2]-q2-s[1|2].example.int"]
+    G --> N[hosts]
+    N --> M["web-net[1|2]-q1-s[1|2].example.int"]
+    N --> O["web-net[1|2]-q2-s[1|2].example.int"]
+    H --> P[hosts]
     Q --> R["web-net[1|2]-q1-s[1|2].example.int"]
     Q --> S["web-net[1|2]-q2-s[1|2].example.int"]
 ```
@@ -57,35 +57,35 @@ Each site.yml inventory will be setup similar to the following with the "[1|2]" 
 all:
   hosts:
     web-net[1|2]-q1-s[1|2].example.int:
-      trace_var: hosts-site[1|2]/web-net[1|2]-q1-s[1|2].example.int
+      trace_var: site[1|2]/web-net[1|2]-q1-s[1|2].example.int
       foreman: <94 keys>
       facts: {}
     web-net[1|2]-q2-s[1|2].example.int:
-      trace_var: hosts-site[1|2]/rhel7/web-net[1|2]-q2-s[1|2].example.int
+      trace_var: site[1|2]/rhel7/web-net[1|2]-q2-s[1|2].example.int
       foreman: <94 keys>
       facts: {}
   children:
     rhel7:
       vars:
-        trace_var: hosts-site[1|2]/rhel7
+        trace_var: site[1|2]/rhel7
       hosts:
         web-net[1|2]-q1-s[1|2].example.int: {}
         web-net[1|2]-q2-s[1|2].example.int: {}
     environment_qa:
       vars:
-        trace_var: hosts-site[1|2]/environment_qa
+        trace_var: site[1|2]/environment_qa
       hosts:
         web-net[1|2]-q1-s[1|2].example.int: {}
         web-net[1|2]-q2-s[1|2].example.int: {}
     location_site[1|2]:
       vars:
-        trace_var: hosts-site[1|2]/location_site[1|2]
+        trace_var: site[1|2]/location_site[1|2]
       hosts:
         web-net[1|2]-q1-s[1|2].example.int: {}
         web-net[1|2]-q2-s[1|2].example.int: {}
     network[1|2]:
       vars:
-        trace_var: hosts-site[1|2]/location_site[1|2]
+        trace_var: site[1|2]/location_site[1|2]
       hosts:
         web-net[1|2]-q1-s[1|2].example.int: {}
         web-net[1|2]-q2-s[1|2].example.int: {}
