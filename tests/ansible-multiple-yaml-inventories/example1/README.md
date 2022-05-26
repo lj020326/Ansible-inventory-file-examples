@@ -1,41 +1,7 @@
 
-Using multiple Ansible YAML-based Inventories  
-===
+# Example 1: Playbook using 2 YAML inventories with overlapping parent groups  
 
-The following sections will explore use cases when using multiple YAML-based inventory files:
-
-* [Example 1: Playbook using 2 YAML inventories with overlapping parent groups](#Example-01)
-
-* [Example 2: Playbook using 2 YAML inventories with non-overlapping parent groups](#Example-02)
-
-The purpose here is to fully understand how to leverage child group vars especially with respect to deriving the expected behavior for variable merging. 
-
-The ansible environment used to perform the examples:
-
-```output
-$ git clone https://github.com/lj020326/ansible-inventory-file-examples.git
-$ cd ansible-inventory-file-examples
-$ git switch develop-lj
-$ cd tests/ansible-group-priority
-$ ansible --version
-ansible [core 2.12.3]
-  config file = None
-  configured module search path = ['/Users/ljohnson/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
-  ansible python module location = /Users/ljohnson/.pyenv/versions/3.10.2/lib/python3.10/site-packages/ansible
-  ansible collection location = /Users/ljohnson/.ansible/collections:/usr/share/ansible/collections
-  executable location = /Users/ljohnson/.pyenv/versions/3.10.2/bin/ansible
-  python version = 3.10.2 (main, Feb 21 2022, 15:35:10) [Clang 13.0.0 (clang-1300.0.29.30)]
-  jinja version = 3.1.0
-  libyaml = True
-```
-
-
-
-## <a id="Example-06"></a>Example 6: Using group_by key groups with ansible_group_priority
-
-Copy the files used in the prior example for example 6.
-
-Then modify the playbook to set the group_by key to 'cluster' for all hosts as follows:
+The playbook as follows:
 
 ```yaml
 - name: "Run trace var play"
@@ -85,16 +51,16 @@ The [network1 site1.yml inventory](./network1/site1.yml) follows:
 
 ```yaml
 all:
+  hosts:
+    web-net1-q1-s1.example.int:
+      trace_var: hosts-site1/web-net1-q1-s1.example.int
+      foreman: <94 keys>
+      facts: {}
+    web-net1-q2-s1.example.int:
+      trace_var: hosts-site1/rhel7/web-net1-q2-s1.example.int
+      foreman: <94 keys>
+      facts: {}
   children:
-    hosts:
-      web-net1-q1-s1.example.int:
-        trace_var: hosts-site1/web-net1-q1-s1.example.int
-        foreman: <94 keys>
-        facts: {}
-      web-net1-q2-s1.example.int:
-        trace_var: hosts-site1/rhel7/web-net1-q2-s1.example.int
-        foreman: <94 keys>
-        facts: {}
     rhel7:
       vars:
         trace_var: hosts-site1/rhel7
