@@ -129,7 +129,7 @@ all:
               purpose_role: ''
               purpose_usage: ''
               registered_at: 2022-03-11 09:05:08 -0600
-              registered_through: satp1s4.example.int
+              registered_through: sat123.example.int
               release_version: 7Server
               service_level: Standard
               user: null
@@ -268,7 +268,7 @@ all:
               purpose_role: ''
               purpose_usage: ''
               registered_at: 2022-02-24 15:54:28 -0600
-              registered_through: satp1s4.example.int
+              registered_through: sat123.example.int
               release_version: 7Server
               service_level: Standard
               user: null
