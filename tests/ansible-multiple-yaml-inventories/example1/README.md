@@ -47,17 +47,17 @@ graph TD;
     P --> R["web-net[1|2]-q2-s[1|2].example.int"]
 ```
 
-The [network1 site1.yml inventory](./network1/site1.yml) follows:
+Each site.yml inventory will be setup similar to the following with the "[1|2]" regex pattern evaluated for each of the 4 cases:
 
 ```yaml
 all:
   hosts:
-    web-net1-q1-s1.example.int:
-      trace_var: hosts-site1/web-net1-q1-s1.example.int
+    web-net[1|2]-q1-s[1|2].example.int:
+      trace_var: hosts-site1/web-net[1|2]-q1-s[1|2].example.int
       foreman: <94 keys>
       facts: {}
-    web-net1-q2-s1.example.int:
-      trace_var: hosts-site1/rhel7/web-net1-q2-s1.example.int
+    web-net[1|2]-q2-s[1|2].example.int:
+      trace_var: hosts-site1/rhel7/web-net[1|2]-q2-s[1|2].example.int
       foreman: <94 keys>
       facts: {}
   children:
@@ -65,59 +65,31 @@ all:
       vars:
         trace_var: hosts-site1/rhel7
       hosts:
-        web-net1-q1-s1.example.int: {}
-        web-net1-q2-s1.example.int: {}
+        web-net[1|2]-q1-s[1|2].example.int: {}
+        web-net[1|2]-q2-s[1|2].example.int: {}
     environment_qa:
       vars:
         trace_var: hosts-site1/environment_qa
       hosts:
-        web-net1-q1-s1.example.int: {}
-        web-net1-q2-s1.example.int: {}
+        web-net[1|2]-q1-s[1|2].example.int: {}
+        web-net[1|2]-q2-s[1|2].example.int: {}
     location_site1:
       vars:
         trace_var: hosts-site1/location_site1
       hosts:
-        web-net1-q1-s1.example.int: {}
-        web-net1-q2-s1.example.int: {}
+        web-net[1|2]-q1-s[1|2].example.int: {}
+        web-net[1|2]-q2-s[1|2].example.int: {}
     ungrouped: {}
 
 ```
 
-For the [network2 site1.yml inventory](./network2/site1.yml):
+Each of the respective inventory files:
 
-```yaml
-all:
-  hosts:
-    web-net2-q1-s1.example.int:
-      trace_var: hosts-site2/web-net2-q1-s1.example.int
-      foreman: <94 keys>
-      facts: {}
-    web-net2-q2-s1.example.int:
-      trace_var: hosts-site2/rhel7/web-net2-q2-s1.example.int
-      foreman: <94 keys>
-      facts: {}
-  children:
-    rhel7:
-      vars:
-        trace_var: hosts-site2/rhel7
-      hosts:
-        web-net2-q1-s1.example.int: {}
-        web-net2-q2-s1.example.int: {}
-    environment_qa:
-      vars:
-        trace_var: hosts-site2/environment_qa
-      hosts:
-        web-net2-q1-s1.example.int: {}
-        web-net2-q2-s1.example.int: {}
-    location_site2:
-      vars:
-        trace_var: hosts-site2/location_site2
-      hosts:
-        web-net2-q1-s1.example.int: {}
-        web-net2-q2-s1.example.int: {}
-    ungrouped: {}
+* [network1 site1 inventory](./network1/site1.yml)
+* [network1 site2 inventory](./network1/site2.yml)
+* [network2 site1 inventory](./network2/site1.yml)
+* [network2 site2 inventory](./network2/site2.yml)
 
-```
 
 With the 4 inventories, mentioned, we now seek to confirm that the expected value appears for the 'trace_var' variable for both hosts.
 
