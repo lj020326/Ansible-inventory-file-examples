@@ -108,7 +108,7 @@ Each of the respective inventory files:
 * [network2/site2 inventory](./inventory/network2/site2.yml)
 
 
-With the 4 inventories, mentioned, we now seek to confirm that the expected value appears for the 'trace_var' variable for both hosts.
+With the 4 inventories mentioned, we now seek to confirm that the expected value appears for the 'trace_var' variable for both hosts.
 
 playbook run for inventory/network1/site1.yml:
 ```output
