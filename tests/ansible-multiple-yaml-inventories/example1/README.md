@@ -113,15 +113,15 @@ PLAY [Run trace var play] ******************************************************
 
 TASK [debug] *************************************************************************************************************************************************************************************************************************************************************
 ok: [web-q1-net1-s1.example.int] => {
-    "trace_var": "network1/hosts-site1/web-q1-net1-s1.example.int"
+    "trace_var": "network1/site1/web-q1-net1-s1.example.int"
 }
-ok: [web-q2-net1-s2.example.int] => {
-    "trace_var": "network1/hosts-site1/rhel7/web-q2-net1-s2.example.int"
+ok: [web-q2-net1-s1.example.int] => {
+    "trace_var": "network1/site1/web-q2-net1-s1.example.int"
 }
 
 PLAY RECAP ***************************************************************************************************************************************************************************************************************************************************************
 web-q1-net1-s1.example.int : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-web-q2-net1-s2.example.int : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+web-q2-net1-s1.example.int : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 
 ```
 
