@@ -32,11 +32,11 @@ For each of the 4 inventory files, the following group/host hierarchy will be im
 graph TD;
     A[all] --> C[hosts]
     A[all] --> D[children]
+    C --> I["web-net[1|2]-q1-s[1|2].example.int"]
+    C --> J["web-net[1|2]-q2-s[1|2].example.int"]
     D --> E[rhel7]
     D --> F[environment_qa]
     D --> G[location_mem]
-    E --> I["web-net[1|2]-q1-s[1|2].example.int"]
-    E --> J["web-net[1|2]-q2-s[1|2].example.int"]
     E --> K[hosts]
     K --> L["web-net[1|2]-q1-s[1|2].example.int"]
     K --> M["web-net[1|2]-q2-s[1|2].example.int"]
