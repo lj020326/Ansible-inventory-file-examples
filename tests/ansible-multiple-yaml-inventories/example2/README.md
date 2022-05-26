@@ -1,6 +1,15 @@
 
 # Example 2: Playbook using 2 YAML inventories with non-overlapping parent groups
 
+In the prior [Example 1](../example1/README.md), with running on the merged inventory, the merging of multiple inventories works as expected.
+
+When dealing with the combined/merged, it would be essential to be able to target the sites/networks by groups.
+While the groups in the prior example existed for the sites dimension, the groups did not exist for the networks.
+
+The following example attempts to solve this.
+
+## Playbook used
+
 The playbook as follows:
 
 ```yaml

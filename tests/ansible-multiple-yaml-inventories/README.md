@@ -8,7 +8,7 @@ The following sections will explore use cases when using multiple YAML-based inv
 
 * [Example 2: Playbook using 2 YAML inventories with non-overlapping parent groups - works but doesn't](#Example-02)
 
-* [Example 3: Playbook using 3 YAML inventories meeting group requirement sufficiency](#Example-03)
+* [Example 3: Playbook using 3 YAML inventories with group requirement sufficiency](#Example-03)
 
 The purpose here is to fully understand how to leverage child group vars especially with respect to deriving the expected behavior for variable merging. 
 

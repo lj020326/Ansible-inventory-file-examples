@@ -360,12 +360,7 @@ web-q2-net2-s2.example.int : ok=2    changed=0    unreachable=0    failed=0    s
 
 The merging of multiple inventories works as expected for this case.
 
-When dealing with the combined/merged, it would be helpful/essential to be able to target the sites/networks by groups.
+When dealing with the combined/merged, it would be essential to be able to target the sites/networks by groups.
 While the groups in this example exist for the sites dimension, it does not exist for the networks.
 
 The [next example](../example2/README.md) will look to solve this.
-
-
-
-
-
