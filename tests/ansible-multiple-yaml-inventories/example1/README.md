@@ -50,7 +50,7 @@ Then modify the playbook to set the group_by key to 'cluster' for all hosts as f
     - debug: var=test
 ```
 
-In this example there are 2 networks located at 2 sites resulting in 4 YAML inventory files, diagrammed as follows:
+In this example there are 2 networks located at 2 sites resulting in 4 YAML inventory files, with hierarchy diagrammed as follows:
 
 ```mermaid
 graph TD;
