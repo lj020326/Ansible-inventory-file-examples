@@ -3,7 +3,7 @@
 all:
   hosts:
     web-q1-net1-s1.example.int:
-      trace_var: network1/hosts-site1/web-q1-net1-s1.example.int
+      trace_var: network1/site1/web-q1-net1-s1.example.int
       foreman:
         architecture_id: 1
         architecture_name: x86_64
@@ -142,7 +142,7 @@ all:
         uuid: null
       facts: {}
     web-q2-net1-s2.example.int:
-      trace_var: network1/hosts-site1/rhel7/web-q2-net1-s2.example.int
+      trace_var: network1/site1/web-q2-net1-s2.example.int
       foreman:
         architecture_id: 1
         architecture_name: x86_64
@@ -283,19 +283,19 @@ all:
   children:
     rhel7:
       vars:
-        trace_var: network1/hosts-site1/rhel7
+        trace_var: network1/site1/rhel7
       hosts:
         web-q1-net1-s1.example.int: {}
         web-q2-net1-s2.example.int: {}
     environment_qa:
       vars:
-        trace_var: network1/hosts-site1/environment_qa
+        trace_var: network1/site1/environment_qa
       hosts:
         web-q1-net1-s1.example.int: {}
         web-q2-net1-s2.example.int: {}
     location_site1:
       vars:
-        trace_var: network1/hosts-site1/location_site1
+        trace_var: network1/site1/location_site1
       hosts:
         web-q1-net1-s1.example.int: {}
         web-q2-net1-s2.example.int: {}
