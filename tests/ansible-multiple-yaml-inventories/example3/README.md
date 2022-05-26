@@ -384,7 +384,9 @@ web-q2-net2-s2.example.int : ok=2    changed=0    unreachable=0    failed=0    s
 
 ## Debug host vars using groups to target sets of hosts
 
-To run debug using a group defined set of hosts:
+Run debug using a group defined set of hosts.
+
+Run for group 'network2'
 ```shell
 ansible -i ./inventory/ -m debug -a var=trace_var network2
 web-q1-net2-s1.example.int | SUCCESS => {
@@ -398,6 +400,24 @@ web-q1-net2-s2.example.int | SUCCESS => {
 }
 web-q2-net2-s2.example.int | SUCCESS => {
     "trace_var": "network2/site2/web-q2-net2-s2.example.int"
+}
+
+```
+
+Run for group 'site1'
+```shell
+ansible -i ./inventory/ -m debug -a var=trace_var location_site1
+web-q1-net1-s1.example.int | SUCCESS => {
+    "trace_var": "network1/site1/web-q1-net1-s1.example.int"
+}
+web-q2-net1-s1.example.int | SUCCESS => {
+    "trace_var": "network1/site1/web-q2-net1-s1.example.int"
+}
+web-q1-net2-s1.example.int | SUCCESS => {
+    "trace_var": "network2/site1/web-q1-net2-s1.example.int"
+}
+web-q2-net2-s1.example.int | SUCCESS => {
+    "trace_var": "network2/site1/web-q2-net2-s1.example.int"
 }
 
 ```
