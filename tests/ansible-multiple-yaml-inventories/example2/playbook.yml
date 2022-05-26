@@ -1,6 +1,7 @@
-- name: "Run play"
+- name: "Run trace var play"
   hosts: all
   gather_facts: false
   connection: local
   tasks:
-    - debug: var=test
+    - debug:
+        var: trace_var
