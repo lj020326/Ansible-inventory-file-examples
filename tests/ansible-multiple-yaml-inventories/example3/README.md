@@ -1,5 +1,5 @@
 
-# Example 3: Playbook using 3 YAML inventories with group requirement sufficiency  
+# Example 3: Playbook using multiple YAML inventories with group requirement sufficiency  
 
 In the prior [Example 2](../example2/README.md), with running on the merged inventory, the expected results were that only the appropriate network group would be assigned for each host.
 Instead, we found that all the hosts in both networks have both 'network' groups assigned.
