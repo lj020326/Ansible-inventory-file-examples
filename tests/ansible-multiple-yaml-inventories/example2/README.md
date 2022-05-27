@@ -1,5 +1,5 @@
 
-# Example 2: Playbook using 2 YAML inventories with non-overlapping parent groups
+# Example 2: Playbook using multiple YAML inventories with non-overlapping parent groups
 
 In the prior [Example 1](../example1/README.md), with running on the merged inventory, the merging of multiple inventories works as expected.
 
