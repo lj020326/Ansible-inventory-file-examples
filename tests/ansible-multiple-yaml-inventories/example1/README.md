@@ -1,5 +1,5 @@
 
-# Example 1: Playbook using 2 YAML inventories with overlapping parent groups  
+# Example 1: Playbook using multiple YAML inventories with overlapping parent groups  
 
 The playbook as follows:
 
