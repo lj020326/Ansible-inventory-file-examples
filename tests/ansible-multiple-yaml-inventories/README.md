@@ -41,7 +41,6 @@ See the details for this example [here](./example1/README.md)
 
 See the details for this example [here](./example2/README.md)
 
-
 ## <a id="Example-03"></a>Example 3: Playbook using multiple YAML inventories meeting group requirement sufficiency
 
 See the details for this example [here](./example3/README.md)
