@@ -33,15 +33,15 @@ ansible [core 2.12.3]
 
 
 
-## <a id="Example-01"></a>Example 1: Playbook using 2 YAML inventories with overlapping parent groups
+## <a id="Example-01"></a>Example 1: Playbook using multiple YAML inventories with overlapping parent groups
 
 See the details for this example [here](./example1/README.md)
 
-## <a id="Example-02"></a>Example 2: Playbook using 2 YAML inventories with non-overlapping parent groups
+## <a id="Example-02"></a>Example 2: Playbook using multiple YAML inventories with non-overlapping parent groups
 
 See the details for this example [here](./example2/README.md)
 
 
-## <a id="Example-03"></a>Example 3: Playbook using 3 YAML inventories meeting group requirement sufficiency
+## <a id="Example-03"></a>Example 3: Playbook using multiple YAML inventories meeting group requirement sufficiency
 
 See the details for this example [here](./example3/README.md)
