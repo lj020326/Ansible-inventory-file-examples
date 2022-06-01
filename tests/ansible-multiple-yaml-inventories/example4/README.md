@@ -294,25 +294,95 @@ We look to apply those filters in the next ntp playbook section.
 
 ## NTP group variables
 
-### Group vars for environment specific settings
+### Environment specific variable settings
 
-Set up group variables for the respective networks.
+Each network-site environment has a difference gateway.
+The gateway is also used to derive the network mask for each respective environment, which in turn is used to properly derive the ntp allow/restrict network mask setting used for each ntp server.
 
-[inventory/group_vars/network_dmz.yml](./inventory/group_vars/network_dmz.yml)
+Set up the gateway_ipv4 variable for each network/site.
+
+We do this by adding a section for each site group (location_site[1|2]) for the appropriate variable settings to be added to the respective inventory ntp.yml as follows.
+
+[inventory/dmz/ntp.yml](./inventory/dmz/ntp.yml)
 ```yaml
----
-
-gateway_ipv4: 221.112.0.1
-gateway_ipv4_network_cidr: 221.112.0.0/16
+all:
+  children:
+    ntp_server:
+      hosts:
+        admin-q1-dmz-s1.example.int: {}
+        admin-q2-dmz-s1.example.int: {}
+        admin-q1-dmz-s2.example.int: {}
+        admin-q2-dmz-s2.example.int: {}
+    ntp_client:
+      children:
+        environment_test: {}
+    location_site1:
+      vars:
+        trace_var: dmz/ntp/location_site1
+        gateway_ipv4: 112.112.0.1
+        gateway_ipv4_network_cidr: 112.112.0.0/16
+    location_site2:
+      vars:
+        trace_var: dmz/ntp/location_site2
+        gateway_ipv4: 221.221.0.1
+        gateway_ipv4_network_cidr: 221.221.0.0/16
 
 ```
 
-[inventory/group_vars/network_internal.yml](./inventory/group_vars/network_internal.yml)
+[inventory/internal/ntp.yml](./inventory/group_vars/network_internal.yml)
 ```yaml
----
+all:
+  children:
+    ntp_server:
+      hosts:
+        admin-q1-internal-s1.example.int: {}
+        admin-q2-internal-s1.example.int: {}
+        admin-q1-internal-s2.example.int: {}
+        admin-q2-internal-s2.example.int: {}
+    ntp_client:
+      children:
+        environment_test: {}
+    location_site1:
+      vars:
+        trace_var: internal/ntp/location_site1
+        gateway_ipv4: 192.168.112.1
+        gateway_ipv4_network_cidr: 192.168.112.0/16
+    location_site2:
+      vars:
+        trace_var: internal/ntp/location_site2
+        gateway_ipv4: 192.168.221.1
+        gateway_ipv4_network_cidr: 192.168.221.0/16
+```
 
-gateway_ipv4: 192.160.0.1
-gateway_ipv4_network_cidr: 192.160.0.0/16
+### Verify that the correct gateway_ipv4 setting appears for each ntp server.
+
+```shell
+ansible -i ./inventory/ -m debug -a var=group_trace_var,gateway_ipv4 ntp_server
+admin-q1-dmz-s1.example.int | SUCCESS => {
+    "group_trace_var,gateway_ipv4": "('group_vars/ntp_client.yml', '192.168.112.1')"
+}
+admin-q2-dmz-s1.example.int | SUCCESS => {
+    "group_trace_var,gateway_ipv4": "('group_vars/ntp_client.yml', '192.168.112.1')"
+}
+admin-q1-dmz-s2.example.int | SUCCESS => {
+    "group_trace_var,gateway_ipv4": "('group_vars/ntp_client.yml', '192.168.221.1')"
+}
+admin-q2-dmz-s2.example.int | SUCCESS => {
+    "group_trace_var,gateway_ipv4": "('group_vars/ntp_client.yml', '192.168.221.1')"
+}
+admin-q1-internal-s1.example.int | SUCCESS => {
+    "group_trace_var,gateway_ipv4": "('group_vars/ntp_client.yml', '192.168.112.1')"
+}
+admin-q2-internal-s1.example.int | SUCCESS => {
+    "group_trace_var,gateway_ipv4": "('group_vars/ntp_client.yml', '192.168.112.1')"
+}
+admin-q1-internal-s2.example.int | SUCCESS => {
+    "group_trace_var,gateway_ipv4": "('group_vars/ntp_client.yml', '192.168.221.1')"
+}
+admin-q2-internal-s2.example.int | SUCCESS => {
+    "group_trace_var,gateway_ipv4": "('group_vars/ntp_client.yml', '192.168.221.1')"
+}
+
 ```
 
 
