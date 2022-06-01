@@ -138,10 +138,6 @@ all:
         uptime_seconds: null
         use_image: null
         uuid: null
-      foreman_facts: {}
-      foreman_params:
-        enable-epel: 'false'
-        enable-puppet5: 'true'
     admin-q2-net1-s1.example.int:
       trace_var: network1/site1/admin-q2-net1-s1.example.int
       foreman:
@@ -278,10 +274,6 @@ all:
         uptime_seconds: 1231428
         use_image: null
         uuid: null
-      foreman_facts: {}
-      foreman_params:
-        enable-epel: 'false'
-        enable-puppet5: 'true'
     app-q1-net1-s1.example.int:
       trace_var: network1/site1/app-q1-net1-s1.example.int
       foreman:
@@ -419,10 +411,6 @@ all:
         uptime_seconds: 616197
         use_image: null
         uuid: null
-      foreman_facts: {}
-      foreman_params:
-        enable-epel: 'false'
-        enable-puppet5: 'true'
     app-q2-net1-s1.example.int:
       trace_var: network1/site1/app-q2-net1-s1.example.int
       foreman:
@@ -559,10 +547,6 @@ all:
         uptime_seconds: 615898
         use_image: null
         uuid: null
-      foreman_facts: {}
-      foreman_params:
-        enable-epel: 'false'
-        enable-puppet5: 'true'
     web-q1-net1-s1.example.int:
       trace_var: network1/site1/web-q1-net1-s1.example.int
       foreman:
@@ -701,7 +685,6 @@ all:
         uptime_seconds: 291089
         use_image: null
         uuid: null
-      facts: {}
     web-q2-net1-s1.example.int:
       trace_var: network1/site1/web-q2-net1-s1.example.int
       foreman:
@@ -840,7 +823,6 @@ all:
         uptime_seconds: 287444
         use_image: null
         uuid: null
-      facts: {}
   children:
     rhel6:
       vars:
