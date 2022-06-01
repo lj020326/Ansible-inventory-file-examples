@@ -205,7 +205,7 @@ Note that the 'ntp_client' group includes the 8 admin machines already included 
 
 We will now run through several ansible CLI tests to verify that the correct machines result for each respective limit used.
 
-### Run 1: Target all ntp servers
+### Test 1: Target all ntp servers
 
 ```shell
 ansible -i ./inventory/ ntp_server  -m debug -a var=trace_var,group_names
@@ -239,7 +239,7 @@ admin-q2-internal-s2.example.int | SUCCESS => {
 This is as expected.
 
 
-### Run 1: Target all ntp clients
+### Test 2: Target all ntp clients
 
 As mentioned earlier, that the 'ntp_clients' group is defined using the children group of 'environment_test'.  The following ansible debug command excludes the 'ntp_server' hosts from that set such to target only the non-'ntp-server' hosts.
 
@@ -296,6 +296,13 @@ web-q2-internal-s2.example.int | SUCCESS => {
 
 ```
 
+This is as expected.
+
+## Test Conclusion
+
+The 2 test results demonstrate that we can safely target the ntp_server and ntp_client machines with the appropriate group limit filters.
+
+We look to apply those filters in the next ntp playbook section.
 
 ## NTP Playbook
 
