@@ -674,17 +674,41 @@ web-q1-internal-s2.example.int | SUCCESS => {
 
 ```shell
 ansible -i ./inventory/ dmz  -m debug -a var=trace_var,foreman.content_facet_attributes.lifecycle_environment.name,foreman.location_name
+admin-q1-dmz-s1.example.int | SUCCESS => {
+    "trace_var,foreman.content_facet_attributes.lifecycle_environment.name,foreman.location_name": "('dmz/site1/admin-q1-dmz-s1.example.int', 'DEV', 'SITE1')"
+}
+admin-q2-dmz-s1.example.int | SUCCESS => {
+    "trace_var,foreman.content_facet_attributes.lifecycle_environment.name,foreman.location_name": "('dmz/site1/admin-q2-dmz-s1.example.int', 'DEV', 'SITE1')"
+}
+app-q1-dmz-s1.example.int | SUCCESS => {
+    "trace_var,foreman.content_facet_attributes.lifecycle_environment.name,foreman.location_name": "('dmz/site1/app-q1-dmz-s1.example.int', 'QA', 'SITE1')"
+}
+app-q2-dmz-s1.example.int | SUCCESS => {
+    "trace_var,foreman.content_facet_attributes.lifecycle_environment.name,foreman.location_name": "('dmz/site1/app-q2-dmz-s1.example.int', 'QA', 'SITE1')"
+}
 web-q1-dmz-s1.example.int | SUCCESS => {
-    "trace_var,foreman.content_facet_attributes.lifecycle_environment.name,foreman.location_name": "('dmz/site1/web-q1-dmz-s1.example.int', 'QA', 'MEM')"
+    "trace_var,foreman.content_facet_attributes.lifecycle_environment.name,foreman.location_name": "('dmz/site1/web-q1-dmz-s1.example.int', 'QA', 'SITE1')"
 }
 web-q2-dmz-s1.example.int | SUCCESS => {
-    "trace_var,foreman.content_facet_attributes.lifecycle_environment.name,foreman.location_name": "('dmz/site1/web-q2-dmz-s1.example.int', 'QA', 'MEM')"
+    "trace_var,foreman.content_facet_attributes.lifecycle_environment.name,foreman.location_name": "('dmz/site1/web-q2-dmz-s1.example.int', 'QA', 'SITE1')"
+}
+admin-q1-dmz-s2.example.int | SUCCESS => {
+    "trace_var,foreman.content_facet_attributes.lifecycle_environment.name,foreman.location_name": "('dmz/site2/admin-q1-dmz-s2.example.int', 'DEV', 'SITE2')"
+}
+admin-q2-dmz-s2.example.int | SUCCESS => {
+    "trace_var,foreman.content_facet_attributes.lifecycle_environment.name,foreman.location_name": "('dmz/site2/admin-q2-dmz-s2.example.int', 'DEV', 'SITE2')"
+}
+app-q1-dmz-s2.example.int | SUCCESS => {
+    "trace_var,foreman.content_facet_attributes.lifecycle_environment.name,foreman.location_name": "('dmz/site2/app-q1-dmz-s2.example.int', 'QA', 'SITE2')"
+}
+app-q2-dmz-s2.example.int | SUCCESS => {
+    "trace_var,foreman.content_facet_attributes.lifecycle_environment.name,foreman.location_name": "('dmz/site2/app-q2-dmz-s2.example.int', 'QA', 'SITE2')"
 }
 web-q1-dmz-s2.example.int | SUCCESS => {
-    "trace_var,foreman.content_facet_attributes.lifecycle_environment.name,foreman.location_name": "('dmz/site2/web-q1-dmz-s2.example.int', 'QA', 'MEM')"
+    "trace_var,foreman.content_facet_attributes.lifecycle_environment.name,foreman.location_name": "('dmz/site2/web-q1-dmz-s2.example.int', 'QA', 'SITE2')"
 }
 web-q2-dmz-s2.example.int | SUCCESS => {
-    "trace_var,foreman.content_facet_attributes.lifecycle_environment.name,foreman.location_name": "('dmz/site2/web-q2-dmz-s2.example.int', 'QA', 'MEM')"
+    "trace_var,foreman.content_facet_attributes.lifecycle_environment.name,foreman.location_name": "('dmz/site2/web-q2-dmz-s2.example.int', 'QA', 'SITE2')"
 }
 
 ```
