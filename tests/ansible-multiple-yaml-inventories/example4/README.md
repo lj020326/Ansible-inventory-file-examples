@@ -164,8 +164,6 @@ admin-internal-q2-s2.example.int
 ```
 
 
-
-
 The 'ntp-client' group will include all linux machines for the respective environment.
 In this case, the environment will be defined with the existing test environment group named 'environment_test'.
 
