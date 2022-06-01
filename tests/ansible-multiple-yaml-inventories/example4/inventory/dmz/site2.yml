@@ -68,7 +68,7 @@ all:
         last_compile: 2022-05-06 13:42:17 -0500
         last_report: null
         location_id: 2
-        location_name: DFW
+        location_name: SITE2
         mac: 00:50:56:a6:77:e3
         managed: false
         medium_id: null
@@ -204,7 +204,7 @@ all:
         last_compile: 2022-05-06 09:44:51 -0500
         last_report: null
         location_id: 2
-        location_name: DFW
+        location_name: SITE2
         mac: 00:50:56:ac:d2:a4
         managed: false
         medium_id: null
@@ -283,7 +283,7 @@ all:
         capabilities:
         - build
         certname: app-q1-dmz-s2.example.int
-        comment: First Weblogic App Server in QA @ MEM = Weblogic Console for
+        comment: First Weblogic App Server in QA @ SITE2 = Weblogic Console for
           QA
         compute_profile_id: null
         compute_profile_name: null
@@ -340,8 +340,8 @@ all:
         ip6: ''
         last_compile: 2022-05-20 01:40:59 -0500
         last_report: null
-        location_id: 3
-        location_name: MEM
+        location_id: 2
+        location_name: SITE2
         mac: 00:1a:64:76:00:c9
         managed: false
         medium_id: null
@@ -420,7 +420,7 @@ all:
         capabilities:
         - build
         certname: app-q2-dmz-s2.example.int
-        comment: 'Weblogic Application Server (Console) #2 QA MEM'
+        comment: 'Weblogic Application Server (Console) #2 QA SITE2'
         compute_profile_id: null
         compute_profile_name: null
         compute_resource_id: null
@@ -476,8 +476,8 @@ all:
         ip6: null
         last_compile: 2022-05-19 11:17:24 -0500
         last_report: null
-        location_id: 3
-        location_name: MEM
+        location_id: 2
+        location_name: SITE2
         mac: e0:d8:48:7d:d3:75
         managed: false
         medium_id: null
@@ -612,8 +612,8 @@ all:
         ip6: null
         last_compile: 2022-05-13 09:56:51 -0500
         last_report: null
-        location_id: 3
-        location_name: MEM
+        location_id: 2
+        location_name: SITE2
         mac: 00:1a:64:76:00:b9
         managed: false
         medium_id: null
@@ -661,7 +661,7 @@ all:
         subnet6_id: null
         subnet6_name: null
         subnet_id: 13
-        subnet_name: MEM_DMZ-101
+        subnet_name: SITE2_DMZ-101
         subscription_facet_attributes:
           autoheal: true
           hypervisor: false
@@ -750,8 +750,8 @@ all:
         ip6: null
         last_compile: 2022-05-13 10:21:04 -0500
         last_report: null
-        location_id: 3
-        location_name: MEM
+        location_id: 2
+        location_name: SITE2
         mac: 9a:7f:1f:ee:b9:f0
         managed: false
         medium_id: null
