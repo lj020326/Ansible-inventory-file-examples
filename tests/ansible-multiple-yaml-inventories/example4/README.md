@@ -376,7 +376,7 @@ ntp_log_info:
 ntp_cmdport_disabled: no
 
 ## used for variable-to-inventory trace/debug
-trace_var: group_vars/ntp_server.yml
+group_trace_var: group_vars/ntp_server.yml
 
 ```
 
@@ -408,7 +408,7 @@ ntp_servers: |
 ntp_cmdport_disabled: yes
 
 ## used for variable-to-inventory trace/debug
-trace_var: group_vars/ntp_client.yml
+group_trace_var: group_vars/ntp_client.yml
 
 ```
 
