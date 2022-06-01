@@ -7,21 +7,7 @@ Now we will look to apply plays that can target machines in the merged inventory
 
 E.g., the following scenario will discuss a simple NTP client/server based playbook to apply across the merged inventory. 
 
-## Playbook used
-
-To begin, we will start with the same playbook from the prior examples as follows:
-
-```yaml
-- name: "Run trace var play"
-  hosts: all
-  gather_facts: false
-  connection: local
-  tasks:
-    - debug:
-        var: trace_var
-    - debug:
-        var: group_names
-```
+## Overview
 
 In this example there are 2 networks located at 2 sites resulting in 4 YAML inventory files, with hierarchy diagrammed as follows:
 
