@@ -1,5 +1,0 @@
----
-
-gateway_ipv4: 221.112.0.1
-gateway_ipv4_network_cidr: 221.112.0.0/16
-

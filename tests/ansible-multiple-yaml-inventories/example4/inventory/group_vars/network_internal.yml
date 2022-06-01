@@ -1,5 +1,0 @@
----
-
-gateway_ipv4: 192.160.0.1
-gateway_ipv4_network_cidr: 192.160.0.0/16
-
