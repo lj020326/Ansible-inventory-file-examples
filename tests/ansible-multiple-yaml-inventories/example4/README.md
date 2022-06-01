@@ -149,7 +149,7 @@ Each of the respective inventory files:
 To prepare the ntp playbook, we will setup a group of ntp servers and client.
 For each site, there will be 2 time servers.
 
-The NTP time server configuration will be applied to the following 'admin' related machines:
+The 'ntp-server' group configuration will be applied to the following 4 'admin' machines:
 
 ```output
 admin-[dmz|internal]-q1-s[1|2].example.int
@@ -189,6 +189,9 @@ all:
         environment_test: {}
 ```
 
+Now we run through several tests to verify that the correct ntp servers show for each respective test run.
+
+### Run 1: Target all ntp servers
 
 ```shell
 ansible -i ./inventory/ ntp_server  -m debug -a var=trace_var,foreman.location_name
@@ -218,6 +221,8 @@ admin-q2-internal-s2.example.int | SUCCESS => {
 }
 
 ```
+
+This is as expected.
 
 
 
