@@ -144,337 +144,82 @@ Each of the respective inventory files:
 
 
 
-## Combined inventory run.
+## Define NTP inventory groups
 
-playbook run for combined inventory:
+To prepare the ntp playbook, we will setup a group of ntp servers and client.
+For each site, there will be 2 time servers.
+
+The NTP time server configuration will be applied to the following 'admin' related machines:
+
 ```output
-ansible-playbook -i ./inventory/ playbook.yml
-
-PLAY [Run trace var play] ************************************************************************************************************************************************************************************************************************************************
-
-TASK [debug] *************************************************************************************************************************************************************************************************************************************************************
-ok: [admin-q1-dmz-s1.example.int] => {
-    "trace_var": "dmz/site1/admin-q1-dmz-s1.example.int"
-}
-ok: [admin-q2-dmz-s1.example.int] => {
-    "trace_var": "dmz/site1/admin-q2-dmz-s1.example.int"
-}
-ok: [app-q1-dmz-s1.example.int] => {
-    "trace_var": "dmz/site1/app-q1-dmz-s1.example.int"
-}
-ok: [app-q2-dmz-s1.example.int] => {
-    "trace_var": "dmz/site1/app-q2-dmz-s1.example.int"
-}
-ok: [web-q1-dmz-s1.example.int] => {
-    "trace_var": "dmz/site1/web-q1-dmz-s1.example.int"
-}
-ok: [web-q2-dmz-s1.example.int] => {
-    "trace_var": "dmz/site1/web-q2-dmz-s1.example.int"
-}
-ok: [admin-q1-dmz-s2.example.int] => {
-    "trace_var": "dmz/site2/admin-q1-dmz-s2.example.int"
-}
-ok: [admin-q2-dmz-s2.example.int] => {
-    "trace_var": "dmz/site2/admin-q2-dmz-s2.example.int"
-}
-ok: [app-q1-dmz-s2.example.int] => {
-    "trace_var": "dmz/site2/app-q1-dmz-s2.example.int"
-}
-ok: [app-q2-dmz-s2.example.int] => {
-    "trace_var": "dmz/site2/app-q2-dmz-s2.example.int"
-}
-ok: [web-q1-dmz-s2.example.int] => {
-    "trace_var": "dmz/site2/web-q1-dmz-s2.example.int"
-}
-ok: [web-q2-dmz-s2.example.int] => {
-    "trace_var": "dmz/site2/web-q2-dmz-s2.example.int"
-}
-ok: [admin-q1-internal-s1.example.int] => {
-    "trace_var": "internal/site1/admin-q1-internal-s1.example.int"
-}
-ok: [admin-q2-internal-s1.example.int] => {
-    "trace_var": "internal/site1/admin-q2-internal-s1.example.int"
-}
-ok: [app-q1-internal-s1.example.int] => {
-    "trace_var": "internal/site1/app-q1-internal-s1.example.int"
-}
-ok: [app-q2-internal-s1.example.int] => {
-    "trace_var": "internal/site1/app-q2-internal-s1.example.int"
-}
-ok: [web-q1-internal-s1.example.int] => {
-    "trace_var": "internal/site1/web-q1-internal-s1.example.int"
-}
-ok: [web-q2-internal-s1.example.int] => {
-    "trace_var": "internal/site1/web-q2-internal-s1.example.int"
-}
-ok: [admin-q1-internal-s2.example.int] => {
-    "trace_var": "internal/site2/admin-q1-internal-s2.example.int"
-}
-ok: [admin-q2-internal-s2.example.int] => {
-    "trace_var": "internal/site2/admin-q2-internal-s2.example.int"
-}
-ok: [app-q1-internal-s2.example.int] => {
-    "trace_var": "internal/site2/app-q1-internal-s2.example.int"
-}
-ok: [app-q2-internal-s2.example.int] => {
-    "trace_var": "internal/site2/app-q2-internal-s2.example.int"
-}
-ok: [web-q1-internal-s2.example.int] => {
-    "trace_var": "internal/site2/web-q1-internal-s2.example.int"
-}
-ok: [web-q2-internal-s2.example.int] => {
-    "trace_var": "internal/site2/web-q2-internal-s2.example.int"
-}
-
-TASK [debug] *************************************************************************************************************************************************************************************************************************************************************
-ok: [admin-q1-dmz-s1.example.int] => {
-    "group_names": [
-        "dmz",
-        "environment_test",
-        "location_site1",
-        "ntp_client",
-        "ntp_server",
-        "rhel6"
-    ]
-}
-ok: [admin-q2-dmz-s1.example.int] => {
-    "group_names": [
-        "dmz",
-        "environment_test",
-        "location_site1",
-        "ntp_client",
-        "ntp_server",
-        "rhel7"
-    ]
-}
-ok: [app-q1-dmz-s1.example.int] => {
-    "group_names": [
-        "dmz",
-        "environment_test",
-        "location_site1",
-        "ntp_client",
-        "rhel7"
-    ]
-}
-ok: [app-q2-dmz-s1.example.int] => {
-    "group_names": [
-        "dmz",
-        "environment_test",
-        "location_site1",
-        "ntp_client",
-        "rhel7"
-    ]
-}
-ok: [web-q1-dmz-s1.example.int] => {
-    "group_names": [
-        "dmz",
-        "environment_test",
-        "location_site1",
-        "ntp_client",
-        "rhel7"
-    ]
-}
-ok: [web-q2-dmz-s1.example.int] => {
-    "group_names": [
-        "dmz",
-        "environment_test",
-        "location_site1",
-        "ntp_client",
-        "rhel7"
-    ]
-}
-ok: [admin-q1-dmz-s2.example.int] => {
-    "group_names": [
-        "dmz",
-        "environment_test",
-        "location_site2",
-        "ntp_client",
-        "ntp_server",
-        "rhel6"
-    ]
-}
-ok: [admin-q2-dmz-s2.example.int] => {
-    "group_names": [
-        "dmz",
-        "environment_test",
-        "location_site2",
-        "ntp_client",
-        "ntp_server",
-        "rhel7"
-    ]
-}
-ok: [app-q1-dmz-s2.example.int] => {
-    "group_names": [
-        "dmz",
-        "environment_test",
-        "location_site2",
-        "ntp_client",
-        "rhel7"
-    ]
-}
-ok: [app-q2-dmz-s2.example.int] => {
-    "group_names": [
-        "dmz",
-        "environment_test",
-        "location_site2",
-        "ntp_client",
-        "rhel7"
-    ]
-}
-ok: [web-q1-dmz-s2.example.int] => {
-    "group_names": [
-        "dmz",
-        "environment_test",
-        "location_site2",
-        "ntp_client",
-        "rhel7"
-    ]
-}
-ok: [web-q2-dmz-s2.example.int] => {
-    "group_names": [
-        "dmz",
-        "environment_test",
-        "location_site2",
-        "ntp_client",
-        "rhel7"
-    ]
-}
-ok: [admin-q1-internal-s1.example.int] => {
-    "group_names": [
-        "environment_test",
-        "internal",
-        "location_site1",
-        "ntp_client",
-        "rhel6"
-    ]
-}
-ok: [admin-q2-internal-s1.example.int] => {
-    "group_names": [
-        "environment_test",
-        "internal",
-        "location_site1",
-        "ntp_client",
-        "rhel7"
-    ]
-}
-ok: [app-q1-internal-s1.example.int] => {
-    "group_names": [
-        "environment_test",
-        "internal",
-        "location_site1",
-        "ntp_client",
-        "rhel7"
-    ]
-}
-ok: [app-q2-internal-s1.example.int] => {
-    "group_names": [
-        "environment_test",
-        "internal",
-        "location_site1",
-        "ntp_client",
-        "rhel7"
-    ]
-}
-ok: [web-q1-internal-s1.example.int] => {
-    "group_names": [
-        "environment_test",
-        "internal",
-        "location_site1",
-        "ntp_client",
-        "rhel7"
-    ]
-}
-ok: [web-q2-internal-s1.example.int] => {
-    "group_names": [
-        "environment_test",
-        "internal",
-        "location_site1",
-        "ntp_client",
-        "rhel7"
-    ]
-}
-ok: [admin-q1-internal-s2.example.int] => {
-    "group_names": [
-        "environment_test",
-        "internal",
-        "location_site2",
-        "ntp_client",
-        "rhel6"
-    ]
-}
-ok: [admin-q2-internal-s2.example.int] => {
-    "group_names": [
-        "environment_test",
-        "internal",
-        "location_site2",
-        "ntp_client",
-        "rhel7"
-    ]
-}
-ok: [app-q1-internal-s2.example.int] => {
-    "group_names": [
-        "environment_test",
-        "internal",
-        "location_site2",
-        "ntp_client",
-        "rhel7"
-    ]
-}
-ok: [app-q2-internal-s2.example.int] => {
-    "group_names": [
-        "environment_test",
-        "internal",
-        "location_site2",
-        "ntp_client",
-        "rhel7"
-    ]
-}
-ok: [web-q1-internal-s2.example.int] => {
-    "group_names": [
-        "environment_test",
-        "internal",
-        "location_site2",
-        "ntp_client",
-        "rhel7"
-    ]
-}
-ok: [web-q2-internal-s2.example.int] => {
-    "group_names": [
-        "environment_test",
-        "internal",
-        "location_site2",
-        "ntp_client",
-        "rhel7"
-    ]
-}
-
-PLAY RECAP ***************************************************************************************************************************************************************************************************************************************************************
-admin-q1-dmz-s1.example.int : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-admin-q1-dmz-s2.example.int : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-admin-q1-internal-s1.example.int : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-admin-q1-internal-s2.example.int : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-admin-q2-dmz-s1.example.int : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-admin-q2-dmz-s2.example.int : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-admin-q2-internal-s1.example.int : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-admin-q2-internal-s2.example.int : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-app-q1-dmz-s1.example.int  : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-app-q1-dmz-s2.example.int  : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-app-q1-internal-s1.example.int : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-app-q1-internal-s2.example.int : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-app-q2-dmz-s1.example.int  : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-app-q2-dmz-s2.example.int  : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-app-q2-internal-s1.example.int : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-app-q2-internal-s2.example.int : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-web-q1-dmz-s1.example.int  : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-web-q1-dmz-s2.example.int  : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-web-q1-internal-s1.example.int : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-web-q1-internal-s2.example.int : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-web-q2-dmz-s1.example.int  : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-web-q2-dmz-s2.example.int  : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-web-q2-internal-s1.example.int : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-web-q2-internal-s2.example.int : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+admin-[dmz|internal]-q1-s[1|2].example.int
+admin-[dmz|internal]-q1-s[1|2].example.int
 
 ```
+
+The ntp-server groups are defined as follows:
+
+[inventory/dmz/ntp.yml](./inventory/dmz/ntp.yml):
+```yaml
+all:
+  children:
+    ntp_server:
+      hosts:
+        admin-q1-dmz-s1.example.int: {}
+        admin-q2-dmz-s1.example.int: {}
+        admin-q1-dmz-s2.example.int: {}
+        admin-q2-dmz-s2.example.int: {}
+    ntp_client:
+      children:
+        environment_test: {}
+```
+
+[inventory/internal/ntp.yml](./inventory/internal/ntp.yml):
+```yaml
+all:
+  children:
+    ntp_server:
+      hosts:
+        admin-q1-internal-s1.example.int: {}
+        admin-q2-internal-s1.example.int: {}
+        admin-q1-internal-s2.example.int: {}
+        admin-q2-internal-s2.example.int: {}
+    ntp_client:
+      children:
+        environment_test: {}
+```
+
+
+```shell
+ansible -i ./inventory/ ntp_server  -m debug -a var=trace_var,foreman.location_name
+admin-q1-dmz-s1.example.int | SUCCESS => {
+    "trace_var,foreman.location_name": "('dmz/site1/admin-q1-dmz-s1.example.int', 'SITE1')"
+}
+admin-q2-dmz-s1.example.int | SUCCESS => {
+    "trace_var,foreman.location_name": "('dmz/site1/admin-q2-dmz-s1.example.int', 'SITE1')"
+}
+admin-q1-dmz-s2.example.int | SUCCESS => {
+    "trace_var,foreman.location_name": "('dmz/site2/admin-q1-dmz-s2.example.int', 'SITE2')"
+}
+admin-q2-dmz-s2.example.int | SUCCESS => {
+    "trace_var,foreman.location_name": "('dmz/site2/admin-q2-dmz-s2.example.int', 'SITE2')"
+}
+admin-q1-internal-s1.example.int | SUCCESS => {
+    "trace_var,foreman.location_name": "('internal/site1/admin-q1-internal-s1.example.int', 'SITE1')"
+}
+admin-q2-internal-s1.example.int | SUCCESS => {
+    "trace_var,foreman.location_name": "('internal/site1/admin-q2-internal-s1.example.int', 'SITE1')"
+}
+admin-q1-internal-s2.example.int | SUCCESS => {
+    "trace_var,foreman.location_name": "('internal/site2/admin-q1-internal-s2.example.int', 'SITE2')"
+}
+admin-q2-internal-s2.example.int | SUCCESS => {
+    "trace_var,foreman.location_name": "('internal/site2/admin-q2-internal-s2.example.int', 'SITE2')"
+}
+
+```
+
+
 
 ## NTP Playbook
 
