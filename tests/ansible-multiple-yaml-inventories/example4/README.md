@@ -47,7 +47,7 @@ graph TD;
     D --> E[rhel7]
     D --> F[environment_qa]
     D --> G["location_site[1|2]"]
-    D --> H["network[1|2]"]
+    D --> H["[dmz|internal]"]
     E --> K[hosts]
     K --> L["web-[dmz|internal]-q1-s[1|2].example.int"]
     K --> M["web-[dmz|internal]-q2-s[1|2].example.int"]
@@ -123,7 +123,7 @@ all:
         web-[dmz|internal]-q2-s[1|2].example.int: {}
     [dmz|internal]:
       vars:
-        trace_var: site[1|2]/network[1|2]
+        trace_var: site[1|2]/[dmz|internal]
       hosts:
         admin-[dmz|internal]-q1-s[1|2].example.int: {}
         admin-[dmz|internal]-q1-s[1|2].example.int: {}
