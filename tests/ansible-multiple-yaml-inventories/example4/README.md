@@ -528,7 +528,7 @@ admin-q2-internal-s2.example.int | SUCCESS => {
 
 ```
 
-## Limit to specific hosts in a group
+### Limit to specific hosts in a group
 
 ```shell
 ansible -i ./inventory/ -m debug -a var=trace_var,group_names ntp_server -l admin-q1-dmz-s1.example.int
@@ -538,7 +538,7 @@ admin-q1-dmz-s1.example.int | SUCCESS => {
 
 ```
 
-## Limit hosts in a group
+### Limit hosts in a group
 
 Run for group 'site1' with a specified limit
 ```shell
@@ -569,148 +569,3 @@ web-q2-internal-s2.example.int | SUCCESS => {
 }
 
 ```
-
-
-```shell
-ansible -i ./inventory/ internal -l web-q1* -m debug -a var=foreman.content_facet_attributes.lifecycle_environment.name
-web-q1-internal-s1.example.int | SUCCESS => {
-    "foreman.content_facet_attributes.lifecycle_environment.name": "QA"
-}
-web-q1-internal-s2.example.int | SUCCESS => {
-    "foreman.content_facet_attributes.lifecycle_environment.name": "QA"
-}
-
-```
-
-
-```shell
-ansible -i ./inventory/ internal -l web-q1* -m debug -a var=foreman.content_facet_attributes.lifecycle_environment
-web-q1-internal-s1.example.int | SUCCESS => {
-    "foreman.content_facet_attributes.lifecycle_environment": {
-        "id": 3,
-        "name": "QA"
-    }
-}
-web-q1-internal-s2.example.int | SUCCESS => {
-    "foreman.content_facet_attributes.lifecycle_environment": {
-        "id": 3,
-        "name": "QA"
-    }
-}
-
-```
-
-```shell
-ansible -i ./inventory/ dmz  -m debug -a var=trace_var,foreman.content_facet_attributes.lifecycle_environment.name,foreman.location_name
-admin-q1-dmz-s1.example.int | SUCCESS => {
-    "trace_var,foreman.content_facet_attributes.lifecycle_environment.name,foreman.location_name": "('dmz/site1/admin-q1-dmz-s1.example.int', 'DEV', 'SITE1')"
-}
-admin-q2-dmz-s1.example.int | SUCCESS => {
-    "trace_var,foreman.content_facet_attributes.lifecycle_environment.name,foreman.location_name": "('dmz/site1/admin-q2-dmz-s1.example.int', 'DEV', 'SITE1')"
-}
-app-q1-dmz-s1.example.int | SUCCESS => {
-    "trace_var,foreman.content_facet_attributes.lifecycle_environment.name,foreman.location_name": "('dmz/site1/app-q1-dmz-s1.example.int', 'QA', 'SITE1')"
-}
-app-q2-dmz-s1.example.int | SUCCESS => {
-    "trace_var,foreman.content_facet_attributes.lifecycle_environment.name,foreman.location_name": "('dmz/site1/app-q2-dmz-s1.example.int', 'QA', 'SITE1')"
-}
-web-q1-dmz-s1.example.int | SUCCESS => {
-    "trace_var,foreman.content_facet_attributes.lifecycle_environment.name,foreman.location_name": "('dmz/site1/web-q1-dmz-s1.example.int', 'QA', 'SITE1')"
-}
-web-q2-dmz-s1.example.int | SUCCESS => {
-    "trace_var,foreman.content_facet_attributes.lifecycle_environment.name,foreman.location_name": "('dmz/site1/web-q2-dmz-s1.example.int', 'QA', 'SITE1')"
-}
-admin-q1-dmz-s2.example.int | SUCCESS => {
-    "trace_var,foreman.content_facet_attributes.lifecycle_environment.name,foreman.location_name": "('dmz/site2/admin-q1-dmz-s2.example.int', 'DEV', 'SITE2')"
-}
-admin-q2-dmz-s2.example.int | SUCCESS => {
-    "trace_var,foreman.content_facet_attributes.lifecycle_environment.name,foreman.location_name": "('dmz/site2/admin-q2-dmz-s2.example.int', 'DEV', 'SITE2')"
-}
-app-q1-dmz-s2.example.int | SUCCESS => {
-    "trace_var,foreman.content_facet_attributes.lifecycle_environment.name,foreman.location_name": "('dmz/site2/app-q1-dmz-s2.example.int', 'QA', 'SITE2')"
-}
-app-q2-dmz-s2.example.int | SUCCESS => {
-    "trace_var,foreman.content_facet_attributes.lifecycle_environment.name,foreman.location_name": "('dmz/site2/app-q2-dmz-s2.example.int', 'QA', 'SITE2')"
-}
-web-q1-dmz-s2.example.int | SUCCESS => {
-    "trace_var,foreman.content_facet_attributes.lifecycle_environment.name,foreman.location_name": "('dmz/site2/web-q1-dmz-s2.example.int', 'QA', 'SITE2')"
-}
-web-q2-dmz-s2.example.int | SUCCESS => {
-    "trace_var,foreman.content_facet_attributes.lifecycle_environment.name,foreman.location_name": "('dmz/site2/web-q2-dmz-s2.example.int', 'QA', 'SITE2')"
-}
-
-```
-
-```shell
-ansible -i ./inventory/ -m debug -a var=foreman.content_facet_attributes internal -l web-q1*
-web-q1-internal-s1.example.int | SUCCESS => {
-    "foreman.content_facet_attributes": {
-        "applicable_module_stream_count": 0,
-        "applicable_package_count": 7,
-        "content_source": null,
-        "content_source_id": null,
-        "content_source_name": null,
-        "content_view": {
-            "id": 8,
-            "name": "RHEL7_composite"
-        },
-        "content_view_id": 8,
-        "content_view_name": "RHEL7_composite",
-        "errata_counts": {
-            "bugfix": 0,
-            "enhancement": 0,
-            "security": 0,
-            "total": 0
-        },
-        "id": 105,
-        "kickstart_repository": null,
-        "kickstart_repository_id": null,
-        "kickstart_repository_name": null,
-        "lifecycle_environment": {
-            "id": 3,
-            "name": "QA"
-        },
-        "lifecycle_environment_id": 3,
-        "lifecycle_environment_name": "QA",
-        "upgradable_module_stream_count": 0,
-        "upgradable_package_count": 0,
-        "uuid": "7a1cb585-1265-4232-baf1-eee16f2cf819"
-    }
-}
-web-q1-internal-s2.example.int | SUCCESS => {
-    "foreman.content_facet_attributes": {
-        "applicable_module_stream_count": 0,
-        "applicable_package_count": 7,
-        "content_source": null,
-        "content_source_id": null,
-        "content_source_name": null,
-        "content_view": {
-            "id": 8,
-            "name": "RHEL7_composite"
-        },
-        "content_view_id": 8,
-        "content_view_name": "RHEL7_composite",
-        "errata_counts": {
-            "bugfix": 0,
-            "enhancement": 0,
-            "security": 0,
-            "total": 0
-        },
-        "id": 105,
-        "kickstart_repository": null,
-        "kickstart_repository_id": null,
-        "kickstart_repository_name": null,
-        "lifecycle_environment": {
-            "id": 3,
-            "name": "QA"
-        },
-        "lifecycle_environment_id": 3,
-        "lifecycle_environment_name": "QA",
-        "upgradable_module_stream_count": 0,
-        "upgradable_package_count": 0,
-        "uuid": "7a1cb585-1265-4232-baf1-eee16f2cf819"
-    }
-}
-
-```
-
