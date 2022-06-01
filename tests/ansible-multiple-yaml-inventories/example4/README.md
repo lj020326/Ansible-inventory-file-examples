@@ -312,7 +312,16 @@ We look to apply those filters in the next ntp playbook section.
 
 Set up group variables for the respective networks.
 
-[inventory/group_vars/dmz.yml](./inventory/group_vars/network_dmz.yml)
+[inventory/group_vars/network_dmz.yml](./inventory/group_vars/network_dmz.yml)
+```yaml
+---
+
+gateway_ipv4: 221.112.0.1
+gateway_ipv4_network_cidr: 221.112.0.0/16
+
+```
+
+[inventory/group_vars/network_internal.yml](./inventory/group_vars/network_internal.yml)
 ```yaml
 ---
 
