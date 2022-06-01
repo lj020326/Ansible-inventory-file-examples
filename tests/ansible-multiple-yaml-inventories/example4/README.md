@@ -162,7 +162,10 @@ admin-internal-q1-s2.example.int
 admin-internal-q2-s2.example.int
 ```
 
-The ntp-server groups are defined as follows:
+The 'ntp-client' group will include all linux machines for the respective environment.
+In this case, the environment will be defined with the existing test environment group named 'environment_test'.
+
+Now, we can define the YAML groups to be used by the 'ntp' playbook/role as follows:
 
 [inventory/dmz/ntp.yml](./inventory/dmz/ntp.yml):
 ```yaml
