@@ -67,7 +67,7 @@ all:
         ip6: null
         last_compile: 2022-05-13 09:56:51 -0500
         last_report: null
-        location_id: 3
+        location_id: 1
         location_name: MEM
         mac: 00:1a:64:76:00:b9
         managed: false
@@ -206,7 +206,7 @@ all:
         ip6: null
         last_compile: 2022-05-13 10:21:04 -0500
         last_report: null
-        location_id: 3
+        location_id: 1
         location_name: MEM
         mac: 9a:7f:1f:ee:b9:f0
         managed: false
