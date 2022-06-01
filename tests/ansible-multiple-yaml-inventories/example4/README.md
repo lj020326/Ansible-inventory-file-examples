@@ -68,6 +68,18 @@ Each site.yml inventory will be setup similar to the following with the "[dmz|in
 ```yaml
 all:
   hosts:
+    admin-[dmz|internal]-q1-s[1|2].example.int: 
+      trace_var: site[1|2]/admin-[dmz|internal]-q1-s[1|2].example.int
+      foreman: <94 keys>
+    admin-[dmz|internal]-q2-s[1|2].example.int: 
+      trace_var: site[1|2]/admin-[dmz|internal]-q1-s[1|2].example.int
+      foreman: <94 keys>
+    app-[dmz|internal]-q1-s[1|2].example.int: 
+      trace_var: site[1|2]/app-[dmz|internal]-q1-s[1|2].example.int
+      foreman: <94 keys>
+    app-[dmz|internal]-q2-s[1|2].example.int: 
+      trace_var: site[1|2]/app-[dmz|internal]-q1-s[1|2].example.int
+      foreman: <94 keys>
     web-[dmz|internal]-q1-s[1|2].example.int:
       trace_var: site[1|2]/web-[dmz|internal]-q1-s[1|2].example.int
       foreman: <94 keys>
@@ -75,28 +87,48 @@ all:
       trace_var: site[1|2]/rhel7/web-[dmz|internal]-q2-s[1|2].example.int
       foreman: <94 keys>
   children:
+    rhel6:
+      vars:
+        trace_var: dmz/site1/rhel6
+      hosts:
+        admin-[dmz|internal]-q1-s[1|2].example.int: {}
     rhel7:
       vars:
         trace_var: site[1|2]/rhel7
       hosts:
+        admin-[dmz|internal]-q2-s[1|2].example.int: {}
+        app-[dmz|internal]-q1-s[1|2].example.int: {}
+        app-[dmz|internal]-q2-s[1|2].example.int: {}
         web-[dmz|internal]-q1-s[1|2].example.int: {}
         web-[dmz|internal]-q2-s[1|2].example.int: {}
     environment_qa:
       vars:
         trace_var: site[1|2]/environment_qa
       hosts:
+        admin-[dmz|internal]-q1-s[1|2].example.int: {}
+        admin-[dmz|internal]-q1-s[1|2].example.int: {}
+        app-[dmz|internal]-q1-s[1|2].example.int: {}
+        app-[dmz|internal]-q2-s[1|2].example.int: {}
         web-[dmz|internal]-q1-s[1|2].example.int: {}
         web-[dmz|internal]-q2-s[1|2].example.int: {}
     location_site[1|2]:
       vars:
         trace_var: site[1|2]/location_site[1|2]
       hosts:
+        admin-[dmz|internal]-q1-s[1|2].example.int: {}
+        admin-[dmz|internal]-q1-s[1|2].example.int: {}
+        app-[dmz|internal]-q1-s[1|2].example.int: {}
+        app-[dmz|internal]-q2-s[1|2].example.int: {}
         web-[dmz|internal]-q1-s[1|2].example.int: {}
         web-[dmz|internal]-q2-s[1|2].example.int: {}
     network[1|2]:
       vars:
         trace_var: site[1|2]/network[1|2]
       hosts:
+        admin-[dmz|internal]-q1-s[1|2].example.int: {}
+        admin-[dmz|internal]-q1-s[1|2].example.int: {}
+        app-[dmz|internal]-q1-s[1|2].example.int: {}
+        app-[dmz|internal]-q2-s[1|2].example.int: {}
         web-[dmz|internal]-q1-s[1|2].example.int: {}
         web-[dmz|internal]-q2-s[1|2].example.int: {}
     ungrouped: {}
