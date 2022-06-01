@@ -33,7 +33,7 @@ graph TD;
     D --> E[rhel7]
     D --> F[environment_qa]
     D --> G["location_site[1|2]"]
-    D --> H["[dmz|internal]"]
+    D --> H["network_[dmz|internal]"]
     E --> K[hosts]
     K --> L["web-[dmz|internal]-q1-s[1|2].example.int"]
     K --> M["web-[dmz|internal]-q2-s[1|2].example.int"]
