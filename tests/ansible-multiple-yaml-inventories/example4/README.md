@@ -436,6 +436,48 @@ Run debug using a group defined set of hosts.
 
 ### Specify groups
 
+Run for group 'network_internal'
+```shell
+ansible -i ./inventory/ -m debug -a var=trace_var,group_names network_internal
+admin-q1-internal-s1.example.int | SUCCESS => {
+    "trace_var,group_names": "('internal/site1/admin-q1-internal-s1.example.int', ['environment_test', 'location_site1', 'network_internal', 'ntp_client', 'ntp_server', 'rhel6'])"
+}
+admin-q2-internal-s1.example.int | SUCCESS => {
+    "trace_var,group_names": "('internal/site1/admin-q2-internal-s1.example.int', ['environment_test', 'location_site1', 'network_internal', 'ntp_client', 'ntp_server', 'rhel7'])"
+}
+app-q1-internal-s1.example.int | SUCCESS => {
+    "trace_var,group_names": "('internal/site1/app-q1-internal-s1.example.int', ['environment_test', 'location_site1', 'network_internal', 'ntp_client', 'rhel7'])"
+}
+app-q2-internal-s1.example.int | SUCCESS => {
+    "trace_var,group_names": "('internal/site1/app-q2-internal-s1.example.int', ['environment_test', 'location_site1', 'network_internal', 'ntp_client', 'rhel7'])"
+}
+web-q1-internal-s1.example.int | SUCCESS => {
+    "trace_var,group_names": "('internal/site1/web-q1-internal-s1.example.int', ['environment_test', 'location_site1', 'network_internal', 'ntp_client', 'rhel7'])"
+}
+web-q2-internal-s1.example.int | SUCCESS => {
+    "trace_var,group_names": "('internal/site1/web-q2-internal-s1.example.int', ['environment_test', 'location_site1', 'network_internal', 'ntp_client', 'rhel7'])"
+}
+admin-q1-internal-s2.example.int | SUCCESS => {
+    "trace_var,group_names": "('internal/site2/admin-q1-internal-s2.example.int', ['environment_test', 'location_site2', 'network_internal', 'ntp_client', 'ntp_server', 'rhel6'])"
+}
+admin-q2-internal-s2.example.int | SUCCESS => {
+    "trace_var,group_names": "('internal/site2/admin-q2-internal-s2.example.int', ['environment_test', 'location_site2', 'network_internal', 'ntp_client', 'ntp_server', 'rhel7'])"
+}
+app-q1-internal-s2.example.int | SUCCESS => {
+    "trace_var,group_names": "('internal/site2/app-q1-internal-s2.example.int', ['environment_test', 'location_site2', 'network_internal', 'ntp_client', 'rhel7'])"
+}
+app-q2-internal-s2.example.int | SUCCESS => {
+    "trace_var,group_names": "('internal/site2/app-q2-internal-s2.example.int', ['environment_test', 'location_site2', 'network_internal', 'ntp_client', 'rhel7'])"
+}
+web-q1-internal-s2.example.int | SUCCESS => {
+    "trace_var,group_names": "('internal/site2/web-q1-internal-s2.example.int', ['environment_test', 'location_site2', 'network_internal', 'ntp_client', 'rhel7'])"
+}
+web-q2-internal-s2.example.int | SUCCESS => {
+    "trace_var,group_names": "('internal/site2/web-q2-internal-s2.example.int', ['environment_test', 'location_site2', 'network_internal', 'ntp_client', 'rhel7'])"
+}
+
+```
+
 Run for group 'location_site1'
 ```shell
 ansible -i ./inventory/ -m debug -a var=trace_var,group_names location_site1
