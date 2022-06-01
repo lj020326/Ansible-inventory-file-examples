@@ -1,11 +1,11 @@
 
-# Example 3: Playbook using multiple YAML inventories with group requirement sufficiency  
+# Example 4: Multiple YAML inventories with role based groups
 
-In the prior [Example 2](../example2/README.md), with running on the merged inventory, the expected results were that only the appropriate network group would be assigned for each host.
-Instead, we found that all the hosts in both networks have both 'network' groups assigned.
-This is not the intended or expected behavior.
+In the prior [Example 3](../example3/README.md), we found the method to merge multiple YAML inventories with the merged results observing intended or expected behavior.
 
-The following example will look to solve this.
+Now we will look to apply plays that can target machines in the merged inventory based on the role-based group desired.
+
+E.g., the following scenario will discuss a simple NTP client/server based playbook to apply across the merged inventory. 
 
 ## Playbook used
 
