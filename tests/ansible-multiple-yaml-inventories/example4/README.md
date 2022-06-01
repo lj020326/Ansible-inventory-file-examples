@@ -71,11 +71,9 @@ all:
     web-[dmz|internal]-q1-s[1|2].example.int:
       trace_var: site[1|2]/web-[dmz|internal]-q1-s[1|2].example.int
       foreman: <94 keys>
-      facts: {}
     web-[dmz|internal]-q2-s[1|2].example.int:
       trace_var: site[1|2]/rhel7/web-[dmz|internal]-q2-s[1|2].example.int
       foreman: <94 keys>
-      facts: {}
   children:
     rhel7:
       vars:
