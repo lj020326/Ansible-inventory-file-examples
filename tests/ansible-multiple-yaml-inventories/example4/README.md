@@ -712,9 +712,9 @@ admin-q1-dmz-s1.example.int | SUCCESS => {
 
 ```
 
-### Limit hosts in a group
+### Limit hosts in the role-based group
 
-Run for group 'site1' with a specified limit
+Run for the role-based group 'ntp_client' with a specified limit
 ```shell
 ansible -i ./inventory/ -m debug -a var=trace_var,group_names ntp_client -l web-*
 web-q1-dmz-s1.example.int | SUCCESS => {
