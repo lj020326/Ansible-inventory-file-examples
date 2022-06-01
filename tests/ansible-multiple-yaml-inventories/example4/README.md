@@ -227,7 +227,7 @@ This is as expected.
 
 ### Test 2: Target all ntp clients
 
-As mentioned earlier, that the 'ntp_clients' group is defined using the children group of 'environment_test'.  The following ansible debug command excludes the 'ntp_server' hosts from that set such to target only the non-'ntp-server' hosts.
+As mentioned earlier, the 'ntp_clients' group is defined using the children group of 'environment_test'.  The following ansible debug command excludes the 'ntp_server' hosts from that set such to target only the non-'ntp-server' hosts.
 
 ```shell
 ansible -i ./inventory/ ntp_client,\!ntp_server  -m debug -a var=trace_var,group_names
@@ -369,6 +369,8 @@ group_trace_var: group_vars/ntp_server.yml
 [inventory/group_vars/ntp_client.yml](./inventory/group_vars/ntp_client.yml)
 ```yaml
 ---
+
+ntp_network_group
 
 ## ntp-client configs
 ## ref: https://github.com/geerlingguy/ansible-role-ntp
