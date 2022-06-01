@@ -201,7 +201,7 @@ all:
 
 The 'ntp_client' group is defined using the children group of 'environment_test'.  
 
-Note that the 'ntp_client' group includes the 8 admin machines already included in the 'ntp_server' group.  This overlap can be worked around by making sure that the 'ntp_server' group is excluded for the respective plays that only mean to target the 'ntp_client' machines.  This will be demonstrated in the following verifications section. 
+Note that the 'ntp_client' group includes the 8 admin machines already included in the 'ntp_server' group.  This overlap can be addressed by making sure that the 'ntp_server' group is excluded for the respective plays that only mean to target the 'ntp_client' machines.  This will be demonstrated in the following verifications section. 
 
 We will now run through several ansible CLI tests to verify that the correct machines result for each respective limit used.
 
