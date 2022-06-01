@@ -296,8 +296,7 @@ We look to apply those filters in the next ntp playbook section.
 
 ### Environment specific variable settings
 
-Each network-site environment has a difference gateway.
-The gateway is also used to derive the network mask for each respective environment, which in turn is used to properly derive the ntp allow/restrict network mask setting used for each ntp server.
+Each network-site environment has a different gateway with a respective unique ipv4 address.  The gateway ipv4 address is used to derive the network mask for each respective environment, which in turn is used to properly derive the ntp allow/restrict network mask setting used for each ntp server.
 
 Set up the gateway_ipv4 variable for each network/site.
 
