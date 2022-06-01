@@ -1,0 +1,8 @@
+all:
+  children:
+    ntp_server:
+      hosts:
+        ansiblelinuxtestd1s1.alsac.stjude.org: {}
+    ntp_client:
+      children:
+        environment_qa: {}
