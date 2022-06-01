@@ -307,7 +307,29 @@ We look to apply those filters in the next ntp playbook section.
 
 ## NTP Playbook
 
+[playbook.yml](./playbook.yml):
+```yaml
+---
 
+- name: "Setup ntp servers"
+  hosts: ntp_server
+  tags:
+    - bootstrap-ntp
+    - bootstrap-ntp-server
+  become: yes
+  roles:
+    - role: geerlingguy.ntp
+
+- name: "Setup ntp clients"
+  hosts: ntp_client,!ntp_server
+  tags:
+    - bootstrap-ntp
+    - bootstrap-ntp-client
+  become: yes
+  roles:
+    - role: geerlingguy.ntp
+
+```
 
 
 
