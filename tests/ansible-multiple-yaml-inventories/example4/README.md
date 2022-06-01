@@ -309,7 +309,15 @@ We look to apply those filters in the next ntp playbook section.
 
 ### Setup group variables for ntp_server and ntp_client plays
 
-Setup the respective server and client group variables.
+Setup the respective group variables for the groups: 'all', 'ntp_server' and 'ntp_client'.
+
+[inventory/group_vars/all.yml](./inventory/group_vars/all.yml)
+```yaml
+---
+
+gateway_ipv4: 192.160.0.1
+gateway_ipv4_network_cidr: 192.160.0.0/16
+```
 
 [inventory/group_vars/ntp_server.yml](./inventory/group_vars/ntp_server.yml)
 ```yaml
