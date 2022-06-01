@@ -842,28 +842,48 @@ all:
         uuid: null
       facts: {}
   children:
+    rhel6:
+      vars:
+        trace_var: network1/site1/rhel7
+      hosts:
+        admin-q1-net1-s1.example.int: {}
     rhel7:
       vars:
         trace_var: network1/site1/rhel7
       hosts:
+        admin-q2-net1-s1.example.int: {}
+        app-q1-net1-s1.example.int: {}
+        app-q2-net1-s1.example.int: {}
         web-q1-net1-s1.example.int: {}
         web-q2-net1-s1.example.int: {}
     environment_test:
       vars:
         trace_var: network1/site1/environment_qa
       hosts:
+        admin-q1-net1-s1.example.int: {}
+        admin-q2-net1-s1.example.int: {}
+        app-q1-net1-s1.example.int: {}
+        app-q2-net1-s1.example.int: {}
         web-q1-net1-s1.example.int: {}
         web-q2-net1-s1.example.int: {}
     location_site1:
       vars:
         trace_var: network1/site1/location_site1
       hosts:
+        admin-q1-net1-s1.example.int: {}
+        admin-q2-net1-s1.example.int: {}
+        app-q1-net1-s1.example.int: {}
+        app-q2-net1-s1.example.int: {}
         web-q1-net1-s1.example.int: {}
         web-q2-net1-s1.example.int: {}
     network1:
       vars:
         trace_var: network1/site1/network1
       hosts:
+        admin-q1-net1-s1.example.int: {}
+        admin-q2-net1-s1.example.int: {}
+        app-q1-net1-s1.example.int: {}
+        app-q2-net1-s1.example.int: {}
         web-q1-net1-s1.example.int: {}
         web-q2-net1-s1.example.int: {}
     ungrouped: {}
