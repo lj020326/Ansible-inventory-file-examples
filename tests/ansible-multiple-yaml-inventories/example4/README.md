@@ -63,7 +63,7 @@ graph TD;
 ```
 
 
-Each site.yml inventory will be setup similar to the following with the "[1|2]" regex pattern evaluated for each of the 4 cases:
+Each site.yml inventory will be setup similar to the following with the "[dmz|internal]" and "[1|2]" regex patterns evaluated for each of the 4 cases:
 
 ```yaml
 all:
