@@ -296,6 +296,7 @@ web-q2-internal-s2.example.int | SUCCESS => {
 
 ```
 
+We see that all the ntp-client machines and no ntp-server machines result. 
 This is as expected.
 
 ## Test Conclusion
