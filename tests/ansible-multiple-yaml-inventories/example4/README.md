@@ -148,9 +148,9 @@ Each of the respective inventory files:
 
 For the ntp playbook/role to work on both servers and clients, we will define the 'ntp_server' and 'ntp_client' groups to correctly scope the machines to be applied.
 
-For each network/site, there will be 2 time servers resulting in a total of 8 machines to be targeted for the 'ntp-server' play/role application.
+For each network/site, there will be 2 __ntp servers__ resulting in a total of 8 hosts to be targeted for the 'ntp-server' play/role application.
 
-Specifically, the 'ntp_server' group configuration will be applied to the following 8 'admin' machines (2 for each specific network/site):
+Specifically, the 'ntp_server' group configuration will be applied to the following 8 'admin' machines (2 host instances for each specific network/site):
 
 ```output
 admin-dmz-q1-s1.example.int
