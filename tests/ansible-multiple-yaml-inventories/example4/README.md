@@ -412,6 +412,15 @@ web-q2-internal-s2.example.int : ok=2    changed=0    unreachable=0    failed=0 
 
 ```
 
+## NTP Playbook
+
+
+
+
+
+
+
+
 ## Debug host vars using groups to target sets of hosts
 
 Run debug using a group defined set of hosts.
