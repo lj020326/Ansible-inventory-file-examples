@@ -448,6 +448,7 @@ group_trace_var: group_vars/ntp_client.yml
 
 Run debug using a group defined set of hosts.
 
+### Specify groups
 
 Run for group 'location_site1'
 ```shell
@@ -527,6 +528,8 @@ admin-q2-internal-s2.example.int | SUCCESS => {
 }
 
 ```
+
+## Limits
 
 ### Limit to specific hosts in a group
 
