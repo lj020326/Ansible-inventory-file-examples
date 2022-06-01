@@ -149,12 +149,17 @@ Each of the respective inventory files:
 To prepare the ntp playbook, we will setup a group of ntp servers and client.
 For each site, there will be 2 time servers.
 
-The 'ntp-server' group configuration will be applied to the following 4 'admin' machines:
+The 'ntp-server' group configuration will be applied to the following 8 'admin' machines (2 for each specific network/site):
 
 ```output
-admin-[dmz|internal]-q1-s[1|2].example.int
-admin-[dmz|internal]-q1-s[1|2].example.int
-
+admin-dmz-q1-s1.example.int
+admin-dmz-q2-s1.example.int
+admin-dmz-q1-s2.example.int
+admin-dmz-q2-s2.example.int
+admin-internal-q1-s1.example.int
+admin-internal-q2-s1.example.int
+admin-internal-q1-s2.example.int
+admin-internal-q2-s2.example.int
 ```
 
 The ntp-server groups are defined as follows:
