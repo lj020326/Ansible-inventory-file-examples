@@ -210,28 +210,28 @@ We will now run through several ansible CLI tests to verify that the correct mac
 ```shell
 ansible -i ./inventory/ ntp_server  -m debug -a var=trace_var,group_names
 admin-q1-dmz-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('dmz/site1/admin-q1-dmz-s1.example.int', ['dmz', 'environment_test', 'location_site1', 'ntp_client', 'ntp_server', 'rhel6'])"
+    "trace_var,group_names": "('dmz/site1/admin-q1-dmz-s1.example.int', ['environment_test', 'location_site1', 'network_dmz', 'ntp_client', 'ntp_server', 'rhel6'])"
 }
 admin-q2-dmz-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('dmz/site1/admin-q2-dmz-s1.example.int', ['dmz', 'environment_test', 'location_site1', 'ntp_client', 'ntp_server', 'rhel7'])"
+    "trace_var,group_names": "('dmz/site1/admin-q2-dmz-s1.example.int', ['environment_test', 'location_site1', 'network_dmz', 'ntp_client', 'ntp_server', 'rhel7'])"
 }
 admin-q1-dmz-s2.example.int | SUCCESS => {
-    "trace_var,group_names": "('dmz/site2/admin-q1-dmz-s2.example.int', ['dmz', 'environment_test', 'location_site2', 'ntp_client', 'ntp_server', 'rhel6'])"
+    "trace_var,group_names": "('dmz/site2/admin-q1-dmz-s2.example.int', ['environment_test', 'location_site2', 'network_dmz', 'ntp_client', 'ntp_server', 'rhel6'])"
 }
 admin-q2-dmz-s2.example.int | SUCCESS => {
-    "trace_var,group_names": "('dmz/site2/admin-q2-dmz-s2.example.int', ['dmz', 'environment_test', 'location_site2', 'ntp_client', 'ntp_server', 'rhel7'])"
+    "trace_var,group_names": "('dmz/site2/admin-q2-dmz-s2.example.int', ['environment_test', 'location_site2', 'network_dmz', 'ntp_client', 'ntp_server', 'rhel7'])"
 }
 admin-q1-internal-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site1/admin-q1-internal-s1.example.int', ['environment_test', 'internal', 'location_site1', 'ntp_client', 'ntp_server', 'rhel6'])"
+    "trace_var,group_names": "('internal/site1/admin-q1-internal-s1.example.int', ['environment_test', 'location_site1', 'network_internal', 'ntp_client', 'ntp_server', 'rhel6'])"
 }
 admin-q2-internal-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site1/admin-q2-internal-s1.example.int', ['environment_test', 'internal', 'location_site1', 'ntp_client', 'ntp_server', 'rhel7'])"
+    "trace_var,group_names": "('internal/site1/admin-q2-internal-s1.example.int', ['environment_test', 'location_site1', 'network_internal', 'ntp_client', 'ntp_server', 'rhel7'])"
 }
 admin-q1-internal-s2.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site2/admin-q1-internal-s2.example.int', ['environment_test', 'internal', 'location_site2', 'ntp_client', 'ntp_server', 'rhel6'])"
+    "trace_var,group_names": "('internal/site2/admin-q1-internal-s2.example.int', ['environment_test', 'location_site2', 'network_internal', 'ntp_client', 'ntp_server', 'rhel6'])"
 }
 admin-q2-internal-s2.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site2/admin-q2-internal-s2.example.int', ['environment_test', 'internal', 'location_site2', 'ntp_client', 'ntp_server', 'rhel7'])"
+    "trace_var,group_names": "('internal/site2/admin-q2-internal-s2.example.int', ['environment_test', 'location_site2', 'network_internal', 'ntp_client', 'ntp_server', 'rhel7'])"
 }
 
 ```
@@ -246,52 +246,52 @@ As mentioned earlier, that the 'ntp_clients' group is defined using the children
 ```shell
 ansible -i ./inventory/ ntp_client,\!ntp_server  -m debug -a var=trace_var,group_names
 app-q1-dmz-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('dmz/site1/app-q1-dmz-s1.example.int', ['dmz', 'environment_test', 'location_site1', 'ntp_client', 'rhel7'])"
+    "trace_var,group_names": "('dmz/site1/app-q1-dmz-s1.example.int', ['environment_test', 'location_site1', 'network_dmz', 'ntp_client', 'rhel7'])"
 }
 app-q2-dmz-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('dmz/site1/app-q2-dmz-s1.example.int', ['dmz', 'environment_test', 'location_site1', 'ntp_client', 'rhel7'])"
+    "trace_var,group_names": "('dmz/site1/app-q2-dmz-s1.example.int', ['environment_test', 'location_site1', 'network_dmz', 'ntp_client', 'rhel7'])"
 }
 web-q1-dmz-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('dmz/site1/web-q1-dmz-s1.example.int', ['dmz', 'environment_test', 'location_site1', 'ntp_client', 'rhel7'])"
+    "trace_var,group_names": "('dmz/site1/web-q1-dmz-s1.example.int', ['environment_test', 'location_site1', 'network_dmz', 'ntp_client', 'rhel7'])"
 }
 web-q2-dmz-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('dmz/site1/web-q2-dmz-s1.example.int', ['dmz', 'environment_test', 'location_site1', 'ntp_client', 'rhel7'])"
+    "trace_var,group_names": "('dmz/site1/web-q2-dmz-s1.example.int', ['environment_test', 'location_site1', 'network_dmz', 'ntp_client', 'rhel7'])"
 }
 app-q1-dmz-s2.example.int | SUCCESS => {
-    "trace_var,group_names": "('dmz/site2/app-q1-dmz-s2.example.int', ['dmz', 'environment_test', 'location_site2', 'ntp_client', 'rhel7'])"
+    "trace_var,group_names": "('dmz/site2/app-q1-dmz-s2.example.int', ['environment_test', 'location_site2', 'network_dmz', 'ntp_client', 'rhel7'])"
 }
 app-q2-dmz-s2.example.int | SUCCESS => {
-    "trace_var,group_names": "('dmz/site2/app-q2-dmz-s2.example.int', ['dmz', 'environment_test', 'location_site2', 'ntp_client', 'rhel7'])"
+    "trace_var,group_names": "('dmz/site2/app-q2-dmz-s2.example.int', ['environment_test', 'location_site2', 'network_dmz', 'ntp_client', 'rhel7'])"
 }
 web-q1-dmz-s2.example.int | SUCCESS => {
-    "trace_var,group_names": "('dmz/site2/web-q1-dmz-s2.example.int', ['dmz', 'environment_test', 'location_site2', 'ntp_client', 'rhel7'])"
+    "trace_var,group_names": "('dmz/site2/web-q1-dmz-s2.example.int', ['environment_test', 'location_site2', 'network_dmz', 'ntp_client', 'rhel7'])"
 }
 web-q2-dmz-s2.example.int | SUCCESS => {
-    "trace_var,group_names": "('dmz/site2/web-q2-dmz-s2.example.int', ['dmz', 'environment_test', 'location_site2', 'ntp_client', 'rhel7'])"
+    "trace_var,group_names": "('dmz/site2/web-q2-dmz-s2.example.int', ['environment_test', 'location_site2', 'network_dmz', 'ntp_client', 'rhel7'])"
 }
 app-q1-internal-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site1/app-q1-internal-s1.example.int', ['environment_test', 'internal', 'location_site1', 'ntp_client', 'rhel7'])"
+    "trace_var,group_names": "('internal/site1/app-q1-internal-s1.example.int', ['environment_test', 'location_site1', 'network_internal', 'ntp_client', 'rhel7'])"
 }
 app-q2-internal-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site1/app-q2-internal-s1.example.int', ['environment_test', 'internal', 'location_site1', 'ntp_client', 'rhel7'])"
+    "trace_var,group_names": "('internal/site1/app-q2-internal-s1.example.int', ['environment_test', 'location_site1', 'network_internal', 'ntp_client', 'rhel7'])"
 }
 web-q1-internal-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site1/web-q1-internal-s1.example.int', ['environment_test', 'internal', 'location_site1', 'ntp_client', 'rhel7'])"
+    "trace_var,group_names": "('internal/site1/web-q1-internal-s1.example.int', ['environment_test', 'location_site1', 'network_internal', 'ntp_client', 'rhel7'])"
 }
 web-q2-internal-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site1/web-q2-internal-s1.example.int', ['environment_test', 'internal', 'location_site1', 'ntp_client', 'rhel7'])"
+    "trace_var,group_names": "('internal/site1/web-q2-internal-s1.example.int', ['environment_test', 'location_site1', 'network_internal', 'ntp_client', 'rhel7'])"
 }
 app-q1-internal-s2.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site2/app-q1-internal-s2.example.int', ['environment_test', 'internal', 'location_site2', 'ntp_client', 'rhel7'])"
+    "trace_var,group_names": "('internal/site2/app-q1-internal-s2.example.int', ['environment_test', 'location_site2', 'network_internal', 'ntp_client', 'rhel7'])"
 }
 app-q2-internal-s2.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site2/app-q2-internal-s2.example.int', ['environment_test', 'internal', 'location_site2', 'ntp_client', 'rhel7'])"
+    "trace_var,group_names": "('internal/site2/app-q2-internal-s2.example.int', ['environment_test', 'location_site2', 'network_internal', 'ntp_client', 'rhel7'])"
 }
 web-q1-internal-s2.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site2/web-q1-internal-s2.example.int', ['environment_test', 'internal', 'location_site2', 'ntp_client', 'rhel7'])"
+    "trace_var,group_names": "('internal/site2/web-q1-internal-s2.example.int', ['environment_test', 'location_site2', 'network_internal', 'ntp_client', 'rhel7'])"
 }
 web-q2-internal-s2.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site2/web-q2-internal-s2.example.int', ['environment_test', 'internal', 'location_site2', 'ntp_client', 'rhel7'])"
+    "trace_var,group_names": "('internal/site2/web-q2-internal-s2.example.int', ['environment_test', 'location_site2', 'network_internal', 'ntp_client', 'rhel7'])"
 }
 
 ```
