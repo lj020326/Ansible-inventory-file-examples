@@ -9,7 +9,7 @@ E.g., the following scenario will discuss a simple NTP client/server based playb
 
 ## Playbook used
 
-The playbook as follows:
+To begin, we will start with the same playbook from the prior examples as follows:
 
 ```yaml
 - name: "Run trace var play"
