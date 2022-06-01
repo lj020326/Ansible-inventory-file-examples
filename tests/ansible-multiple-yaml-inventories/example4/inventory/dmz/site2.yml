@@ -858,7 +858,7 @@ all:
         app-q2-dmz-s2.example.int: {}
         web-q1-dmz-s2.example.int: {}
         web-q2-dmz-s2.example.int: {}
-    dmz:
+    network_dmz:
       vars:
         trace_var: dmz/site2/dmz
       hosts:

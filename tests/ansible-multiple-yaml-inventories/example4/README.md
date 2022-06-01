@@ -305,19 +305,25 @@ The 2 test results demonstrate that we can safely target the ntp_server and ntp_
 
 We look to apply those filters in the next ntp playbook section.
 
-## NTP Playbook
 
-### Setup group variables for ntp_server and ntp_client plays
+## NTP group variables
 
-Setup the respective group variables for the groups: 'all', 'ntp_server' and 'ntp_client'.
+### Group vars for environment specific settings
 
-[inventory/group_vars/all.yml](./inventory/group_vars/all.yml)
+Set up group variables for the respective networks.
+
+[inventory/group_vars/dmz.yml](./inventory/group_vars/dmz.yml)
 ```yaml
 ---
 
 gateway_ipv4: 192.160.0.1
 gateway_ipv4_network_cidr: 192.160.0.0/16
 ```
+
+
+### Group vars for play/role specific settings
+
+Setup the respective group variables for the ntp groups: 'dmz', 'ntp_server' and 'ntp_client'.
 
 [inventory/group_vars/ntp_server.yml](./inventory/group_vars/ntp_server.yml)
 ```yaml
@@ -397,6 +403,8 @@ trace_var: group_vars/ntp_client.yml
 
 ```
 
+
+## NTP Playbook
 
 [playbook.yml](./playbook.yml):
 ```yaml

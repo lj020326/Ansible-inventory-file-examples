@@ -858,7 +858,7 @@ all:
         app-q2-internal-s2.example.int: {}
         web-q1-internal-s2.example.int: {}
         web-q2-internal-s2.example.int: {}
-    internal:
+    network_internal:
       vars:
         trace_var: internal/site2/internal
       hosts:
