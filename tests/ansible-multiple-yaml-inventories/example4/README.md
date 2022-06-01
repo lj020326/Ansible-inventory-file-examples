@@ -148,16 +148,11 @@ Each of the respective inventory files:
 
 playbook run for combined inventory:
 ```output
+ansible-playbook -i ./inventory/ playbook.yml
 
 PLAY [Run trace var play] ************************************************************************************************************************************************************************************************************************************************
 
 TASK [debug] *************************************************************************************************************************************************************************************************************************************************************
-ok: [web-q1-net1-s2.example.int] => {
-    "trace_var": "network1/site2/web-q1-net1-s2.example.int"
-}
-ok: [web-q2-net1-s2.example.int] => {
-    "trace_var": "network1/site2/web-q2-net1-s2.example.int"
-}
 ok: [admin-q1-dmz-s1.example.int] => {
     "trace_var": "dmz/site1/admin-q1-dmz-s1.example.int"
 }
@@ -193,18 +188,6 @@ ok: [web-q1-dmz-s2.example.int] => {
 }
 ok: [web-q2-dmz-s2.example.int] => {
     "trace_var": "dmz/site2/web-q2-dmz-s2.example.int"
-}
-ok: [web-q1-net2-s1.example.int] => {
-    "trace_var": "network2/site1/web-q1-net2-s1.example.int"
-}
-ok: [web-q2-net2-s1.example.int] => {
-    "trace_var": "network2/site1/web-q2-net2-s1.example.int"
-}
-ok: [web-q1-net2-s2.example.int] => {
-    "trace_var": "network2/site2/web-q1-net2-s2.example.int"
-}
-ok: [web-q2-net2-s2.example.int] => {
-    "trace_var": "network2/site2/web-q2-net2-s2.example.int"
 }
 ok: [admin-q1-internal-s1.example.int] => {
     "trace_var": "internal/site1/admin-q1-internal-s1.example.int"
@@ -242,34 +225,15 @@ ok: [web-q1-internal-s2.example.int] => {
 ok: [web-q2-internal-s2.example.int] => {
     "trace_var": "internal/site2/web-q2-internal-s2.example.int"
 }
-ok: [ansiblelinuxtestd1s1.alsac.stjude.org] => {
-    "trace_var": "VARIABLE IS NOT DEFINED!"
-}
 
 TASK [debug] *************************************************************************************************************************************************************************************************************************************************************
-ok: [web-q1-net1-s2.example.int] => {
-    "group_names": [
-        "environment_qa",
-        "location_site2",
-        "network1",
-        "ntp_client",
-        "rhel7"
-    ]
-}
-ok: [web-q2-net1-s2.example.int] => {
-    "group_names": [
-        "environment_qa",
-        "location_site2",
-        "network1",
-        "ntp_client",
-        "rhel7"
-    ]
-}
 ok: [admin-q1-dmz-s1.example.int] => {
     "group_names": [
         "dmz",
         "environment_test",
         "location_site1",
+        "ntp_client",
+        "ntp_server",
         "rhel6"
     ]
 }
@@ -278,6 +242,8 @@ ok: [admin-q2-dmz-s1.example.int] => {
         "dmz",
         "environment_test",
         "location_site1",
+        "ntp_client",
+        "ntp_server",
         "rhel7"
     ]
 }
@@ -286,6 +252,7 @@ ok: [app-q1-dmz-s1.example.int] => {
         "dmz",
         "environment_test",
         "location_site1",
+        "ntp_client",
         "rhel7"
     ]
 }
@@ -294,6 +261,7 @@ ok: [app-q2-dmz-s1.example.int] => {
         "dmz",
         "environment_test",
         "location_site1",
+        "ntp_client",
         "rhel7"
     ]
 }
@@ -302,6 +270,7 @@ ok: [web-q1-dmz-s1.example.int] => {
         "dmz",
         "environment_test",
         "location_site1",
+        "ntp_client",
         "rhel7"
     ]
 }
@@ -310,6 +279,7 @@ ok: [web-q2-dmz-s1.example.int] => {
         "dmz",
         "environment_test",
         "location_site1",
+        "ntp_client",
         "rhel7"
     ]
 }
@@ -318,6 +288,8 @@ ok: [admin-q1-dmz-s2.example.int] => {
         "dmz",
         "environment_test",
         "location_site2",
+        "ntp_client",
+        "ntp_server",
         "rhel6"
     ]
 }
@@ -326,6 +298,8 @@ ok: [admin-q2-dmz-s2.example.int] => {
         "dmz",
         "environment_test",
         "location_site2",
+        "ntp_client",
+        "ntp_server",
         "rhel7"
     ]
 }
@@ -334,6 +308,7 @@ ok: [app-q1-dmz-s2.example.int] => {
         "dmz",
         "environment_test",
         "location_site2",
+        "ntp_client",
         "rhel7"
     ]
 }
@@ -342,6 +317,7 @@ ok: [app-q2-dmz-s2.example.int] => {
         "dmz",
         "environment_test",
         "location_site2",
+        "ntp_client",
         "rhel7"
     ]
 }
@@ -350,6 +326,7 @@ ok: [web-q1-dmz-s2.example.int] => {
         "dmz",
         "environment_test",
         "location_site2",
+        "ntp_client",
         "rhel7"
     ]
 }
@@ -358,41 +335,6 @@ ok: [web-q2-dmz-s2.example.int] => {
         "dmz",
         "environment_test",
         "location_site2",
-        "rhel7"
-    ]
-}
-ok: [web-q1-net2-s1.example.int] => {
-    "group_names": [
-        "environment_qa",
-        "location_site1",
-        "network2",
-        "ntp_client",
-        "rhel7"
-    ]
-}
-ok: [web-q2-net2-s1.example.int] => {
-    "group_names": [
-        "environment_qa",
-        "location_site1",
-        "network2",
-        "ntp_client",
-        "rhel7"
-    ]
-}
-ok: [web-q1-net2-s2.example.int] => {
-    "group_names": [
-        "environment_qa",
-        "location_site2",
-        "network2",
-        "ntp_client",
-        "rhel7"
-    ]
-}
-ok: [web-q2-net2-s2.example.int] => {
-    "group_names": [
-        "environment_qa",
-        "location_site2",
-        "network2",
         "ntp_client",
         "rhel7"
     ]
@@ -402,6 +344,7 @@ ok: [admin-q1-internal-s1.example.int] => {
         "environment_test",
         "internal",
         "location_site1",
+        "ntp_client",
         "rhel6"
     ]
 }
@@ -410,6 +353,7 @@ ok: [admin-q2-internal-s1.example.int] => {
         "environment_test",
         "internal",
         "location_site1",
+        "ntp_client",
         "rhel7"
     ]
 }
@@ -418,6 +362,7 @@ ok: [app-q1-internal-s1.example.int] => {
         "environment_test",
         "internal",
         "location_site1",
+        "ntp_client",
         "rhel7"
     ]
 }
@@ -426,6 +371,7 @@ ok: [app-q2-internal-s1.example.int] => {
         "environment_test",
         "internal",
         "location_site1",
+        "ntp_client",
         "rhel7"
     ]
 }
@@ -434,6 +380,7 @@ ok: [web-q1-internal-s1.example.int] => {
         "environment_test",
         "internal",
         "location_site1",
+        "ntp_client",
         "rhel7"
     ]
 }
@@ -442,6 +389,7 @@ ok: [web-q2-internal-s1.example.int] => {
         "environment_test",
         "internal",
         "location_site1",
+        "ntp_client",
         "rhel7"
     ]
 }
@@ -450,6 +398,7 @@ ok: [admin-q1-internal-s2.example.int] => {
         "environment_test",
         "internal",
         "location_site2",
+        "ntp_client",
         "rhel6"
     ]
 }
@@ -458,6 +407,7 @@ ok: [admin-q2-internal-s2.example.int] => {
         "environment_test",
         "internal",
         "location_site2",
+        "ntp_client",
         "rhel7"
     ]
 }
@@ -466,6 +416,7 @@ ok: [app-q1-internal-s2.example.int] => {
         "environment_test",
         "internal",
         "location_site2",
+        "ntp_client",
         "rhel7"
     ]
 }
@@ -474,6 +425,7 @@ ok: [app-q2-internal-s2.example.int] => {
         "environment_test",
         "internal",
         "location_site2",
+        "ntp_client",
         "rhel7"
     ]
 }
@@ -482,6 +434,7 @@ ok: [web-q1-internal-s2.example.int] => {
         "environment_test",
         "internal",
         "location_site2",
+        "ntp_client",
         "rhel7"
     ]
 }
@@ -490,12 +443,8 @@ ok: [web-q2-internal-s2.example.int] => {
         "environment_test",
         "internal",
         "location_site2",
+        "ntp_client",
         "rhel7"
-    ]
-}
-ok: [ansiblelinuxtestd1s1.alsac.stjude.org] => {
-    "group_names": [
-        "ntp_server"
     ]
 }
 
@@ -508,7 +457,6 @@ admin-q2-dmz-s1.example.int : ok=2    changed=0    unreachable=0    failed=0    
 admin-q2-dmz-s2.example.int : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 admin-q2-internal-s1.example.int : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 admin-q2-internal-s2.example.int : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-ansiblelinuxtestd1s1.alsac.stjude.org : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 app-q1-dmz-s1.example.int  : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 app-q1-dmz-s2.example.int  : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 app-q1-internal-s1.example.int : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
@@ -521,16 +469,10 @@ web-q1-dmz-s1.example.int  : ok=2    changed=0    unreachable=0    failed=0    s
 web-q1-dmz-s2.example.int  : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 web-q1-internal-s1.example.int : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 web-q1-internal-s2.example.int : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-web-q1-net1-s2.example.int : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-web-q1-net2-s1.example.int : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-web-q1-net2-s2.example.int : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 web-q2-dmz-s1.example.int  : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 web-q2-dmz-s2.example.int  : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 web-q2-internal-s1.example.int : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 web-q2-internal-s2.example.int : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-web-q2-net1-s2.example.int : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-web-q2-net2-s1.example.int : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-web-q2-net2-s2.example.int : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 
 ```
 
