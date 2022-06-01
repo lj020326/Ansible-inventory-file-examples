@@ -67,7 +67,7 @@ all:
         ip6: null
         last_compile: 2022-05-06 13:42:17 -0500
         last_report: null
-        location_id: 2
+        location_id: 1
         location_name: SITE1
         mac: 00:50:56:a6:77:e3
         managed: false
@@ -203,7 +203,7 @@ all:
         ip6: null
         last_compile: 2022-05-06 09:44:51 -0500
         last_report: null
-        location_id: 2
+        location_id: 1
         location_name: SITE1
         mac: 00:50:56:ac:d2:a4
         managed: false
@@ -340,7 +340,7 @@ all:
         ip6: ''
         last_compile: 2022-05-20 01:40:59 -0500
         last_report: null
-        location_id: 3
+        location_id: 1
         location_name: SITE1
         mac: 00:1a:64:76:00:c9
         managed: false
@@ -476,7 +476,7 @@ all:
         ip6: null
         last_compile: 2022-05-19 11:17:24 -0500
         last_report: null
-        location_id: 3
+        location_id: 1
         location_name: SITE1
         mac: e0:d8:48:7d:d3:75
         managed: false
@@ -612,7 +612,7 @@ all:
         ip6: null
         last_compile: 2022-05-13 09:56:51 -0500
         last_report: null
-        location_id: 3
+        location_id: 1
         location_name: SITE1
         mac: 00:1a:64:76:00:b9
         managed: false
@@ -750,7 +750,7 @@ all:
         ip6: null
         last_compile: 2022-05-13 10:21:04 -0500
         last_report: null
-        location_id: 3
+        location_id: 1
         location_name: SITE1
         mac: 9a:7f:1f:ee:b9:f0
         managed: false
