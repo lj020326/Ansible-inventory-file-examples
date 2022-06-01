@@ -197,6 +197,8 @@ all:
         environment_test: {}
 ```
 
+Note to keep things simple by re-using existing groups, the 'ntp_clients' group is defined using the children group of 'environment_test', which includes the 8 admin machines.
+
 For the playbook to work, we look to define the ntp-server and ntp-client groups to correctly scope the machines to be applied.
 
 We will now run through several ansible CLI tests to verify that the correct machines result for each respective limit used.
@@ -236,6 +238,8 @@ This is as expected.
 
 
 ### Run 1: Target all ntp clients
+
+In this case, note to keep things simple by re-using existing groups, that the 'ntp_clients' group is defined using the children group of 'environment_test'
 
 ```shell
 ansible -i ./inventory/ ntp_client,\!ntp_server  -m debug -a var=trace_var,group_names
