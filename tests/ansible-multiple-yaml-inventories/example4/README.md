@@ -27,12 +27,12 @@ In this example there are 2 networks located at 2 sites resulting in 4 YAML inve
 
 ```mermaid
 graph TD;
-    A[all] --> B[network1]
-    A[all] --> C[network2]
-    B --> D["site1<br>network1/site1.yml"]
-    B --> E["site2<br>network1/site2.yml"]
-    C --> F["site1<br>network2/site1.yml"]
-    C --> G["site2<br>network2/site2.yml"]
+    A[all] --> B[dmz]
+    A[all] --> C[internal]
+    B --> D["site1<br>dmz/site1.yml"]
+    B --> E["site2<br>dmz/site2.yml"]
+    C --> F["site1<br>internal/site1.yml"]
+    C --> G["site2<br>internal/site2.yml"]
 ```
 
 
@@ -42,24 +42,24 @@ For each of the 4 inventory files, the following group/host hierarchy will be im
 graph TD;
     A[all] --> C[hosts]
     A[all] --> D[children]
-    C --> I["web-net[1|2]-q1-s[1|2].example.int"]
-    C --> J["web-net[1|2]-q2-s[1|2].example.int"]
+    C --> I["web-[dmz|internal]-q1-s[1|2].example.int"]
+    C --> J["web-[dmz|internal]-q2-s[1|2].example.int"]
     D --> E[rhel7]
     D --> F[environment_qa]
     D --> G["location_site[1|2]"]
     D --> H["network[1|2]"]
     E --> K[hosts]
-    K --> L["web-net[1|2]-q1-s[1|2].example.int"]
-    K --> M["web-net[1|2]-q2-s[1|2].example.int"]
+    K --> L["web-[dmz|internal]-q1-s[1|2].example.int"]
+    K --> M["web-[dmz|internal]-q2-s[1|2].example.int"]
     F --> N[hosts]
-    N --> O["web-net[1|2]-q1-s[1|2].example.int"]
-    N --> P["web-net[1|2]-q2-s[1|2].example.int"]
+    N --> O["web-[dmz|internal]-q1-s[1|2].example.int"]
+    N --> P["web-[dmz|internal]-q2-s[1|2].example.int"]
     G --> Q[hosts]
-    Q --> R["web-net[1|2]-q1-s[1|2].example.int"]
-    Q --> S["web-net[1|2]-q2-s[1|2].example.int"]
+    Q --> R["web-[dmz|internal]-q1-s[1|2].example.int"]
+    Q --> S["web-[dmz|internal]-q2-s[1|2].example.int"]
     H --> T[hosts]
-    T --> U["web-net[1|2]-q1-s[1|2].example.int"]
-    T --> W["web-net[1|2]-q2-s[1|2].example.int"]
+    T --> U["web-[dmz|internal]-q1-s[1|2].example.int"]
+    T --> W["web-[dmz|internal]-q2-s[1|2].example.int"]
 ```
 
 
@@ -68,12 +68,12 @@ Each site.yml inventory will be setup similar to the following with the "[1|2]" 
 ```yaml
 all:
   hosts:
-    web-net[1|2]-q1-s[1|2].example.int:
-      trace_var: site[1|2]/web-net[1|2]-q1-s[1|2].example.int
+    web-[dmz|internal]-q1-s[1|2].example.int:
+      trace_var: site[1|2]/web-[dmz|internal]-q1-s[1|2].example.int
       foreman: <94 keys>
       facts: {}
-    web-net[1|2]-q2-s[1|2].example.int:
-      trace_var: site[1|2]/rhel7/web-net[1|2]-q2-s[1|2].example.int
+    web-[dmz|internal]-q2-s[1|2].example.int:
+      trace_var: site[1|2]/rhel7/web-[dmz|internal]-q2-s[1|2].example.int
       foreman: <94 keys>
       facts: {}
   children:
@@ -81,52 +81,52 @@ all:
       vars:
         trace_var: site[1|2]/rhel7
       hosts:
-        web-net[1|2]-q1-s[1|2].example.int: {}
-        web-net[1|2]-q2-s[1|2].example.int: {}
+        web-[dmz|internal]-q1-s[1|2].example.int: {}
+        web-[dmz|internal]-q2-s[1|2].example.int: {}
     environment_qa:
       vars:
         trace_var: site[1|2]/environment_qa
       hosts:
-        web-net[1|2]-q1-s[1|2].example.int: {}
-        web-net[1|2]-q2-s[1|2].example.int: {}
+        web-[dmz|internal]-q1-s[1|2].example.int: {}
+        web-[dmz|internal]-q2-s[1|2].example.int: {}
     location_site[1|2]:
       vars:
         trace_var: site[1|2]/location_site[1|2]
       hosts:
-        web-net[1|2]-q1-s[1|2].example.int: {}
-        web-net[1|2]-q2-s[1|2].example.int: {}
+        web-[dmz|internal]-q1-s[1|2].example.int: {}
+        web-[dmz|internal]-q2-s[1|2].example.int: {}
     network[1|2]:
       vars:
         trace_var: site[1|2]/network[1|2]
       hosts:
-        web-net[1|2]-q1-s[1|2].example.int: {}
-        web-net[1|2]-q2-s[1|2].example.int: {}
+        web-[dmz|internal]-q1-s[1|2].example.int: {}
+        web-[dmz|internal]-q2-s[1|2].example.int: {}
     ungrouped: {}
 
 ```
 
 Each of the respective inventory files:
 
-* [network1/site1 inventory](./inventory/network1/site1.yml)
-* [network1/site2 inventory](./inventory/network1/site2.yml)
-* [network2/site1 inventory](./inventory/network2/site1.yml)
-* [network2/site2 inventory](./inventory/network2/site2.yml)
+* [dmz/site1 inventory](./inventory/dmz/site1.yml)
+* [dmz/site2 inventory](./inventory/dmz/site2.yml)
+* [internal/site1 inventory](./inventory/internal/site1.yml)
+* [internal/site2 inventory](./inventory/internal/site2.yml)
 
 
 With the 4 inventories mentioned, we now seek to confirm that the expected value appears for the 'group_names' special variable and the 'trace_var' variable for both hosts.
 
-playbook run for inventory/network1/site1.yml:
+playbook run for inventory/dmz/site1.yml:
 ```output
-ansible-playbook -i ./inventory/network1/site1.yml playbook.yml
+ansible-playbook -i ./inventory/dmz/site1.yml playbook.yml
 
 PLAY [Run trace var play] ************************************************************************************************************************************************************************************************************************************************
 
 TASK [debug] *************************************************************************************************************************************************************************************************************************************************************
 ok: [web-q1-net1-s1.example.int] => {
-    "trace_var": "network1/site1/web-q1-net1-s1.example.int"
+    "trace_var": "dmz/site1/web-q1-net1-s1.example.int"
 }
 ok: [web-q2-net1-s1.example.int] => {
-    "trace_var": "network1/site1/web-q2-net1-s1.example.int"
+    "trace_var": "dmz/site1/web-q2-net1-s1.example.int"
 }
 
 TASK [debug] *************************************************************************************************************************************************************************************************************************************************************
@@ -153,18 +153,18 @@ web-q2-net1-s1.example.int : ok=2    changed=0    unreachable=0    failed=0    s
 
 This is as expected.
 
-playbook run for inventory/network1/site2.yml:
+playbook run for inventory/dmz/site2.yml:
 ```output
-ansible-playbook -i ./inventory/network1/site2.yml playbook.yml
+ansible-playbook -i ./inventory/dmz/site2.yml playbook.yml
 
 PLAY [Run trace var play] ************************************************************************************************************************************************************************************************************************************************
 
 TASK [debug] *************************************************************************************************************************************************************************************************************************************************************
 ok: [web-q1-net1-s2.example.int] => {
-    "trace_var": "network1/site2/web-q1-net1-s2.example.int"
+    "trace_var": "dmz/site2/web-q1-net1-s2.example.int"
 }
 ok: [web-q2-net1-s2.example.int] => {
-    "trace_var": "network1/site2/web-q2-net1-s2.example.int"
+    "trace_var": "dmz/site2/web-q2-net1-s2.example.int"
 }
 
 TASK [debug] *************************************************************************************************************************************************************************************************************************************************************
@@ -192,18 +192,18 @@ web-q2-net1-s2.example.int : ok=2    changed=0    unreachable=0    failed=0    s
 This is as expected.
 
 
-playbook run for inventory/network2/site1.yml:
+playbook run for inventory/internal/site1.yml:
 ```output
-ansible-playbook -i ./inventory/network2/site1.yml playbook.yml
+ansible-playbook -i ./inventory/internal/site1.yml playbook.yml
 
 PLAY [Run trace var play] ************************************************************************************************************************************************************************************************************************************************
 
 TASK [debug] *************************************************************************************************************************************************************************************************************************************************************
 ok: [web-q1-net2-s1.example.int] => {
-    "trace_var": "network2/site1/web-q1-net2-s1.example.int"
+    "trace_var": "internal/site1/web-q1-net2-s1.example.int"
 }
 ok: [web-q2-net2-s1.example.int] => {
-    "trace_var": "network2/site1/web-q2-net2-s1.example.int"
+    "trace_var": "internal/site1/web-q2-net2-s1.example.int"
 }
 
 TASK [debug] *************************************************************************************************************************************************************************************************************************************************************
@@ -230,18 +230,18 @@ web-q2-net2-s1.example.int : ok=2    changed=0    unreachable=0    failed=0    s
 
 This is as expected.
 
-playbook run for inventory/network2/site2.yml:
+playbook run for inventory/internal/site2.yml:
 ```output
-ansible-playbook -i ./inventory/network2/site2.yml playbook.yml
+ansible-playbook -i ./inventory/internal/site2.yml playbook.yml
 
 PLAY [Run trace var play] ************************************************************************************************************************************************************************************************************************************************
 
 TASK [debug] *************************************************************************************************************************************************************************************************************************************************************
 ok: [web-q1-net2-s2.example.int] => {
-    "trace_var": "network2/site2/web-q1-net2-s2.example.int"
+    "trace_var": "internal/site2/web-q1-net2-s2.example.int"
 }
 ok: [web-q2-net2-s2.example.int] => {
-    "trace_var": "network2/site2/web-q2-net2-s2.example.int"
+    "trace_var": "internal/site2/web-q2-net2-s2.example.int"
 }
 
 TASK [debug] *************************************************************************************************************************************************************************************************************************************************************
@@ -280,28 +280,28 @@ PLAY [Run trace var play] ******************************************************
 
 TASK [debug] *************************************************************************************************************************************************************************************************************************************************************
 ok: [web-q1-net1-s1.example.int] => {
-    "trace_var": "network1/site1/web-q1-net1-s1.example.int"
+    "trace_var": "dmz/site1/web-q1-net1-s1.example.int"
 }
 ok: [web-q2-net1-s1.example.int] => {
-    "trace_var": "network1/site1/web-q2-net1-s1.example.int"
+    "trace_var": "dmz/site1/web-q2-net1-s1.example.int"
 }
 ok: [web-q1-net1-s2.example.int] => {
-    "trace_var": "network1/site2/web-q1-net1-s2.example.int"
+    "trace_var": "dmz/site2/web-q1-net1-s2.example.int"
 }
 ok: [web-q2-net1-s2.example.int] => {
-    "trace_var": "network1/site2/web-q2-net1-s2.example.int"
+    "trace_var": "dmz/site2/web-q2-net1-s2.example.int"
 }
 ok: [web-q1-net2-s1.example.int] => {
-    "trace_var": "network2/site1/web-q1-net2-s1.example.int"
+    "trace_var": "internal/site1/web-q1-net2-s1.example.int"
 }
 ok: [web-q2-net2-s1.example.int] => {
-    "trace_var": "network2/site1/web-q2-net2-s1.example.int"
+    "trace_var": "internal/site1/web-q2-net2-s1.example.int"
 }
 ok: [web-q1-net2-s2.example.int] => {
-    "trace_var": "network2/site2/web-q1-net2-s2.example.int"
+    "trace_var": "internal/site2/web-q1-net2-s2.example.int"
 }
 ok: [web-q2-net2-s2.example.int] => {
-    "trace_var": "network2/site2/web-q2-net2-s2.example.int"
+    "trace_var": "internal/site2/web-q2-net2-s2.example.int"
 }
 
 TASK [debug] *************************************************************************************************************************************************************************************************************************************************************
@@ -309,7 +309,7 @@ ok: [web-q1-net1-s1.example.int] => {
     "group_names": [
         "environment_qa",
         "location_site1",
-        "network1",
+        "dmz",
         "rhel7"
     ]
 }
@@ -317,7 +317,7 @@ ok: [web-q2-net1-s1.example.int] => {
     "group_names": [
         "environment_qa",
         "location_site1",
-        "network1",
+        "dmz",
         "rhel7"
     ]
 }
@@ -325,7 +325,7 @@ ok: [web-q1-net1-s2.example.int] => {
     "group_names": [
         "environment_qa",
         "location_site2",
-        "network1",
+        "dmz",
         "rhel7"
     ]
 }
@@ -333,7 +333,7 @@ ok: [web-q2-net1-s2.example.int] => {
     "group_names": [
         "environment_qa",
         "location_site2",
-        "network1",
+        "dmz",
         "rhel7"
     ]
 }
@@ -341,7 +341,7 @@ ok: [web-q1-net2-s1.example.int] => {
     "group_names": [
         "environment_qa",
         "location_site1",
-        "network2",
+        "internal",
         "rhel7"
     ]
 }
@@ -349,7 +349,7 @@ ok: [web-q2-net2-s1.example.int] => {
     "group_names": [
         "environment_qa",
         "location_site1",
-        "network2",
+        "internal",
         "rhel7"
     ]
 }
@@ -357,7 +357,7 @@ ok: [web-q1-net2-s2.example.int] => {
     "group_names": [
         "environment_qa",
         "location_site2",
-        "network2",
+        "internal",
         "rhel7"
     ]
 }
@@ -365,7 +365,7 @@ ok: [web-q2-net2-s2.example.int] => {
     "group_names": [
         "environment_qa",
         "location_site2",
-        "network2",
+        "internal",
         "rhel7"
     ]
 }
@@ -386,20 +386,20 @@ web-q2-net2-s2.example.int : ok=2    changed=0    unreachable=0    failed=0    s
 
 Run debug using a group defined set of hosts.
 
-Run for group 'network2'
+Run for group 'internal'
 ```shell
-ansible -i ./inventory/ network2 -m debug -a var=trace_var 
+ansible -i ./inventory/ internal -m debug -a var=trace_var 
 web-q1-net2-s1.example.int | SUCCESS => {
-    "trace_var": "network2/site1/web-q1-net2-s1.example.int"
+    "trace_var": "internal/site1/web-q1-net2-s1.example.int"
 }
 web-q2-net2-s1.example.int | SUCCESS => {
-    "trace_var": "network2/site1/web-q2-net2-s1.example.int"
+    "trace_var": "internal/site1/web-q2-net2-s1.example.int"
 }
 web-q1-net2-s2.example.int | SUCCESS => {
-    "trace_var": "network2/site2/web-q1-net2-s2.example.int"
+    "trace_var": "internal/site2/web-q1-net2-s2.example.int"
 }
 web-q2-net2-s2.example.int | SUCCESS => {
-    "trace_var": "network2/site2/web-q2-net2-s2.example.int"
+    "trace_var": "internal/site2/web-q2-net2-s2.example.int"
 }
 
 ```
@@ -408,16 +408,16 @@ Run for group 'location_site1'
 ```shell
 ansible -i ./inventory/ -m debug -a var=trace_var location_site1
 web-q1-net1-s1.example.int | SUCCESS => {
-    "trace_var": "network1/site1/web-q1-net1-s1.example.int"
+    "trace_var": "dmz/site1/web-q1-net1-s1.example.int"
 }
 web-q2-net1-s1.example.int | SUCCESS => {
-    "trace_var": "network1/site1/web-q2-net1-s1.example.int"
+    "trace_var": "dmz/site1/web-q2-net1-s1.example.int"
 }
 web-q1-net2-s1.example.int | SUCCESS => {
-    "trace_var": "network2/site1/web-q1-net2-s1.example.int"
+    "trace_var": "internal/site1/web-q1-net2-s1.example.int"
 }
 web-q2-net2-s1.example.int | SUCCESS => {
-    "trace_var": "network2/site1/web-q2-net2-s1.example.int"
+    "trace_var": "internal/site1/web-q2-net2-s1.example.int"
 }
 
 ```
@@ -426,28 +426,28 @@ Run for group(s) matching expression '*site1'
 ```shell
 ansible -i ./inventory/ -m debug -a var=trace_var *site1
 web-q1-net1-s1.example.int | SUCCESS => {
-    "trace_var": "network1/site1/web-q1-net1-s1.example.int"
+    "trace_var": "dmz/site1/web-q1-net1-s1.example.int"
 }
 web-q2-net1-s1.example.int | SUCCESS => {
-    "trace_var": "network1/site1/web-q2-net1-s1.example.int"
+    "trace_var": "dmz/site1/web-q2-net1-s1.example.int"
 }
 web-q1-net2-s1.example.int | SUCCESS => {
-    "trace_var": "network2/site1/web-q1-net2-s1.example.int"
+    "trace_var": "internal/site1/web-q1-net2-s1.example.int"
 }
 web-q2-net2-s1.example.int | SUCCESS => {
-    "trace_var": "network2/site1/web-q2-net2-s1.example.int"
+    "trace_var": "internal/site1/web-q2-net2-s1.example.int"
 }
 
 ```
 
-Run for group(s) matching multiple groups 'location_site1,&network1'
+Run for group(s) matching multiple groups 'location_site1,&dmz'
 ```shell
-ansible -i ./inventory/ -m debug -a var=trace_var location_site1,\&network1
+ansible -i ./inventory/ -m debug -a var=trace_var location_site1,\&dmz
 web-q1-net1-s1.example.int | SUCCESS => {
-    "trace_var": "network1/site1/web-q1-net1-s1.example.int"
+    "trace_var": "dmz/site1/web-q1-net1-s1.example.int"
 }
 web-q2-net1-s1.example.int | SUCCESS => {
-    "trace_var": "network1/site1/web-q2-net1-s1.example.int"
+    "trace_var": "dmz/site1/web-q2-net1-s1.example.int"
 }
 
 ```
@@ -459,10 +459,10 @@ Run for group 'site1' with a specified limit
 ```shell
 ansible -i ./inventory/ -m debug -a var=trace_var location_site1 -l web-q2*
 web-q2-net1-s1.example.int | SUCCESS => {
-    "trace_var": "network1/site1/web-q2-net1-s1.example.int"
+    "trace_var": "dmz/site1/web-q2-net1-s1.example.int"
 }
 web-q2-net2-s1.example.int | SUCCESS => {
-    "trace_var": "network2/site1/web-q2-net2-s1.example.int"
+    "trace_var": "internal/site1/web-q2-net2-s1.example.int"
 }
 
 ```
@@ -483,7 +483,7 @@ web-q1-net2-s1.example.int | SUCCESS => {
 ```
 
 ```shell
-ansible -i ./inventory/ network2 -l web-q1* -m debug -a var=foreman.content_facet_attributes.lifecycle_environment.name
+ansible -i ./inventory/ internal -l web-q1* -m debug -a var=foreman.content_facet_attributes.lifecycle_environment.name
 web-q1-net2-s1.example.int | SUCCESS => {
     "foreman.content_facet_attributes.lifecycle_environment.name": "QA"
 }
@@ -495,7 +495,7 @@ web-q1-net2-s2.example.int | SUCCESS => {
 
 
 ```shell
-ansible -i ./inventory/ network2 -l web-q1* -m debug -a var=foreman.content_facet_attributes.lifecycle_environment
+ansible -i ./inventory/ internal -l web-q1* -m debug -a var=foreman.content_facet_attributes.lifecycle_environment
 web-q1-net2-s1.example.int | SUCCESS => {
     "foreman.content_facet_attributes.lifecycle_environment": {
         "id": 3,
@@ -512,24 +512,24 @@ web-q1-net2-s2.example.int | SUCCESS => {
 ```
 
 ```shell
-ansible -i ./inventory/ network1  -m debug -a var=trace_var,foreman.content_facet_attributes.lifecycle_environment.name,foreman.location_name
+ansible -i ./inventory/ dmz  -m debug -a var=trace_var,foreman.content_facet_attributes.lifecycle_environment.name,foreman.location_name
 web-q1-net1-s1.example.int | SUCCESS => {
-    "trace_var,foreman.content_facet_attributes.lifecycle_environment.name,foreman.location_name": "('network1/site1/web-q1-net1-s1.example.int', 'QA', 'MEM')"
+    "trace_var,foreman.content_facet_attributes.lifecycle_environment.name,foreman.location_name": "('dmz/site1/web-q1-net1-s1.example.int', 'QA', 'MEM')"
 }
 web-q2-net1-s1.example.int | SUCCESS => {
-    "trace_var,foreman.content_facet_attributes.lifecycle_environment.name,foreman.location_name": "('network1/site1/web-q2-net1-s1.example.int', 'QA', 'MEM')"
+    "trace_var,foreman.content_facet_attributes.lifecycle_environment.name,foreman.location_name": "('dmz/site1/web-q2-net1-s1.example.int', 'QA', 'MEM')"
 }
 web-q1-net1-s2.example.int | SUCCESS => {
-    "trace_var,foreman.content_facet_attributes.lifecycle_environment.name,foreman.location_name": "('network1/site2/web-q1-net1-s2.example.int', 'QA', 'MEM')"
+    "trace_var,foreman.content_facet_attributes.lifecycle_environment.name,foreman.location_name": "('dmz/site2/web-q1-net1-s2.example.int', 'QA', 'MEM')"
 }
 web-q2-net1-s2.example.int | SUCCESS => {
-    "trace_var,foreman.content_facet_attributes.lifecycle_environment.name,foreman.location_name": "('network1/site2/web-q2-net1-s2.example.int', 'QA', 'MEM')"
+    "trace_var,foreman.content_facet_attributes.lifecycle_environment.name,foreman.location_name": "('dmz/site2/web-q2-net1-s2.example.int', 'QA', 'MEM')"
 }
 
 ```
 
 ```shell
-ansible -i ./inventory/ -m debug -a var=foreman.content_facet_attributes network2 -l web-q1*
+ansible -i ./inventory/ -m debug -a var=foreman.content_facet_attributes internal -l web-q1*
 web-q1-net2-s1.example.int | SUCCESS => {
     "foreman.content_facet_attributes": {
         "applicable_module_stream_count": 0,
