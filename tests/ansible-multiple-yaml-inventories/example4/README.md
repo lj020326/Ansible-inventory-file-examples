@@ -109,7 +109,7 @@ all:
         web-[dmz|internal]-q2-s[1|2].example.int: {}
     network_[dmz|internal]:
       vars:
-        trace_var: site[1|2]/[dmz|internal]
+        trace_var: site[1|2]/network_[dmz|internal]
       hosts:
         admin-[dmz|internal]-q1-s[1|2].example.int: {}
         admin-[dmz|internal]-q1-s[1|2].example.int: {}
