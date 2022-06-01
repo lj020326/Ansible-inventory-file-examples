@@ -4,6 +4,8 @@ all:
       hosts:
         admin-q1-dmz-s1.example.int: {}
         admin-q2-dmz-s1.example.int: {}
+        admin-q1-dmz-s2.example.int: {}
+        admin-q2-dmz-s2.example.int: {}
     ntp_client:
       children:
         environment_test: {}
