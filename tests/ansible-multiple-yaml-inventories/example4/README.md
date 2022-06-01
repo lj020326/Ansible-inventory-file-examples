@@ -197,41 +197,98 @@ all:
         environment_test: {}
 ```
 
-Now we run through several tests to verify that the correct ntp servers show for each respective test run.
+For the playbook to work, we look to define the ntp-server and ntp-client groups to correctly scope the machines to be applied.
+
+We will now run through several ansible CLI tests to verify that the correct machines result for each respective limit used.
 
 ### Run 1: Target all ntp servers
 
 ```shell
-ansible -i ./inventory/ ntp_server  -m debug -a var=trace_var,foreman.location_name
+ansible -i ./inventory/ ntp_server  -m debug -a var=trace_var,group_names
 admin-q1-dmz-s1.example.int | SUCCESS => {
-    "trace_var,foreman.location_name": "('dmz/site1/admin-q1-dmz-s1.example.int', 'SITE1')"
+    "trace_var,group_names": "('dmz/site1/admin-q1-dmz-s1.example.int', ['dmz', 'environment_test', 'location_site1', 'ntp_client', 'ntp_server', 'rhel6'])"
 }
 admin-q2-dmz-s1.example.int | SUCCESS => {
-    "trace_var,foreman.location_name": "('dmz/site1/admin-q2-dmz-s1.example.int', 'SITE1')"
+    "trace_var,group_names": "('dmz/site1/admin-q2-dmz-s1.example.int', ['dmz', 'environment_test', 'location_site1', 'ntp_client', 'ntp_server', 'rhel7'])"
 }
 admin-q1-dmz-s2.example.int | SUCCESS => {
-    "trace_var,foreman.location_name": "('dmz/site2/admin-q1-dmz-s2.example.int', 'SITE2')"
+    "trace_var,group_names": "('dmz/site2/admin-q1-dmz-s2.example.int', ['dmz', 'environment_test', 'location_site2', 'ntp_client', 'ntp_server', 'rhel6'])"
 }
 admin-q2-dmz-s2.example.int | SUCCESS => {
-    "trace_var,foreman.location_name": "('dmz/site2/admin-q2-dmz-s2.example.int', 'SITE2')"
+    "trace_var,group_names": "('dmz/site2/admin-q2-dmz-s2.example.int', ['dmz', 'environment_test', 'location_site2', 'ntp_client', 'ntp_server', 'rhel7'])"
 }
 admin-q1-internal-s1.example.int | SUCCESS => {
-    "trace_var,foreman.location_name": "('internal/site1/admin-q1-internal-s1.example.int', 'SITE1')"
+    "trace_var,group_names": "('internal/site1/admin-q1-internal-s1.example.int', ['environment_test', 'internal', 'location_site1', 'ntp_client', 'ntp_server', 'rhel6'])"
 }
 admin-q2-internal-s1.example.int | SUCCESS => {
-    "trace_var,foreman.location_name": "('internal/site1/admin-q2-internal-s1.example.int', 'SITE1')"
+    "trace_var,group_names": "('internal/site1/admin-q2-internal-s1.example.int', ['environment_test', 'internal', 'location_site1', 'ntp_client', 'ntp_server', 'rhel7'])"
 }
 admin-q1-internal-s2.example.int | SUCCESS => {
-    "trace_var,foreman.location_name": "('internal/site2/admin-q1-internal-s2.example.int', 'SITE2')"
+    "trace_var,group_names": "('internal/site2/admin-q1-internal-s2.example.int', ['environment_test', 'internal', 'location_site2', 'ntp_client', 'ntp_server', 'rhel6'])"
 }
 admin-q2-internal-s2.example.int | SUCCESS => {
-    "trace_var,foreman.location_name": "('internal/site2/admin-q2-internal-s2.example.int', 'SITE2')"
+    "trace_var,group_names": "('internal/site2/admin-q2-internal-s2.example.int', ['environment_test', 'internal', 'location_site2', 'ntp_client', 'ntp_server', 'rhel7'])"
 }
 
 ```
 
 This is as expected.
 
+
+### Run 1: Target all ntp clients
+
+```shell
+ansible -i ./inventory/ ntp_client,\!ntp_server  -m debug -a var=trace_var,group_names
+app-q1-dmz-s1.example.int | SUCCESS => {
+    "trace_var,group_names": "('dmz/site1/app-q1-dmz-s1.example.int', ['dmz', 'environment_test', 'location_site1', 'ntp_client', 'rhel7'])"
+}
+app-q2-dmz-s1.example.int | SUCCESS => {
+    "trace_var,group_names": "('dmz/site1/app-q2-dmz-s1.example.int', ['dmz', 'environment_test', 'location_site1', 'ntp_client', 'rhel7'])"
+}
+web-q1-dmz-s1.example.int | SUCCESS => {
+    "trace_var,group_names": "('dmz/site1/web-q1-dmz-s1.example.int', ['dmz', 'environment_test', 'location_site1', 'ntp_client', 'rhel7'])"
+}
+web-q2-dmz-s1.example.int | SUCCESS => {
+    "trace_var,group_names": "('dmz/site1/web-q2-dmz-s1.example.int', ['dmz', 'environment_test', 'location_site1', 'ntp_client', 'rhel7'])"
+}
+app-q1-dmz-s2.example.int | SUCCESS => {
+    "trace_var,group_names": "('dmz/site2/app-q1-dmz-s2.example.int', ['dmz', 'environment_test', 'location_site2', 'ntp_client', 'rhel7'])"
+}
+app-q2-dmz-s2.example.int | SUCCESS => {
+    "trace_var,group_names": "('dmz/site2/app-q2-dmz-s2.example.int', ['dmz', 'environment_test', 'location_site2', 'ntp_client', 'rhel7'])"
+}
+web-q1-dmz-s2.example.int | SUCCESS => {
+    "trace_var,group_names": "('dmz/site2/web-q1-dmz-s2.example.int', ['dmz', 'environment_test', 'location_site2', 'ntp_client', 'rhel7'])"
+}
+web-q2-dmz-s2.example.int | SUCCESS => {
+    "trace_var,group_names": "('dmz/site2/web-q2-dmz-s2.example.int', ['dmz', 'environment_test', 'location_site2', 'ntp_client', 'rhel7'])"
+}
+app-q1-internal-s1.example.int | SUCCESS => {
+    "trace_var,group_names": "('internal/site1/app-q1-internal-s1.example.int', ['environment_test', 'internal', 'location_site1', 'ntp_client', 'rhel7'])"
+}
+app-q2-internal-s1.example.int | SUCCESS => {
+    "trace_var,group_names": "('internal/site1/app-q2-internal-s1.example.int', ['environment_test', 'internal', 'location_site1', 'ntp_client', 'rhel7'])"
+}
+web-q1-internal-s1.example.int | SUCCESS => {
+    "trace_var,group_names": "('internal/site1/web-q1-internal-s1.example.int', ['environment_test', 'internal', 'location_site1', 'ntp_client', 'rhel7'])"
+}
+web-q2-internal-s1.example.int | SUCCESS => {
+    "trace_var,group_names": "('internal/site1/web-q2-internal-s1.example.int', ['environment_test', 'internal', 'location_site1', 'ntp_client', 'rhel7'])"
+}
+app-q1-internal-s2.example.int | SUCCESS => {
+    "trace_var,group_names": "('internal/site2/app-q1-internal-s2.example.int', ['environment_test', 'internal', 'location_site2', 'ntp_client', 'rhel7'])"
+}
+app-q2-internal-s2.example.int | SUCCESS => {
+    "trace_var,group_names": "('internal/site2/app-q2-internal-s2.example.int', ['environment_test', 'internal', 'location_site2', 'ntp_client', 'rhel7'])"
+}
+web-q1-internal-s2.example.int | SUCCESS => {
+    "trace_var,group_names": "('internal/site2/web-q1-internal-s2.example.int', ['environment_test', 'internal', 'location_site2', 'ntp_client', 'rhel7'])"
+}
+web-q2-internal-s2.example.int | SUCCESS => {
+    "trace_var,group_names": "('internal/site2/web-q2-internal-s2.example.int', ['environment_test', 'internal', 'location_site2', 'ntp_client', 'rhel7'])"
+}
+
+```
 
 
 ## NTP Playbook
