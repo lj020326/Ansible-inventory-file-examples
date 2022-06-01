@@ -312,7 +312,7 @@ We look to apply those filters in the next ntp playbook section.
 
 Set up group variables for the respective networks.
 
-[inventory/group_vars/dmz.yml](./inventory/group_vars/dmz.yml)
+[inventory/group_vars/dmz.yml](./inventory/group_vars/network_dmz.yml)
 ```yaml
 ---
 
