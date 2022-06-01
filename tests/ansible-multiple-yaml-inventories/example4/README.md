@@ -439,8 +439,6 @@ group_trace_var: group_vars/ntp_server.yml
 ```yaml
 ---
 
-ntp_network_group
-
 ## ntp-client configs
 ## ref: https://github.com/geerlingguy/ansible-role-ntp
 ntp_timezone: America/New_York
