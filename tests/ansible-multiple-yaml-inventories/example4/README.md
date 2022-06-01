@@ -426,8 +426,45 @@ group_trace_var: group_vars/ntp_client.yml
 ```
 
 
+### Show the resulting ntp_servers variable
 
+Run for groups 'ntp_server,\&network_internal'
+```shell
+ansible -i ./inventory/ -m debug -a var=ntp_servers ntp_server,\&network_internal
+admin-q1-internal-s1.example.int | SUCCESS => {
+    "ntp_servers": [
+        "0.us.pool.ntp.org iburst xleave",
+        "1.us.pool.ntp.org iburst xleave",
+        "2.us.pool.ntp.org iburst xleave",
+        "3.us.pool.ntp.org iburst xleave"
+    ]
+}
+admin-q2-internal-s1.example.int | SUCCESS => {
+    "ntp_servers": [
+        "0.us.pool.ntp.org iburst xleave",
+        "1.us.pool.ntp.org iburst xleave",
+        "2.us.pool.ntp.org iburst xleave",
+        "3.us.pool.ntp.org iburst xleave"
+    ]
+}
+admin-q1-internal-s2.example.int | SUCCESS => {
+    "ntp_servers": [
+        "0.us.pool.ntp.org iburst xleave",
+        "1.us.pool.ntp.org iburst xleave",
+        "2.us.pool.ntp.org iburst xleave",
+        "3.us.pool.ntp.org iburst xleave"
+    ]
+}
+admin-q2-internal-s2.example.int | SUCCESS => {
+    "ntp_servers": [
+        "0.us.pool.ntp.org iburst xleave",
+        "1.us.pool.ntp.org iburst xleave",
+        "2.us.pool.ntp.org iburst xleave",
+        "3.us.pool.ntp.org iburst xleave"
+    ]
+}
 
+```
 
 
 ## Debug host vars using groups to target sets of hosts
