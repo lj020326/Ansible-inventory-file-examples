@@ -844,7 +844,7 @@ all:
   children:
     rhel6:
       vars:
-        trace_var: network1/site1/rhel7
+        trace_var: network1/site1/rhel6
       hosts:
         admin-q1-net1-s1.example.int: {}
     rhel7:
