@@ -332,7 +332,7 @@ gateway_ipv4_network_cidr: 192.160.0.0/16
 
 ### Group vars for play/role specific settings
 
-Setup the respective group variables for the ntp groups: 'dmz', 'ntp_server' and 'ntp_client'.
+Set up group variables for the respective ntp groups.
 
 [inventory/group_vars/ntp_server.yml](./inventory/group_vars/ntp_server.yml)
 ```yaml
