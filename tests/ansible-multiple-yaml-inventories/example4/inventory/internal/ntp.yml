@@ -1,0 +1,11 @@
+all:
+  children:
+    ntp_server:
+      hosts:
+        admin-q1-internal-s1.example.int: {}
+        admin-q2-internal-s1.example.int: {}
+        admin-q1-internal-s2.example.int: {}
+        admin-q2-internal-s2.example.int: {}
+    ntp_client:
+      children:
+        environment_test: {}
