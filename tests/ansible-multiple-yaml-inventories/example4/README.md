@@ -439,7 +439,6 @@ Run debug using a group defined set of hosts.
 Run for group 'location_site1'
 ```shell
 ansible -i ./inventory/ -m debug -a var=trace_var,group_names location_site1
-ansible -i ./inventory/ -m debug -a var=trace_var,group_names location_site1
 admin-q1-dmz-s1.example.int | SUCCESS => {
     "trace_var,group_names": "('dmz/site1/admin-q1-dmz-s1.example.int', ['environment_test', 'location_site1', 'network_dmz', 'ntp_client', 'ntp_server', 'rhel6'])"
 }
