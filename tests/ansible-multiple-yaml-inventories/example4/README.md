@@ -121,7 +121,7 @@ all:
         app-[dmz|internal]-q2-s[1|2].example.int: {}
         web-[dmz|internal]-q1-s[1|2].example.int: {}
         web-[dmz|internal]-q2-s[1|2].example.int: {}
-    network[1|2]:
+    [dmz|internal]:
       vars:
         trace_var: site[1|2]/network[1|2]
       hosts:
