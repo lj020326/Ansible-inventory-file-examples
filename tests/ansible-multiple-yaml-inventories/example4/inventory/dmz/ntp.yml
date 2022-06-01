@@ -2,7 +2,8 @@ all:
   children:
     ntp_server:
       hosts:
-        ansiblelinuxtestd1s1.alsac.stjude.org: {}
+        admin-q1-dmz-s1.example.int: {}
+        admin-q2-dmz-s1.example.int: {}
     ntp_client:
       children:
-        environment_qa: {}
+        environment_test: {}
