@@ -299,13 +299,96 @@ web-q2-internal-s2.example.int | SUCCESS => {
 We see that all the ntp-client machines and no ntp-server machines result. 
 This is as expected.
 
-## Test Conclusion
+## Testing Conclusion
 
 The 2 test results demonstrate that we can safely target the ntp_server and ntp_client machines with the appropriate group limit filters.
 
 We look to apply those filters in the next ntp playbook section.
 
 ## NTP Playbook
+
+### Setup group variables for ntp_server and ntp_client plays
+
+Setup the respective server and client group variables.
+
+[inventory/group_vars/ntp_server.yml](./inventory/group_vars/ntp_server.yml)
+```yaml
+---
+
+## ntp-server configs
+## ref: https://github.com/geerlingguy/ansible-role-ntp
+ntp_timezone: America/New_York
+ntp_area: 'us'
+
+ntp_tinker_panic: true
+
+ntp_allow_networks:
+  - "{{ gateway_ipv4_network_cidr }}"
+
+#ntp_servers:
+#  - "{{ gateway_ip4 }} prefer iburst"
+
+ntp_servers:
+  - 0{{ '.' + ntp_area if ntp_area else '' }}.pool.ntp.org iburst xleave
+  - 1{{ '.' + ntp_area if ntp_area else '' }}.pool.ntp.org iburst xleave
+  - 2{{ '.' + ntp_area if ntp_area else '' }}.pool.ntp.org iburst xleave
+  - 3{{ '.' + ntp_area if ntp_area else '' }}.pool.ntp.org iburst xleave
+
+ntp_peers: |
+  [
+    {% for host in groups['ntp_server'] | difference([inventory_hostname]) %}
+    {{ hostvars[host].ansible_host }},
+    {% endfor %}
+  ]
+
+ntp_local_stratum_enabled: yes
+
+ntp_leapsectz_enabled: yes
+
+ntp_log_info:
+  - measurements
+  - statistics
+  - tracking
+
+ntp_cmdport_disabled: no
+
+## used for variable-to-inventory trace/debug
+trace_var: group_vars/ntp_server.yml
+
+```
+
+[inventory/group_vars/ntp_client.yml](./inventory/group_vars/ntp_client.yml)
+```yaml
+---
+
+## ntp-client configs
+## ref: https://github.com/geerlingguy/ansible-role-ntp
+ntp_timezone: America/New_York
+
+ntp_tinker_panic: yes
+
+ntp_servers: |
+  [
+    {% if ansible_default_ipv4.address|d(ansible_all_ipv4_addresses[0]) is defined %}
+    {% if groups['ntp_server'] is defined %}
+    {% for server in groups['ntp_server'] %}
+    {% for network in hostvars[server].ntp_allow_networks|d([]) %}
+    {% if ansible_default_ipv4.address|d(ansible_all_ipv4_addresses[0]) | ansible.utils.ipaddr('network') %}
+    "{{ hostvars[server].ansible_host }}",
+    {% endif %}
+    {% endfor %}
+    {% endfor %}
+    {% endif %}
+    {% endif %}
+  ]
+
+ntp_cmdport_disabled: yes
+
+## used for variable-to-inventory trace/debug
+trace_var: group_vars/ntp_client.yml
+
+```
+
 
 [playbook.yml](./playbook.yml):
 ```yaml
