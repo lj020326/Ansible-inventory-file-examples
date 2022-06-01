@@ -9,3 +9,13 @@ all:
     ntp_client:
       children:
         environment_test: {}
+    location_site1:
+      vars:
+        trace_var: internal/ntp/location_site1
+        gateway_ipv4: 192.168.112.1
+        gateway_ipv4_network_cidr: 192.168.112.0/16
+    location_site2:
+      vars:
+        trace_var: internal/ntp/location_site2
+        gateway_ipv4: 192.168.221.1
+        gateway_ipv4_network_cidr: 192.168.221.0/16
