@@ -146,10 +146,11 @@ Each of the respective inventory files:
 
 ## Define NTP inventory groups
 
-To prepare the ntp playbook, we will setup a group of ntp servers and client.
-For each site, there will be 2 time servers.
+For the ntp playbook/role to work on both servers and clients, we will define the 'ntp_server' and 'ntp_client' groups to correctly scope the machines to be applied.
 
-The 'ntp-server' group configuration will be applied to the following 8 'admin' machines (2 for each specific network/site):
+For each network/site, there will be 2 time servers resulting in a total of 8 machines to be targeted for the 'ntp-server' play/role application.
+
+Specifically, the 'ntp_server' group configuration will be applied to the following 8 'admin' machines (2 for each specific network/site):
 
 ```output
 admin-dmz-q1-s1.example.int
@@ -161,6 +162,9 @@ admin-internal-q2-s1.example.int
 admin-internal-q1-s2.example.int
 admin-internal-q2-s2.example.int
 ```
+
+
+
 
 The 'ntp-client' group will include all linux machines for the respective environment.
 In this case, the environment will be defined with the existing test environment group named 'environment_test'.
@@ -197,9 +201,7 @@ all:
         environment_test: {}
 ```
 
-Note to keep things simple by re-using existing groups, the 'ntp_clients' group is defined using the children group of 'environment_test', which includes the 8 admin machines.
-
-For the playbook to work, we look to define the ntp-server and ntp-client groups to correctly scope the machines to be applied.
+To keep things simple by re-using existing groups, the 'ntp_client' group is defined using the children group of 'environment_test'.  Note that the 'ntp_client' group includes the 8 admin machines already included in the 'ntp_server' group.  This overlap can be worked around by making sure that the 'ntp_server' group is excluded for the respective plays that only mean to target the 'ntp_client' machines.  This will be demonstrated in the following verifications section. 
 
 We will now run through several ansible CLI tests to verify that the correct machines result for each respective limit used.
 
