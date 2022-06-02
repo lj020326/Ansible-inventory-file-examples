@@ -3,7 +3,7 @@
 
 In the prior [Example 3](../example3/README.md), we found the method to merge multiple YAML inventories with the merged results observing intended or expected behavior.
 
-Now we will look to apply plays that can target machines in the merged inventory based on the role-based group desired.
+Now we will look to apply plays that can target machines in the merged inventory with role-based groups.
 
 E.g., the following scenario will discuss a simple NTP client/server based playbook to apply across the merged inventory. 
 
@@ -287,9 +287,9 @@ This is as expected.
 
 ## Testing Conclusion
 
-The 2 test results demonstrate that we can safely target the ntp_server and ntp_client machines with the appropriate group limit filters.
+The 2 test results demonstrate that we can safely target the ntp_server and ntp_client machines with the appropriate group targets.
 
-We look to apply those filters in the next ntp playbook section.
+We now seek to apply those filters in the next ntp playbook section.
 
 
 ## NTP group variables
