@@ -210,42 +210,58 @@ We will now run through several ansible CLI tests to verify that the correct mac
 ### Test 1: Show list of all ntp hosts
 
 ```shell
-ansible -i ./inventory/dmz --list-hosts all
+ansible -i ./inventory --list-hosts all
+  hosts (24):
+    admin-q1-dmz-s1.example.int
+    admin-q2-dmz-s1.example.int
+    app-q1-dmz-s1.example.int
+    app-q2-dmz-s1.example.int
+    web-q1-dmz-s1.example.int
+    web-q2-dmz-s1.example.int
+    admin-q1-dmz-s2.example.int
+    admin-q2-dmz-s2.example.int
+    app-q1-dmz-s2.example.int
+    app-q2-dmz-s2.example.int
+    web-q1-dmz-s2.example.int
+    web-q2-dmz-s2.example.int
+    admin-q1-internal-s1.example.int
+    admin-q2-internal-s1.example.int
+    app-q1-internal-s1.example.int
+    app-q2-internal-s1.example.int
+    web-q1-internal-s1.example.int
+    web-q2-internal-s1.example.int
+    admin-q1-internal-s2.example.int
+    admin-q2-internal-s2.example.int
+    app-q1-internal-s2.example.int
+    app-q2-internal-s2.example.int
+    web-q1-internal-s2.example.int
+    web-q2-internal-s2.example.int
 
 ```
 
-### Test 1: Target all ntp servers
+### Test 2: Show debug for ntp servers
 
 ```shell
-ansible -i ./inventory/ ntp_server  -m debug -a var=trace_var,group_names
-admin-q1-dmz-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('dmz/site1/admin-q1-dmz-s1.example.int', ['environment_test', 'location_site1', 'network_dmz', 'ntp_client', 'ntp_server', 'rhel6'])"
-}
-admin-q2-dmz-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('dmz/site1/admin-q2-dmz-s1.example.int', ['environment_test', 'location_site1', 'network_dmz', 'ntp_client', 'ntp_server', 'rhel7'])"
-}
-admin-q1-dmz-s2.example.int | SUCCESS => {
-    "trace_var,group_names": "('dmz/site2/admin-q1-dmz-s2.example.int', ['environment_test', 'location_site2', 'network_dmz', 'ntp_client', 'ntp_server', 'rhel6'])"
-}
-admin-q2-dmz-s2.example.int | SUCCESS => {
-    "trace_var,group_names": "('dmz/site2/admin-q2-dmz-s2.example.int', ['environment_test', 'location_site2', 'network_dmz', 'ntp_client', 'ntp_server', 'rhel7'])"
-}
-admin-q1-internal-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site1/admin-q1-internal-s1.example.int', ['environment_test', 'location_site1', 'network_internal', 'ntp_client', 'ntp_server', 'rhel6'])"
-}
-admin-q2-internal-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site1/admin-q2-internal-s1.example.int', ['environment_test', 'location_site1', 'network_internal', 'ntp_client', 'ntp_server', 'rhel7'])"
-}
-admin-q1-internal-s2.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site2/admin-q1-internal-s2.example.int', ['environment_test', 'location_site2', 'network_internal', 'ntp_client', 'ntp_server', 'rhel6'])"
-}
-admin-q2-internal-s2.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site2/admin-q2-internal-s2.example.int', ['environment_test', 'location_site2', 'network_internal', 'ntp_client', 'ntp_server', 'rhel7'])"
-}
-
+ansible -i ./inventory/dmz -m debug -a var=ntp_servers ntp_server
+[WARNING]: Could not match supplied host pattern, ignoring: ntp_server
+[WARNING]: No hosts matched, nothing to do
 ```
 
-This is as expected.
+This is not what we expect.
+
+According to several known issues (TODO - cite issue link(s) here), the ini files must be renamed without the INI extension for ansible to properly pull in the respective files.
+
+So rename the ntp.ini files to remove the ini extension from the file names.
+
+We now re-run the last 2 tests with the following results.
+
+
+### Test 1 (after removed ini extension): Show list of all ntp hosts
+
+```shell
+ansible -i ./inventory --list-hosts all
+
+```
 
 
 ### Test 2: Target all ntp clients
