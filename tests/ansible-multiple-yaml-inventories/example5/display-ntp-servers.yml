@@ -8,5 +8,7 @@
     - debug:
         var: group_names
     - debug:
+        var: foreman.ip
+    - debug:
         var: ntp_servers
 
