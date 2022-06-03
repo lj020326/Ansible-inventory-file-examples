@@ -4,5 +4,9 @@
   connection: local
   tasks:
     - debug:
+        var: trace_var
+    - debug:
+        var: group_names
+    - debug:
         var: ntp_servers
 
