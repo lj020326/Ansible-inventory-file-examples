@@ -12,7 +12,7 @@ ntp_servers: |
     {% if groups['ntp_server'] is defined %}
     {% for server in groups['ntp_server'] %}
     {% for network in hostvars[server].ntp_allow_networks|d([]) %}
-    {% if foreman.ip | ansible.utils.ipaddr(network) | ipaddr('bool') %}
+    {% if foreman.ip | ansible.utils.ipaddr(network) | ansible.utils.ipaddr('bool') %}
     "{{ hostvars[server].ansible_host }}",
     {% endif %}
     {% endfor %}
