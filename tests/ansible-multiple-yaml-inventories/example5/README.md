@@ -1,9 +1,9 @@
 
 # Example 4: Multiple YAML inventories with 'role-based' YAML inventory groups
 
-In the prior [Example 4](../example3/README.md), we found the method to merge Multiple YAML inventories with 'role-based' INI inventory groups did not work as expected/intended.
+In the prior [Example 4](../example4/README.md), we merged Multiple YAML inventories using 'role-based' INI inventory groups.
 
-The following section looks to resolve this by migrating the INI role-based groups into YAML role-based groups.
+The following section will migrate the INI role-based groups to YAML role-based groups.
 
 ## Overview
 
@@ -200,7 +200,7 @@ We will now run through several ansible CLI tests to verify that the correct mac
 ### Test 1: Show list of all ntp hosts
 
 ```shell
-ansible -i ./inventory --list-hosts all
+ansible -i ./inventory --list-hosts ntp
   hosts (24):
     admin-q1-dmz-s1.example.int
     admin-q2-dmz-s1.example.int
@@ -229,33 +229,66 @@ ansible -i ./inventory --list-hosts all
 
 ```
 
-### Test 2: Target all ntp servers
+### Test 2: Show debug for ntp servers
 
 ```shell
-ansible -i ./inventory/ -m debug -a var=group_names,ntp_server ntp_server
+ansible -i ./inventory/dmz -m debug -a var=ntp_servers ntp
+ansible -i ./inventory/dmz -m debug -a var=ntp_servers ntp
 admin-q1-dmz-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('dmz/site1/admin-q1-dmz-s1.example.int', ['environment_test', 'location_site1', 'network_dmz', 'ntp_client', 'ntp_server', 'rhel6'])"
+    "ntp_servers": [
+        "0.us.pool.ntp.org iburst xleave",
+        "1.us.pool.ntp.org iburst xleave",
+        "2.us.pool.ntp.org iburst xleave",
+        "3.us.pool.ntp.org iburst xleave"
+    ]
 }
 admin-q2-dmz-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('dmz/site1/admin-q2-dmz-s1.example.int', ['environment_test', 'location_site1', 'network_dmz', 'ntp_client', 'ntp_server', 'rhel7'])"
+    "ntp_servers": [
+        "0.us.pool.ntp.org iburst xleave",
+        "1.us.pool.ntp.org iburst xleave",
+        "2.us.pool.ntp.org iburst xleave",
+        "3.us.pool.ntp.org iburst xleave"
+    ]
 }
 admin-q1-dmz-s2.example.int | SUCCESS => {
-    "trace_var,group_names": "('dmz/site2/admin-q1-dmz-s2.example.int', ['environment_test', 'location_site2', 'network_dmz', 'ntp_client', 'ntp_server', 'rhel6'])"
+    "ntp_servers": [
+        "0.us.pool.ntp.org iburst xleave",
+        "1.us.pool.ntp.org iburst xleave",
+        "2.us.pool.ntp.org iburst xleave",
+        "3.us.pool.ntp.org iburst xleave"
+    ]
 }
 admin-q2-dmz-s2.example.int | SUCCESS => {
-    "trace_var,group_names": "('dmz/site2/admin-q2-dmz-s2.example.int', ['environment_test', 'location_site2', 'network_dmz', 'ntp_client', 'ntp_server', 'rhel7'])"
+    "ntp_servers": [
+        "0.us.pool.ntp.org iburst xleave",
+        "1.us.pool.ntp.org iburst xleave",
+        "2.us.pool.ntp.org iburst xleave",
+        "3.us.pool.ntp.org iburst xleave"
+    ]
 }
-admin-q1-internal-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site1/admin-q1-internal-s1.example.int', ['environment_test', 'location_site1', 'network_internal', 'ntp_client', 'ntp_server', 'rhel6'])"
+app-q2-dmz-s1.example.int | SUCCESS => {
+    "ntp_servers": []
 }
-admin-q2-internal-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site1/admin-q2-internal-s1.example.int', ['environment_test', 'location_site1', 'network_internal', 'ntp_client', 'ntp_server', 'rhel7'])"
+app-q1-dmz-s1.example.int | SUCCESS => {
+    "ntp_servers": []
 }
-admin-q1-internal-s2.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site2/admin-q1-internal-s2.example.int', ['environment_test', 'location_site2', 'network_internal', 'ntp_client', 'ntp_server', 'rhel6'])"
+web-q1-dmz-s1.example.int | SUCCESS => {
+    "ntp_servers": []
 }
-admin-q2-internal-s2.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site2/admin-q2-internal-s2.example.int', ['environment_test', 'location_site2', 'network_internal', 'ntp_client', 'ntp_server', 'rhel7'])"
+web-q2-dmz-s1.example.int | SUCCESS => {
+    "ntp_servers": []
+}
+app-q1-dmz-s2.example.int | SUCCESS => {
+    "ntp_servers": []
+}
+app-q2-dmz-s2.example.int | SUCCESS => {
+    "ntp_servers": []
+}
+web-q1-dmz-s2.example.int | SUCCESS => {
+    "ntp_servers": []
+}
+web-q2-dmz-s2.example.int | SUCCESS => {
+    "ntp_servers": []
 }
 
 ```

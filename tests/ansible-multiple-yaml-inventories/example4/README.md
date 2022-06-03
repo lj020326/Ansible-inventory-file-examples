@@ -242,8 +242,8 @@ ansible -i ./inventory --list-hosts ntp
 ### Test 2: Show debug for ntp servers
 
 ```shell
-ansible -i ./inventory/dmz -m debug -a var=ntp_servers ntp_server
-[WARNING]: Could not match supplied host pattern, ignoring: ntp_server
+ansible -i ./inventory/dmz -m debug -a var=ntp_servers ntp
+[WARNING]: Could not match supplied host pattern, ignoring: ntp
 [WARNING]: No hosts matched, nothing to do
 ```
 
