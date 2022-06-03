@@ -14,11 +14,14 @@ environment_test
 ntp_client
 ntp_server
 
+[location_site1]
 
 [location_site1:vars]
 trace_var=dmz/ntp/location_site1
 gateway_ipv4=112.112.0.1
 gateway_ipv4_network_cidr=112.112.0.0/16
+
+[location_site2]
 
 [location_site2:vars]
 trace_var=dmz/ntp/location_site2
