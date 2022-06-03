@@ -9,9 +9,12 @@ admin-q2-internal-s2.example.int
 [ntp_client:children]
 environment_test
 
+[environment_test]
+
 [ntp:children]
 ntp_client
 ntp_server
+
 
 [location_site1:vars]
 trace_var=internal/ntp/location_site1
