@@ -1,9 +1,9 @@
 
-# Example 4: Multiple YAML inventories with role based groups
+# Example 5: Multiple YAML inventories with role based groups using INI specified groups
 
 In the prior [Example 3](../example3/README.md), we found the method to merge multiple YAML inventories with the merged results observing intended or expected behavior.
 
-Now we will look to apply plays that can target machines in the merged inventory with role-based groups.
+Now we will look to apply plays that can target machines in the merged inventory with 'role-based' inventory groups.
 
 E.g., the following scenario will discuss a simple NTP client/server based playbook to apply across the merged inventory. 
 
@@ -155,34 +155,50 @@ In this case, the environment will be defined with the existing test environment
 
 Now we can define the YAML groups to be used by the 'ntp' playbook/role as follows:
 
-[inventory/dmz/ntp.yml](./inventory/dmz/ntp.yml):
-```yaml
-all:
-  children:
-    ntp_server:
-      hosts:
-        admin-q1-dmz-s1.example.int: {}
-        admin-q2-dmz-s1.example.int: {}
-        admin-q1-dmz-s2.example.int: {}
-        admin-q2-dmz-s2.example.int: {}
-    ntp_client:
-      children:
-        environment_test: {}
+[inventory/dmz/ntp.yml](./inventory/dmz/ntp.ini):
+```ini
+
+[ntp_server]
+admin-q1-dmz-s1.example.int
+admin-q2-dmz-s1.example.int
+admin-q1-dmz-s2.example.int
+admin-q2-dmz-s2.example.int
+
+[ntp_client:children]
+environment_test
+
+
+[location_site1:vars]
+trace_var=dmz/ntp/location_site1
+gateway_ipv4=112.112.0.1
+gateway_ipv4_network_cidr=112.112.0.0/16
+
+[location_site2:vars]
+trace_var=dmz/ntp/location_site2
+gateway_ipv4=221.221.0.1
+gateway_ipv4_network_cidr=221.221.0.0/16
 ```
 
-[inventory/internal/ntp.yml](./inventory/internal/ntp.yml):
-```yaml
-all:
-  children:
-    ntp_server:
-      hosts:
-        admin-q1-internal-s1.example.int: {}
-        admin-q2-internal-s1.example.int: {}
-        admin-q1-internal-s2.example.int: {}
-        admin-q2-internal-s2.example.int: {}
-    ntp_client:
-      children:
-        environment_test: {}
+[inventory/internal/ntp.ini](./inventory/internal/ntp.ini):
+```ini
+[ntp_server]
+admin-q1-internal-s1.example.int
+admin-q2-internal-s1.example.int
+admin-q1-internal-s2.example.int
+admin-q2-internal-s2.example.int
+
+[ntp_client:children]
+environment_test
+
+[location_site1:vars]
+trace_var=internal/ntp/location_site1
+gateway_ipv4=192.168.112.1
+gateway_ipv4_network_cidr=192.168.112.0/16
+
+[location_site2:vars]
+trace_var=internal/ntp/location_site2
+gateway_ipv4=192.168.221.1
+gateway_ipv4_network_cidr=192.168.221.0/16
 ```
 
 The 'ntp_client' group is defined with the children group of 'environment_test'.  
@@ -191,555 +207,102 @@ Note that the 'ntp_client' group includes the 8 admin machines already included 
 
 We will now run through several ansible CLI tests to verify that the correct machines result for each respective limit used.
 
-### Test 1: Target all ntp servers
+### Test 1: Show list of all ntp hosts
 
 ```shell
-ansible -i ./inventory/ ntp_server  -m debug -a var=trace_var,group_names
-admin-q1-dmz-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('dmz/site1/admin-q1-dmz-s1.example.int', ['environment_test', 'location_site1', 'network_dmz', 'ntp_client', 'ntp_server', 'rhel6'])"
-}
-admin-q2-dmz-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('dmz/site1/admin-q2-dmz-s1.example.int', ['environment_test', 'location_site1', 'network_dmz', 'ntp_client', 'ntp_server', 'rhel7'])"
-}
-admin-q1-dmz-s2.example.int | SUCCESS => {
-    "trace_var,group_names": "('dmz/site2/admin-q1-dmz-s2.example.int', ['environment_test', 'location_site2', 'network_dmz', 'ntp_client', 'ntp_server', 'rhel6'])"
-}
-admin-q2-dmz-s2.example.int | SUCCESS => {
-    "trace_var,group_names": "('dmz/site2/admin-q2-dmz-s2.example.int', ['environment_test', 'location_site2', 'network_dmz', 'ntp_client', 'ntp_server', 'rhel7'])"
-}
-admin-q1-internal-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site1/admin-q1-internal-s1.example.int', ['environment_test', 'location_site1', 'network_internal', 'ntp_client', 'ntp_server', 'rhel6'])"
-}
-admin-q2-internal-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site1/admin-q2-internal-s1.example.int', ['environment_test', 'location_site1', 'network_internal', 'ntp_client', 'ntp_server', 'rhel7'])"
-}
-admin-q1-internal-s2.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site2/admin-q1-internal-s2.example.int', ['environment_test', 'location_site2', 'network_internal', 'ntp_client', 'ntp_server', 'rhel6'])"
-}
-admin-q2-internal-s2.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site2/admin-q2-internal-s2.example.int', ['environment_test', 'location_site2', 'network_internal', 'ntp_client', 'ntp_server', 'rhel7'])"
-}
+ansible -i ./inventory --list-hosts all
+  hosts (24):
+    admin-q1-dmz-s1.example.int
+    admin-q2-dmz-s1.example.int
+    app-q1-dmz-s1.example.int
+    app-q2-dmz-s1.example.int
+    web-q1-dmz-s1.example.int
+    web-q2-dmz-s1.example.int
+    admin-q1-dmz-s2.example.int
+    admin-q2-dmz-s2.example.int
+    app-q1-dmz-s2.example.int
+    app-q2-dmz-s2.example.int
+    web-q1-dmz-s2.example.int
+    web-q2-dmz-s2.example.int
+    admin-q1-internal-s1.example.int
+    admin-q2-internal-s1.example.int
+    app-q1-internal-s1.example.int
+    app-q2-internal-s1.example.int
+    web-q1-internal-s1.example.int
+    web-q2-internal-s1.example.int
+    admin-q1-internal-s2.example.int
+    admin-q2-internal-s2.example.int
+    app-q1-internal-s2.example.int
+    app-q2-internal-s2.example.int
+    web-q1-internal-s2.example.int
+    web-q2-internal-s2.example.int
 
 ```
 
-This is as expected.
-
-
-### Test 2: Target all ntp clients
-
-As mentioned earlier, the 'ntp_clients' group is defined using the children group of 'environment_test'.  The following ansible debug command excludes the 'ntp_server' hosts from that set such to target only the non-'ntp-server' hosts.
+### Test 2: Show debug for ntp servers
 
 ```shell
-ansible -i ./inventory/ ntp_client,\!ntp_server  -m debug -a var=trace_var,group_names
-app-q1-dmz-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('dmz/site1/app-q1-dmz-s1.example.int', ['environment_test', 'location_site1', 'network_dmz', 'ntp_client', 'rhel7'])"
-}
-app-q2-dmz-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('dmz/site1/app-q2-dmz-s1.example.int', ['environment_test', 'location_site1', 'network_dmz', 'ntp_client', 'rhel7'])"
-}
-web-q1-dmz-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('dmz/site1/web-q1-dmz-s1.example.int', ['environment_test', 'location_site1', 'network_dmz', 'ntp_client', 'rhel7'])"
-}
-web-q2-dmz-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('dmz/site1/web-q2-dmz-s1.example.int', ['environment_test', 'location_site1', 'network_dmz', 'ntp_client', 'rhel7'])"
-}
-app-q1-dmz-s2.example.int | SUCCESS => {
-    "trace_var,group_names": "('dmz/site2/app-q1-dmz-s2.example.int', ['environment_test', 'location_site2', 'network_dmz', 'ntp_client', 'rhel7'])"
-}
-app-q2-dmz-s2.example.int | SUCCESS => {
-    "trace_var,group_names": "('dmz/site2/app-q2-dmz-s2.example.int', ['environment_test', 'location_site2', 'network_dmz', 'ntp_client', 'rhel7'])"
-}
-web-q1-dmz-s2.example.int | SUCCESS => {
-    "trace_var,group_names": "('dmz/site2/web-q1-dmz-s2.example.int', ['environment_test', 'location_site2', 'network_dmz', 'ntp_client', 'rhel7'])"
-}
-web-q2-dmz-s2.example.int | SUCCESS => {
-    "trace_var,group_names": "('dmz/site2/web-q2-dmz-s2.example.int', ['environment_test', 'location_site2', 'network_dmz', 'ntp_client', 'rhel7'])"
-}
-app-q1-internal-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site1/app-q1-internal-s1.example.int', ['environment_test', 'location_site1', 'network_internal', 'ntp_client', 'rhel7'])"
-}
-app-q2-internal-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site1/app-q2-internal-s1.example.int', ['environment_test', 'location_site1', 'network_internal', 'ntp_client', 'rhel7'])"
-}
-web-q1-internal-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site1/web-q1-internal-s1.example.int', ['environment_test', 'location_site1', 'network_internal', 'ntp_client', 'rhel7'])"
-}
-web-q2-internal-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site1/web-q2-internal-s1.example.int', ['environment_test', 'location_site1', 'network_internal', 'ntp_client', 'rhel7'])"
-}
-app-q1-internal-s2.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site2/app-q1-internal-s2.example.int', ['environment_test', 'location_site2', 'network_internal', 'ntp_client', 'rhel7'])"
-}
-app-q2-internal-s2.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site2/app-q2-internal-s2.example.int', ['environment_test', 'location_site2', 'network_internal', 'ntp_client', 'rhel7'])"
-}
-web-q1-internal-s2.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site2/web-q1-internal-s2.example.int', ['environment_test', 'location_site2', 'network_internal', 'ntp_client', 'rhel7'])"
-}
-web-q2-internal-s2.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site2/web-q2-internal-s2.example.int', ['environment_test', 'location_site2', 'network_internal', 'ntp_client', 'rhel7'])"
-}
-
+ansible -i ./inventory/dmz -m debug -a var=ntp_servers ntp_server
+[WARNING]: Could not match supplied host pattern, ignoring: ntp_server
+[WARNING]: No hosts matched, nothing to do
 ```
 
-We see that all the ntp-client machines and no ntp-server machines result. 
-This is as expected.
+This is not what we expect.
 
-## Testing Conclusion
+According to several known issues (TODO - cite issue link(s) here), the ini files must be renamed without the INI extension for ansible to properly pull in the respective files.
 
-The 2 test results demonstrate that we can safely target the ntp_server and ntp_client machines with the appropriate group targets.
+So rename the ntp.ini files to remove the ini extension from the file names.
 
-We now seek to apply those filters in the next ntp playbook section.
+We now re-run the first '--list-hosts' test with the following results.
 
-
-## NTP group variables
-
-### Environment specific variable settings
-
-Each network-site environment has a different gateway with a respective unique ipv4 address.  The gateway ipv4 address is used to derive the network mask for each respective environment, which in turn is used to properly derive the ntp allow/restrict network mask setting used for each ntp server.
-
-Set up the gateway_ipv4 variable for each network/site.
-
-We do this by adding a section for each site group (location_site[1|2]) for the appropriate variable settings to be added to the respective inventory ntp.yml as follows.
-
-[inventory/dmz/ntp.yml](./inventory/dmz/ntp.yml)
-```yaml
-all:
-  children:
-    ntp_server:
-      hosts:
-        admin-q1-dmz-s1.example.int: {}
-        admin-q2-dmz-s1.example.int: {}
-        admin-q1-dmz-s2.example.int: {}
-        admin-q2-dmz-s2.example.int: {}
-    ntp_client:
-      children:
-        environment_test: {}
-    location_site1:
-      vars:
-        trace_var: dmz/ntp/location_site1
-        gateway_ipv4: 112.112.0.1
-        gateway_ipv4_network_cidr: 112.112.0.0/16
-    location_site2:
-      vars:
-        trace_var: dmz/ntp/location_site2
-        gateway_ipv4: 221.221.0.1
-        gateway_ipv4_network_cidr: 221.221.0.0/16
-
-```
-
-[inventory/internal/ntp.yml](./inventory/group_vars/network_internal.yml)
-```yaml
-all:
-  children:
-    ntp_server:
-      hosts:
-        admin-q1-internal-s1.example.int: {}
-        admin-q2-internal-s1.example.int: {}
-        admin-q1-internal-s2.example.int: {}
-        admin-q2-internal-s2.example.int: {}
-    ntp_client:
-      children:
-        environment_test: {}
-    location_site1:
-      vars:
-        trace_var: internal/ntp/location_site1
-        gateway_ipv4: 192.168.112.1
-        gateway_ipv4_network_cidr: 192.168.112.0/16
-    location_site2:
-      vars:
-        trace_var: internal/ntp/location_site2
-        gateway_ipv4: 192.168.221.1
-        gateway_ipv4_network_cidr: 192.168.221.0/16
-```
-
-### Verify that the correct gateway_ipv4 setting appears for each ntp server.
+### Test 1 (after removed ini extension): Show list of all ntp hosts
 
 ```shell
-ansible -i ./inventory/ -m debug -a var=group_trace_var,gateway_ipv4 ntp_server
-admin-q1-dmz-s1.example.int | SUCCESS => {
-    "group_trace_var,gateway_ipv4": "('group_vars/ntp_client.yml', '192.168.112.1')"
-}
-admin-q2-dmz-s1.example.int | SUCCESS => {
-    "group_trace_var,gateway_ipv4": "('group_vars/ntp_client.yml', '192.168.112.1')"
-}
-admin-q1-dmz-s2.example.int | SUCCESS => {
-    "group_trace_var,gateway_ipv4": "('group_vars/ntp_client.yml', '192.168.221.1')"
-}
-admin-q2-dmz-s2.example.int | SUCCESS => {
-    "group_trace_var,gateway_ipv4": "('group_vars/ntp_client.yml', '192.168.221.1')"
-}
-admin-q1-internal-s1.example.int | SUCCESS => {
-    "group_trace_var,gateway_ipv4": "('group_vars/ntp_client.yml', '192.168.112.1')"
-}
-admin-q2-internal-s1.example.int | SUCCESS => {
-    "group_trace_var,gateway_ipv4": "('group_vars/ntp_client.yml', '192.168.112.1')"
-}
-admin-q1-internal-s2.example.int | SUCCESS => {
-    "group_trace_var,gateway_ipv4": "('group_vars/ntp_client.yml', '192.168.221.1')"
-}
-admin-q2-internal-s2.example.int | SUCCESS => {
-    "group_trace_var,gateway_ipv4": "('group_vars/ntp_client.yml', '192.168.221.1')"
-}
+ansible -i ./inventory --list-hosts all
+[WARNING]:  * Failed to parse /Users/ljohnson/repos/ansible/ansible-inventory-file-examples/tests/ansible-multiple-yaml-inventories/example5/inventory/dmz/ntp with yaml plugin: We were unable to read either as JSON nor YAML, these are the errors we got from each:
+JSON: Expecting value: line 2 column 2 (char 2)  Syntax Error while loading YAML.   did not find expected <document start>  The error appears to be in '/Users/ljohnson/repos/ansible/ansible-inventory-file-examples/tests/ansible-multiple-yaml-
+inventories/example5/inventory/dmz/ntp': line 3, column 1, but may be elsewhere in the file depending on the exact syntax problem.  The offending line appears to be:  [ntp_server] admin-q1-dmz-s1.example.int ^ here
+[WARNING]:  * Failed to parse /Users/ljohnson/repos/ansible/ansible-inventory-file-examples/tests/ansible-multiple-yaml-inventories/example5/inventory/dmz/ntp with ini plugin: /Users/ljohnson/repos/ansible/ansible-inventory-file-examples/tests/ansible-multiple-
+yaml-inventories/example5/inventory/dmz/ntp:9: Section [ntp_client:children] includes undefined group: environment_test
+[WARNING]: Unable to parse /Users/ljohnson/repos/ansible/ansible-inventory-file-examples/tests/ansible-multiple-yaml-inventories/example5/inventory/dmz/ntp as an inventory source
+  hosts (24):
+    admin-q1-dmz-s1.example.int
+    admin-q2-dmz-s1.example.int
+    app-q1-dmz-s1.example.int
+    app-q2-dmz-s1.example.int
+    web-q1-dmz-s1.example.int
+    web-q2-dmz-s1.example.int
+    admin-q1-dmz-s2.example.int
+    admin-q2-dmz-s2.example.int
+    app-q1-dmz-s2.example.int
+    app-q2-dmz-s2.example.int
+    web-q1-dmz-s2.example.int
+    web-q2-dmz-s2.example.int
+    admin-q1-internal-s1.example.int
+    admin-q2-internal-s1.example.int
+    app-q1-internal-s1.example.int
+    app-q2-internal-s1.example.int
+    web-q1-internal-s1.example.int
+    web-q2-internal-s1.example.int
+    admin-q1-internal-s2.example.int
+    admin-q2-internal-s2.example.int
+    app-q1-internal-s2.example.int
+    app-q2-internal-s2.example.int
+    web-q1-internal-s2.example.int
+    web-q2-internal-s2.example.int
 
 ```
 
-
-### Group vars for play/role specific settings
-
-Set up group variables for the respective ntp groups.
-
-[inventory/group_vars/ntp_server.yml](./inventory/group_vars/ntp_server.yml)
-```yaml
----
-
-## ntp-server configs
-## ref: https://github.com/geerlingguy/ansible-role-ntp
-ntp_timezone: America/New_York
-ntp_area: 'us'
-
-ntp_tinker_panic: true
-
-ntp_allow_networks:
-  - "{{ gateway_ipv4_network_cidr }}"
-
-#ntp_servers:
-#  - "{{ gateway_ip4 }} prefer iburst"
-
-ntp_servers:
-  - 0{{ '.' + ntp_area if ntp_area else '' }}.pool.ntp.org iburst xleave
-  - 1{{ '.' + ntp_area if ntp_area else '' }}.pool.ntp.org iburst xleave
-  - 2{{ '.' + ntp_area if ntp_area else '' }}.pool.ntp.org iburst xleave
-  - 3{{ '.' + ntp_area if ntp_area else '' }}.pool.ntp.org iburst xleave
-
-ntp_peers: |
-  [
-    {% for host in groups['ntp_server'] | difference([inventory_hostname]) %}
-    {{ hostvars[host].ansible_host }},
-    {% endfor %}
-  ]
-
-ntp_local_stratum_enabled: yes
-
-ntp_leapsectz_enabled: yes
-
-ntp_log_info:
-  - measurements
-  - statistics
-  - tracking
-
-ntp_cmdport_disabled: no
-
-## used for variable-to-inventory trace/debug
-group_trace_var: group_vars/ntp_server.yml
-
-```
-
-[inventory/group_vars/ntp_client.yml](./inventory/group_vars/ntp_client.yml)
-```yaml
----
-
-## ntp-client configs
-## ref: https://github.com/geerlingguy/ansible-role-ntp
-ntp_timezone: America/New_York
-
-ntp_tinker_panic: yes
-
-ntp_servers: |
-  [
-    {% if ansible_default_ipv4.address|d(ansible_all_ipv4_addresses[0]) is defined %}
-    {% if groups['ntp_server'] is defined %}
-    {% for server in groups['ntp_server'] %}
-    {% for network in hostvars[server].ntp_allow_networks|d([]) %}
-    {% if ansible_default_ipv4.address|d(ansible_all_ipv4_addresses[0]) | ansible.utils.ipaddr('network') %}
-    "{{ hostvars[server].ansible_host }}",
-    {% endif %}
-    {% endfor %}
-    {% endfor %}
-    {% endif %}
-    {% endif %}
-  ]
-
-ntp_cmdport_disabled: yes
-
-## used for variable-to-inventory trace/debug
-group_trace_var: group_vars/ntp_client.yml
-
-```
+We see that now the INI files are parsed, but that the INI plugin cannot resolve the child group 'environment_test'.
 
 
-## NTP Playbook
+## Conclusion/Next Steps
 
-[playbook.yml](./playbook.yml):
-```yaml
----
+From this test, we conclude that mixing INI and YAML groups in the inventory does not work as expected.
 
-- name: "Setup ntp servers"
-  hosts: ntp_server
-  tags:
-    - bootstrap-ntp
-    - bootstrap-ntp-server
-  become: yes
-  roles:
-    - role: geerlingguy.ntp
-
-- name: "Setup ntp clients"
-  hosts: ntp_client,!ntp_server
-  tags:
-    - bootstrap-ntp
-    - bootstrap-ntp-client
-  become: yes
-  roles:
-    - role: geerlingguy.ntp
-
-```
+The [next example](../example5/README.md) will look to solve this.
 
 
-### Show the resulting ntp_servers variable
-
-Run for groups 'ntp_server,\&network_internal'
-```shell
-ansible -i ./inventory/ -m debug -a var=ntp_servers ntp_server,\&network_internal
-admin-q1-internal-s1.example.int | SUCCESS => {
-    "ntp_servers": [
-        "0.us.pool.ntp.org iburst xleave",
-        "1.us.pool.ntp.org iburst xleave",
-        "2.us.pool.ntp.org iburst xleave",
-        "3.us.pool.ntp.org iburst xleave"
-    ]
-}
-admin-q2-internal-s1.example.int | SUCCESS => {
-    "ntp_servers": [
-        "0.us.pool.ntp.org iburst xleave",
-        "1.us.pool.ntp.org iburst xleave",
-        "2.us.pool.ntp.org iburst xleave",
-        "3.us.pool.ntp.org iburst xleave"
-    ]
-}
-admin-q1-internal-s2.example.int | SUCCESS => {
-    "ntp_servers": [
-        "0.us.pool.ntp.org iburst xleave",
-        "1.us.pool.ntp.org iburst xleave",
-        "2.us.pool.ntp.org iburst xleave",
-        "3.us.pool.ntp.org iburst xleave"
-    ]
-}
-admin-q2-internal-s2.example.int | SUCCESS => {
-    "ntp_servers": [
-        "0.us.pool.ntp.org iburst xleave",
-        "1.us.pool.ntp.org iburst xleave",
-        "2.us.pool.ntp.org iburst xleave",
-        "3.us.pool.ntp.org iburst xleave"
-    ]
-}
-
-```
 
 
-## Debug host vars using groups to target sets of hosts
 
-Run debug using a group defined set of hosts.
-
-### Specify role & network/location groups
-
-Run for groups 'ntp_server,\&network_internal'
-```shell
-ansible -i ./inventory/ -m debug -a var=trace_var,group_names ntp_server,\&network_internal
-admin-q1-internal-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site1/admin-q1-internal-s1.example.int', ['environment_test', 'location_site1', 'network_internal', 'ntp_client', 'ntp_server', 'rhel6'])"
-}
-admin-q2-internal-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site1/admin-q2-internal-s1.example.int', ['environment_test', 'location_site1', 'network_internal', 'ntp_client', 'ntp_server', 'rhel7'])"
-}
-admin-q1-internal-s2.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site2/admin-q1-internal-s2.example.int', ['environment_test', 'location_site2', 'network_internal', 'ntp_client', 'ntp_server', 'rhel6'])"
-}
-admin-q2-internal-s2.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site2/admin-q2-internal-s2.example.int', ['environment_test', 'location_site2', 'network_internal', 'ntp_client', 'ntp_server', 'rhel7'])"
-}
-
-```
-
-Run for groups 'ntp_server,\&location_site2'
-```shell
-ansible -i ./inventory/ -m debug -a var=trace_var,group_names ntp_server,\&location_site2
-admin-q1-dmz-s2.example.int | SUCCESS => {
-    "trace_var,group_names": "('dmz/site2/admin-q1-dmz-s2.example.int', ['environment_test', 'location_site2', 'network_dmz', 'ntp_client', 'ntp_server', 'rhel6'])"
-}
-admin-q2-dmz-s2.example.int | SUCCESS => {
-    "trace_var,group_names": "('dmz/site2/admin-q2-dmz-s2.example.int', ['environment_test', 'location_site2', 'network_dmz', 'ntp_client', 'ntp_server', 'rhel7'])"
-}
-admin-q1-internal-s2.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site2/admin-q1-internal-s2.example.int', ['environment_test', 'location_site2', 'network_internal', 'ntp_client', 'ntp_server', 'rhel6'])"
-}
-admin-q2-internal-s2.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site2/admin-q2-internal-s2.example.int', ['environment_test', 'location_site2', 'network_internal', 'ntp_client', 'ntp_server', 'rhel7'])"
-}
-
-```
-
-### Specify network/location groups
-
-Run for group 'network_internal'
-```shell
-ansible -i ./inventory/ -m debug -a var=trace_var,group_names network_internal
-admin-q1-internal-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site1/admin-q1-internal-s1.example.int', ['environment_test', 'location_site1', 'network_internal', 'ntp_client', 'ntp_server', 'rhel6'])"
-}
-admin-q2-internal-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site1/admin-q2-internal-s1.example.int', ['environment_test', 'location_site1', 'network_internal', 'ntp_client', 'ntp_server', 'rhel7'])"
-}
-app-q1-internal-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site1/app-q1-internal-s1.example.int', ['environment_test', 'location_site1', 'network_internal', 'ntp_client', 'rhel7'])"
-}
-app-q2-internal-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site1/app-q2-internal-s1.example.int', ['environment_test', 'location_site1', 'network_internal', 'ntp_client', 'rhel7'])"
-}
-web-q1-internal-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site1/web-q1-internal-s1.example.int', ['environment_test', 'location_site1', 'network_internal', 'ntp_client', 'rhel7'])"
-}
-web-q2-internal-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site1/web-q2-internal-s1.example.int', ['environment_test', 'location_site1', 'network_internal', 'ntp_client', 'rhel7'])"
-}
-admin-q1-internal-s2.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site2/admin-q1-internal-s2.example.int', ['environment_test', 'location_site2', 'network_internal', 'ntp_client', 'ntp_server', 'rhel6'])"
-}
-admin-q2-internal-s2.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site2/admin-q2-internal-s2.example.int', ['environment_test', 'location_site2', 'network_internal', 'ntp_client', 'ntp_server', 'rhel7'])"
-}
-app-q1-internal-s2.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site2/app-q1-internal-s2.example.int', ['environment_test', 'location_site2', 'network_internal', 'ntp_client', 'rhel7'])"
-}
-app-q2-internal-s2.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site2/app-q2-internal-s2.example.int', ['environment_test', 'location_site2', 'network_internal', 'ntp_client', 'rhel7'])"
-}
-web-q1-internal-s2.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site2/web-q1-internal-s2.example.int', ['environment_test', 'location_site2', 'network_internal', 'ntp_client', 'rhel7'])"
-}
-web-q2-internal-s2.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site2/web-q2-internal-s2.example.int', ['environment_test', 'location_site2', 'network_internal', 'ntp_client', 'rhel7'])"
-}
-
-```
-
-Run for group 'location_site1'
-```shell
-ansible -i ./inventory/ -m debug -a var=trace_var,group_names location_site1
-admin-q1-dmz-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('dmz/site1/admin-q1-dmz-s1.example.int', ['environment_test', 'location_site1', 'network_dmz', 'ntp_client', 'ntp_server', 'rhel6'])"
-}
-admin-q2-dmz-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('dmz/site1/admin-q2-dmz-s1.example.int', ['environment_test', 'location_site1', 'network_dmz', 'ntp_client', 'ntp_server', 'rhel7'])"
-}
-app-q1-dmz-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('dmz/site1/app-q1-dmz-s1.example.int', ['environment_test', 'location_site1', 'network_dmz', 'ntp_client', 'rhel7'])"
-}
-app-q2-dmz-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('dmz/site1/app-q2-dmz-s1.example.int', ['environment_test', 'location_site1', 'network_dmz', 'ntp_client', 'rhel7'])"
-}
-web-q1-dmz-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('dmz/site1/web-q1-dmz-s1.example.int', ['environment_test', 'location_site1', 'network_dmz', 'ntp_client', 'rhel7'])"
-}
-web-q2-dmz-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('dmz/site1/web-q2-dmz-s1.example.int', ['environment_test', 'location_site1', 'network_dmz', 'ntp_client', 'rhel7'])"
-}
-admin-q1-internal-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site1/admin-q1-internal-s1.example.int', ['environment_test', 'location_site1', 'network_internal', 'ntp_client', 'ntp_server', 'rhel6'])"
-}
-admin-q2-internal-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site1/admin-q2-internal-s1.example.int', ['environment_test', 'location_site1', 'network_internal', 'ntp_client', 'ntp_server', 'rhel7'])"
-}
-app-q1-internal-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site1/app-q1-internal-s1.example.int', ['environment_test', 'location_site1', 'network_internal', 'ntp_client', 'rhel7'])"
-}
-app-q2-internal-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site1/app-q2-internal-s1.example.int', ['environment_test', 'location_site1', 'network_internal', 'ntp_client', 'rhel7'])"
-}
-web-q1-internal-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site1/web-q1-internal-s1.example.int', ['environment_test', 'location_site1', 'network_internal', 'ntp_client', 'rhel7'])"
-}
-web-q2-internal-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site1/web-q2-internal-s1.example.int', ['environment_test', 'location_site1', 'network_internal', 'ntp_client', 'rhel7'])"
-}
-
-```
-
-Run for group(s) matching multiple groups 'ntp_server,&network_dmz'
-```shell
-ansible -i ./inventory/ -m debug -a var=trace_var,group_names ntp_server,\&network_dmz
-admin-q1-dmz-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('dmz/site1/admin-q1-dmz-s1.example.int', ['environment_test', 'location_site1', 'network_dmz', 'ntp_client', 'ntp_server', 'rhel6'])"
-}
-admin-q2-dmz-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('dmz/site1/admin-q2-dmz-s1.example.int', ['environment_test', 'location_site1', 'network_dmz', 'ntp_client', 'ntp_server', 'rhel7'])"
-}
-admin-q1-dmz-s2.example.int | SUCCESS => {
-    "trace_var,group_names": "('dmz/site2/admin-q1-dmz-s2.example.int', ['environment_test', 'location_site2', 'network_dmz', 'ntp_client', 'ntp_server', 'rhel6'])"
-}
-admin-q2-dmz-s2.example.int | SUCCESS => {
-    "trace_var,group_names": "('dmz/site2/admin-q2-dmz-s2.example.int', ['environment_test', 'location_site2', 'network_dmz', 'ntp_client', 'ntp_server', 'rhel7'])"
-}
-
-```
-
-Run for group(s) matching multiple groups 'location_site2,&ntp_server'
-```shell
-ansible -i ./inventory/ -m debug -a var=trace_var,group_names location_site2,\&ntp_server
-admin-q1-dmz-s2.example.int | SUCCESS => {
-    "trace_var,group_names": "('dmz/site2/admin-q1-dmz-s2.example.int', ['environment_test', 'location_site2', 'network_dmz', 'ntp_client', 'ntp_server', 'rhel6'])"
-}
-admin-q2-dmz-s2.example.int | SUCCESS => {
-    "trace_var,group_names": "('dmz/site2/admin-q2-dmz-s2.example.int', ['environment_test', 'location_site2', 'network_dmz', 'ntp_client', 'ntp_server', 'rhel7'])"
-}
-admin-q1-internal-s2.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site2/admin-q1-internal-s2.example.int', ['environment_test', 'location_site2', 'network_internal', 'ntp_client', 'ntp_server', 'rhel6'])"
-}
-admin-q2-internal-s2.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site2/admin-q2-internal-s2.example.int', ['environment_test', 'location_site2', 'network_internal', 'ntp_client', 'ntp_server', 'rhel7'])"
-}
-
-```
-
-## Limits
-
-### Limit to specific hosts in a group
-
-```shell
-ansible -i ./inventory/ -m debug -a var=trace_var,group_names ntp_server -l admin-q1-dmz-s1.example.int
-admin-q1-dmz-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('dmz/site1/admin-q1-dmz-s1.example.int', ['environment_test', 'location_site1', 'network_dmz', 'ntp_client', 'ntp_server', 'rhel6'])"
-}
-
-```
-
-### Limit hosts in the role-based group
-
-Run for the role-based group 'ntp_client' with a specified limit
-```shell
-ansible -i ./inventory/ -m debug -a var=trace_var,group_names ntp_client -l web-*
-web-q1-dmz-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('dmz/site1/web-q1-dmz-s1.example.int', ['environment_test', 'location_site1', 'network_dmz', 'ntp_client', 'rhel7'])"
-}
-web-q2-dmz-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('dmz/site1/web-q2-dmz-s1.example.int', ['environment_test', 'location_site1', 'network_dmz', 'ntp_client', 'rhel7'])"
-}
-web-q1-dmz-s2.example.int | SUCCESS => {
-    "trace_var,group_names": "('dmz/site2/web-q1-dmz-s2.example.int', ['environment_test', 'location_site2', 'network_dmz', 'ntp_client', 'rhel7'])"
-}
-web-q2-dmz-s2.example.int | SUCCESS => {
-    "trace_var,group_names": "('dmz/site2/web-q2-dmz-s2.example.int', ['environment_test', 'location_site2', 'network_dmz', 'ntp_client', 'rhel7'])"
-}
-web-q1-internal-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site1/web-q1-internal-s1.example.int', ['environment_test', 'location_site1', 'network_internal', 'ntp_client', 'rhel7'])"
-}
-web-q2-internal-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site1/web-q2-internal-s1.example.int', ['environment_test', 'location_site1', 'network_internal', 'ntp_client', 'rhel7'])"
-}
-web-q1-internal-s2.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site2/web-q1-internal-s2.example.int', ['environment_test', 'location_site2', 'network_internal', 'ntp_client', 'rhel7'])"
-}
-web-q2-internal-s2.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site2/web-q2-internal-s2.example.int', ['environment_test', 'location_site2', 'network_internal', 'ntp_client', 'rhel7'])"
-}
-
-```

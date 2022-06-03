@@ -1,7 +1,7 @@
 
-# Example 5: Multiple YAML inventories with role based groups using INI specified groups
+# Example 4: Multiple YAML inventories with role based groups
 
-In the prior [Example 4](../example4/README.md), we found the method to merge multiple YAML inventories with the merged results observing intended or expected behavior.
+In the prior [Example 3](../example3/README.md), we found the method to merge multiple YAML inventories with the merged results observing intended or expected behavior.
 
 Now we will look to apply plays that can target machines in the merged inventory with role-based groups.
 
@@ -155,50 +155,34 @@ In this case, the environment will be defined with the existing test environment
 
 Now we can define the YAML groups to be used by the 'ntp' playbook/role as follows:
 
-[inventory/dmz/ntp.yml](./inventory/dmz/ntp.ini):
-```ini
-
-[ntp_server]
-admin-q1-dmz-s1.example.int
-admin-q2-dmz-s1.example.int
-admin-q1-dmz-s2.example.int
-admin-q2-dmz-s2.example.int
-
-[ntp_client:children]
-environment_test
-
-
-[location_site1:vars]
-trace_var=dmz/ntp/location_site1
-gateway_ipv4=112.112.0.1
-gateway_ipv4_network_cidr=112.112.0.0/16
-
-[location_site2:vars]
-trace_var=dmz/ntp/location_site2
-gateway_ipv4=221.221.0.1
-gateway_ipv4_network_cidr=221.221.0.0/16
+[inventory/dmz/ntp.yml](./inventory/dmz/ntp.yml):
+```yaml
+all:
+  children:
+    ntp_server:
+      hosts:
+        admin-q1-dmz-s1.example.int: {}
+        admin-q2-dmz-s1.example.int: {}
+        admin-q1-dmz-s2.example.int: {}
+        admin-q2-dmz-s2.example.int: {}
+    ntp_client:
+      children:
+        environment_test: {}
 ```
 
-[inventory/internal/ntp.ini](./inventory/internal/ntp.ini):
-```ini
-[ntp_server]
-admin-q1-internal-s1.example.int
-admin-q2-internal-s1.example.int
-admin-q1-internal-s2.example.int
-admin-q2-internal-s2.example.int
-
-[ntp_client:children]
-environment_test
-
-[location_site1:vars]
-trace_var=internal/ntp/location_site1
-gateway_ipv4=192.168.112.1
-gateway_ipv4_network_cidr=192.168.112.0/16
-
-[location_site2:vars]
-trace_var=internal/ntp/location_site2
-gateway_ipv4=192.168.221.1
-gateway_ipv4_network_cidr=192.168.221.0/16
+[inventory/internal/ntp.yml](./inventory/internal/ntp.yml):
+```yaml
+all:
+  children:
+    ntp_server:
+      hosts:
+        admin-q1-internal-s1.example.int: {}
+        admin-q2-internal-s1.example.int: {}
+        admin-q1-internal-s2.example.int: {}
+        admin-q2-internal-s2.example.int: {}
+    ntp_client:
+      children:
+        environment_test: {}
 ```
 
 The 'ntp_client' group is defined with the children group of 'environment_test'.  
@@ -207,61 +191,38 @@ Note that the 'ntp_client' group includes the 8 admin machines already included 
 
 We will now run through several ansible CLI tests to verify that the correct machines result for each respective limit used.
 
-### Test 1: Show list of all ntp hosts
+### Test 1: Target all ntp servers
 
 ```shell
-ansible -i ./inventory --list-hosts all
-  hosts (24):
-    admin-q1-dmz-s1.example.int
-    admin-q2-dmz-s1.example.int
-    app-q1-dmz-s1.example.int
-    app-q2-dmz-s1.example.int
-    web-q1-dmz-s1.example.int
-    web-q2-dmz-s1.example.int
-    admin-q1-dmz-s2.example.int
-    admin-q2-dmz-s2.example.int
-    app-q1-dmz-s2.example.int
-    app-q2-dmz-s2.example.int
-    web-q1-dmz-s2.example.int
-    web-q2-dmz-s2.example.int
-    admin-q1-internal-s1.example.int
-    admin-q2-internal-s1.example.int
-    app-q1-internal-s1.example.int
-    app-q2-internal-s1.example.int
-    web-q1-internal-s1.example.int
-    web-q2-internal-s1.example.int
-    admin-q1-internal-s2.example.int
-    admin-q2-internal-s2.example.int
-    app-q1-internal-s2.example.int
-    app-q2-internal-s2.example.int
-    web-q1-internal-s2.example.int
-    web-q2-internal-s2.example.int
+ansible -i ./inventory/ ntp_server  -m debug -a var=trace_var,group_names
+admin-q1-dmz-s1.example.int | SUCCESS => {
+    "trace_var,group_names": "('dmz/site1/admin-q1-dmz-s1.example.int', ['environment_test', 'location_site1', 'network_dmz', 'ntp_client', 'ntp_server', 'rhel6'])"
+}
+admin-q2-dmz-s1.example.int | SUCCESS => {
+    "trace_var,group_names": "('dmz/site1/admin-q2-dmz-s1.example.int', ['environment_test', 'location_site1', 'network_dmz', 'ntp_client', 'ntp_server', 'rhel7'])"
+}
+admin-q1-dmz-s2.example.int | SUCCESS => {
+    "trace_var,group_names": "('dmz/site2/admin-q1-dmz-s2.example.int', ['environment_test', 'location_site2', 'network_dmz', 'ntp_client', 'ntp_server', 'rhel6'])"
+}
+admin-q2-dmz-s2.example.int | SUCCESS => {
+    "trace_var,group_names": "('dmz/site2/admin-q2-dmz-s2.example.int', ['environment_test', 'location_site2', 'network_dmz', 'ntp_client', 'ntp_server', 'rhel7'])"
+}
+admin-q1-internal-s1.example.int | SUCCESS => {
+    "trace_var,group_names": "('internal/site1/admin-q1-internal-s1.example.int', ['environment_test', 'location_site1', 'network_internal', 'ntp_client', 'ntp_server', 'rhel6'])"
+}
+admin-q2-internal-s1.example.int | SUCCESS => {
+    "trace_var,group_names": "('internal/site1/admin-q2-internal-s1.example.int', ['environment_test', 'location_site1', 'network_internal', 'ntp_client', 'ntp_server', 'rhel7'])"
+}
+admin-q1-internal-s2.example.int | SUCCESS => {
+    "trace_var,group_names": "('internal/site2/admin-q1-internal-s2.example.int', ['environment_test', 'location_site2', 'network_internal', 'ntp_client', 'ntp_server', 'rhel6'])"
+}
+admin-q2-internal-s2.example.int | SUCCESS => {
+    "trace_var,group_names": "('internal/site2/admin-q2-internal-s2.example.int', ['environment_test', 'location_site2', 'network_internal', 'ntp_client', 'ntp_server', 'rhel7'])"
+}
 
 ```
 
-### Test 2: Show debug for ntp servers
-
-```shell
-ansible -i ./inventory/dmz -m debug -a var=ntp_servers ntp_server
-[WARNING]: Could not match supplied host pattern, ignoring: ntp_server
-[WARNING]: No hosts matched, nothing to do
-```
-
-This is not what we expect.
-
-According to several known issues (TODO - cite issue link(s) here), the ini files must be renamed without the INI extension for ansible to properly pull in the respective files.
-
-So rename the ntp.ini files to remove the ini extension from the file names.
-
-We now re-run the last 2 tests with the following results.
-
-
-### Test 1 (after removed ini extension): Show list of all ntp hosts
-
-```shell
-ansible -i ./inventory --list-hosts all
-
-```
+This is as expected.
 
 
 ### Test 2: Target all ntp clients
