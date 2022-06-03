@@ -155,34 +155,50 @@ In this case, the environment will be defined with the existing test environment
 
 Now we can define the YAML groups to be used by the 'ntp' playbook/role as follows:
 
-[inventory/dmz/ntp.yml](./inventory/dmz/ntp.yml):
-```yaml
-all:
-  children:
-    ntp_server:
-      hosts:
-        admin-q1-dmz-s1.example.int: {}
-        admin-q2-dmz-s1.example.int: {}
-        admin-q1-dmz-s2.example.int: {}
-        admin-q2-dmz-s2.example.int: {}
-    ntp_client:
-      children:
-        environment_test: {}
+[inventory/dmz/ntp.yml](./inventory/dmz/ntp.ini):
+```ini
+
+[ntp_server]
+admin-q1-dmz-s1.example.int
+admin-q2-dmz-s1.example.int
+admin-q1-dmz-s2.example.int
+admin-q2-dmz-s2.example.int
+
+[ntp_client:children]
+environment_test
+
+
+[location_site1:vars]
+trace_var=dmz/ntp/location_site1
+gateway_ipv4=112.112.0.1
+gateway_ipv4_network_cidr=112.112.0.0/16
+
+[location_site2:vars]
+trace_var=dmz/ntp/location_site2
+gateway_ipv4=221.221.0.1
+gateway_ipv4_network_cidr=221.221.0.0/16
 ```
 
-[inventory/internal/ntp.yml](./inventory/internal/ntp.yml):
-```yaml
-all:
-  children:
-    ntp_server:
-      hosts:
-        admin-q1-internal-s1.example.int: {}
-        admin-q2-internal-s1.example.int: {}
-        admin-q1-internal-s2.example.int: {}
-        admin-q2-internal-s2.example.int: {}
-    ntp_client:
-      children:
-        environment_test: {}
+[inventory/internal/ntp.ini](./inventory/internal/ntp.ini):
+```ini
+[ntp_server]
+admin-q1-internal-s1.example.int
+admin-q2-internal-s1.example.int
+admin-q1-internal-s2.example.int
+admin-q2-internal-s2.example.int
+
+[ntp_client:children]
+environment_test
+
+[location_site1:vars]
+trace_var=internal/ntp/location_site1
+gateway_ipv4=192.168.112.1
+gateway_ipv4_network_cidr=192.168.112.0/16
+
+[location_site2:vars]
+trace_var=internal/ntp/location_site2
+gateway_ipv4=192.168.221.1
+gateway_ipv4_network_cidr=192.168.221.0/16
 ```
 
 The 'ntp_client' group is defined with the children group of 'environment_test'.  
