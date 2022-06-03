@@ -19,4 +19,8 @@ all:
         trace_var: dmz/ntp/location_site2
         gateway_ipv4: 221.221.0.1
         gateway_ipv4_network_cidr: 221.221.0.0/16
+    ntp:
+      children:
+        ntp_client: {}
+        ntp_server: {}
 

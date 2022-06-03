@@ -10,8 +10,9 @@ The following sections will explore use cases when using multiple YAML-based inv
 
 * [Example 3: Playbook using multiple YAML inventories with group requirement sufficiency](#Example-03)
 
-* [Example 4: Multiple YAML inventories with role based groups](#Example-04)
+* [Example 4: Multiple YAML inventories with 'role-based' INI inventory groups](#Example-04)
 
+* [Example 5: Multiple YAML inventories with 'role-based' YAML inventory groups](#Example-05)
 
 The purpose here is to fully understand how to leverage child group vars especially with respect to deriving the expected behavior for variable merging. 
 

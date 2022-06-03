@@ -1,11 +1,9 @@
 
-# Example 4: Multiple YAML inventories with role based groups
+# Example 4: Multiple YAML inventories with 'role-based' YAML inventory groups
 
-In the prior [Example 3](../example3/README.md), we found the method to merge multiple YAML inventories with the merged results observing intended or expected behavior.
+In the prior [Example 4](../example3/README.md), we found the method to merge Multiple YAML inventories with 'role-based' INI inventory groups did not work as expected/intended.
 
-Now we will look to apply plays that can target machines in the merged inventory with role-based groups.
-
-E.g., the following scenario will discuss a simple NTP client/server based playbook to apply across the merged inventory. 
+The following section looks to resolve this by migrating the INI role-based groups into YAML role-based groups.
 
 ## Overview
 
@@ -168,6 +166,10 @@ all:
     ntp_client:
       children:
         environment_test: {}
+    ntp:
+      children:
+        ntp_client: {}
+        ntp_server: {}
 ```
 
 [inventory/internal/ntp.yml](./inventory/internal/ntp.yml):
@@ -183,6 +185,10 @@ all:
     ntp_client:
       children:
         environment_test: {}
+    ntp:
+      children:
+        ntp_client: {}
+        ntp_server: {}
 ```
 
 The 'ntp_client' group is defined with the children group of 'environment_test'.  
@@ -191,10 +197,42 @@ Note that the 'ntp_client' group includes the 8 admin machines already included 
 
 We will now run through several ansible CLI tests to verify that the correct machines result for each respective limit used.
 
-### Test 1: Target all ntp servers
+### Test 1: Show list of all ntp hosts
 
 ```shell
-ansible -i ./inventory/ ntp_server  -m debug -a var=trace_var,group_names
+ansible -i ./inventory --list-hosts all
+  hosts (24):
+    admin-q1-dmz-s1.example.int
+    admin-q2-dmz-s1.example.int
+    app-q1-dmz-s1.example.int
+    app-q2-dmz-s1.example.int
+    web-q1-dmz-s1.example.int
+    web-q2-dmz-s1.example.int
+    admin-q1-dmz-s2.example.int
+    admin-q2-dmz-s2.example.int
+    app-q1-dmz-s2.example.int
+    app-q2-dmz-s2.example.int
+    web-q1-dmz-s2.example.int
+    web-q2-dmz-s2.example.int
+    admin-q1-internal-s1.example.int
+    admin-q2-internal-s1.example.int
+    app-q1-internal-s1.example.int
+    app-q2-internal-s1.example.int
+    web-q1-internal-s1.example.int
+    web-q2-internal-s1.example.int
+    admin-q1-internal-s2.example.int
+    admin-q2-internal-s2.example.int
+    app-q1-internal-s2.example.int
+    app-q2-internal-s2.example.int
+    web-q1-internal-s2.example.int
+    web-q2-internal-s2.example.int
+
+```
+
+### Test 2: Target all ntp servers
+
+```shell
+ansible -i ./inventory/ -m debug -a var=group_names,ntp_server ntp_server
 admin-q1-dmz-s1.example.int | SUCCESS => {
     "trace_var,group_names": "('dmz/site1/admin-q1-dmz-s1.example.int', ['environment_test', 'location_site1', 'network_dmz', 'ntp_client', 'ntp_server', 'rhel6'])"
 }
@@ -352,6 +390,7 @@ all:
         gateway_ipv4: 192.168.221.1
         gateway_ipv4_network_cidr: 192.168.221.0/16
 ```
+
 
 ### Verify that the correct gateway_ipv4 setting appears for each ntp server.
 

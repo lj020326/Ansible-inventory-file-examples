@@ -19,3 +19,7 @@ all:
         trace_var: internal/ntp/location_site2
         gateway_ipv4: 192.168.221.1
         gateway_ipv4_network_cidr: 192.168.221.0/16
+    ntp:
+      children:
+        ntp_client: {}
+        ntp_server: {}

@@ -1,5 +1,5 @@
 
-# Example 5: Multiple YAML inventories with role based groups using INI specified groups
+# Example 4: Multiple YAML inventories with 'role-based' INI inventory groups
 
 In the prior [Example 3](../example3/README.md), we found the method to merge multiple YAML inventories with the merged results observing intended or expected behavior.
 
