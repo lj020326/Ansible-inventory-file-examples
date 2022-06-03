@@ -20,12 +20,12 @@ ntp_server
 
 [location_site1:vars]
 trace_var=internal/ntp/location_site1
-gateway_ipv4=192.168.112.1
-gateway_ipv4_network_cidr=192.168.112.0/16
+gateway_ipv4=10.10.10.1
+gateway_ipv4_network_cidr=10.10.10.0/24
 
 [location_site2]
 
 [location_site2:vars]
 trace_var=internal/ntp/location_site2
-gateway_ipv4=192.168.221.1
-gateway_ipv4_network_cidr=192.168.221.0/16
+gateway_ipv4=10.10.20.1
+gateway_ipv4_network_cidr=10.10.20.0/24
