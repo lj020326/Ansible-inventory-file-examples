@@ -259,44 +259,34 @@ We now re-run the first '--list-hosts' test with the following results.
 
 ```shell
 ansible -i ./inventory --list-hosts ntp
-[WARNING]:  * Failed to parse /Users/ljohnson/repos/ansible/ansible-inventory-file-examples/tests/ansible-multiple-yaml-inventories/example5/inventory/dmz/ntp with yaml plugin: We were unable to read either as JSON nor YAML, these are the errors we got from each:
-JSON: Expecting value: line 2 column 2 (char 2)  Syntax Error while loading YAML.   did not find expected <document start>  The error appears to be in '/Users/ljohnson/repos/ansible/ansible-inventory-file-examples/tests/ansible-multiple-yaml-
-inventories/example5/inventory/dmz/ntp': line 3, column 1, but may be elsewhere in the file depending on the exact syntax problem.  The offending line appears to be:  [ntp_server] admin-q1-dmz-s1.example.int ^ here
-[WARNING]:  * Failed to parse /Users/ljohnson/repos/ansible/ansible-inventory-file-examples/tests/ansible-multiple-yaml-inventories/example5/inventory/dmz/ntp with ini plugin: /Users/ljohnson/repos/ansible/ansible-inventory-file-examples/tests/ansible-multiple-
-yaml-inventories/example5/inventory/dmz/ntp:9: Section [ntp_client:children] includes undefined group: environment_test
-[WARNING]: Unable to parse /Users/ljohnson/repos/ansible/ansible-inventory-file-examples/tests/ansible-multiple-yaml-inventories/example5/inventory/dmz/ntp as an inventory source
   hosts (24):
     admin-q1-dmz-s1.example.int
     admin-q2-dmz-s1.example.int
+    admin-q1-dmz-s2.example.int
+    admin-q2-dmz-s2.example.int
+    admin-q1-internal-s1.example.int
+    admin-q2-internal-s1.example.int
+    admin-q1-internal-s2.example.int
+    admin-q2-internal-s2.example.int
     app-q1-dmz-s1.example.int
     app-q2-dmz-s1.example.int
     web-q1-dmz-s1.example.int
     web-q2-dmz-s1.example.int
-    admin-q1-dmz-s2.example.int
-    admin-q2-dmz-s2.example.int
     app-q1-dmz-s2.example.int
     app-q2-dmz-s2.example.int
     web-q1-dmz-s2.example.int
     web-q2-dmz-s2.example.int
-    admin-q1-internal-s1.example.int
-    admin-q2-internal-s1.example.int
     app-q1-internal-s1.example.int
     app-q2-internal-s1.example.int
     web-q1-internal-s1.example.int
     web-q2-internal-s1.example.int
-    admin-q1-internal-s2.example.int
-    admin-q2-internal-s2.example.int
     app-q1-internal-s2.example.int
     app-q2-internal-s2.example.int
     web-q1-internal-s2.example.int
-    web-q2-internal-s2.example.int
 
 ```
 
-We see that now the INI files are parsed, but that the INI plugin cannot resolve the child group 'environment_test'.
-Without the 'environment_test' group applied to the ntp_client:children, there are no ntp client hosts defined.
 
-This can be confirmed by targeting that group.
 
 
 
