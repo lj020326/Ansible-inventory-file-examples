@@ -233,7 +233,6 @@ ansible -i ./inventory --list-hosts ntp
 
 ```shell
 ansible -i ./inventory/dmz -m debug -a var=ntp_servers ntp
-ansible -i ./inventory/dmz -m debug -a var=ntp_servers ntp
 admin-q1-dmz-s1.example.int | SUCCESS => {
     "ntp_servers": [
         "0.us.pool.ntp.org iburst xleave",
@@ -301,7 +300,7 @@ This is as expected.
 As mentioned earlier, the 'ntp_clients' group is defined using the children group of 'environment_test'.  The following ansible debug command excludes the 'ntp_server' hosts from that set such to target only the non-'ntp-server' hosts.
 
 ```shell
-ansible -i ./inventory/ ntp_client,\!ntp_server  -m debug -a var=trace_var,group_names
+ansible -i ./inventory/ -m debug -a var=ntp_server ntp_client,\!ntp_server
 app-q1-dmz-s1.example.int | SUCCESS => {
     "trace_var,group_names": "('dmz/site1/app-q1-dmz-s1.example.int', ['environment_test', 'location_site1', 'network_dmz', 'ntp_client', 'rhel7'])"
 }

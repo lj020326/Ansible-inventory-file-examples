@@ -255,38 +255,129 @@ So rename the ntp.ini files to remove the ini extension from the file names.
 
 We now re-run the first '--list-hosts' test with the following results.
 
-### Test 1 (after removed ini extension): Show list of all ntp hosts
+### Test 2 (after removed ini extension): Show debug for ntp servers
 
 ```shell
-ansible -i ./inventory --list-hosts ntp
-  hosts (24):
-    admin-q1-dmz-s1.example.int
-    admin-q2-dmz-s1.example.int
-    admin-q1-dmz-s2.example.int
-    admin-q2-dmz-s2.example.int
-    admin-q1-internal-s1.example.int
-    admin-q2-internal-s1.example.int
-    admin-q1-internal-s2.example.int
-    admin-q2-internal-s2.example.int
-    app-q1-dmz-s1.example.int
-    app-q2-dmz-s1.example.int
-    web-q1-dmz-s1.example.int
-    web-q2-dmz-s1.example.int
-    app-q1-dmz-s2.example.int
-    app-q2-dmz-s2.example.int
-    web-q1-dmz-s2.example.int
-    web-q2-dmz-s2.example.int
-    app-q1-internal-s1.example.int
-    app-q2-internal-s1.example.int
-    web-q1-internal-s1.example.int
-    web-q2-internal-s1.example.int
-    app-q1-internal-s2.example.int
-    app-q2-internal-s2.example.int
-    web-q1-internal-s2.example.int
+ansible -i ./inventory/dmz -m debug -a var=ntp_servers ntp
+ansible -i ./inventory/dmz -m debug -a var=ntp_servers ntp
+admin-q1-dmz-s1.example.int | SUCCESS => {
+    "ntp_servers": [
+        "0.us.pool.ntp.org iburst xleave",
+        "1.us.pool.ntp.org iburst xleave",
+        "2.us.pool.ntp.org iburst xleave",
+        "3.us.pool.ntp.org iburst xleave"
+    ]
+}
+admin-q2-dmz-s1.example.int | SUCCESS => {
+    "ntp_servers": [
+        "0.us.pool.ntp.org iburst xleave",
+        "1.us.pool.ntp.org iburst xleave",
+        "2.us.pool.ntp.org iburst xleave",
+        "3.us.pool.ntp.org iburst xleave"
+    ]
+}
+admin-q1-dmz-s2.example.int | SUCCESS => {
+    "ntp_servers": [
+        "0.us.pool.ntp.org iburst xleave",
+        "1.us.pool.ntp.org iburst xleave",
+        "2.us.pool.ntp.org iburst xleave",
+        "3.us.pool.ntp.org iburst xleave"
+    ]
+}
+admin-q2-dmz-s2.example.int | SUCCESS => {
+    "ntp_servers": [
+        "0.us.pool.ntp.org iburst xleave",
+        "1.us.pool.ntp.org iburst xleave",
+        "2.us.pool.ntp.org iburst xleave",
+        "3.us.pool.ntp.org iburst xleave"
+    ]
+}
+app-q2-dmz-s1.example.int | SUCCESS => {
+    "ntp_servers": []
+}
+app-q1-dmz-s1.example.int | SUCCESS => {
+    "ntp_servers": []
+}
+web-q1-dmz-s1.example.int | SUCCESS => {
+    "ntp_servers": []
+}
+web-q2-dmz-s1.example.int | SUCCESS => {
+    "ntp_servers": []
+}
+app-q1-dmz-s2.example.int | SUCCESS => {
+    "ntp_servers": []
+}
+app-q2-dmz-s2.example.int | SUCCESS => {
+    "ntp_servers": []
+}
+web-q1-dmz-s2.example.int | SUCCESS => {
+    "ntp_servers": []
+}
+web-q2-dmz-s2.example.int | SUCCESS => {
+    "ntp_servers": []
+}
 
 ```
 
+This is as expected.
 
+
+### Test 2: Target all ntp clients
+
+As mentioned earlier, the 'ntp_clients' group is defined using the children group of 'environment_test'.  The following ansible debug command excludes the 'ntp_server' hosts from that set such to target only the non-'ntp-server' hosts.
+
+```shell
+ansible -i ./inventory/ -m debug -a var=ntp_servers ntp_client,\!ntp_server
+app-q1-dmz-s1.example.int | SUCCESS => {
+    "ntp_servers": []
+}
+app-q2-dmz-s1.example.int | SUCCESS => {
+    "ntp_servers": []
+}
+web-q1-dmz-s1.example.int | SUCCESS => {
+    "ntp_servers": []
+}
+web-q2-dmz-s1.example.int | SUCCESS => {
+    "ntp_servers": []
+}
+app-q1-dmz-s2.example.int | SUCCESS => {
+    "ntp_servers": []
+}
+app-q2-dmz-s2.example.int | SUCCESS => {
+    "ntp_servers": []
+}
+web-q1-dmz-s2.example.int | SUCCESS => {
+    "ntp_servers": []
+}
+web-q2-dmz-s2.example.int | SUCCESS => {
+    "ntp_servers": []
+}
+app-q1-internal-s1.example.int | SUCCESS => {
+    "ntp_servers": []
+}
+app-q2-internal-s1.example.int | SUCCESS => {
+    "ntp_servers": []
+}
+web-q1-internal-s1.example.int | SUCCESS => {
+    "ntp_servers": []
+}
+web-q2-internal-s1.example.int | SUCCESS => {
+    "ntp_servers": []
+}
+app-q1-internal-s2.example.int | SUCCESS => {
+    "ntp_servers": []
+}
+app-q2-internal-s2.example.int | SUCCESS => {
+    "ntp_servers": []
+}
+web-q1-internal-s2.example.int | SUCCESS => {
+    "ntp_servers": []
+}
+web-q2-internal-s2.example.int | SUCCESS => {
+    "ntp_servers": []
+}
+
+```
 
 
 
