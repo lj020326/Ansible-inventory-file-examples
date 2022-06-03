@@ -13,7 +13,7 @@ all:
       vars:
         trace_var: internal/ntp/location_site1
         gateway_ipv4: 10.10.10.1
-        gateway_ipv4_network_cidr: 10.10.0.0/24
+        gateway_ipv4_network_cidr: 10.10.10.0/24
     location_site2:
       vars:
         trace_var: internal/ntp/location_site2
