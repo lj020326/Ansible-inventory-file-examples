@@ -1,4 +1,8 @@
 
+[ntp:children]
+ntp_client
+ntp_server
+
 [ntp_server]
 admin-q1-dmz-s1.example.int
 admin-q2-dmz-s1.example.int
