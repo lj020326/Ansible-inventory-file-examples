@@ -43,7 +43,7 @@ graph TD;
 Viewing the parent/child hierarchy in a tree format also visualizes this well:
 
 ```output
-              [top_group]
+                [all]
                   |
         ----------------------
         |                    |
