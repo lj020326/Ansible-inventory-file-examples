@@ -408,10 +408,10 @@ ntp_servers:
 ntp_peers: |
   [
     {% for host in groups['ntp_server'] | difference([inventory_hostname]) %}
-    {{ hostvars[host].ansible_host }},
+    {{ host }},
     {% endfor %}
   ]
-
+  
 ntp_local_stratum_enabled: yes
 
 ntp_leapsectz_enabled: yes
