@@ -23,7 +23,7 @@ all:
         admin-q2-internal-s2.example.int: {}
     ntp:
       children:
-        ntp_client: {}
+        ntp_client:
           vars:
             ansible_group_priority: 1
         ntp_server:
