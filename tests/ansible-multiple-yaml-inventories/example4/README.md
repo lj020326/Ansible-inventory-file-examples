@@ -309,11 +309,10 @@ We can verify that the correct ntp servers have been matched to the correct clie
 The results are as expected/intended.
 
 
-
 ## Conclusion/Next Steps
 
-From this test, we conclude that mixing INI and YAML groups in the inventory does not work as expected.
+From this test, we conclude that using the INI method to matching role-based group setting to an existing YAML-based inventory works as expected.
 
-The [next example](../example5/README.md) will look to solve this.
+The [next example](../example5/README.md) will use a pure YAML-based method to do the same.
 
 
