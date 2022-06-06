@@ -164,20 +164,15 @@ Now we can define the YAML groups to be used by the 'ntp' playbook/role as follo
 ```yaml
 all:
   children:
-    ntp_server:
-      hosts:
-        admin-q1-dmz-s1.example.int: {}
-        admin-q2-dmz-s1.example.int: {}
-        admin-q1-dmz-s2.example.int: {}
-        admin-q2-dmz-s2.example.int: {}
     ntp_client:
       children:
         environment_test: {}
     ntp:
       children:
         ntp_client: {}
-        ntp_server: {}
 ```
+
+Note that for the DMZ network, that there are no ntp servers and that all machines are ntp clients.
 
 [inventory/internal/ntp.yml](./inventory/internal/ntp.yml):
 ```yaml
@@ -421,11 +416,11 @@ ntp_log_info:
 ntp_cmdport_disabled: no
 
 ## used for variable-to-inventory trace/debug
-group_trace_var: group_vars/ntp_server.yml
+group_trace_var: internal/group_vars/ntp_server.yml
 
 ```
 
-[inventory/group_vars/internal/ntp_client.yml](./inventory/internal/group_vars/ntp_client.yml)
+[inventory/internal/group_vars/ntp_client.yml](./inventory/internal/group_vars/ntp_client.yml)
 ```yaml
 ---
 
@@ -451,7 +446,7 @@ ntp_servers: |
 ntp_cmdport_disabled: yes
 
 ## used for variable-to-inventory trace/debug
-group_trace_var: group_vars/internal/groups_vars/ntp_client.yml
+group_trace_var: internal/groups_vars/ntp_client.yml
 
 ```
 
