@@ -11,13 +11,12 @@ Remove the parent/child relationship of '[override]' from '[top_group]' group, i
 ```mermaid
 graph TD;
     A[top_group] --> C[product]
-    B[override] --> F[override]
+    B[override] --> F[cluster]
     C --> D["product1"]
     C --> E["product2"]
     D --> H["host1"]
     E --> I["host2"]
-    F --> G["cluster"]
-    G --> J["host1"]
+    F --> J["host1"]
 ```
 
 
