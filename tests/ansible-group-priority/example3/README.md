@@ -11,7 +11,7 @@ Remove the parent/child relationship of '[override]' from '[top_group]' group, i
 ```mermaid
 graph TD;
     A[top_group] --> C[product]
-    B[override] --> F[cluster<br>__ansible_group_priority=10__]
+    B[override] --> F[cluster<br>'ansible_group_priority=10']
     C --> D["product1"]
     C --> E["product2"]
     D --> H["host1"]
