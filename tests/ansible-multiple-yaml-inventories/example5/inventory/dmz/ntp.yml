@@ -2,7 +2,10 @@ all:
   children:
     ntp_client:
       children:
-        environment_test: {}
+        ntp_client_dmz: {}
+    ntp_client_dmz:
+      children:
+        network_dmz: {}
     ntp:
       children:
         ntp_client: {}
