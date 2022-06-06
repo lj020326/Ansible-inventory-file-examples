@@ -123,3 +123,8 @@ host1 | SUCCESS => {
 }
 
 ```
+
+
+## Conclusions/Next Steps
+
+The [next example](../example5/README.md) will look to further into the group variable merge behavior.
