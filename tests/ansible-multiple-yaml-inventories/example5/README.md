@@ -2,8 +2,9 @@
 # Example 4: Multiple YAML inventories with 'role-based' YAML inventory groups
 
 In the prior [Example 4](../example4/README.md), we merged Multiple YAML inventories using 'role-based' INI inventory groups.
+It was also noted that a downside with that approach was that the inventory and groups would be expressed using mixed formats in YAML and INI.
 
-The following section will use YAML role-based groups applied to an existing YAML based inventory.
+The following section will use YAML-only approach by implementing the inventory role-based groups in YAML.
 
 The benefit of this approach will be that the inventory and groups will be represented in the same YAML format.
 
