@@ -11,7 +11,7 @@ all:
         ntp_client_internal: {}
     ntp_client_internal:
       children:
-        environment_test: {}
+        network_internal: {}
     ntp:
       children:
         ntp_client: {}
