@@ -6,15 +6,6 @@ ntp_timezone: America/New_York
 
 ntp_tinker_panic: yes
 
-#ntp_servers: |
-#  [
-#    {% if groups['ntp_server'] is defined %}
-#    {% for server in groups['ntp_server'] %}
-#    "{{ server }}",
-#    {% endfor %}
-#    {% endif %}
-#  ]
-
 ntp_servers: |
   [
     {% if groups['ntp_server'] is defined %}
