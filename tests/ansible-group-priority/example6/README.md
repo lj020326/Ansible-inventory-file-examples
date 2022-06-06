@@ -1,63 +1,5 @@
 
-# Example 5: playbook using inventory
-
-For the next example, use the inventory from example 4. 
-
-Then setup the following [playbook](./example5/playbook.yml):
-
-```yaml
-- name: "Run play"
-  hosts: all
-  gather_facts: false
-  connection: local
-  tasks:
-    - debug: var=test
-
-```
-
-Confirm that the results are as expected:
-
-```output
-ansible-playbook -i ./example5/hosts.ini ./example5/playbook.yml 
-
-PLAY [Run play] **********************************************************************************************************************************************************************************************************************************************************
-
-TASK [debug] *************************************************************************************************************************************************************************************************************************************************************
-ok: [host1] => {
-    "test": "cluster"
-}
-ok: [host2] => {
-    "test": "product2"
-}
-
-PLAY RECAP ***************************************************************************************************************************************************************************************************************************************************************
-host1                      : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-host2                      : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-```
-
-Confirm that the results are as expected for the yaml inventory:
-
-```output
-ansible-playbook -i ./example5/hosts.yml ./example5/playbook.yml 
-
-PLAY [Run play] **********************************************************************************************************************************************************************************************************************************************************
-
-TASK [debug] *************************************************************************************************************************************************************************************************************************************************************
-ok: [host1] => {
-    "test": "cluster"
-}
-ok: [host2] => {
-    "test": "product2"
-}
-
-PLAY RECAP ***************************************************************************************************************************************************************************************************************************************************************
-host1                      : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-host2                      : ok=1    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
-```
-
-Looks good since both results are as expected.
-
-## <a id="Example-06"></a>Example 6: Using group_by key groups with ansible_group_priority
+# Example 6: Using group_by key groups with ansible_group_priority
 
 Copy the files used in the prior example for example 6.
 
@@ -151,15 +93,4 @@ In conclusion, from the testing done, the variable merge path behavior is consis
 The exception occurs when using ansible group_by and key child groups with the YAML inventory noted in [Example 6](#Example-06).
 
 If the use case involving ansible group_by and key child groups is desired and/or essential to your group variable method of use, then it is essential to use the INI inventory and avoid using the YAML inventory plugin for those specific cases until the inconsistent behavior is resolved by the ansible dev team. 
-
-
-## References
-
-* https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html#how-variables-are-merged
-* [combine_vars utility function](https://github.com/ansible/ansible/blob/stable-2.13/lib/ansible/utils/vars.py#L81)
-* https://github.com/ansible/ansible/blob/devel/lib/ansible/inventory/group.py
-* https://github.com/ansible/ansible/blob/stable-2.13/lib/ansible/plugins/vars/host_group_vars.py
-* https://stackoverflow.com/questions/38120793/ansible-group-vars-priority
-* [Managing "nested" group in Ansible YAML inventory files](https://github.com/lj020326/ansible-datacenter/blob/main/docs/ansible-nested-groups-in-YAML-inventory-files.md)
-* 
 
