@@ -8,7 +8,7 @@ all:
         admin-q2-internal-s2.example.int: {}
     ntp_client:
       children:
-        environment_test: {}
+        ntp_client_internal: {}
     ntp_client_internal:
       children:
         environment_test: {}
