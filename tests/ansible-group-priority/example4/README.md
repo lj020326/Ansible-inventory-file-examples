@@ -11,6 +11,21 @@ With the inventory used in the prior example 3 as the starting point, make the g
 Add a group 'foo' between 'override' and 'top_group', such that 'override' is the same depth, 3 levels deep, as 'product1' and 'product2'.  
 Note the 'cluster' child group now has a depth of 4, resulting in it have the greatest depth path.
 
+
+```mermaid
+graph TD;
+    A[top_group] --> B[product]
+    A[top_group] --> C[foo]
+    B --> D["product1"]
+    B --> E["product2"]
+    C --> F["override"]
+    F --> J["cluster"]
+    D --> G["host1"]
+    E --> H["host2"]
+    J --> K["host1"]
+```
+
+
 The resulting yaml inventory with this hierarchy can be found in [hosts.yml](./hosts.yml):
 
 ```yaml
