@@ -30,6 +30,14 @@ all:
       children:
         ntp_client: {}
         ntp_server: {}
+          vars:
+            group_trace_var: internal/ntp.yml[ntp_server]
+            ansible_group_priority: 10
+            ntp_servers:
+              - 0.rhel.pool.ntp.org
+              - 1.rhel.pool.ntp.org
+              - 2.rhel.pool.ntp.org
+              - 3.rhel.pool.ntp.org
     location_site1:
       vars:
         trace_var: internal/ntp/location_site1
