@@ -76,6 +76,10 @@ host1 | SUCCESS => {
 }
 ```
 
+
+
+## Conclusions/Next Steps
+
 The results may not be what are expected, since the variable set in `product1` group always wins. 
 
 Even if the priority of the 'override' group and all of its child groups were set to the highest, in this case, 10, the 'test' variable is set by the `product1` group.
@@ -83,3 +87,5 @@ Even if the priority of the 'override' group and all of its child groups were se
 The priority does not follow an intuitive merge path.  The deepest child group gets set and if multiple child group peers exist at the same depth, then the one with the greatest priority in that peer depth group will be set.  If the priority is the same among multiple groups at the greatest depth, then alphabetical sort order is used with the last in the sort group winning. 
 
 To summarize in the case when using the ansible_group_priority variable, the child group having the greatest child depth and greatest priority within that depth will always win.
+
+The [next example](../example4/README.md) will look to further into the group variable merge behavior.
