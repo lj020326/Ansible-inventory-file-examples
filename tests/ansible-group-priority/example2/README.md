@@ -34,7 +34,5 @@ host1 | SUCCESS => {
 
 ## Conclusions/Next Steps
 
-The results from removal of the test var from the 'cluster' group results in unexpected results.
-
-The [next example](../example3/README.md) will look to resolve this.
+The [next example](../example3/README.md) will look to further into the group variable merge behavior.
 
