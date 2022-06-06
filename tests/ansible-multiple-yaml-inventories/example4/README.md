@@ -213,6 +213,25 @@ We will now run through several ansible CLI tests to verify that the correct mac
 
 ### Test 1: Show list of all ntp hosts
 
+First we verify that the correct list of machines appear by running .
+We run the first '--list-hosts' test with the following results.
+
+```shell
+ansible -i ./inventory --list-hosts ntp
+[WARNING]: Could not match supplied host pattern, ignoring: ntp
+[WARNING]: No hosts matched, nothing to do
+  hosts (0):
+```
+
+This is not what we expect.
+
+According to several known issues (TODO - cite issue link(s) here), the ini files must be renamed without the INI extension for ansible to properly pull in the respective files.
+
+So rename the ntp.ini files to remove the ini extension from the file names.
+
+We now re-run the first '--list-hosts' test with the following results.
+
+
 ```shell
 ansible -i ./inventory --list-hosts ntp
   hosts (24):
@@ -245,19 +264,6 @@ ansible -i ./inventory --list-hosts ntp
 
 ### Test 2: Show debug for ntp servers
 
-```shell
-ansible -i ./inventory/dmz -m debug -a var=ntp_servers ntp
-[WARNING]: Could not match supplied host pattern, ignoring: ntp
-[WARNING]: No hosts matched, nothing to do
-```
-
-This is not what we expect.
-
-According to several known issues (TODO - cite issue link(s) here), the ini files must be renamed without the INI extension for ansible to properly pull in the respective files.
-
-So rename the ntp.ini files to remove the ini extension from the file names.
-
-We now re-run the first '--list-hosts' test with the following results.
 
 
 ### Test 2 (after removed ini extension): Show debug for ntp servers
