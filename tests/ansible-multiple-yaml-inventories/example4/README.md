@@ -313,6 +313,9 @@ The results are as expected/intended.
 
 From this test, we conclude that using the INI method to matching role-based group setting to an existing YAML-based inventory works as expected.
 
-The only downside with the approach is that the inventory and groups are now expressed using mixed formats in YAML and INI.
+The only 2 downsides with the approach are
+
+1) the inventory and groups are now expressed using mixed formats in YAML and INI and
+2) the INI formatted files cannot be stored with the '*.ini' extension causing most IDEs to not invoke the correct code styling/formatting.
 
 The [next example](../example5/README.md) will use a complete YAML-based method to do the same.
