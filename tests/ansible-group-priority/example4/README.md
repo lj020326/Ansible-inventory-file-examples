@@ -11,7 +11,7 @@ With the inventory used in the prior example 3 as the starting point, make the g
 Add a group 'foo' between 'override' and 'top_group', such that 'override' is the same depth, 3 levels deep, as 'product1' and 'product2'.  
 Note the 'cluster' child group now has a depth of 4, resulting in it have the greatest depth path.
 
-The resulting yaml inventory with this hierarchy can be found in [hosts.ex4.yml](./hosts.ex4.yml):
+The resulting yaml inventory with this hierarchy can be found in [hosts.yml](./hosts.yml):
 
 ```yaml
 all:
@@ -56,7 +56,7 @@ all:
 
 ```
 
-The ini inventory implementing this hierarchy can be found in [hosts.ex4.ini](./hosts.ex4.ini):
+The ini inventory implementing this hierarchy can be found in [hosts.ini](./hosts.ini):
 
 ```ini
 [top_group:vars]
@@ -113,11 +113,11 @@ Since the 'cluster' group now has the greatest depth path, using the rule it wou
 In fact, the observed results are now consistent with the stated rule:
 
 ```output
-ansible -i hosts.ex4.ini -m debug -a var=test host1
+ansible -i hosts.ini -m debug -a var=test host1
 host1 | SUCCESS => {
     "test": "cluster"
 }
-ansible -i hosts.ex4.yml -m debug -a var=test host1
+ansible -i hosts.yml -m debug -a var=test host1
 host1 | SUCCESS => {
     "test": "cluster"
 }

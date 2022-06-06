@@ -21,7 +21,7 @@ Remove the parent/child relationship of '[override]' from '[top_group]' group, i
 
 As can be clearly seen above, the 'cluster' group has a depth of 2 while the 'product1' and 'product2' groups each have depths of 3.
 
-The INI inventory implementing this hierarchy can be found in [hosts.ex3.ini](./hosts.ex2.ini) and the equivalent YAML inventory implementing this hierarchy can be found in [hosts.ex3.yml](./hosts.ex2.yml):
+The INI inventory implementing this hierarchy can be found in [hosts.ini](./hosts.ini) and the equivalent YAML inventory implementing this hierarchy can be found in [hosts.yml](./hosts.yml):
 
 ```yaml
 all:
@@ -63,14 +63,14 @@ all:
 Now confirm that the results are as expected for the 2 equivalent inventory implementations:
 
 ```output
-ansible -i hosts.ex3.ini -m debug -a var=test host1
+ansible -i hosts.ini -m debug -a var=test host1
 host1 | SUCCESS => {
     "test": "product1"
 }
 ...
 ...
 
-ansible -i hosts.ex3.yml -m debug -a var=test host1
+ansible -i hosts.yml -m debug -a var=test host1
 host1 | SUCCESS => {
     "test": "product1"
 }
