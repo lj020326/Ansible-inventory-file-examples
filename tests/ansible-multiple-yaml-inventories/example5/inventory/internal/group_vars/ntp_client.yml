@@ -6,29 +6,29 @@ ntp_timezone: America/New_York
 
 ntp_tinker_panic: yes
 
-#ntp_servers: |
-#  [
-#    {% if groups['ntp_server'] is defined %}
-#    {% for server in groups['ntp_server'] %}
-#    "{{ server }}",
-#    {% endfor %}
-#    {% endif %}
-#  ]
-
 ntp_servers: |
   [
-    {% if ansible_default_ipv4.address|d(ansible_all_ipv4_addresses[0]) is defined %}
     {% if groups['ntp_server'] is defined %}
     {% for server in groups['ntp_server'] %}
-    {% for network in hostvars[server]['ntp_allow_networks']|d([]) %}
-    {% if network|ansible.netcommon.network_in_usable(foreman.ip) %}
     "{{ server }}",
-    {% endif %}
     {% endfor %}
-    {% endfor %}
-    {% endif %}
     {% endif %}
   ]
+
+#ntp_servers: |
+#  [
+#    {% if ansible_default_ipv4.address|d(ansible_all_ipv4_addresses[0]) is defined %}
+#    {% if groups['ntp_server'] is defined %}
+#    {% for server in groups['ntp_server'] %}
+#    {% for network in hostvars[server]['ntp_allow_networks']|d([]) %}
+#    {% if network|ansible.netcommon.network_in_usable(foreman.ip) %}
+#    "{{ server }}",
+#    {% endif %}
+#    {% endfor %}
+#    {% endfor %}
+#    {% endif %}
+#    {% endif %}
+#  ]
 
 ntp_cmdport_disabled: yes
 
