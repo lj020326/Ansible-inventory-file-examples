@@ -83,6 +83,7 @@ In this example, if both groups have the same priority, the result would normall
 > `ansible_group_priority` can only be set in the inventory source and not in 'group_vars/', as the variable is used in the loading of 'group_vars'.
 
 
+## Example Use Cases Covered
 
 The purpose of the examples covered is to understand how to leverage child group vars especially with respect to deriving the expected behavior for variable merging. 
 
