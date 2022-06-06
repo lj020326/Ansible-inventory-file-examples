@@ -1,8 +1,6 @@
 
 # Example 2: Unset variable 'test' from the initial 'cluster' group to validate if expected result occurs
 
-## Test
-
 On this test, unset `test` from `[cluster:vars]` in the ini inventory [hosts.ex2.ini](./hosts.ex2.ini):
 
 ```ini
@@ -36,8 +34,7 @@ host1 | SUCCESS => {
 
 ## Conclusions/Next Steps
 
-The results from the change to the group results in unexpected results.
+The results from removal of the test var from the 'cluster' group results in unexpected results.
 
 The [next example](../example3/README.md) will look to resolve this.
-
 
