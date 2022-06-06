@@ -9,6 +9,9 @@ all:
     ntp_client:
       children:
         environment_test: {}
+    ntp_client_internal:
+      children:
+        environment_test: {}
     ntp:
       children:
         ntp_client: {}
