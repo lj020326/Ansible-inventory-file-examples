@@ -19,6 +19,19 @@ ntp_servers: |
     {% endif %}
   ]
 
+##
+## the following can mistakenly add ntp servers that exclude the client
+##
+#ntp_servers: |
+#  [
+#    {% if groups['ntp_server'] is defined %}
+#    {% for server in groups['ntp_server'] %}
+#    "{{ server }}",
+#    {% endfor %}
+#    {% endif %}
+#  ]
+
+
 ntp_cmdport_disabled: yes
 
 ## used for variable-to-inventory trace/debug
