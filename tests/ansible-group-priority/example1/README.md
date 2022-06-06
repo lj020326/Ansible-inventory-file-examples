@@ -87,3 +87,11 @@ host1 | SUCCESS => {
     "test": "cluster"
 }
 ```
+
+
+## Conclusions/Next Steps
+
+The merging of multiple groups works as expected for this case.
+
+The [next example](../example2/README.md) will test how to test a change to a group var and validate.
+
