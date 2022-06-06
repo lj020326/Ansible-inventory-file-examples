@@ -1,7 +1,9 @@
 
 # Example 2: Unset variable 'test' from the initial 'cluster' group to validate if expected result occurs
 
-On the next test, unset `test` from `[cluster:vars]` in the ini inventory [hosts.ex2.ini](./hosts.ex2.ini):
+## Test
+
+On this test, unset `test` from `[cluster:vars]` in the ini inventory [hosts.ex2.ini](./hosts.ex2.ini):
 
 ```ini
 ;test="cluster"
@@ -29,29 +31,6 @@ ansible -i hosts.ex2.yml -m debug -a var=test host1
 host1 | SUCCESS => {
     "test": "product1"
 }
-```
-
-
-## Groups and depth level
-
-The group 'cluster' is below group 'override' which is directly below 'top_group' making it 3 levels below the 'all' group; in other terms, 'top_group' has a depth level of 3.
-
-Similarly, the 'product1' group is below 'product' which is below 'top_group' making it 3 levels below the 'all' group; in other terms, 'product1' has a depth level of 3.
-
-Viewing the parent/child hierarchy in a tree format visualizes this well:
-
-```output
-              [top_group]
-                  |
-        ----------------------
-        |                    |
-     [product]           [override]
-         |                   |
-    ------------       -------------
-   |            |            |
-[product1] [product2]    [cluster] 
-   |                         |
- host1                     host1
 ```
 
 
