@@ -56,3 +56,8 @@ host2                      : ok=1    changed=0    unreachable=0    failed=0    s
 ```
 
 Looks good since both results are as expected.
+
+
+## Conclusions/Next Steps
+
+The [next example](../example5/README.md) will look to further into the group variable merge behavior.
