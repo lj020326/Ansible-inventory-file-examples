@@ -85,9 +85,8 @@ In this example, if both groups have the same priority, the result would normall
 
 ## Example Use Cases Covered
 
-The purpose of the examples covered is to understand how to leverage child group vars especially with respect to deriving the expected behavior for variable merging. 
-
-The following examples/sections will explore common group prioritization use cases:
+The purpose of the following examples is to understand how to leverage child group vars especially with respect to deriving the expected behavior for variable merging. 
+The examples will explore common group prioritization use cases:
 
 * [Example 1: Test with child groups having same depth](./example1/README.md)
 
