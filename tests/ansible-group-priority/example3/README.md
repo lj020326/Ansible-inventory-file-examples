@@ -17,7 +17,7 @@ graph TD;
     D --> H["host1"]
     E --> I["host2"]
     F --> G["cluster"]
-    G --> I["host1"]
+    G --> J["host1"]
 ```
 
 
