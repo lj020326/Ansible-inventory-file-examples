@@ -264,10 +264,6 @@ ansible -i ./inventory --list-hosts ntp
 
 ### Test 2: Show debug for ntp servers
 
-
-
-### Test 2 (after removed ini extension): Show debug for ntp servers
-
 ```shell
 ansible -i ./inventory/dmz -m debug -a var=ntp_servers ntp
 admin-q1-dmz-s1.example.int | SUCCESS => {
