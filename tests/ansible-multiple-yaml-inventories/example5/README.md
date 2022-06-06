@@ -400,10 +400,10 @@ ntp_allow_networks:
 #  - "{{ gateway_ip4 }} prefer iburst"
 
 ntp_servers:
-  - 0{{ '.' + ntp_area if ntp_area else '' }}.pool.ntp.org iburst xleave
-  - 1{{ '.' + ntp_area if ntp_area else '' }}.pool.ntp.org iburst xleave
-  - 2{{ '.' + ntp_area if ntp_area else '' }}.pool.ntp.org iburst xleave
-  - 3{{ '.' + ntp_area if ntp_area else '' }}.pool.ntp.org iburst xleave
+  - 0{{ '.' + ntp_area if ntp_area else '' }}.pool.ntp.org
+  - 1{{ '.' + ntp_area if ntp_area else '' }}.pool.ntp.org
+  - 2{{ '.' + ntp_area if ntp_area else '' }}.pool.ntp.org
+  - 3{{ '.' + ntp_area if ntp_area else '' }}.pool.ntp.org
 
 ntp_peers: |
   [
