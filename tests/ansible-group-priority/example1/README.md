@@ -43,7 +43,7 @@ Viewing the parent/child hierarchy in a tree format visualizes this well:
 
 ## Inventory 
 
-The inventory implementing the aforementioned hierarchy as an ini inventory [hosts.ex1.ini](./hosts.ex1.ini):
+The inventory implementing the aforementioned hierarchy as an ini inventory [hosts.ini](./hosts.ini):
 
 ```ini
 [top_group:vars]
@@ -99,7 +99,7 @@ ansible_group_priority=10
 Now run a simple query on the variable `test` for host1 and observe the results of the query:
 
 ```output
-ansible -i hosts.ex1.ini -m debug -a var=test host1
+ansible -i hosts.ini -m debug -a var=test host1
 host1 | SUCCESS => {
     "test": "cluster"
 }
@@ -107,10 +107,10 @@ host1 | SUCCESS => {
 
 So far so good, since the `cluster` group priority is '10'. 
 
-The same results can be confirmed when you convert the same inventory to yaml as [hosts.ex1.yml](./hosts.ex1.yml):
+The same results can be confirmed when you convert the same inventory to yaml as [hosts.yml](./hosts.yml):
 
 ```output
-ansible -i hosts.ex1.yml -m debug -a var=test host1
+ansible -i hosts.yml -m debug -a var=test host1
 host1 | SUCCESS => {
     "test": "cluster"
 }
