@@ -29,7 +29,7 @@ all:
     ntp:
       children:
         ntp_client: {}
-        ntp_server: {}
+        ntp_server:
           vars:
             group_trace_var: internal/ntp.yml[ntp_server]
             ansible_group_priority: 10
