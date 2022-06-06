@@ -8,12 +8,10 @@ ntp_tinker_panic: yes
 
 ntp_servers: |
   [
-    {% if foreman.ip is defined %}
     {% if groups['ntp_server'] is defined %}
     {% for server in groups['ntp_server'] %}
     "{{ hostvars[server].ansible_host }}",
     {% endfor %}
-    {% endif %}
     {% endif %}
   ]
 
