@@ -80,7 +80,7 @@ host1 | SUCCESS => {
 
 ## Conclusions/Next Steps
 
-The results may not be what are expected, since the variable set in `product1` group always wins. 
+The results may not be what are expected, since the variable set in `product1` group always wins even when the priority of the 'override' group is set higher. 
 
 Even if the priority of the 'override' group and all of its child groups were set to the highest, in this case, 10, the 'test' variable is set by the `product1` group.
 
