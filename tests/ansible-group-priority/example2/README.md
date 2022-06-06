@@ -32,7 +32,7 @@ host1 | SUCCESS => {
 ```
 
 
-### Groups and depth level
+## Groups and depth level
 
 The group 'cluster' is below group 'override' which is directly below 'top_group' making it 3 levels below the 'all' group; in other terms, 'top_group' has a depth level of 3.
 
