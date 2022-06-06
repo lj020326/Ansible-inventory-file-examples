@@ -7,6 +7,20 @@ Consider the following case.
 
 Remove the parent/child relationship of '[override]' from '[top_group]' group, in the following way:
 
+
+```mermaid
+graph TD;
+    A[top_group] --> C[product]
+    B[override] --> F[override]
+    C --> D["product1"]
+    C --> E["product2"]
+    D --> H["host1"]
+    E --> I["host2"]
+    F --> G["cluster"]
+    G --> I["host1"]
+```
+
+
 ```output
     [top_group]          [override] ansible_group_priority=10
          |                    |
