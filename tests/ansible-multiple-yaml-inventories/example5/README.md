@@ -3,7 +3,9 @@
 
 In the prior [Example 4](../example4/README.md), we merged Multiple YAML inventories using 'role-based' INI inventory groups.
 
-The following section will migrate the INI role-based groups to YAML role-based groups.
+The following section will use YAML role-based groups applied to an existing YAML based inventory.
+
+The benefit of this approach will be that the inventory and groups will be represented in the same YAML format.
 
 ## Overview
 
