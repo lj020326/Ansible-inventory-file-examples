@@ -2,7 +2,7 @@ all:
   children:
     ntp_client:
       vars:
-        group_trace_var: internal/ntp.yml[ntp_client_internal]
+        group_trace_var: internal/ntp.yml[ntp_client]
         ansible_group_priority: 1
       children:
         ntp_client_internal: {}
