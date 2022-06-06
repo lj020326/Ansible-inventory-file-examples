@@ -12,7 +12,7 @@ Remove the parent/child relationship of '[override]' from '[top_group]' group, i
 graph TD;
     A[top_group] --> C[product]
     B[override<br>'ansible_group_priority=10'] --> F[cluster<br>'ansible_group_priority=10']
-    C --> D["product1"]
+    C --> D["product1<br>'ansible_group_priority=10'"]
     C --> E["product2"]
     D --> H["host1"]
     E --> I["host2"]
