@@ -22,7 +22,7 @@ ntp_servers:
 ntp_peers: |
   [
     {% for host in groups['ntp_server'] | difference([inventory_hostname]) %}
-    {{ hostvars[host].ansible_host }},
+    {{ hostvars[host].inventory_hostname }},
     {% endfor %}
   ]
 
