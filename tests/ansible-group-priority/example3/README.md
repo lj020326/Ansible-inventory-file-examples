@@ -10,8 +10,8 @@ Remove the parent/child relationship of '[override]' from '[top_group]' group, i
 
 ```mermaid
 graph TD;
-    A[top_group] --> C[product<br>_ansible_group_priority=10_]
-    B[override] --> F[cluster<br>_ansible_group_priority=10_]
+    A[top_group] --> C[product]
+    B[override] --> F[cluster<br>__ansible_group_priority=10__]
     C --> D["product1"]
     C --> E["product2"]
     D --> H["host1"]
@@ -19,6 +19,18 @@ graph TD;
     F --> J["host1"]
 ```
 
+
+```output
+    [top_group]          [override] ansible_group_priority=10
+         |                    |
+     [product]           [cluster] ansible_group_priority=10
+         |                    |
+    ------------            host1
+   |            |            
+[product1] [product2]  
+   |
+  host1 
+```
 
 As can be clearly seen above, the 'cluster' group has a depth of 2 while the 'product1' and 'product2' groups each have depths of 3.
 
