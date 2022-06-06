@@ -239,128 +239,48 @@ ansible -i ./inventory --list-hosts ntp
 ### Test 2: Show debug for ntp servers
 
 ```shell
-ansible -i ./inventory/dmz -m debug -a var=ntp_servers ntp
-admin-q1-dmz-s1.example.int | SUCCESS => {
-    "ntp_servers": [
-        "0.us.pool.ntp.org iburst xleave",
-        "1.us.pool.ntp.org iburst xleave",
-        "2.us.pool.ntp.org iburst xleave",
-        "3.us.pool.ntp.org iburst xleave"
-    ]
+ansible -i ./inventory/internal -m debug -a var="foreman.ip,ntp_servers|d('')" ntp
+admin-q1-internal-s1.example.int | SUCCESS => {
+    "foreman.ip,ntp_servers|d('')": "('10.10.10.56', ['0.us.pool.ntp.org', '1.us.pool.ntp.org', '2.us.pool.ntp.org', '3.us.pool.ntp.org'])"
 }
-admin-q2-dmz-s1.example.int | SUCCESS => {
-    "ntp_servers": [
-        "0.us.pool.ntp.org iburst xleave",
-        "1.us.pool.ntp.org iburst xleave",
-        "2.us.pool.ntp.org iburst xleave",
-        "3.us.pool.ntp.org iburst xleave"
-    ]
+admin-q2-internal-s1.example.int | SUCCESS => {
+    "foreman.ip,ntp_servers|d('')": "('10.10.10.60', ['0.us.pool.ntp.org', '1.us.pool.ntp.org', '2.us.pool.ntp.org', '3.us.pool.ntp.org'])"
 }
-admin-q1-dmz-s2.example.int | SUCCESS => {
-    "ntp_servers": [
-        "0.us.pool.ntp.org iburst xleave",
-        "1.us.pool.ntp.org iburst xleave",
-        "2.us.pool.ntp.org iburst xleave",
-        "3.us.pool.ntp.org iburst xleave"
-    ]
+admin-q1-internal-s2.example.int | SUCCESS => {
+    "foreman.ip,ntp_servers|d('')": "('10.10.20.56', ['0.us.pool.ntp.org', '1.us.pool.ntp.org', '2.us.pool.ntp.org', '3.us.pool.ntp.org'])"
 }
-admin-q2-dmz-s2.example.int | SUCCESS => {
-    "ntp_servers": [
-        "0.us.pool.ntp.org iburst xleave",
-        "1.us.pool.ntp.org iburst xleave",
-        "2.us.pool.ntp.org iburst xleave",
-        "3.us.pool.ntp.org iburst xleave"
-    ]
-}
-app-q2-dmz-s1.example.int | SUCCESS => {
-    "ntp_servers": []
-}
-app-q1-dmz-s1.example.int | SUCCESS => {
-    "ntp_servers": []
-}
-web-q1-dmz-s1.example.int | SUCCESS => {
-    "ntp_servers": []
-}
-web-q2-dmz-s1.example.int | SUCCESS => {
-    "ntp_servers": []
-}
-app-q1-dmz-s2.example.int | SUCCESS => {
-    "ntp_servers": []
-}
-app-q2-dmz-s2.example.int | SUCCESS => {
-    "ntp_servers": []
-}
-web-q1-dmz-s2.example.int | SUCCESS => {
-    "ntp_servers": []
-}
-web-q2-dmz-s2.example.int | SUCCESS => {
-    "ntp_servers": []
-}
-
-```
-
-This is as expected.
-
-
-### Test 2: Target all ntp clients
-
-As mentioned earlier, the 'ntp_clients' group is defined using the children group of 'environment_test'.  The following ansible debug command excludes the 'ntp_server' hosts from that set such to target only the non-'ntp-server' hosts.
-
-```shell
-ansible -i ./inventory/ -m debug -a var=ntp_server ntp_client,\!ntp_server
-app-q1-dmz-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('dmz/site1/app-q1-dmz-s1.example.int', ['environment_test', 'location_site1', 'network_dmz', 'ntp_client', 'rhel7'])"
-}
-app-q2-dmz-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('dmz/site1/app-q2-dmz-s1.example.int', ['environment_test', 'location_site1', 'network_dmz', 'ntp_client', 'rhel7'])"
-}
-web-q1-dmz-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('dmz/site1/web-q1-dmz-s1.example.int', ['environment_test', 'location_site1', 'network_dmz', 'ntp_client', 'rhel7'])"
-}
-web-q2-dmz-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('dmz/site1/web-q2-dmz-s1.example.int', ['environment_test', 'location_site1', 'network_dmz', 'ntp_client', 'rhel7'])"
-}
-app-q1-dmz-s2.example.int | SUCCESS => {
-    "trace_var,group_names": "('dmz/site2/app-q1-dmz-s2.example.int', ['environment_test', 'location_site2', 'network_dmz', 'ntp_client', 'rhel7'])"
-}
-app-q2-dmz-s2.example.int | SUCCESS => {
-    "trace_var,group_names": "('dmz/site2/app-q2-dmz-s2.example.int', ['environment_test', 'location_site2', 'network_dmz', 'ntp_client', 'rhel7'])"
-}
-web-q1-dmz-s2.example.int | SUCCESS => {
-    "trace_var,group_names": "('dmz/site2/web-q1-dmz-s2.example.int', ['environment_test', 'location_site2', 'network_dmz', 'ntp_client', 'rhel7'])"
-}
-web-q2-dmz-s2.example.int | SUCCESS => {
-    "trace_var,group_names": "('dmz/site2/web-q2-dmz-s2.example.int', ['environment_test', 'location_site2', 'network_dmz', 'ntp_client', 'rhel7'])"
+admin-q2-internal-s2.example.int | SUCCESS => {
+    "foreman.ip,ntp_servers|d('')": "('10.10.20.60', ['0.us.pool.ntp.org', '1.us.pool.ntp.org', '2.us.pool.ntp.org', '3.us.pool.ntp.org'])"
 }
 app-q1-internal-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site1/app-q1-internal-s1.example.int', ['environment_test', 'location_site1', 'network_internal', 'ntp_client', 'rhel7'])"
+    "foreman.ip,ntp_servers|d('')": "('10.10.10.61', ['admin-q1-internal-s1.example.int', 'admin-q2-internal-s1.example.int'])"
 }
 app-q2-internal-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site1/app-q2-internal-s1.example.int', ['environment_test', 'location_site1', 'network_internal', 'ntp_client', 'rhel7'])"
+    "foreman.ip,ntp_servers|d('')": "('10.10.10.62', ['admin-q1-internal-s1.example.int', 'admin-q2-internal-s1.example.int'])"
 }
 web-q1-internal-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site1/web-q1-internal-s1.example.int', ['environment_test', 'location_site1', 'network_internal', 'ntp_client', 'rhel7'])"
+    "foreman.ip,ntp_servers|d('')": "('10.10.10.63', ['admin-q1-internal-s1.example.int', 'admin-q2-internal-s1.example.int'])"
 }
 web-q2-internal-s1.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site1/web-q2-internal-s1.example.int', ['environment_test', 'location_site1', 'network_internal', 'ntp_client', 'rhel7'])"
+    "foreman.ip,ntp_servers|d('')": "('10.10.10.64', ['admin-q1-internal-s1.example.int', 'admin-q2-internal-s1.example.int'])"
 }
 app-q1-internal-s2.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site2/app-q1-internal-s2.example.int', ['environment_test', 'location_site2', 'network_internal', 'ntp_client', 'rhel7'])"
+    "foreman.ip,ntp_servers|d('')": "('10.10.20.90', ['admin-q1-internal-s2.example.int', 'admin-q2-internal-s2.example.int'])"
 }
 app-q2-internal-s2.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site2/app-q2-internal-s2.example.int', ['environment_test', 'location_site2', 'network_internal', 'ntp_client', 'rhel7'])"
+    "foreman.ip,ntp_servers|d('')": "('10.10.20.91', ['admin-q1-internal-s2.example.int', 'admin-q2-internal-s2.example.int'])"
 }
 web-q1-internal-s2.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site2/web-q1-internal-s2.example.int', ['environment_test', 'location_site2', 'network_internal', 'ntp_client', 'rhel7'])"
+    "foreman.ip,ntp_servers|d('')": "('10.10.20.92', ['admin-q1-internal-s2.example.int', 'admin-q2-internal-s2.example.int'])"
 }
 web-q2-internal-s2.example.int | SUCCESS => {
-    "trace_var,group_names": "('internal/site2/web-q2-internal-s2.example.int', ['environment_test', 'location_site2', 'network_internal', 'ntp_client', 'rhel7'])"
+    "foreman.ip,ntp_servers|d('')": "('10.10.20.93', ['admin-q1-internal-s2.example.int', 'admin-q2-internal-s2.example.int'])"
 }
 
 ```
 
-We see that all the ntp-client machines and no ntp-server machines result. 
-This is as expected.
+We can verify that the correct ntp servers have been matched to the correct clients based on the 'ntp_allow_networks', which is indirectly based on the respective gateways.
+The results are as expected/intended.
 
 ## Testing Conclusion
 
@@ -392,6 +312,9 @@ all:
     ntp_client:
       children:
         environment_test: {}
+    ntp:
+      children:
+        ntp_client: {}
     location_site1:
       vars:
         trace_var: dmz/ntp/location_site1
@@ -405,7 +328,7 @@ all:
 
 ```
 
-[inventory/internal/ntp.yml](./inventory/group_vars/network_internal.yml)
+[inventory/internal/ntp.yml](./inventory/internal/ntp.yml)
 ```yaml
 all:
   children:
@@ -418,6 +341,10 @@ all:
     ntp_client:
       children:
         environment_test: {}
+    ntp:
+      children:
+        ntp_client: {}
+        ntp_server: {}
     location_site1:
       vars:
         trace_var: internal/ntp/location_site1
@@ -435,29 +362,17 @@ all:
 
 ```shell
 ansible -i ./inventory/ -m debug -a var=group_trace_var,gateway_ipv4 ntp_server
-admin-q1-dmz-s1.example.int | SUCCESS => {
-    "group_trace_var,gateway_ipv4": "('group_vars/ntp_client.yml', '192.168.112.1')"
-}
-admin-q2-dmz-s1.example.int | SUCCESS => {
-    "group_trace_var,gateway_ipv4": "('group_vars/ntp_client.yml', '192.168.112.1')"
-}
-admin-q1-dmz-s2.example.int | SUCCESS => {
-    "group_trace_var,gateway_ipv4": "('group_vars/ntp_client.yml', '192.168.221.1')"
-}
-admin-q2-dmz-s2.example.int | SUCCESS => {
-    "group_trace_var,gateway_ipv4": "('group_vars/ntp_client.yml', '192.168.221.1')"
-}
 admin-q1-internal-s1.example.int | SUCCESS => {
-    "group_trace_var,gateway_ipv4": "('group_vars/ntp_client.yml', '192.168.112.1')"
+    "group_trace_var,gateway_ipv4": "('group_vars/ntp_client.yml', '10.10.10.1')"
 }
 admin-q2-internal-s1.example.int | SUCCESS => {
-    "group_trace_var,gateway_ipv4": "('group_vars/ntp_client.yml', '192.168.112.1')"
+    "group_trace_var,gateway_ipv4": "('group_vars/ntp_client.yml', '10.10.10.1')"
 }
 admin-q1-internal-s2.example.int | SUCCESS => {
-    "group_trace_var,gateway_ipv4": "('group_vars/ntp_client.yml', '192.168.221.1')"
+    "group_trace_var,gateway_ipv4": "('group_vars/ntp_client.yml', '10.10.20.1')"
 }
 admin-q2-internal-s2.example.int | SUCCESS => {
-    "group_trace_var,gateway_ipv4": "('group_vars/ntp_client.yml', '192.168.221.1')"
+    "group_trace_var,gateway_ipv4": "('group_vars/ntp_client.yml', '10.10.20.1')"
 }
 
 ```

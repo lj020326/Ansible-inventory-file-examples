@@ -168,6 +168,10 @@ admin-q2-dmz-s2.example.int
 environment_test
 
 
+[ntp:children]
+ntp_client
+ntp_server
+
 [location_site1:vars]
 trace_var=dmz/ntp/location_site1
 gateway_ipv4=112.112.0.1
