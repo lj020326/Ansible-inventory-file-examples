@@ -28,6 +28,18 @@ Similarly, the 'product1' group is below 'product' which is below 'top_group' ma
 
 Viewing the parent/child hierarchy in a tree format visualizes this well:
 
+```mermaid
+graph TD;
+    A[all] --> B[product]
+    A[all] --> C[override]
+    B --> D["product1"]
+    B --> E["product2"]
+    C --> F["cluster"]
+    D --> G["host1"]
+    E --> H["host2"]
+    F --> I["host1"]
+```
+
 ```output
               [top_group]
                   |
