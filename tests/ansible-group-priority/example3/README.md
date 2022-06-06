@@ -19,19 +19,6 @@ graph TD;
     F --> J["host1"]
 ```
 
-
-```output
-    [top_group]          [override] ansible_group_priority=10
-         |                    |
-     [product]           [cluster] ansible_group_priority=10
-         |                    |
-    ------------            host1
-   |            |            
-[product1] [product2]  
-   |
-  host1 
-```
-
 As can be clearly seen above, the 'cluster' group has a depth of 2 while the 'product1' and 'product2' groups each have depths of 3.
 
 The INI inventory implementing this hierarchy can be found in [hosts.ini](./hosts.ini) and the equivalent YAML inventory implementing this hierarchy can be found in [hosts.yml](./hosts.yml):
