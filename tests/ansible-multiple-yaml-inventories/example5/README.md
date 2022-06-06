@@ -425,7 +425,7 @@ group_trace_var: group_vars/ntp_server.yml
 
 ```
 
-[inventory/group_vars/ntp_client.yml](./inventory/group_vars/ntp_client.yml)
+[inventory/group_vars/internal/ntp_client.yml](./inventory/internal/group_vars/ntp_client.yml)
 ```yaml
 ---
 
@@ -437,16 +437,14 @@ ntp_tinker_panic: yes
 
 ntp_servers: |
   [
-    {% if ansible_default_ipv4.address|d(ansible_all_ipv4_addresses[0]) is defined %}
     {% if groups['ntp_server'] is defined %}
     {% for server in groups['ntp_server'] %}
-    {% for network in hostvars[server].ntp_allow_networks|d([]) %}
-    {% if ansible_default_ipv4.address|d(ansible_all_ipv4_addresses[0]) | ansible.utils.ipaddr('network') %}
-    "{{ hostvars[server].ansible_host }}",
+    {% for network in hostvars[server]['ntp_allow_networks']|d([]) %}
+    {% if network|ansible.netcommon.network_in_usable(foreman.ip) %}
+    "{{ server }}",
     {% endif %}
     {% endfor %}
     {% endfor %}
-    {% endif %}
     {% endif %}
   ]
 
