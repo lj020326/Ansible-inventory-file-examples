@@ -24,9 +24,10 @@ all:
     ntp:
       children:
         ntp_client: {}
+          vars:
+            ansible_group_priority: 1
         ntp_server:
           vars:
-            group_trace_var: internal/ntp.yml[ntp_server]
             ansible_group_priority: 10
     location_site1:
       vars:
