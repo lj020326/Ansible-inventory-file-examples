@@ -190,6 +190,10 @@ admin-q2-internal-s2.example.int
 [ntp_client:children]
 environment_test
 
+[ntp:children]
+ntp_client
+ntp_server
+
 [location_site1:vars]
 trace_var=internal/ntp/location_site1
 gateway_ipv4=192.168.112.1
@@ -255,10 +259,10 @@ So rename the ntp.ini files to remove the ini extension from the file names.
 
 We now re-run the first '--list-hosts' test with the following results.
 
+
 ### Test 2 (after removed ini extension): Show debug for ntp servers
 
 ```shell
-ansible -i ./inventory/dmz -m debug -a var=ntp_servers ntp
 ansible -i ./inventory/dmz -m debug -a var=ntp_servers ntp
 admin-q1-dmz-s1.example.int | SUCCESS => {
     "ntp_servers": [
