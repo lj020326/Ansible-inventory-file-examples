@@ -382,7 +382,7 @@ admin-q2-internal-s2.example.int | SUCCESS => {
 
 Set up group variables for the respective ntp groups.
 
-[inventory/group_vars/ntp_server.yml](./inventory/internal/group_vars/ntp_server.yml)
+[inventory/internal/group_vars/ntp_server.yml](./inventory/internal/group_vars/ntp_server.yml)
 ```yaml
 ---
 
