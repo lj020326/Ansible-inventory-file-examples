@@ -7,6 +7,9 @@ all:
       children:
         network_internal: {}
     ntp_server:
+      vars:
+        group_trace_var: internal/ntp.yml[ntp_server]
+        ansible_group_priority: 10
       hosts:
         admin-q1-internal-s1.example.int: {}
         admin-q2-internal-s1.example.int: {}
