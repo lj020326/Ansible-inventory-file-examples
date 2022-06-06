@@ -18,6 +18,7 @@ For example, create an inventory structurally that looks like this:
   |--@ungrouped:
 ```
 
+Note in this inventory that 'host1' appears in both 'cluster' and 'product1' groups.
 
 ## Groups and depth level
 
