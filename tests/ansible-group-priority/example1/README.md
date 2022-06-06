@@ -30,8 +30,8 @@ Viewing the parent/child hierarchy diagrammed as follows:
 
 ```mermaid
 graph TD;
-    A[all] --> B[product]
-    A[all] --> C[override]
+    A[top_group] --> B[product]
+    A[top_group] --> C[override]
     B --> D["product1"]
     B --> E["product2"]
     C --> F["cluster"]
