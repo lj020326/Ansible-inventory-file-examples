@@ -6,6 +6,8 @@
     - debug:
         var: trace_var
     - debug:
+        var: group_trace_var
+    - debug:
         var: group_names
     - debug:
         var: foreman.ip
