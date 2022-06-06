@@ -40,22 +40,6 @@ graph TD;
     F --> I["host1"]
 ```
 
-Viewing the parent/child hierarchy in a tree format also visualizes this well:
-
-```output
-                [all]
-                  |
-        ----------------------
-        |                    |
-     [product]           [override]
-         |                   |
-    ------------       -------------
-   |            |            |
-[product1] [product2]    [cluster] 
-   |                         |
- host1                     host1
-```
-
 ## Inventory 
 
 The inventory implementing the aforementioned hierarchy as an ini inventory [hosts.ini](./hosts.ini):
