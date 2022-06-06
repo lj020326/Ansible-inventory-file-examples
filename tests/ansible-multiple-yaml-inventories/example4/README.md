@@ -305,65 +305,8 @@ web-q2-internal-s2.example.int | SUCCESS => {
 
 ```
 
-This is as expected.
-
-
-### Test 2: Target all ntp clients
-
-As mentioned earlier, the 'ntp_clients' group is defined using the children group of 'environment_test'.  The following ansible debug command excludes the 'ntp_server' hosts from that set such to target only the non-'ntp-server' hosts.
-
-```shell
-ansible -i ./inventory/ -m debug -a var=ntp_servers ntp_client,\!ntp_server
-app-q1-dmz-s1.example.int | SUCCESS => {
-    "ntp_servers": []
-}
-app-q2-dmz-s1.example.int | SUCCESS => {
-    "ntp_servers": []
-}
-web-q1-dmz-s1.example.int | SUCCESS => {
-    "ntp_servers": []
-}
-web-q2-dmz-s1.example.int | SUCCESS => {
-    "ntp_servers": []
-}
-app-q1-dmz-s2.example.int | SUCCESS => {
-    "ntp_servers": []
-}
-app-q2-dmz-s2.example.int | SUCCESS => {
-    "ntp_servers": []
-}
-web-q1-dmz-s2.example.int | SUCCESS => {
-    "ntp_servers": []
-}
-web-q2-dmz-s2.example.int | SUCCESS => {
-    "ntp_servers": []
-}
-app-q1-internal-s1.example.int | SUCCESS => {
-    "ntp_servers": []
-}
-app-q2-internal-s1.example.int | SUCCESS => {
-    "ntp_servers": []
-}
-web-q1-internal-s1.example.int | SUCCESS => {
-    "ntp_servers": []
-}
-web-q2-internal-s1.example.int | SUCCESS => {
-    "ntp_servers": []
-}
-app-q1-internal-s2.example.int | SUCCESS => {
-    "ntp_servers": []
-}
-app-q2-internal-s2.example.int | SUCCESS => {
-    "ntp_servers": []
-}
-web-q1-internal-s2.example.int | SUCCESS => {
-    "ntp_servers": []
-}
-web-q2-internal-s2.example.int | SUCCESS => {
-    "ntp_servers": []
-}
-
-```
+We can verify that the correct ntp servers have been matched to the correct clients based on the 'ntp_allow_networks', which is indirectly based on the respective gateways.
+The results are as expected/intended.
 
 
 
