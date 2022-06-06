@@ -10,7 +10,7 @@ ntp_servers: |
   [
     {% if groups['ntp_server'] is defined %}
     {% for server in groups['ntp_server'] %}
-    "{{ hostvars[server].ansible_host }}",
+    "{{ server }}",
     {% endfor %}
     {% endif %}
   ]
