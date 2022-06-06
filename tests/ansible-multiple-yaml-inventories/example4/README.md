@@ -315,6 +315,4 @@ From this test, we conclude that using the INI method to matching role-based gro
 
 The only downside with the approach is that the inventory and groups are now expressed using mixed formats in YAML and INI.
 
-The [next example](../example5/README.md) will use a pure YAML-based method to do the same.
-
-
+The [next example](../example5/README.md) will use a complete YAML-based method to do the same.
