@@ -9,7 +9,7 @@ The next example validates the following rule observed in the prior example:
 With the inventory used in the prior example 3 as the starting point, make the groups 'override', 'product1', and 'product2' have the same depth. 
 
 Add a group 'foo' between 'override' and 'top_group', such that 'override' is the same depth, 3 levels deep, as 'product1' and 'product2'.  
-Note the 'cluster' child group now has a depth of 4, resulting in it have the greatest depth path.
+Note the 'cluster' child group now has a depth of 4, resulting in it have the greatest depth path among the other groups (product1/product2).
 
 
 ```mermaid
