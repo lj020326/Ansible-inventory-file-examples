@@ -26,7 +26,7 @@ The group 'cluster' is below group 'override' which is directly below 'top_group
 
 Similarly, the 'product1' group is below 'product' which is below 'top_group' making it 3 levels below the 'all' group; in other terms, 'product1' has a depth level of 3.
 
-Viewing the parent/child hierarchy in a tree format visualizes this well:
+Viewing the parent/child hierarchy diagrammed as follows:
 
 ```mermaid
 graph TD;
@@ -39,6 +39,8 @@ graph TD;
     E --> H["host2"]
     F --> I["host1"]
 ```
+
+Viewing the parent/child hierarchy in a tree format also visualizes this well:
 
 ```output
               [top_group]
