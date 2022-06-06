@@ -93,5 +93,5 @@ host1 | SUCCESS => {
 
 The merging of multiple groups works as expected for this case.
 
-The [next example](../example2/README.md) will test a change to a group var and validate.
+The [next example](../example2/README.md) will validate/test a change to a group var.
 
