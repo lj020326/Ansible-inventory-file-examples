@@ -265,62 +265,42 @@ ansible -i ./inventory --list-hosts ntp
 ### Test 2: Show debug for ntp servers
 
 ```shell
-ansible -i ./inventory/dmz -m debug -a var=ntp_servers ntp
-admin-q1-dmz-s1.example.int | SUCCESS => {
-    "ntp_servers": [
-        "0.us.pool.ntp.org iburst xleave",
-        "1.us.pool.ntp.org iburst xleave",
-        "2.us.pool.ntp.org iburst xleave",
-        "3.us.pool.ntp.org iburst xleave"
-    ]
+ansible -i ./inventory/internal -m debug -a var="foreman.ip,ntp_servers|d('')" ntp
+admin-q1-internal-s1.example.int | SUCCESS => {
+    "foreman.ip,ntp_servers|d('')": "('10.10.10.56', ['0.us.pool.ntp.org', '1.us.pool.ntp.org', '2.us.pool.ntp.org', '3.us.pool.ntp.org'])"
 }
-admin-q2-dmz-s1.example.int | SUCCESS => {
-    "ntp_servers": [
-        "0.us.pool.ntp.org iburst xleave",
-        "1.us.pool.ntp.org iburst xleave",
-        "2.us.pool.ntp.org iburst xleave",
-        "3.us.pool.ntp.org iburst xleave"
-    ]
+admin-q2-internal-s1.example.int | SUCCESS => {
+    "foreman.ip,ntp_servers|d('')": "('10.10.10.60', ['0.us.pool.ntp.org', '1.us.pool.ntp.org', '2.us.pool.ntp.org', '3.us.pool.ntp.org'])"
 }
-admin-q1-dmz-s2.example.int | SUCCESS => {
-    "ntp_servers": [
-        "0.us.pool.ntp.org iburst xleave",
-        "1.us.pool.ntp.org iburst xleave",
-        "2.us.pool.ntp.org iburst xleave",
-        "3.us.pool.ntp.org iburst xleave"
-    ]
+admin-q1-internal-s2.example.int | SUCCESS => {
+    "foreman.ip,ntp_servers|d('')": "('10.10.20.56', ['0.us.pool.ntp.org', '1.us.pool.ntp.org', '2.us.pool.ntp.org', '3.us.pool.ntp.org'])"
 }
-admin-q2-dmz-s2.example.int | SUCCESS => {
-    "ntp_servers": [
-        "0.us.pool.ntp.org iburst xleave",
-        "1.us.pool.ntp.org iburst xleave",
-        "2.us.pool.ntp.org iburst xleave",
-        "3.us.pool.ntp.org iburst xleave"
-    ]
+admin-q2-internal-s2.example.int | SUCCESS => {
+    "foreman.ip,ntp_servers|d('')": "('10.10.20.60', ['0.us.pool.ntp.org', '1.us.pool.ntp.org', '2.us.pool.ntp.org', '3.us.pool.ntp.org'])"
 }
-app-q2-dmz-s1.example.int | SUCCESS => {
-    "ntp_servers": []
+app-q1-internal-s1.example.int | SUCCESS => {
+    "foreman.ip,ntp_servers|d('')": "('10.10.10.61', ['admin-q1-internal-s1.example.int', 'admin-q2-internal-s1.example.int'])"
 }
-app-q1-dmz-s1.example.int | SUCCESS => {
-    "ntp_servers": []
+app-q2-internal-s1.example.int | SUCCESS => {
+    "foreman.ip,ntp_servers|d('')": "('10.10.10.62', ['admin-q1-internal-s1.example.int', 'admin-q2-internal-s1.example.int'])"
 }
-web-q1-dmz-s1.example.int | SUCCESS => {
-    "ntp_servers": []
+web-q1-internal-s1.example.int | SUCCESS => {
+    "foreman.ip,ntp_servers|d('')": "('10.10.10.63', ['admin-q1-internal-s1.example.int', 'admin-q2-internal-s1.example.int'])"
 }
-web-q2-dmz-s1.example.int | SUCCESS => {
-    "ntp_servers": []
+web-q2-internal-s1.example.int | SUCCESS => {
+    "foreman.ip,ntp_servers|d('')": "('10.10.10.64', ['admin-q1-internal-s1.example.int', 'admin-q2-internal-s1.example.int'])"
 }
-app-q1-dmz-s2.example.int | SUCCESS => {
-    "ntp_servers": []
+app-q1-internal-s2.example.int | SUCCESS => {
+    "foreman.ip,ntp_servers|d('')": "('10.10.20.90', ['admin-q1-internal-s2.example.int', 'admin-q2-internal-s2.example.int'])"
 }
-app-q2-dmz-s2.example.int | SUCCESS => {
-    "ntp_servers": []
+app-q2-internal-s2.example.int | SUCCESS => {
+    "foreman.ip,ntp_servers|d('')": "('10.10.20.91', ['admin-q1-internal-s2.example.int', 'admin-q2-internal-s2.example.int'])"
 }
-web-q1-dmz-s2.example.int | SUCCESS => {
-    "ntp_servers": []
+web-q1-internal-s2.example.int | SUCCESS => {
+    "foreman.ip,ntp_servers|d('')": "('10.10.20.92', ['admin-q1-internal-s2.example.int', 'admin-q2-internal-s2.example.int'])"
 }
-web-q2-dmz-s2.example.int | SUCCESS => {
-    "ntp_servers": []
+web-q2-internal-s2.example.int | SUCCESS => {
+    "foreman.ip,ntp_servers|d('')": "('10.10.20.93', ['admin-q1-internal-s2.example.int', 'admin-q2-internal-s2.example.int'])"
 }
 
 ```
