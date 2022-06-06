@@ -396,9 +396,6 @@ ntp_tinker_panic: true
 ntp_allow_networks:
   - "{{ gateway_ipv4_network_cidr }}"
 
-#ntp_servers:
-#  - "{{ gateway_ip4 }} prefer iburst"
-
 ntp_servers:
   - 0{{ '.' + ntp_area if ntp_area else '' }}.pool.ntp.org
   - 1{{ '.' + ntp_area if ntp_area else '' }}.pool.ntp.org
