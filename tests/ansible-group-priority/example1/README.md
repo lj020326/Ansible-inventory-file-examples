@@ -87,16 +87,3 @@ host1 | SUCCESS => {
     "test": "cluster"
 }
 ```
-
-
-
-## References
-
-* https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html#how-variables-are-merged
-* [combine_vars utility function](https://github.com/ansible/ansible/blob/stable-2.13/lib/ansible/utils/vars.py#L81)
-* https://github.com/ansible/ansible/blob/devel/lib/ansible/inventory/group.py
-* https://github.com/ansible/ansible/blob/stable-2.13/lib/ansible/plugins/vars/host_group_vars.py
-* https://stackoverflow.com/questions/38120793/ansible-group-vars-priority
-* [Managing "nested" group in Ansible YAML inventory files](https://github.com/lj020326/ansible-datacenter/blob/main/docs/ansible-nested-groups-in-YAML-inventory-files.md)
-* 
-
