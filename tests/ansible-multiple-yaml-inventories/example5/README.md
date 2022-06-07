@@ -122,7 +122,7 @@ all:
         app-[dmz|internal]-q2-s[1|2].example.int: {}
         web-[dmz|internal]-q1-s[1|2].example.int: {}
         web-[dmz|internal]-q2-s[1|2].example.int: {}
-    ## teh following group is only used for the internal inventory
+    ## following network_client group is only used in the internal inventory
     network_client:
       vars:
         trace_var: site[1|2]/network_client
