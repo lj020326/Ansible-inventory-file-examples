@@ -127,10 +127,10 @@ all:
       vars:
         trace_var: site[1|2]/network_client
       hosts:
-        app-q1-internal-s1.example.int: {}
-        app-q2-internal-s1.example.int: {}
-        web-q1-internal-s1.example.int: {}
-        web-q2-internal-s1.example.int: {}
+        app-q1-internal-s[1|2].example.int: {}
+        app-q2-internal-s[1|2].example.int: {}
+        web-q1-internal-s[1|2].example.int: {}
+        web-q2-internal-s[1|2].example.int: {}
     ungrouped: {}
 
 ```
