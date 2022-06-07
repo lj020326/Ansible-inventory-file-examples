@@ -127,7 +127,8 @@ all:
     ##    to separate the ntp-clients from the servers
     ##
     ## For the DMZ environment, all machines are ntp-clients 
-    ##    and use the same ntp_servers config
+    ##    and have the same ntp_servers config  
+    ##    to common external/publicly-hosted ntp-servers
     ##
     network_client:
       vars:
