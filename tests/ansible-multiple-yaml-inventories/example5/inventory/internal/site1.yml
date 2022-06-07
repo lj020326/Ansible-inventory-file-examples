@@ -860,7 +860,7 @@ all:
         web-q2-internal-s1.example.int: {}
     network_internal:
       vars:
-        trace_var: internal/site1/internal
+        trace_var: internal/site1/network_internal
       hosts:
         admin-q1-internal-s1.example.int: {}
         admin-q2-internal-s1.example.int: {}
@@ -870,7 +870,7 @@ all:
         web-q2-internal-s1.example.int: {}
     network_client:
       vars:
-        trace_var: internal/site1/internal
+        trace_var: internal/site1/network_client
       hosts:
         app-q1-internal-s1.example.int: {}
         app-q2-internal-s1.example.int: {}

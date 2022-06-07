@@ -122,6 +122,14 @@ all:
         app-[dmz|internal]-q2-s[1|2].example.int: {}
         web-[dmz|internal]-q1-s[1|2].example.int: {}
         web-[dmz|internal]-q2-s[1|2].example.int: {}
+    network_client:
+      vars:
+        trace_var: site[1|2]/network_client
+      hosts:
+        app-q1-internal-s1.example.int: {}
+        app-q2-internal-s1.example.int: {}
+        web-q1-internal-s1.example.int: {}
+        web-q2-internal-s1.example.int: {}
     ungrouped: {}
 
 ```
@@ -178,19 +186,45 @@ Note that for the DMZ network, that there are no ntp servers and that all machin
 ```yaml
 all:
   children:
+    ntp_client:
+      vars:
+        group_trace_var: internal/ntp.yml[ntp_client]
+        ansible_group_priority: 1
+      children:
+        ntp_client_internal: {}
+    ntp_client_internal:
+      vars:
+        group_trace_var: internal/ntp.yml[ntp_client_internal]
+        ansible_group_priority: 1
+      children:
+        network_client: {}
     ntp_server:
+      vars:
+        group_trace_var: internal/ntp.yml[ntp_server]
+        ansible_group_priority: 10
       hosts:
         admin-q1-internal-s1.example.int: {}
         admin-q2-internal-s1.example.int: {}
         admin-q1-internal-s2.example.int: {}
         admin-q2-internal-s2.example.int: {}
-    ntp_client:
-      children:
-        environment_test: {}
     ntp:
       children:
-        ntp_client: {}
-        ntp_server: {}
+        ntp_client:
+          vars:
+            ansible_group_priority: 1
+        ntp_server:
+          vars:
+            ansible_group_priority: 10
+    location_site1:
+      vars:
+        trace_var: internal/ntp.yml[location_site1]
+        gateway_ipv4: 10.10.10.1
+        gateway_ipv4_network_cidr: 10.10.10.0/24
+    location_site2:
+      vars:
+        trace_var: internal/ntp.yml[location_site2]
+        gateway_ipv4: 10.10.20.1
+        gateway_ipv4_network_cidr: 10.10.20.0/24
 ```
 
 The 'ntp_client' group is defined with the children group of 'environment_test'.  
