@@ -126,7 +126,8 @@ all:
     ## 'network_client' group is only used in the internal inventory
     ##    to separate the ntp-clients from the servers
     ##
-    ## For the DMZ environment, all machines are consider ntp-clients and use the same ntp_servers config
+    ## For the DMZ environment, all machines are ntp-clients 
+    ##    and use the same ntp_servers config
     ##
     network_client:
       vars:
