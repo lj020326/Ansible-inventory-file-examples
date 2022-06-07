@@ -197,19 +197,16 @@ all:
     ntp_client:
       vars:
         group_trace_var: internal/ntp.yml[ntp_client]
-        ansible_group_priority: 1
       children:
         ntp_client_internal: {}
     ntp_client_internal:
       vars:
         group_trace_var: internal/ntp.yml[ntp_client_internal]
-        ansible_group_priority: 1
       children:
         network_client: {}
     ntp_server:
       vars:
         group_trace_var: internal/ntp.yml[ntp_server]
-        ansible_group_priority: 10
       hosts:
         admin-q1-internal-s1.example.int: {}
         admin-q2-internal-s1.example.int: {}
@@ -217,12 +214,8 @@ all:
         admin-q2-internal-s2.example.int: {}
     ntp:
       children:
-        ntp_client:
-          vars:
-            ansible_group_priority: 1
-        ntp_server:
-          vars:
-            ansible_group_priority: 10
+        ntp_client: {}
+        ntp_server: {}
 ```
 
 For the internal network inventory, the 'ntp_client' group is defined with the children group of 'ntp_client_internal' which has its child group set to the inventory defined group 'network_client'.  
