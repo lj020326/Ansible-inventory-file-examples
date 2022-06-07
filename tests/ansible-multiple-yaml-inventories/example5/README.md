@@ -122,8 +122,10 @@ all:
         app-[dmz|internal]-q2-s[1|2].example.int: {}
         web-[dmz|internal]-q1-s[1|2].example.int: {}
         web-[dmz|internal]-q2-s[1|2].example.int: {}
-    ## following network_client group is only used in the internal inventory
-    ## to separate the ntp-clients from the servers
+    ## 'network_client' group is only used in the internal inventory
+    ##    to separate the ntp-clients from the servers
+    ##
+    ## For the DMZ environment, all machines are consider ntp-clients and use the same ntp_servers config
     network_client:
       vars:
         trace_var: site[1|2]/network_client
