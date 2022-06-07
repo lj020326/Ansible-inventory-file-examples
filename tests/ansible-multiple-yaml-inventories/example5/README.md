@@ -235,7 +235,7 @@ all:
         gateway_ipv4_network_cidr: 10.10.20.0/24
 ```
 
-The 'ntp_client' group is defined with the children group of 'environment_test'.  
+For the internal network inventory, the 'ntp_client' group is defined with the children group of 'ntp_client_internal' which has its child group set to the inventory defined group 'network_client'.  
 
 Note that the 'ntp_client' group includes the 8 admin machines already included in the 'ntp_server' group.  This overlap can be addressed by making sure that the 'ntp_server' group is excluded for the respective plays that only mean to target the 'ntp_client' machines.  This will be demonstrated in the following verifications section. 
 
