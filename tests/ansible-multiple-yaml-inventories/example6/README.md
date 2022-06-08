@@ -183,10 +183,6 @@ all:
         admin-q2-internal-s1.example.int: {}
         admin-q1-internal-s2.example.int: {}
         admin-q2-internal-s2.example.int: {}
-    ntp:
-      children:
-        ntp_client: {}
-        ntp_server: {}
 ```
 
 The 'ntp_client_internal' _placeholder_ group also allows the binding to the respective group_vars found in [ntp_client_internal.yml](./internal/group_vars/ntp_client_internal.yml) needed for hosts that get applied to this group.
