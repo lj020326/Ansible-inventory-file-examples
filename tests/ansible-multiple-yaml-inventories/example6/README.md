@@ -222,7 +222,6 @@ Next we define a play to derive the ntp_client_internal group
 [display-ntp-servers.yml](display-ntp-servers.yml):
 ```yaml
 ---
----
 
 - name: "Define derived ntp_client_internal"
   hosts: localhost
@@ -246,6 +245,7 @@ Next we define a play to derive the ntp_client_internal group
         var: __ntp_client_internal
         verbosity: 1
 
+    ## Using set_fact with delegate_to, delegate_facts and with_items to set facts derived on first play on localhost to targeted host
     ## ref: https://github.com/ansible/ansible/issues/20508
     - name: "Copy __ntp_client_internal fact to other servers"
       set_fact:
