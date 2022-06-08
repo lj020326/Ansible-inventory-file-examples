@@ -1,5 +1,5 @@
 
-# Example 4: Multiple YAML inventories with 'role-based' YAML inventory groups
+# Example 5: Multiple YAML inventories with 'role-based' YAML inventory groups
 
 In the prior [Example 4](../example4/README.md), we merged Multiple YAML inventories using 'role-based' INI inventory groups.
 
