@@ -186,10 +186,6 @@ all:
         admin-q2-internal-s1.example.int: {}
         admin-q1-internal-s2.example.int: {}
         admin-q2-internal-s2.example.int: {}
-    ntp:
-      children:
-        ntp_client: {}
-        ntp_server: {}
 ```
 
 
