@@ -14,13 +14,15 @@
     - debug:
         var: ntp_servers
 
-
     - name: Derive ntp_client child group of hosts based on difference of network_internal and ntp_server
       set_fact:
-        __ntp_client:
+        __ntp_client: "{{ network_internal | difference(ntp_server) }}"
 
-    - name: Derive ntp_client child group of hosts based on difference of network_internal and ntp_server
-      group_by:
-        key: "override"
-        parents: "foo"
-    - debug: var=test
+    - debug:
+        var: __ntp_client
+
+#    - name: Derive ntp_client child group of hosts based on difference of network_internal and ntp_server
+#      group_by:
+#        key: "override"
+#        parents: "foo"
+#    - debug: var=test
