@@ -784,4 +784,4 @@ Multiply this by the number of use cases having the same/similar pattern.
 
 Ideally, we do not want to explicitly define and maintain a 'network_client' group since it can be simply derived from the obtaining the difference of the 'network' and 'network_server' groups.
 
-The [next example](../example6/README.md) will use look to resolve the challenge of deriving the 'network_client' child group.
+The [next example](../example6/README.md) will look to resolve the challenge of deriving the 'network_client' child group.
