@@ -158,6 +158,37 @@ For each site in the 'network_internal' group, there will be 2 machines defined 
 All ntp clients in the 'network_internal' group will have the __ntp_servers__ variable set to the 2 ntp_server machines in the respective site.
 
 ### Internal Network NTP Client Configuration
+
+For the internal network inventory, the 'ntp_client' group is defined with the children group of 'ntp_client_internal' which has its child group set to the inventory defined group 'network_client'.  
+
+[inventory/internal/ntp.yml](./inventory/internal/ntp.yml):
+```yaml
+all:
+  children:
+    ntp_client:
+      vars:
+        group_trace_var: internal/ntp.yml[ntp_client]
+      children:
+        ntp_client_internal: {}
+    ntp_client_internal:
+      vars:
+        group_trace_var: internal/ntp.yml[ntp_client_internal]
+      children:
+        network_client: {}
+    ntp_server:
+      vars:
+        group_trace_var: internal/ntp.yml[ntp_server]
+      hosts:
+        admin-q1-internal-s1.example.int: {}
+        admin-q2-internal-s1.example.int: {}
+        admin-q1-internal-s2.example.int: {}
+        admin-q2-internal-s2.example.int: {}
+    ntp:
+      children:
+        ntp_client: {}
+        ntp_server: {}
+```
+
 The __ntp_servers__ variable setting in the ['ntp_client_internal'](./inventory/internal/group_vars/ntp_client_internal.yml) group:
 
 site1:
@@ -180,6 +211,23 @@ ntp_servers: [
 
 ### DMZ Network NTP Client Configuration
 
+The 'ntp-client' group will include all linux machines for the respective environment.
+In this case, the environment will be defined with the existing test environment group named 'environment_test'.
+
+Now we can define the YAML groups to be used by the 'ntp' playbook/role as follows:
+
+[inventory/dmz/ntp.yml](./inventory/dmz/ntp.yml):
+```yaml
+all:
+  children:
+    ntp_client:
+      children:
+        environment_test: {}
+    ntp:
+      children:
+        ntp_client: {}
+```
+
 Note that for the DMZ network, that there are no internal ntp servers and that all machines are ntp clients with the __ntp_server__ variable set to external/public ntp server machines.
 
 This can be seen in the __ntp_servers__ variable in the ['ntp_client'](./inventory/dmz/group_vars/ntp_client.yml) group variable configuration:
@@ -193,6 +241,8 @@ ntp_servers:
 
 ```
 
+## NTP parent group
+A ntp parent group is defined such that it contains all the related groups useful for targetting plays to run against for the entire NTP configuration playbook.
 
 [inventory/internal/ntp.yml](./inventory/internal/ntp.yml):
 ```yaml
