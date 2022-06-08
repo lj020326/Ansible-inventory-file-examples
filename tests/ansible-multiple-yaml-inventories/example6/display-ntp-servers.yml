@@ -8,7 +8,7 @@
 
     - name: Derive ntp_client child group of hosts based on difference of network_internal and ntp_server
       set_fact:
-        __ntp_client: "{{ network_internal | difference(ntp_server) }}"
+        __ntp_client: "{{ groups['network_internal'] | difference(groups['ntp_server']) }}"
 
     - debug:
         var: __ntp_client
