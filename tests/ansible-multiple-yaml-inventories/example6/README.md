@@ -152,40 +152,47 @@ Each of the respective inventory files:
 
 For the ntp playbook/role to work on both servers and clients, we will define the 'ntp_server' and 'ntp_client' groups to correctly scope the machines to be applied.
 
-For each network/site, there will be 2 __ntp servers__ resulting in a total of 8 hosts to be targeted for the 'ntp-server' play/role application.
+All machines in the 'network_dmz' group will have the __ntp_servers__ variable set to the externally defined ntp servers.
 
-Specifically, the 'ntp_server' group configuration will be applied to the following 8 'admin' machines (2 host instances for each specific network/site):
+For each site in the 'network_internal' group, there will be 2 machines defined in the 'ntp_servers' group.
+All ntp clients in the 'network_internal' group will have the __ntp_servers__ variable set to the 2 ntp_server machines in the respective site.
 
+### Internal Network NTP Client Configuration
+The __ntp_servers__ variable setting in the ['ntp_client_internal'](./inventory/internal/group_vars/ntp_client_internal.yml) group:
+
+site1:
 ```output
-admin-dmz-q1-s1.example.int
-admin-dmz-q2-s1.example.int
-admin-dmz-q1-s2.example.int
-admin-dmz-q2-s2.example.int
-admin-internal-q1-s1.example.int
-admin-internal-q2-s1.example.int
-admin-internal-q1-s2.example.int
-admin-internal-q2-s2.example.int
+"ntp_servers": [
+    "admin-q1-internal-s1.example.int",
+    "admin-q2-internal-s1.example.int"
+]
+
+```
+
+site2:
+```output
+ntp_servers: [
+    "admin-q1-internal-s2.example.int",
+    "admin-q2-internal-s2.example.int"
+]
 ```
 
 
-The 'ntp-client' group will include all linux machines for the respective environment.
-In this case, the environment will be defined with the existing test environment group named 'environment_test'.
+### DMZ Network NTP Client Configuration
 
-Now we can define the YAML groups to be used by the 'ntp' playbook/role as follows:
+Note that for the DMZ network, that there are no internal ntp servers and that all machines are ntp clients with the __ntp_server__ variable set to external/public ntp server machines.
 
-[inventory/dmz/ntp.yml](./inventory/dmz/ntp.yml):
+This can be seen in the __ntp_servers__ variable in the ['ntp_client'](./inventory/dmz/group_vars/ntp_client.yml) group variable configuration:
+
 ```yaml
-all:
-  children:
-    ntp_client:
-      children:
-        environment_test: {}
-    ntp:
-      children:
-        ntp_client: {}
+ntp_servers:
+  - 0.rhel.pool.ntp.org
+  - 1.rhel.pool.ntp.org
+  - 2.rhel.pool.ntp.org
+  - 3.rhel.pool.ntp.org
+
 ```
 
-Note that for the DMZ network, that there are no ntp servers and that all machines are ntp clients.
 
 [inventory/internal/ntp.yml](./inventory/internal/ntp.yml):
 ```yaml
