@@ -58,3 +58,7 @@ See the details for this example [here](./example4/README.md)
 ## <a id="Example-05"></a>Example 5: Multiple YAML inventories with 'role-based' YAML inventory groups
 
 See the details for this example [here](./example5/README.md)
+
+## <a id="Example-06"></a>Example 6: Using dynamic groups to derive large child groups
+
+See the details for this example [here](./example6/README.md)
