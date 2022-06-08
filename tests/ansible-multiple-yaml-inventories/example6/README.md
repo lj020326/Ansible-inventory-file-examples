@@ -758,30 +758,3 @@ web-q2-internal-s2.example.int | SUCCESS => {
 }
 
 ```
-
-
-## Conclusion/Next Steps
-
-From this test, we conclude that using the YAML method to match role-based group settings to an existing YAML-based inventory works as expected.
-
-Note that for the ntp clients in the internal group, we leveraged a special group called 'network_client'.
-
-Maintaining such a group configuration can be problematic.
-
-E.g., Say the following parameters are given:
-
-* A 'network' (parent) group has 100, 1000, or lets say __N machines__ and 
-* A subset 'network_server' group only has a far less _finite number_ of instances, say 2, 4, or __M machines__
-* A derived 'network_client' defined as the parent group of __N machines__ minus the server group of __M machines__.
-
-So given an inventory with a 'network' group of 1000 machines, and a 'network_server' group of 4 machines, then the 'network_client' group would have 996 machines. 
-
-Maintaining a 'network_client' group for multiple use-cases would have to re-define the child group of __(N - M) machines__. 
-
-This can present risks since then each 'network_client' group is almost the same size as the parent 'network_server' group and exposes risks of maintaining synchronization of the group.
-
-Multiply this by the number of use cases having the same/similar pattern.
-
-Ideally, we do not want to explicitly define and maintain a 'network_client' group since it can be simply derived from the obtaining the difference of the 'network' and 'network_server' groups.
-
-The [next example](../example6/README.md) will use look to resolve the challenge of deriving the 'network_client' child group.
