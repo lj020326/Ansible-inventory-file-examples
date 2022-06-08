@@ -43,7 +43,8 @@
         parents: ['ntp','network_internal']
 
 - name: "Run trace var play for machines in the newly defined ntp_client group"
-  hosts: ntp_client
+#  hosts: ntp_client
+  hosts: ntp
   gather_facts: false
   connection: local
   tasks:
