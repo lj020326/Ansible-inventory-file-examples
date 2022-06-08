@@ -92,8 +92,6 @@ ansible-inventory --graph -i inventory/ ntp
 ansible-inventory --graph -i inventory/ ntp_server
 ansible-inventory --graph -i inventory/internal/ ntp
 ansible-inventory -i inventory/internal/ --list ntp
-ansible-inventory -i inventory/internal/ntp.yml --graph output
-ansible-inventory -i inventory/internal/site1.yml --graph output
 ansible-playbook -i ./inventory display-ntp-servers.yml 
 ansible-playbook -i ./inventory/ display-ntp-servers.yml
 ansible-playbook -i ./inventory/ playbook.yml
