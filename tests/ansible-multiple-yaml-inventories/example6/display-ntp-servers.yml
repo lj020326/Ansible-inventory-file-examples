@@ -13,31 +13,30 @@
     - debug:
         var: __ntp_client
 
-
-
-- name: "Run trace var play"
-  hosts: ntp
-  gather_facts: false
-  connection: local
-  tasks:
-
-#    - name: Derive ntp_client child group of hosts based on difference of network_internal and ntp_server
-#      when: inventory_hostname in __ntp_client
-#      group_by:
-#        key: "ntp_client"
-#        parents: "ntp"
+#
+#- name: "Run trace var play"
+#  hosts: ntp
+#  gather_facts: false
+#  connection: local
+#  tasks:
+#
+##    - name: Derive ntp_client child group of hosts based on difference of network_internal and ntp_server
+##      when: inventory_hostname in __ntp_client
+##      group_by:
+##        key: "ntp_client"
+##        parents: "ntp"
+##
+##    - debug:
+##        var: trace_var
 #
 #    - debug:
 #        var: trace_var
-
-    - debug:
-        var: trace_var
-    - debug:
-        var: group_trace_var
-    - debug:
-        var: group_names
-    - debug:
-        var: foreman.ip
-    - debug:
-        var: ntp_servers
-
+#    - debug:
+#        var: group_trace_var
+#    - debug:
+#        var: group_names
+#    - debug:
+#        var: foreman.ip
+#    - debug:
+#        var: ntp_servers
+#
