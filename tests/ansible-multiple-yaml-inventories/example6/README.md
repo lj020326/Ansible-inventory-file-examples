@@ -191,7 +191,7 @@ all:
 
 The 'ntp_client_internal' _placeholder_ group also allows the binding to the respective group_vars found in [ntp_client_internal.yml](./internal/group_vars/ntp_client_internal.yml) needed for hosts that get applied to this group.
 
-The __ntp_servers__ variable setting in the ['ntp_client_internal'](./inventory/internal/group_vars/ntp_client_internal.yml) group:
+The expected results from the __ntp_servers__ variable evaluation in the ['ntp_client_internal'](./inventory/internal/group_vars/ntp_client_internal.yml) group would be as follows for each site.
 
 site1:
 ```output
