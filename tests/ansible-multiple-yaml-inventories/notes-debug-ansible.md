@@ -91,9 +91,6 @@ ansible -i ./inventory/internal -m debug -a var=foreman.ip|ansible.utils.ipaddr(
 ansible-inventory --graph -i inventory/ ntp
 ansible-inventory --graph -i inventory/ ntp_server
 ansible-inventory --graph -i inventory/internal/ ntp
-ansible-inventory --graph -i inventory/internal/ output
-ansible-inventory --graph -i inventory/internal/ output group
-ansible-inventory --graph -i inventory/internal/ output ntp
 ansible-inventory -i inventory/internal/ --list ntp
 ansible-inventory -i inventory/internal/ntp.yml --graph output
 ansible-inventory -i inventory/internal/site1.yml --graph output
