@@ -22,6 +22,7 @@
         var: __ntp_client_internal
         verbosity: 1
 
+    ## ref: https://github.com/ansible/ansible/issues/20508
     - name: "Copy __ntp_client_internal fact to other servers"
       set_fact:
         __ntp_client_internal: "{{ __ntp_client_internal }}"
