@@ -162,7 +162,7 @@ All ntp clients in the 'network_internal' group will have the __ntp_servers__ va
 
 ### Internal Network NTP Client Configuration
 
-For the internal network inventory, the 'ntp_client' group is defined with the children group of 'ntp_client_internal' which has its child group set to the inventory defined group 'network_client'.  
+For the internal network inventory, the 'ntp_client_internal' group is defined with the parent group of 'ntp_client'.  The 'ntp_client_internal' group has its child group set to the inventory defined group 'network_client'.  
 
 [inventory/internal/ntp.yml](./inventory/internal/ntp.yml):
 ```yaml
