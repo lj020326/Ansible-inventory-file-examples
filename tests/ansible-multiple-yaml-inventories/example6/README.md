@@ -159,7 +159,7 @@ All ntp clients in the 'network_internal' group will have the __ntp_servers__ va
 
 ### Internal Network NTP Client Configuration
 
-For the internal network inventory, the 'ntp_client_internal' group is defined with the parent group of 'ntp_client' without any children groups or hosts defined.  The group is a place-holder group used by the dynamic group_by strategy/pattern later in this example.
+For the internal network inventory, the 'ntp_client_internal' group is defined with the parent group of 'ntp_client' without any children groups or hosts defined.  The group is a _placeholder_ group used by the dynamic group_by strategy/pattern later in this example.
 
 [inventory/internal/ntp.yml](./inventory/internal/ntp.yml):
 ```yaml
