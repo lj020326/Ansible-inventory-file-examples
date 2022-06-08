@@ -19,6 +19,13 @@
     - debug:
         var: __ntp_client
 
+    - name: "Copy __ntp_client fact to other servers"
+      set_fact:
+        __ntp_client: "{{ __ntp_client }}"
+      delegate_to: "{{ item }}"
+      delegate_facts: True
+      with_items: "{{ groups['all'] }}"
+      when: item != "localhost"
 
 - name: "Apply ntp_client group setting to machines in the derived list"
   hosts: network_internal
