@@ -62,3 +62,7 @@ See the details for this example [here](./example5/README.md)
 ## <a id="Example-06"></a>Example 6: Using dynamic groups to derive large child groups
 
 See the details for this example [here](./example6/README.md)
+
+## Other helpful
+
+See the useful inventory debugging commands for [all examples here](./notes-debug-ansible.md)
