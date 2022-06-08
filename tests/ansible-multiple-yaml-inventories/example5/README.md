@@ -242,7 +242,7 @@ ntp_servers:
 ```
 
 ## NTP parent group
-A ntp parent group is defined such that it contains all the related groups useful for targetting plays to run against for the entire NTP configuration playbook.
+A ntp parent group is defined such that it contains all the related groups useful for targeting plays to run against for the entire NTP configuration playbook.
 
 [inventory/internal/ntp.yml](./inventory/internal/ntp.yml):
 ```yaml
