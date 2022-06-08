@@ -93,6 +93,7 @@ ansible-inventory --graph output -i inventory/ ntp
 ansible-inventory --graph output -i inventory/ ntp_server
 ansible-inventory --graph output -i inventory/internal/
 ansible-inventory --graph output -i inventory/internal/ ntp
+ansible-inventory -i inventory/ --graph ntp
 ansible-inventory -i inventory/internal/ --graph ntp
 ansible-inventory -i inventory/internal/ --graph output
 ansible-inventory -i inventory/internal/ --graph output group
