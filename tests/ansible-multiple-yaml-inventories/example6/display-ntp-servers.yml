@@ -1,8 +1,35 @@
+---
+
+- name: "Define derived ntp_client"
+  hosts: localhost
+  gather_facts: false
+  connection: local
+  tasks:
+
+    - name: Derive ntp_client child group of hosts based on difference of network_internal and ntp_server
+      set_fact:
+        __ntp_client: "{{ network_internal | difference(ntp_server) }}"
+
+    - debug:
+        var: __ntp_client
+
+
+
 - name: "Run trace var play"
   hosts: ntp
   gather_facts: false
   connection: local
   tasks:
+
+#    - name: Derive ntp_client child group of hosts based on difference of network_internal and ntp_server
+#      when: inventory_hostname in __ntp_client
+#      group_by:
+#        key: "ntp_client"
+#        parents: "ntp"
+#
+#    - debug:
+#        var: trace_var
+
     - debug:
         var: trace_var
     - debug:
@@ -13,20 +40,4 @@
         var: foreman.ip
     - debug:
         var: ntp_servers
-
-    - name: Derive ntp_client child group of hosts based on difference of network_internal and ntp_server
-      set_fact:
-        __ntp_client: "{{ network_internal | difference(ntp_server) }}"
-
-    - debug:
-        var: __ntp_client
-
-#    - name: Derive ntp_client child group of hosts based on difference of network_internal and ntp_server
-#      when: inventory_hostname in __ntp_client
-#      group_by:
-#        key: "ntp_client"
-#        parents: "ntp"
-#
-#    - debug:
-#        var: trace_var
 
