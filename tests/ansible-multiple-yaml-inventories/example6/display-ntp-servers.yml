@@ -6,7 +6,7 @@
   connection: local
   tasks:
 
-    - name: Derive ntp_client child group of hosts based on difference of network_internal and ntp_server
+    - name: Derive __ntp_client list of hosts based on difference of network_internal and ntp_server groups
       set_fact:
         __ntp_client: "{{ groups['network_internal'] | difference(groups['ntp_server']) }}"
 
@@ -20,7 +20,7 @@
         var: __ntp_client
 
 
-- name: "Run trace var play"
+- name: "Apply ntp_client group setting to machines in the derived list"
   hosts: network_internal
   gather_facts: false
   connection: local
