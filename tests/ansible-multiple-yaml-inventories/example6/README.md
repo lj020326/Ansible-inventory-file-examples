@@ -23,7 +23,7 @@ Multiply this by the number of use cases having the same/similar pattern.
 
 Ideally, we do not want to explicitly define and maintain a 'network_client' group since it can be simply derived from the obtaining the difference of the 'network' and 'network_server' groups.
 
-The following example will look to resolve the challenge of deriving the 'network_client' child group.
+The following example will look to resolve the challenge of deriving the 'network_client' child group.  More specifically, the following example will demonstrate for the case of the internal ntp client example to derive a 'ntp_client_internal' group.
 
 ## Overview
 
