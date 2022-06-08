@@ -11,6 +11,12 @@
         __ntp_client: "{{ groups['network_internal'] | difference(groups['ntp_server']) }}"
 
     - debug:
+        var: groups['network_internal']
+
+    - debug:
+        var: groups['ntp_server']
+
+    - debug:
         var: __ntp_client
 
 #
