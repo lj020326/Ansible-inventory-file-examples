@@ -246,6 +246,10 @@ A ntp parent group is defined such that it contains all the related groups usefu
 ```yaml
 all:
   children:
+    ntp:
+      children:
+        ntp_client: {}
+        ntp_server: {}
     ntp_client:
       vars:
         group_trace_var: internal/ntp.yml[ntp_client]
@@ -264,10 +268,6 @@ all:
         admin-q2-internal-s1.example.int: {}
         admin-q1-internal-s2.example.int: {}
         admin-q2-internal-s2.example.int: {}
-    ntp:
-      children:
-        ntp_client: {}
-        ntp_server: {}
 ```
 
 ## Setup play to derive the ntp_client_internal group
