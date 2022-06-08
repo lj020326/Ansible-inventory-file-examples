@@ -99,5 +99,4 @@ ansible-playbook -i ./inventory/dmz display-ntp-servers.yml
 ansible-playbook -i ./inventory/internal display-ntp-servers.yml
 ansible-playbook -i ./inventory/internal display-ntp-servers.yml 
 
-
 ```
