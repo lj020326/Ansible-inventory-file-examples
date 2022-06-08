@@ -1,5 +1,5 @@
 
-# Example 5: Using dynamic groups to derive large child groups
+# Example 6: Using dynamic groups to derive large child groups
 
 In the prior [Example 5](../example5/README.md), we successfully matched role-based group settings to an existing YAML-based inventory.
 
