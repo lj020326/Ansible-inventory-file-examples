@@ -15,6 +15,8 @@ Some examples with servers within networks serving clients machines in the respe
 
 and the list goes on...
 
+The following section addresses the network/client needs for this use case specifically with respect to ansible YAML based inventory.
+
 In the prior [Example 5](../example5/README.md), we successfully matched role-based group settings to an existing YAML-based inventory.
 
 We also leveraged a special group called 'network_client' to apply the ntp client settings.
