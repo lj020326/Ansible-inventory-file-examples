@@ -1,6 +1,16 @@
 
 # Example 6: Using dynamic groups to derive large child groups
 
+Many use cases require network-specific servers/fixtures/assets to be setup for to serve/enable clients for network groups within an enterprise.
+Some simple examples fitting this use case would be:
+- ntp servers within networks serving clients machines in the respective networks
+- dns servers within networks serving clients machines in the respective networks
+- ldap servers within networks serving clients machines in the respective networks
+- repo/archive servers within networks serving clients machines in the respective networks
+- nfs servers within networks serving clients machines in the respective networks
+
+and the list goes on...
+
 In the prior [Example 5](../example5/README.md), we successfully matched role-based group settings to an existing YAML-based inventory.
 
 We also leveraged a special group called 'network_client' to apply the ntp client settings.
