@@ -4,6 +4,7 @@
 Many use cases require network-specific servers/fixtures/assets to be setup for to serve/enable clients for network groups within an enterprise.
 Some examples with servers within networks serving clients machines in the respective networks fitting this use case:
 
+- router gateways
 - dns servers
 - ntp servers
 - ldap servers
