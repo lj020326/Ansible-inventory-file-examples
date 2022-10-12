@@ -6,6 +6,7 @@ Some simple examples fitting this use case would be:
 - ntp servers within networks serving clients machines in the respective networks
 - dns servers within networks serving clients machines in the respective networks
 - ldap servers within networks serving clients machines in the respective networks
+- postfix servers within networks serving clients machines in the respective networks
 - repo/archive servers within networks serving clients machines in the respective networks
 - nfs servers within networks serving clients machines in the respective networks
 
