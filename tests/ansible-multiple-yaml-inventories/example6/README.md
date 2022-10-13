@@ -53,10 +53,9 @@ For example, if the YAML-based inventory supported the following feature then th
 all:
   children:
     network_a_clients: 
+      hosts: network_a:!network_a_servers
       vars:
         network_server_list: "{{ groups['network_a_servers'] }}"
-
-      hosts: network_a:!network_a_servers
       
     network_a:
       hosts:
