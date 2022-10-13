@@ -38,7 +38,7 @@ However, if there are any configurations that the client group requires, then th
 
 Ideally, the YAML-based inventory could support derived groupings with operators similar to the limit directive.
 
-For example, if the YAML-based inventory supported the following feature then the solution mentioned [here](https://github.com/lj020326/ansible-inventory-file-examples/tree/develop-lj/tests/ansible-multiple-yaml-inventories/example6) would not be necessary:
+For example, if the YAML-based inventory supported the following feature then the solution mentioned in the next section would not be necessary:
 
 ```yaml
 all:
