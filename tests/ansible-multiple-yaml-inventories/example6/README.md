@@ -17,6 +17,64 @@ and the list goes on...
 
 The following section addresses the network/client needs for this use case specifically with respect to ansible YAML based inventory.
 
+
+#### Simple Example for a derived group
+
+Currently, functionality exists in ansible playbook to sufficiently limit hosts to an implied "client" set of machines using the [patterns supported by the limit feature](https://docs.ansible.com/ansible/latest/user_guide/intro_patterns.html).  For example, to specify all hosts in webservers except those in atlanta:
+
+```shell
+ansible-playbook site.yml --limit 'webservers:!atlanta' 
+```
+
+Now consider the following inventory use case.
+![Derived Groups](./img/iac-derived-groups.png)
+
+In the aforementioned diagram/example, to limit the targeted hosts to only clients:
+```shell
+ansible-playbook site.yml --limit 'network_a:!network_a_servers' 
+```
+
+However, if there are any configurations that the client group requires, then this method is insufficient.
+
+Ideally, the YAML-based inventory could support derived groupings with operators similar to the limit directive.
+
+For example, if the YAML-based inventory supported the following feature then the solution mentioned [here](https://github.com/lj020326/ansible-inventory-file-examples/tree/develop-lj/tests/ansible-multiple-yaml-inventories/example6) would not be necessary:
+
+```yaml
+all:
+  children:
+    network_a_clients: 
+      vars:
+        network_server_list: "{{ groups['network_a_servers'] }}"
+
+      hosts: network_a:!network_a_servers
+      
+    network_a:
+      hosts:
+        admin01: {}
+        admin02: {}
+        admin03: {}
+        machine10: {}
+        machine11: {}
+        machine12: {}
+        ...
+        ...
+        ...
+        machine99: {}
+    
+    network_a_servers:
+      hosts:
+        admin01: {}
+        admin02: {}
+        admin03: {}
+
+
+```
+
+But alas, the YAML-based ansible inventory does not support this feature, at least not at present.
+
+#### Generalized Case
+
 In the prior [Example 5](../example5/README.md), we successfully matched role-based group settings to an existing YAML-based inventory.
 
 We also leveraged a special group called 'network_client' to apply the ntp client settings.
