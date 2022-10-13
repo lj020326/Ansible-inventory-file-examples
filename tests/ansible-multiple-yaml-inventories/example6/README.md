@@ -1,6 +1,15 @@
 
 # Example 6: Using dynamic groups to derive large "subset" groups
 
+This example use case is related to whenever the need exists to set up a set and disjoint set of sub-group configurations required for any playbook and corresponding roles (e.g., client/server configurations).
+
+Basically / put simply, whenever there is the following conditions: 
+
+1) a large group A, and 
+2) a very small/finite subset group B within A, and 
+3) the need exists to have a 3rd group C which is the difference of A - B = C, and 
+4) the need to maintain the configuration state for group C in group_vars/groupC.yml format
+
 Many use cases require network-specific servers/fixtures/assets to be setup for to serve/enable clients for network groups within an enterprise.
 Some examples with servers within networks serving clients machines in the respective networks fitting this use case:
 
