@@ -1,5 +1,5 @@
 
-# Example 6: Using dynamic groups to derive large child groups
+# Example 6: Using dynamic groups to derive large "subset" groups
 
 Many use cases require network-specific servers/fixtures/assets to be setup for to serve/enable clients for network groups within an enterprise.
 Some examples with servers within networks serving clients machines in the respective networks fitting this use case:
@@ -20,7 +20,7 @@ The following section addresses the network/client needs for this use case speci
 
 #### Simple Example for a derived group
 
-Currently, functionality exists in ansible playbook to sufficiently limit hosts to an implied "client" set of machines using the [patterns supported by the limit feature](https://docs.ansible.com/ansible/latest/user_guide/intro_patterns.html).  For example, to specify all hosts in webservers except those in atlanta:
+Currently, functionality exists in ansible playbook to sufficiently limit hosts to an implied "subset" set of machines using the [patterns supported by the limit feature](https://docs.ansible.com/ansible/latest/user_guide/intro_patterns.html).  For example, to specify all hosts in webservers except those in atlanta:
 
 ```shell
 ansible-playbook site.yml --limit 'webservers:!atlanta' 
