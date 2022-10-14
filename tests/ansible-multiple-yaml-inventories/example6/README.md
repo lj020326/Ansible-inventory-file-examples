@@ -389,7 +389,7 @@ Next we define a play to derive the ntp_client_internal group
         __ntp_client_internal: "{{ __ntp_client_internal }}"
       delegate_to: "{{ item }}"
       delegate_facts: True
-      with_items: "{{ groups['all'] }}"
+      with_items: "{{ __ntp_client_internal | intersect(ansible_play_hosts) }}"
       when: item != "localhost"
 
 - name: "Apply ntp_client_internal group setting to machines in the derived list"
