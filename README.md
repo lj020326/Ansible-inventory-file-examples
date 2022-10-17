@@ -18,7 +18,7 @@ everything is an inventory file that goes in with the `-i` flag.
 That means you should see `-i <relative path in project>`. There are
 multiple testing commands you can use on any given inventory file.
 
-```
+```shell
 # run the absolute minimal playbook
 ansible-playbook -i top_level_file.ini debugging/hello_world.yml
 # print the hostvars for all the hosts
