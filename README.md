@@ -33,11 +33,11 @@ Reference for doing the cProfile stuff
 
 https://github.com/ansible/ansible/pull/13673
 
-```bash
+```shell
 pip install pyprof2calltree
 ```
 
-```bash
+```shell
 python -m cProfile -o outme $(which ansible-playbook) -i <rel_path> debugging/hello_world.yml
 pyprof2calltree -i outme
 qcachegrind outme.log
@@ -49,19 +49,19 @@ qcachegrind outme.log
 
 Inventory plugin path via magic `inventory_plugins` dir:
 
-```
+```shell
 ansible-inventory -i plugins/config_path/same_dir/cow.yaml --playbook-dir=plugins/config_path/same_dir --list
 ```
 
 Inventory plugin path via child directories:
 
-```
+```shell
 ansible-inventory -i plugins/config_path/sub_dir/cow.yaml --playbook-dir=plugins/config_path/sub_dir --list
 ```
 
 Inventory plugin path via relative directory and using parent directories:
 
-```
+```shell
 ansible-inventory -i plugins/config_path/inventory_dir/cow.yaml --playbook-dir=plugins/config_path/inventory_dir --list
 ```
 
@@ -69,7 +69,7 @@ All of these work testing locally.
 
 Debugging process for the final example:
 
-```
+```shell
 ansible-inventory -i plugins/config_path/inventory_dir/cow.yaml --playbook-dir=plugins/config_path/other_dir --list
 ansible-doc -t inventory -l --playbook-dir=plugins/config_path/inventory_dir
 
