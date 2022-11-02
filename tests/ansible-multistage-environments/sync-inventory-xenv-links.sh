@@ -42,7 +42,7 @@ do
   find . -type l -print -exec rm {} \;
 
   RELATIVE_PATH=$(pnrelpath "$PWD" "$INVENTORY_DIR")
-  echo "RELATIVE_PATH=${RELATIVE_PATH}"
+  echo "RELATIVE_PATH[0]=${RELATIVE_PATH}"
 
   echo "Create host related links"
   ln -sf ${RELATIVE_PATH}/host_vars ./
@@ -52,7 +52,7 @@ do
 
   echo "get the relative path between $PWD and $INVENTORY_DIR directories"
   RELATIVE_PATH=$(pnrelpath "$PWD" "$INVENTORY_DIR")
-  echo "RELATIVE_PATH=${RELATIVE_PATH}"
+  echo "RELATIVE_PATH[1]=${RELATIVE_PATH}"
 
 #  echo "ln -sf ../../group_vars/* ./"
 #  ln -sf ../../group_vars/* ./
@@ -67,7 +67,7 @@ do
   cd all
   echo "get the relative path between $PWD and $INVENTORY_DIR directories"
   RELATIVE_PATH=$(pnrelpath "$PWD" "$INVENTORY_DIR")
-  echo "RELATIVE_PATH=${RELATIVE_PATH}"
+  echo "RELATIVE_PATH[2]=${RELATIVE_PATH}"
 
   ln -sf ${RELATIVE_PATH}/group_vars/all.yml ./000_cross_env_vars.yml
 
