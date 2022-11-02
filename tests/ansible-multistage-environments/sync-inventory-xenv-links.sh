@@ -24,9 +24,9 @@ echo "PROJECT_DIR=${PROJECT_DIR}"
 echo "INVENTORY_DIR=${INVENTORY_DIR}"
 
 ENVS="
-dev
-test
-prod
+ENV_DEV
+ENV_TEST
+ENV_PROD
 "
 
 IFS=$'\n'

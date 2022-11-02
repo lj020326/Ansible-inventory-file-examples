@@ -3,25 +3,38 @@
 
 ## 1: Check that the correct hosts appear for the group 
 
-Using a group with name 'testgroup'
 ```shell
 $ ansible-inventory -i ./inventory/ --graph --yaml
 @all:
-  |--@app_123:
+  |--@end_dev:
+  |  |--@app_123:
+  |  |  |--appvm01.dev.example.int
+  |  |  |--appvm01.example.int
+  |  |  |--appvm01.test.example.int
   |  |--appvm01.dev.example.int
-  |  |--appvm01.example.int
-  |  |--appvm01.test.example.int
-  |--@ungrouped:
   |  |--appvm02.dev.example.int
+  |--@env_prod:
+  |  |--@app_123:
+  |  |  |--appvm01.dev.example.int
+  |  |  |--appvm01.example.int
+  |  |  |--appvm01.test.example.int
+  |  |--appvm01.example.int
   |  |--appvm02.example.int
+  |--@env_test:
+  |  |--@app_123:
+  |  |  |--appvm01.dev.example.int
+  |  |  |--appvm01.example.int
+  |  |  |--appvm01.test.example.int
+  |  |--appvm01.test.example.int
   |  |--appvm02.test.example.int
+  |--@ungrouped:
 ```
 
-## 1b) Check the groups are correctly setup for the hosts getting added 
+## 2: Check the group vars are correctly setup for hosts  
 
 Group based query:
 ```shell
-ansible -i Sandbox/ -m debug -a var=bootstrap_ntp_servers testgroup_lnx
+$ ansible -i ./inventory/ -m debug -a var=test_groupvar
 ntpq1s1.alsac.stjude.org | SUCCESS => {
     "bootstrap_ntp_servers": [
         "us.pool.ntp.org",
@@ -61,7 +74,7 @@ toyboxd3s4.alsac.stjude.org | SUCCESS => {
 
 Host based query:
 ```shell
-ansible -i Sandbox/ -m debug -a var=group_names dataqualityp1s*
+ansible -i ./inventory/ -m debug -a var=group_names dataqualityp1s*
 dataqualityp1s4.alsac.stjude.org | SUCCESS => {
     "group_names": [
         "odq"
@@ -135,7 +148,7 @@ ansible -i ./inventory/PCI/MEM/ -m debug -a var=ntp_servers ntp_client
 
 Query by group name:
 ```shell
-ansible-inventory -i Sandbox/ --graph --yaml odq
+ansible-inventory -i ./inventory/ --graph --yaml odq
 @odq:
   |--dataqualityp1s1.alsac.stjude.org
   |--dataqualityp1s4.alsac.stjude.org
@@ -144,7 +157,7 @@ ansible-inventory -i Sandbox/ --graph --yaml odq
 
 Other examples:
 ```shell
-ansible-inventory -i Sandbox/PCI/ --graph ntp
+ansible-inventory -i ./inventory/PCI/ --graph ntp
 @ntp:
   |--@ntp_client:
   |  |--@environment_test:
@@ -160,7 +173,7 @@ ansible-inventory -i Sandbox/PCI/ --graph ntp
 
 
 ```shell
-ansible-inventory -i Sandbox/ --graph ntp
+ansible-inventory -i ./inventory/ --graph ntp
 @ntp:
   |--@ntp_client:
   |  |--@environment_test:
@@ -257,7 +270,7 @@ ansible -i ./inventory/PCI/MEM/ -m debug -a var="foreman.ip,bootstrap_ntp_server
 
 We will now run through several ansible CLI tests to verify that the correct machines result for each respective limit used.
 
-## Show list of all Sandbox/DMZ/MEM hosts
+## Show list of all ./inventory/DMZ/MEM hosts
 
 ```shell
 $ ansible -i ./inventory/DMZ/MEM --list-hosts all
