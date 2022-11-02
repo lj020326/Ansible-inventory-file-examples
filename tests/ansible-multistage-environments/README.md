@@ -5,18 +5,16 @@
 
 Using a group with name 'testgroup'
 ```shell
-ansible-inventory -i ./inventory/ --graph --yaml testgroup_lnx
-@testgroup_lnx:
-  |--@testgroup_lnx_site1:
-  |  |--ntpq1s1.alsac.stjude.org
-  |  |--toyboxd1s1.alsac.stjude.org
-  |  |--toyboxd2s1.alsac.stjude.org
-  |  |--toyboxd3s1.alsac.stjude.org
-  |--@testgroup_lnx_site4:
-  |  |--ntpq1s4.alsac.stjude.org
-  |  |--toyboxd1s4.alsac.stjude.org
-  |  |--toyboxd2s4.alsac.stjude.org
-  |  |--toyboxd3s4.alsac.stjude.org
+$ ansible-inventory -i ./inventory/ --graph --yaml
+@all:
+  |--@app_123:
+  |  |--appvm01.dev.example.int
+  |  |--appvm01.example.int
+  |  |--appvm01.test.example.int
+  |--@ungrouped:
+  |  |--appvm02.dev.example.int
+  |  |--appvm02.example.int
+  |  |--appvm02.test.example.int
 ```
 
 ## 1b) Check the groups are correctly setup for the hosts getting added 
