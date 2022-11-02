@@ -2,3 +2,4 @@
 
 testvar: BASE_CONFIG_APP_123
 
+test_groupvar: BASE_CONFIG_APP_123
