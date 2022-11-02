@@ -41,6 +41,7 @@ do
   echo "Remove all existing links in ${ENV_DIR}"
   find . -type l -print -exec rm {} \;
 
+  echo "get the relative path between $PWD and $INVENTORY_DIR directories"
   RELATIVE_PATH=$(pnrelpath "$PWD" "$INVENTORY_DIR")
   echo "RELATIVE_PATH[0]=${RELATIVE_PATH}"
 
