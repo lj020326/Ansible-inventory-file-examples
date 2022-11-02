@@ -17,8 +17,7 @@ SCRIPT_DIR=$( cd "$( dirname "$0" )" && pwd )
 #PROJECT_DIR=$( cd "$SCRIPT_DIR/" && git rev-parse --show-toplevel )
 PROJECT_DIR="${PWD}"
 
-#INVENTORY_DIR="${PROJECT_DIR}/inventory"
-INVENTORY_DIR="./inventory"
+INVENTORY_DIR="${PROJECT_DIR}/inventory"
 
 echo "SCRIPT_DIR=${SCRIPT_DIR}"
 echo "PROJECT_DIR=${PROJECT_DIR}"
