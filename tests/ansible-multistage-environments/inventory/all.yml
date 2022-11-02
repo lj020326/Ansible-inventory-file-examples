@@ -1,0 +1,7 @@
+---
+
+all:
+  children:
+    app_dotnet:
+      children:
+        app_123: {}

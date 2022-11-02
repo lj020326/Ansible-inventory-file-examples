@@ -46,7 +46,7 @@ do
 
   echo "Create host related links"
   ln -sf ${RELATIVE_PATH}/host_vars ./
-#  ln -sf ${RELATIVE_PATH}/*.yml ./
+  ln -sf ${RELATIVE_PATH}/*.yml ./
 
   cd group_vars
 
