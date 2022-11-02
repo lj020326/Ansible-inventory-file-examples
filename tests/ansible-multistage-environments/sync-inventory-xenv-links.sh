@@ -46,7 +46,7 @@ do
 
   echo "Create host related links"
   ln -sf ${RELATIVE_PATH}/host_vars ./
-  ln -sf ${RELATIVE_PATH}/*.yml ./
+#  ln -sf ${RELATIVE_PATH}/*.yml ./
 
   cd group_vars
 
@@ -70,6 +70,7 @@ do
   echo "RELATIVE_PATH[2]=${RELATIVE_PATH}"
 
   ln -sf ${RELATIVE_PATH}/group_vars/all.yml ./000_cross_env_vars.yml
+  touch env_specific.yml
 
 done
 
