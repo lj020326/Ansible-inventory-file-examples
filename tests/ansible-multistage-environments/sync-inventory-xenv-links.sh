@@ -14,7 +14,9 @@ pnrelpath() {
 }
 
 SCRIPT_DIR=$( cd "$( dirname "$0" )" && pwd )
-PROJECT_DIR=$( cd "$SCRIPT_DIR/" && git rev-parse --show-toplevel )
+#PROJECT_DIR=$( cd "$SCRIPT_DIR/" && git rev-parse --show-toplevel )
+PROJECT_DIR="${PWD}"
+
 #INVENTORY_DIR="${PROJECT_DIR}/inventory"
 INVENTORY_DIR="./inventory"
 
@@ -78,6 +80,3 @@ ln -sf ${RELPATH}/files/scripts/bashenv
 
 echo "creating links for useful project scripts"
 cd ${PROJECT_DIR}
-chmod +x ./files/scripts/git/*.sh
-ln -sf ./files/scripts/git/stash-*.sh ./
-ln -sf ./files/scripts/git/sync-*.sh ./
