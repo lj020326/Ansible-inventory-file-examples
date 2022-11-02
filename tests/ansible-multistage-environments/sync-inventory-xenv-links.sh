@@ -51,14 +51,14 @@ do
   cd group_vars
 
   echo "get the relative path between $PWD and $INVENTORY_DIR directories"
-  RELPATH=$(pnrelpath "$PWD" "$INVENTORY_DIR")
-  echo "RELPATH=${RELPATH}"
+  RELATIVE_PATH=$(pnrelpath "$PWD" "$INVENTORY_DIR")
+  echo "RELATIVE_PATH=${RELATIVE_PATH}"
 
 #  echo "ln -sf ../../group_vars/* ./"
 #  ln -sf ../../group_vars/* ./
 
-  echo "ln -sf ${RELPATH}/group_vars/* ./"
-  ln -sf ${RELPATH}/group_vars/* ./
+  echo "ln -sf ${RELATIVE_PATH}/group_vars/* ./"
+  ln -sf ${RELATIVE_PATH}/group_vars/* ./
   rm -f all.yml
 
   ECHO "Create ${PWD}/all dir if does not exist"
@@ -66,17 +66,12 @@ do
 
   cd all
   echo "get the relative path between $PWD and $INVENTORY_DIR directories"
-  RELPATH=$(pnrelpath "$PWD" "$INVENTORY_DIR")
-  echo "RELPATH=${RELPATH}"
+  RELATIVE_PATH=$(pnrelpath "$PWD" "$INVENTORY_DIR")
+  echo "RELATIVE_PATH=${RELATIVE_PATH}"
 
-  ln -sf ${RELPATH}/group_vars/all.yml ./000_cross_env_vars.yml
+  ln -sf ${RELATIVE_PATH}/group_vars/all.yml ./000_cross_env_vars.yml
 
 done
-
-echo "creating links for roles"
-cd ${PROJECT_DIR}/roles/bootstrap-linux-user/files/
-RELPATH=$(pnrelpath "$PWD" "${PROJECT_DIR}")
-ln -sf ${RELPATH}/files/scripts/bashenv
 
 echo "creating links for useful project scripts"
 cd ${PROJECT_DIR}
