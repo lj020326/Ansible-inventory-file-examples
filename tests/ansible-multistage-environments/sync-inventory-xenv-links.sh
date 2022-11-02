@@ -41,12 +41,12 @@ do
   echo "Remove all existing links in ${ENV_DIR}"
   find . -type l -print -exec rm {} \;
 
-  RELPATH=$(pnrelpath "$PWD" "$INVENTORY_DIR")
-  echo "RELPATH=${RELPATH}"
+  RELATIVE_PATH=$(pnrelpath "$PWD" "$INVENTORY_DIR")
+  echo "RELATIVE_PATH=${RELATIVE_PATH}"
 
   echo "Create host related links"
-  ln -sf ${RELPATH}/host_vars ./
-  ln -sf ${RELPATH}/*.yml ./
+  ln -sf ${RELATIVE_PATH}/host_vars ./
+  ln -sf ${RELATIVE_PATH}/*.yml ./
 
   cd group_vars
 
