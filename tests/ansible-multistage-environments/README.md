@@ -47,7 +47,15 @@ appvm02.dev.example.int | SUCCESS => {
 
 ## Inventory Root Level queries
 
-The following should only apply to AWX 'job templates' that are for 'cross-environment' and/or 'supervisor' level inventory scans and related use-cases that do not require testing to be performed (non-change).
+The root inventory should only apply to AWX 'job templates' that meet the following requirements:
+
+- The job is 'non-mutable' such that it does not make any change to any host target.
+- The job risk level is minimal such that it can run across multiple environments independent from CICD infosec/requirements
+- only inventory scans and related use-cases usually fit into this case.
+- the job must run across environments for a specific reason/purpose. 
+  Jobs usually fitting this use case are:
+  - migration related - e.g., job to migrate/synchronize configuration from env1 to env2 
+  - promotion related - e.g., job to promote configuration from env1 to env2 
 
 ```shell
 $ ansible-inventory -i ./inventory/ --graph --yaml
