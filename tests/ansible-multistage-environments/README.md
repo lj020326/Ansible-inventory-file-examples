@@ -8,38 +8,46 @@
 ```shell
 $ ansible-inventory -i ./inventory/ENV_DEV --graph --yaml
 @all:
+  |--@app_123:
+  |  |--@app_123_dev:
+  |  |  |--appvm01.dev.example.int
+  |  |--@app_123_prod:
+  |  |--@app_123_test:
   |--@app_dotnet:
   |  |--@app_123:
-  |  |  |--appvm01.dev.example.int
+  |  |  |--@app_123_dev:
+  |  |  |  |--appvm01.dev.example.int
+  |  |  |--@app_123_prod:
+  |  |  |--@app_123_test:
   |--@env_dev:
-  |  |--@app_123:
+  |  |--@app_123_dev:
   |  |  |--appvm01.dev.example.int
   |  |--appvm01.dev.example.int
   |  |--appvm02.dev.example.int
-  |--@env_prod:
-  |--@env_test:
   |--@ungrouped:
 
 ```
 
 
-## 2: Check the group vars are correctly setup for hosts  
+## 2: Check the groups for hosts  
 
 Group based query:
 ```shell
 $ ansible -i ./inventory/ENV_DEV -m debug -a var=group_names all
-appvm01.dev.example.int | SUCCESS => {
-    "group_names": [
-        "app_123",
-        "app_dotnet",
-        "env_dev"
-    ]
-}
 appvm02.dev.example.int | SUCCESS => {
     "group_names": [
         "env_dev"
     ]
 }
+appvm01.dev.example.int | SUCCESS => {
+    "group_names": [
+        "app_123",
+        "app_123_dev",
+        "app_dotnet",
+        "env_dev"
+    ]
+}
+
 ```
 
 ```shell
