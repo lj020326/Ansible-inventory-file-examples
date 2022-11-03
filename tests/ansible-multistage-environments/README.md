@@ -34,7 +34,7 @@ $ ansible-inventory -i ./inventory/ --graph --yaml
 
 Group based query:
 ```shell
-$ ansible -i ./inventory/ -m debug -a var=test_groupvar
+$ ansible -i ./inventory/ -m debug -a var=group_names env_dev
 ntpq1s1.alsac.stjude.org | SUCCESS => {
     "bootstrap_ntp_servers": [
         "us.pool.ntp.org",

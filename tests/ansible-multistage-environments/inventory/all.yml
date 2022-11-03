@@ -4,4 +4,8 @@ all:
   children:
     app_dotnet:
       children:
-        app_123: {}
+        app_123:
+          children:
+            app_123_dev: {}
+            app_123_test: {}
+            app_123_prod: {}
