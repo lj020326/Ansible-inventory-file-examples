@@ -35,39 +35,18 @@ $ ansible-inventory -i ./inventory/ --graph --yaml
 Group based query:
 ```shell
 $ ansible -i ./inventory/ -m debug -a var=group_names env_dev
-ntpq1s1.alsac.stjude.org | SUCCESS => {
-    "bootstrap_ntp_servers": [
-        "us.pool.ntp.org",
-        "time.nist.gov",
-        "tick.viawest.net",
-        "tock.viawest.net"
+appvm01.dev.example.int | SUCCESS => {
+    "group_names": [
+        "app_123",
+        "app_123_dev",
+        "app_dotnet",
+        "env_dev"
     ]
 }
-toyboxd3s1.alsac.stjude.org | SUCCESS => {
-    "bootstrap_ntp_servers": "VARIABLE IS NOT DEFINED!"
-}
-ntpq1s4.alsac.stjude.org | SUCCESS => {
-    "bootstrap_ntp_servers": [
-        "us.pool.ntp.org",
-        "time.nist.gov",
-        "tick.viawest.net",
-        "tock.viawest.net"
+appvm02.dev.example.int | SUCCESS => {
+    "group_names": [
+        "env_dev"
     ]
-}
-toyboxd1s4.alsac.stjude.org | SUCCESS => {
-    "bootstrap_ntp_servers": "VARIABLE IS NOT DEFINED!"
-}
-toyboxd2s4.alsac.stjude.org | SUCCESS => {
-    "bootstrap_ntp_servers": "VARIABLE IS NOT DEFINED!"
-}
-toyboxd2s1.alsac.stjude.org | SUCCESS => {
-    "bootstrap_ntp_servers": []
-}
-toyboxd1s1.alsac.stjude.org | SUCCESS => {
-    "bootstrap_ntp_servers": []
-}
-toyboxd3s4.alsac.stjude.org | SUCCESS => {
-    "bootstrap_ntp_servers": "VARIABLE IS NOT DEFINED!"
 }
 
 ```
