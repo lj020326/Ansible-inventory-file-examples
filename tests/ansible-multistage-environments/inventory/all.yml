@@ -9,5 +9,5 @@ all:
     app_123:
       children:
         app_123_prod: {}
-
-
+        app_123_test: {}
+        app_123_dev: {}
