@@ -119,6 +119,24 @@ appvm02.dev.example.int | SUCCESS => {
 
 ```
 
+```shell
+$ ansible -i ./inventory/ -m debug -a var=app_env env_dev
+appvm01.dev.example.int | SUCCESS => {
+    "app_env": "test"
+}
+appvm02.dev.example.int | SUCCESS => {
+    "app_env": "dev"
+}
+appvm01.example.int | SUCCESS => {
+    "app_env": "test"
+}
+appvm01.test.example.int | SUCCESS => {
+    "app_env": "test"
+}
+
+```
+
+
 Host based query:
 ```shell
 ansible -i ./inventory/ -m debug -a var=group_names appvm01.test.example.int
