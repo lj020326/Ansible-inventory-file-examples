@@ -4,11 +4,4 @@ all:
   children:
     app_dotnet:
       children:
-        app_dotnet_dev: {}
-        app_dotnet_test: {}
-        app_dotnet_qa: {}
-    app_123:
-      children:
-        app_123_dev: {}
-        app_123_test: {}
-        app_123_prod: {}
+        app_123: {}

@@ -3,6 +3,15 @@
 
 ## 1: Check that the correct hosts appear for the group 
 
+### Env level queries
+
+```shell
+$ ansible-inventory -i ./inventory/ENV_DEV --graph --yaml
+
+```
+
+### Root level query
+
 ```shell
 $ ansible-inventory -i ./inventory/ --graph --yaml
 @all:
