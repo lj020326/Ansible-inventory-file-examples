@@ -3,3 +3,5 @@
 testvar: BASE_CONFIG
 
 test_groupvar: BASE_CONFIG
+
+app_env: "{{ dc_env }}"
