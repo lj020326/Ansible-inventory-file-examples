@@ -58,28 +58,31 @@ The root inventory should only apply to AWX 'job templates' that meet the follow
   - promotion related - e.g., job to promote configuration from env1 to env2 
 
 ```shell
-$ ansible-inventory -i ./inventory/ --graph --yaml
+ansible-inventory -i ./inventory/ --graph --yaml
 @all:
   |--@app_dotnet:
   |  |--@app_123:
-  |  |  |--@app_123_dev:
-  |  |  |  |--appvm01.dev.example.int
-  |  |  |--@app_123_prod:
-  |  |  |  |--appvm01.example.int
-  |  |  |--@app_123_test:
-  |  |  |  |--appvm01.test.example.int
-  |--@env_dev:
-  |  |--@app_123_dev:
   |  |  |--appvm01.dev.example.int
+  |  |  |--appvm01.example.int
+  |  |  |--appvm01.test.example.int
+  |--@env_dev:
+  |  |--@app_123:
+  |  |  |--appvm01.dev.example.int
+  |  |  |--appvm01.example.int
+  |  |  |--appvm01.test.example.int
   |  |--appvm01.dev.example.int
   |  |--appvm02.dev.example.int
   |--@env_prod:
-  |  |--@app_123_prod:
+  |  |--@app_123:
+  |  |  |--appvm01.dev.example.int
   |  |  |--appvm01.example.int
+  |  |  |--appvm01.test.example.int
   |  |--appvm01.example.int
   |  |--appvm02.example.int
   |--@env_test:
-  |  |--@app_123_test:
+  |  |--@app_123:
+  |  |  |--appvm01.dev.example.int
+  |  |  |--appvm01.example.int
   |  |  |--appvm01.test.example.int
   |  |--appvm01.test.example.int
   |  |--appvm02.test.example.int
