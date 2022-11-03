@@ -98,7 +98,7 @@ ansible-inventory -i ./inventory/ --graph --yaml
 
 ```
 
-## 2: Check the group vars are correctly setup for hosts  
+## 2: Check the host groups  
 
 Group based query:
 ```shell
@@ -119,19 +119,50 @@ appvm02.dev.example.int | SUCCESS => {
 
 ```
 
+## 3: Check the host group vars 
+
 ```shell
-$ ansible -i ./inventory/ -m debug -a var=app_env env_dev
+$ ansible -i ./inventory/ -m debug -a var=app_env all
+appvm01.example.int | SUCCESS => {
+    "app_env": "prod"
+}
+appvm02.example.int | SUCCESS => {
+    "app_env": "prod"
+}
 appvm01.dev.example.int | SUCCESS => {
-    "app_env": "test"
+    "app_env": "dev"
 }
 appvm02.dev.example.int | SUCCESS => {
     "app_env": "dev"
 }
-appvm01.example.int | SUCCESS => {
-    "app_env": "test"
-}
 appvm01.test.example.int | SUCCESS => {
     "app_env": "test"
+}
+appvm02.test.example.int | SUCCESS => {
+    "app_env": "test"
+}
+
+```
+
+```shell
+$ ansible -i ./inventory/ -m debug -a var=testvar,test_groupvar all
+appvm01.example.int | SUCCESS => {
+    "testvar,test_groupvar": "('BASE_CONFIG_APP_123', 'BASE_CONFIG_APP_123')"
+}
+appvm02.example.int | SUCCESS => {
+    "testvar,test_groupvar": "('BASE_CONFIG', 'BASE_CONFIG')"
+}
+appvm01.dev.example.int | SUCCESS => {
+    "testvar,test_groupvar": "('BASE_CONFIG_APP_123', 'BASE_CONFIG_APP_123')"
+}
+appvm02.dev.example.int | SUCCESS => {
+    "testvar,test_groupvar": "('BASE_CONFIG', 'BASE_CONFIG')"
+}
+appvm01.test.example.int | SUCCESS => {
+    "testvar,test_groupvar": "('BASE_CONFIG_APP_123', 'BASE_CONFIG_APP_123')"
+}
+appvm02.test.example.int | SUCCESS => {
+    "testvar,test_groupvar": "('BASE_CONFIG', 'BASE_CONFIG')"
 }
 
 ```
