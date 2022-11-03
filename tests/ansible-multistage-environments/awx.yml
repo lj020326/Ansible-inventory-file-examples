@@ -2,10 +2,6 @@
 
 tower_resources:
 
-#  execution_environments:
-#    - name: "My EE"
-#      image: quay.io/ansible/awx-ee
-
   organizations:
     - name: "TEST - DEMO ORG"
       description: "demo org"
@@ -59,37 +55,4 @@ tower_resources:
           scm_url: https://github.com/userspace/demo-inventory-repo.git
           scm_type: git
           scm_branch: master
-
-      teams:
-        - name: "TEST - Test Team 1"
-          description: "test team"
-          team_role: 'member'
-          organization_role: 'execute'
-          state: present
-          roles:
-#            - role: use
-#              inventories:
-#              - "TEST - New Inventory"
-#            - role: use
-#              projects:
-#              - "TEST - New Project"
-#            - role: use
-#              credentials:
-#              - "TEST - Example password"
-#              - "TEST - SCM Credential"
-#            - role: execute
-#              job_templates:
-#              - "TEST - Job Template to Launch"
-
-            ## if using ansible.tower - it may not support lists - change to singletons
-            - role: use
-              inventory: "TEST - New Inventory"
-            - role: use
-              project: "TEST - New Project"
-            - role: use
-              credential: "TEST - Example password"
-            - role: use
-              credential: "TEST - SCM Credential"
-            - role: execute
-              job_template: "TEST - Job Template to Launch"
 
