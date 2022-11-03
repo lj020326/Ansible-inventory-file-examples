@@ -6,28 +6,31 @@
 ```shell
 $ ansible-inventory -i ./inventory/ --graph --yaml
 @all:
-  |--@end_dev:
+  |--@app_dotnet:
   |  |--@app_123:
+  |  |  |--@app_123_dev:
+  |  |  |  |--appvm01.dev.example.int
+  |  |  |--@app_123_prod:
+  |  |  |  |--appvm01.example.int
+  |  |  |--@app_123_test:
+  |  |  |  |--appvm01.test.example.int
+  |--@env_dev:
+  |  |--@app_123_dev:
   |  |  |--appvm01.dev.example.int
-  |  |  |--appvm01.example.int
-  |  |  |--appvm01.test.example.int
   |  |--appvm01.dev.example.int
   |  |--appvm02.dev.example.int
   |--@env_prod:
-  |  |--@app_123:
-  |  |  |--appvm01.dev.example.int
+  |  |--@app_123_prod:
   |  |  |--appvm01.example.int
-  |  |  |--appvm01.test.example.int
   |  |--appvm01.example.int
   |  |--appvm02.example.int
   |--@env_test:
-  |  |--@app_123:
-  |  |  |--appvm01.dev.example.int
-  |  |  |--appvm01.example.int
+  |  |--@app_123_test:
   |  |  |--appvm01.test.example.int
   |  |--appvm01.test.example.int
   |  |--appvm02.test.example.int
   |--@ungrouped:
+
 ```
 
 ## 2: Check the group vars are correctly setup for hosts  
