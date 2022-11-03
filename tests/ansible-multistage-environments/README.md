@@ -27,11 +27,10 @@ $ ansible-inventory -i ./inventory/ENV_DEV --graph --yaml
 
 Group based query:
 ```shell
-$ ansible -i ./inventory/ -m debug -a var=group_names env_dev
+$ ansible -i ./inventory/ENV_DEV -m debug -a var=group_names all
 appvm01.dev.example.int | SUCCESS => {
     "group_names": [
         "app_123",
-        "app_123_dev",
         "app_dotnet",
         "env_dev"
     ]
@@ -41,7 +40,6 @@ appvm02.dev.example.int | SUCCESS => {
         "env_dev"
     ]
 }
-
 ```
 
 
