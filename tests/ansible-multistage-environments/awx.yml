@@ -1,0 +1,86 @@
+---
+
+tower_resources:
+
+#  execution_environments:
+#    - name: "My EE"
+#      image: quay.io/ansible/awx-ee
+
+  organizations:
+    - name: "TEST - DEMO ORG"
+      description: "demo org"
+      state: present
+
+      inventories:
+        - name: "DEMO-INVENTORY-DEV"
+          description: "Demo DEV inventory"
+          state: present
+          source:
+            name: "DEMO-INVENTORY-DEV"
+            description: Project Source for DEV Inventory
+            source: scm
+            source_path: "DEV"
+            credential: git-tower-credential
+            overwrite: True
+            update_on_launch: True
+        - name: "DEMO-INVENTORY-QA"
+          description: "Demo QA inventory"
+          state: present
+          source:
+            name: "DEMO-INVENTORY-QA"
+            description: Project Source for QA Inventory
+            source: scm
+            source_path: "QA"
+            credential: git-tower-credential
+            overwrite: True
+            update_on_launch: True
+        - name: "DEMO-INVENTORY-PROD"
+          description: "Demo PROD inventory"
+          state: present
+          source:
+            name: "DEMO-INVENTORY-PROD"
+            description: Project Source for PROD Inventory
+            source: scm
+            source_path: "PROD"
+            credential: git-tower-credential
+            overwrite: True
+            update_on_launch: True
+
+      projects:
+        - name: "Demo Inventory Project"
+          scm_type: git
+          scm_url: https://github.com/userspace/demo-inventory-repo.git
+
+      teams:
+        - name: "TEST - Test Team 1"
+          description: "test team"
+          team_role: 'member'
+          organization_role: 'execute'
+          state: present
+          roles:
+#            - role: use
+#              inventories:
+#              - "TEST - New Inventory"
+#            - role: use
+#              projects:
+#              - "TEST - New Project"
+#            - role: use
+#              credentials:
+#              - "TEST - Example password"
+#              - "TEST - SCM Credential"
+#            - role: execute
+#              job_templates:
+#              - "TEST - Job Template to Launch"
+
+            ## if using ansible.tower - it may not support lists - change to singletons
+            - role: use
+              inventory: "TEST - New Inventory"
+            - role: use
+              project: "TEST - New Project"
+            - role: use
+              credential: "TEST - Example password"
+            - role: use
+              credential: "TEST - SCM Credential"
+            - role: execute
+              job_template: "TEST - Job Template to Launch"
+
