@@ -43,18 +43,12 @@ appvm02.dev.example.int | SUCCESS => {
 ```
 
 ```shell
-$ ansible -i ./inventory/ENV_DEV -m debug -a var=dc_env all
+$ ansible -i ./inventory/ENV_DEV -m debug -a var=app_env all
 appvm01.dev.example.int | SUCCESS => {
-    "group_names": [
-        "app_123",
-        "app_dotnet",
-        "env_dev"
-    ]
+    "app_env": "dev"
 }
 appvm02.dev.example.int | SUCCESS => {
-    "group_names": [
-        "env_dev"
-    ]
+    "app_env": "dev"
 }
 ```
 
