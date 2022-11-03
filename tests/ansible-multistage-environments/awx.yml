@@ -55,4 +55,3 @@ tower_resources:
           scm_url: https://github.com/userspace/demo-inventory-repo.git
           scm_type: git
           scm_branch: master
-
