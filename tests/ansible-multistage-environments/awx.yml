@@ -47,9 +47,18 @@ tower_resources:
             update_on_launch: True
 
       projects:
-        - name: "Demo Inventory Project"
-          scm_type: git
+        - name: "DEMO-INVENTORY-DEV"
           scm_url: https://github.com/userspace/demo-inventory-repo.git
+          scm_type: git
+          scm_branch: develop
+        - name: "DEMO-INVENTORY-QA"
+          scm_url: https://github.com/userspace/demo-inventory-repo.git
+          scm_type: git
+          scm_branch: release-2022-10-11
+        - name: "DEMO-INVENTORY-PROD"
+          scm_url: https://github.com/userspace/demo-inventory-repo.git
+          scm_type: git
+          scm_branch: master
 
       teams:
         - name: "TEST - Test Team 1"
