@@ -1,16 +1,53 @@
 
-# Sanity Checks 
+# Inventory Queries/Checks 
 
-## 1: Check that the correct hosts appear for the group 
+## Inventory Environment Level queries
 
-### Env level queries
+### 1: hosts in groups 
 
 ```shell
 $ ansible-inventory -i ./inventory/ENV_DEV --graph --yaml
+@all:
+  |--@app_dotnet:
+  |  |--@app_123:
+  |  |  |--appvm01.dev.example.int
+  |--@env_dev:
+  |  |--@app_123:
+  |  |  |--appvm01.dev.example.int
+  |  |--appvm01.dev.example.int
+  |  |--appvm02.dev.example.int
+  |--@env_prod:
+  |--@env_test:
+  |--@ungrouped:
 
 ```
 
-### Root level query
+
+## 2: Check the group vars are correctly setup for hosts  
+
+Group based query:
+```shell
+$ ansible -i ./inventory/ -m debug -a var=group_names env_dev
+appvm01.dev.example.int | SUCCESS => {
+    "group_names": [
+        "app_123",
+        "app_123_dev",
+        "app_dotnet",
+        "env_dev"
+    ]
+}
+appvm02.dev.example.int | SUCCESS => {
+    "group_names": [
+        "env_dev"
+    ]
+}
+
+```
+
+
+## Inventory Root Level queries
+
+The following should only apply to AWX 'job templates' that are for 'cross-environment' and/or 'supervisor' level inventory scans and related use-cases that do not require testing to be performed (non-change).
 
 ```shell
 $ ansible-inventory -i ./inventory/ --graph --yaml
