@@ -2,10 +2,6 @@
 
 all:
   children:
-    env_dev: {}
-    env_test: {}
-    env_prod: {}
-
     app_dotnet:
       children:
         app_123: {}
