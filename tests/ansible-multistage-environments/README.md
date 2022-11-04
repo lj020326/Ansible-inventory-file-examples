@@ -63,15 +63,19 @@ appvm02.dev.example.int | SUCCESS => {
 
 ## Inventory Root Level queries
 
-The root inventory should only apply to AWX 'job templates' that meet the following requirements:
+The root inventory should only apply to AWX 'job templates' that meet the following requirements and/or characteristics:
 
-- The job is 'non-mutable' such that it does not make any change to any host target.
+- The job is 'non-mutable' such that it does not make any change to any host target. 
+  * inventory scans and related use-cases usually fit into this case.
+  * company audits/compliance checks (e.g., info-security related)
 - The job risk level is minimal such that it can run across multiple environments independent from CICD infosec/requirements
-- only inventory scans and related use-cases usually fit into this case.
-- the job must run across environments for a specific reason/purpose. 
-  Jobs usually fitting this use case are:
-  - migration related - e.g., job to migrate/synchronize configuration from env1 to env2 
-  - promotion related - e.g., job to promote configuration from env1 to env2 
+- The job must run across multiple environments for a specific reason/purpose. Jobs usually fitting this use case are:
+  * migration related - e.g., job to migrate/synchronize configuration from env1 to env2
+  * promotion related - e.g., job to promote configuration from env1 to env2
+- provisioning new machines into lower environments 
+  * Preferred/Better approach would be to perform this from the environment and not at the "Root" level
+
+Basically, limit 'Root' inventory use cases, to the extent possible, to non-mutable plays.
 
 ```shell
 $ ansible-inventory -i ./inventory/ --graph --yaml
