@@ -35,7 +35,7 @@
       when: item != "localhost"
 
 - name: "Apply ntp_client_internal group setting to machines in the derived list"
-  hosts: network_internal
+  hosts: network_internal,!ntp_server
   gather_facts: false
   connection: local
   tasks:
