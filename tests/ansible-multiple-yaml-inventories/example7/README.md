@@ -1,5 +1,5 @@
 
-# Example 6: Using dynamic groups to derive large "subset" groups
+# Example 7: Using derived/dynamic groups to derive large "subset" groups
 
 This example use case is related to whenever the need exists to set up a set and disjoint set of sub-group configurations required for any playbook and corresponding roles (e.g., client/server configurations).
 
@@ -83,29 +83,30 @@ But alas, the YAML-based ansible inventory does not support this feature, at lea
 
 #### Generalized Case
 
-In the prior [Example 5](../example5/README.md), we successfully matched role-based group settings to an existing YAML-based inventory.
+In the prior [Example 6](../example6/README.md), we successfully derived the ntp client group.
 
-We also leveraged a special group called 'network_client' to apply the ntp client settings.
+In this example we introduce a role specific parent group, called 'ntp_network', and a subgroup called 'ntp_server' in each network to simplify deriving/setting the ntp client settings.
 
 Maintaining such a group configuration can be problematic.
 
 E.g., Say the following parameters are given:
 
-* A 'network' (parent) group has 100, 1000, or lets say __N machines__ and 
-* A subset 'network_server' group only has a far less _finite number_ of instances, say 2, 4, or __M machines__
-* A derived 'network_client' defined as the parent group of __N machines__ minus the server group of __M machines__.
+* A 'ntp_network' (parent) group has 100, 1000, or lets say __N machines__ and 
+* A subset 'ntp_server' group only has a far less _finite number_ of instances, say 2, 4, or __M machines__
+* A derived 'ntp_client' derived by group_names | intersect(['ntp_network'])==1 and group_names | intersect(['ntp_server'])==0 
+  * this results in __N machines__ minus the server group of __M machines__.
 
-So given an inventory with a 'network' group of 1000 machines, and a 'network_server' group of 4 machines, then the 'network_client' group would have 996 machines. 
+So given an inventory with a 'ntp_network' group of 1000 machines, and a 'ntp_server' group of 4 machines, then the 'ntp_client' group would have 996 machines. 
 
-Maintaining a 'network_client' group for multiple use-cases would have to re-define the child group of __(N - M) machines__. 
+Maintaining a 'ntp_client' group for multiple use-cases would have to redefine the child group of __(N - M) machines__. 
 
-This can present risks since then each 'network_client' group is almost the same size as the parent 'network_server' group and exposes risks of maintaining synchronization of the group.
+This can present risks since then each 'ntp_client' group is almost the same size as the parent 'network_server' group and exposes risks of maintaining synchronization of the group.
 
 Multiply this by the number of use cases having the same/similar pattern.
 
-Ideally, we do not want to explicitly define and maintain a 'network_client' group since it can be simply derived from the obtaining the difference of the 'network' and 'network_server' groups.
+Ideally, we do not want to explicitly define and maintain a 'ntp_client' group since it can be simply derived from the obtaining the difference of the 'network' and 'network_server' groups.
 
-The following example will look to resolve the challenge of deriving the 'network_client' child group.  More specifically, the following example will demonstrate for the case of the internal ntp client example to derive a 'ntp_client_internal' group.
+The following example will look to resolve the challenge of deriving the 'ntp_client' child group.  More specifically, the following example will demonstrate for the case of the internal ntp client example to derive a 'ntp_client_internal' group.
 
 ## Overview
 
@@ -256,7 +257,7 @@ all:
       vars:
         group_trace_var: internal/ntp.yml[ntp_client_internal]
       children:
-        network_client: {}
+        ntp_client: {}
     ntp_server:
       vars:
         group_trace_var: internal/ntp.yml[ntp_server]
@@ -328,28 +329,23 @@ A ntp parent group is defined such that it contains all the related groups usefu
 ```yaml
 all:
   children:
-    ntp:
+    ntp_network:
       children:
-        ntp_client: {}
-        ntp_server: {}
-    ntp_client:
-      vars:
-        group_trace_var: internal/ntp.yml[ntp_client]
-      children:
-        ntp_client_internal: {}
-    ntp_client_internal:
-      vars:
-        group_trace_var: internal/ntp.yml[ntp_client_internal]
-      children:
-        network_client: {}
-    ntp_server:
-      vars:
-        group_trace_var: internal/ntp.yml[ntp_server]
-      hosts:
-        admin-q1-internal-s1.example.int: {}
-        admin-q2-internal-s1.example.int: {}
-        admin-q1-internal-s2.example.int: {}
-        admin-q2-internal-s2.example.int: {}
+        parent_network: {}
+        ntp_client:
+          vars:
+            group_trace_var: internal/ntp.yml[ntp_client]
+        ntp_client_internal:
+          vars:
+            group_trace_var: internal/ntp.yml[ntp_client_internal]
+        ntp_server:
+          vars:
+            group_trace_var: internal/ntp.yml[ntp_server]
+          hosts:
+            admin-q1-internal-s1.example.int: {}
+            admin-q2-internal-s1.example.int: {}
+            admin-q1-internal-s2.example.int: {}
+            admin-q2-internal-s2.example.int: {}
 ```
 
 ## Setup play to derive the ntp_client_internal group
