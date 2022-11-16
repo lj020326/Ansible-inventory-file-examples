@@ -331,7 +331,7 @@ all:
   children:
     ntp_network:
       children:
-        parent_network: {}
+        some_network: {}
         ntp_client:
           vars:
             group_trace_var: internal/ntp.yml[ntp_client]
