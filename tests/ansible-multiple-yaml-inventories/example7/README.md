@@ -356,53 +356,30 @@ Next we define a play to derive the ntp_client_internal group
 ```yaml
 ---
 
-- name: "Define derived ntp_client_internal"
-  hosts: localhost
-  gather_facts: false
-  connection: local
-  tasks:
-
-    - name: Derive __ntp_client_internal list of hosts based on difference of network_internal and ntp_server groups
-      set_fact:
-        __ntp_client_internal: "{{ groups['network_internal'] | difference(groups['ntp_server']) }}"
-
-    - debug:
-        var: groups['network_internal']
-        verbosity: 1
-
-    - debug:
-        var: groups['ntp_server']
-        verbosity: 1
-
-    - debug:
-        var: __ntp_client_internal
-        verbosity: 1
-
-    ## Using set_fact with delegate_to, delegate_facts and with_items to set facts derived on first play on localhost to targeted host
-    ## ref: https://github.com/ansible/ansible/issues/20508
-    - name: "Copy __ntp_client_internal fact to other servers"
-      set_fact:
-        __ntp_client_internal: "{{ __ntp_client_internal }}"
-      delegate_to: "{{ item }}"
-      delegate_facts: True
-      with_items: "{{ __ntp_client_internal | intersect(ansible_play_hosts) }}"
-      when: item != "localhost"
-
-- name: "Apply ntp_client_internal group setting to machines in the derived list"
-  hosts: network_internal
+- name: "Apply ntp_server"
+  hosts: ntp_server
   gather_facts: false
   connection: local
   tasks:
 
     - debug:
-        var: __ntp_client_internal
+        var: group_names
         verbosity: 1
+    - debug:
+        var: ntp_servers
+
+- name: "Apply ntp_client group setting"
+  hosts: ntp_network,!ntp_server
+  gather_facts: false
+  connection: local
+  tasks:
 
     - name: Derive ntp_client_internal child group of hosts based on difference of network_internal and ntp_server
       when: inventory_hostname in __ntp_client_internal
       group_by:
-        key: "ntp_client_internal"
-        parents: ['ntp','ntp_client','network_internal']
+        key: "ntp_client"
+    - debug:
+        var: ntp_servers
 
 - name: "Run trace var play for machines in the newly defined ntp_client_internal group"
 #  hosts: ntp_client_internal
@@ -425,7 +402,6 @@ Next we define a play to derive the ntp_client_internal group
         verbosity: 1
     - debug:
         var: ntp_servers
-
 ```
 
 ## Expected Play Results
