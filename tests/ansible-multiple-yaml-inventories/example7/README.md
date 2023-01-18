@@ -398,7 +398,7 @@ Next we define a play to derive the ntp_client_internal group
         var: group_names
         verbosity: 1
     - debug:
-        var: foreman.ip
+        var: ansible_default_ipv4.address
         verbosity: 1
     - debug:
         var: ntp_servers
