@@ -29,13 +29,11 @@
         __ntp_client_internal: "{{ __ntp_client_internal }}"
       delegate_to: "{{ item }}"
       delegate_facts: True
-#      with_items: "{{ groups['all'] }}"
-#      with_items: "{{ __ntp_client_internal | intersect(ansible_play_hosts) }}"
-      with_items: "{{ __ntp_client_internal }}"
+      with_items: "{{ groups['all'] }}"
       when: item != "localhost"
 
 - name: "Apply ntp_client_internal group setting to machines in the derived list"
-  hosts: network_internal,!ntp_server
+  hosts: network_internal
   gather_facts: false
   connection: local
   tasks:
@@ -67,7 +65,7 @@
         var: group_names
         verbosity: 1
     - debug:
-        var: foreman.ip
+        var: ansible_default_ipv4.address
         verbosity: 1
     - debug:
         var: ntp_servers

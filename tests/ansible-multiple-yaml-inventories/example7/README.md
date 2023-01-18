@@ -129,24 +129,24 @@ For each of the 4 inventory files, the following group/host hierarchy will be im
 graph TD;
     A[all] --> C[hosts]
     A[all] --> D[children]
-    C --> I["web-[dmz|internal]-q1-s[1|2].example.int"]
-    C --> J["web-[dmz|internal]-q2-s[1|2].example.int"]
+    C --> I["web01.qa.site[1|2].example.[dmz|int]"]
+    C --> J["web02.qa.site[1|2].example.[dmz|int]"]
     D --> E[rhel7]
     D --> F[environment_qa]
     D --> G["location_site[1|2]"]
     D --> H["network_[dmz|internal]"]
     E --> K[hosts]
-    K --> L["web-[dmz|internal]-q1-s[1|2].example.int"]
-    K --> M["web-[dmz|internal]-q2-s[1|2].example.int"]
+    K --> L["web01.qa.site[1|2].example.[dmz|int]"]
+    K --> M["web02.qa.site[1|2].example.[dmz|int]"]
     F --> N[hosts]
-    N --> O["web-[dmz|internal]-q1-s[1|2].example.int"]
-    N --> P["web-[dmz|internal]-q2-s[1|2].example.int"]
+    N --> O["web01.qa.site[1|2].example.[dmz|int]"]
+    N --> P["web02.qa.site[1|2].example.[dmz|int]"]
     G --> Q[hosts]
-    Q --> R["web-[dmz|internal]-q1-s[1|2].example.int"]
-    Q --> S["web-[dmz|internal]-q2-s[1|2].example.int"]
+    Q --> R["web01.qa.site[1|2].example.[dmz|int]"]
+    Q --> S["web02.qa.site[1|2].example.[dmz|int]"]
     H --> T[hosts]
-    T --> U["web-[dmz|internal]-q1-s[1|2].example.int"]
-    T --> W["web-[dmz|internal]-q2-s[1|2].example.int"]
+    T --> U["web01.qa.site[1|2].example.[dmz|int]"]
+    T --> W["web02.qa.site[1|2].example.[dmz|int]"]
 ```
 
 
@@ -155,69 +155,69 @@ Each site.yml inventory will be setup similar to the following with the "[dmz|in
 ```yaml
 all:
   hosts:
-    admin-[dmz|internal]-q1-s[1|2].example.int: 
-      trace_var: site[1|2]/admin-[dmz|internal]-q1-s[1|2].example.int
+    admin01.qa.site[1|2].example.[dmz|int]: 
+      trace_var: site[1|2]/admin01.qa.site[1|2].example.[dmz|int]
       foreman: <94 keys>
-    admin-[dmz|internal]-q2-s[1|2].example.int: 
-      trace_var: site[1|2]/admin-[dmz|internal]-q1-s[1|2].example.int
+    admin02.qa.site[1|2].example.[dmz|int]: 
+      trace_var: site[1|2]/admin01.qa.site[1|2].example.[dmz|int]
       foreman: <94 keys>
-    app-[dmz|internal]-q1-s[1|2].example.int: 
-      trace_var: site[1|2]/app-[dmz|internal]-q1-s[1|2].example.int
+    app01.qa.site[1|2].example.[dmz|int]: 
+      trace_var: site[1|2]/app01.qa.site[1|2].example.[dmz|int]
       foreman: <94 keys>
-    app-[dmz|internal]-q2-s[1|2].example.int: 
-      trace_var: site[1|2]/app-[dmz|internal]-q1-s[1|2].example.int
+    app02.qa.site[1|2].example.[dmz|int]: 
+      trace_var: site[1|2]/app01.qa.site[1|2].example.[dmz|int]
       foreman: <94 keys>
-    web-[dmz|internal]-q1-s[1|2].example.int:
-      trace_var: site[1|2]/web-[dmz|internal]-q1-s[1|2].example.int
+    web01.qa.site[1|2].example.[dmz|int]:
+      trace_var: site[1|2]/web01.qa.site[1|2].example.[dmz|int]
       foreman: <94 keys>
-    web-[dmz|internal]-q2-s[1|2].example.int:
-      trace_var: site[1|2]/rhel7/web-[dmz|internal]-q2-s[1|2].example.int
+    web02.qa.site[1|2].example.[dmz|int]:
+      trace_var: site[1|2]/rhel7/web02.qa.site[1|2].example.[dmz|int]
       foreman: <94 keys>
   children:
     rhel6:
       vars:
         trace_var: dmz/site1/rhel6
       hosts:
-        admin-[dmz|internal]-q1-s[1|2].example.int: {}
+        admin01.qa.site[1|2].example.[dmz|int]: {}
     rhel7:
       vars:
         trace_var: site[1|2]/rhel7
       hosts:
-        admin-[dmz|internal]-q2-s[1|2].example.int: {}
-        app-[dmz|internal]-q1-s[1|2].example.int: {}
-        app-[dmz|internal]-q2-s[1|2].example.int: {}
-        web-[dmz|internal]-q1-s[1|2].example.int: {}
-        web-[dmz|internal]-q2-s[1|2].example.int: {}
+        admin02.qa.site[1|2].example.[dmz|int]: {}
+        app01.qa.site[1|2].example.[dmz|int]: {}
+        app02.qa.site[1|2].example.[dmz|int]: {}
+        web01.qa.site[1|2].example.[dmz|int]: {}
+        web02.qa.site[1|2].example.[dmz|int]: {}
     environment_qa:
       vars:
         trace_var: site[1|2]/environment_qa
       hosts:
-        admin-[dmz|internal]-q1-s[1|2].example.int: {}
-        admin-[dmz|internal]-q1-s[1|2].example.int: {}
-        app-[dmz|internal]-q1-s[1|2].example.int: {}
-        app-[dmz|internal]-q2-s[1|2].example.int: {}
-        web-[dmz|internal]-q1-s[1|2].example.int: {}
-        web-[dmz|internal]-q2-s[1|2].example.int: {}
+        admin01.qa.site[1|2].example.[dmz|int]: {}
+        admin01.qa.site[1|2].example.[dmz|int]: {}
+        app01.qa.site[1|2].example.[dmz|int]: {}
+        app02.qa.site[1|2].example.[dmz|int]: {}
+        web01.qa.site[1|2].example.[dmz|int]: {}
+        web02.qa.site[1|2].example.[dmz|int]: {}
     location_site[1|2]:
       vars:
         trace_var: site[1|2]/location_site[1|2]
       hosts:
-        admin-[dmz|internal]-q1-s[1|2].example.int: {}
-        admin-[dmz|internal]-q1-s[1|2].example.int: {}
-        app-[dmz|internal]-q1-s[1|2].example.int: {}
-        app-[dmz|internal]-q2-s[1|2].example.int: {}
-        web-[dmz|internal]-q1-s[1|2].example.int: {}
-        web-[dmz|internal]-q2-s[1|2].example.int: {}
+        admin01.qa.site[1|2].example.[dmz|int]: {}
+        admin01.qa.site[1|2].example.[dmz|int]: {}
+        app01.qa.site[1|2].example.[dmz|int]: {}
+        app02.qa.site[1|2].example.[dmz|int]: {}
+        web01.qa.site[1|2].example.[dmz|int]: {}
+        web02.qa.site[1|2].example.[dmz|int]: {}
     network_[dmz|internal]:
       vars:
         trace_var: site[1|2]/network_[dmz|internal]
       hosts:
-        admin-[dmz|internal]-q1-s[1|2].example.int: {}
-        admin-[dmz|internal]-q1-s[1|2].example.int: {}
-        app-[dmz|internal]-q1-s[1|2].example.int: {}
-        app-[dmz|internal]-q2-s[1|2].example.int: {}
-        web-[dmz|internal]-q1-s[1|2].example.int: {}
-        web-[dmz|internal]-q2-s[1|2].example.int: {}
+        admin01.qa.site[1|2].example.[dmz|int]: {}
+        admin01.qa.site[1|2].example.[dmz|int]: {}
+        app01.qa.site[1|2].example.[dmz|int]: {}
+        app02.qa.site[1|2].example.[dmz|int]: {}
+        web01.qa.site[1|2].example.[dmz|int]: {}
+        web02.qa.site[1|2].example.[dmz|int]: {}
     ungrouped: {}
 
 ```
