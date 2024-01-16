@@ -451,7 +451,9 @@ ansible-controller:[example4](develop-lj)$
 
 As we can see in this article, using `group_vars` is easy to define and can be very helpful in cases where we need to work on a group of hosts. This not only saves our efforts to sort the hosts but also enhance the flexibility in our code. 
 
-The re-usability (DRY) of these group variables makes it more relevant to using in multi-stage environments to enable __configuration-as-code__ implementations for datacenter hosts.
+The re-usability, or the _don't-repeat-yourself_ principal format (__DRY__), of these group variables makes it a an efficient, effective, and low-risk method to implement in multi-stage environments to enable __configuration-as-code__ implementations for complex/advanced/elaborate datacenter host configurations.   
+
+The minimization of duplication of configuration settings using the DRY principal greatly reduces inadvertent/unintended divergence that occurs when having to maintain multiple same configurations across host groups.
 
 ## Reference
 
