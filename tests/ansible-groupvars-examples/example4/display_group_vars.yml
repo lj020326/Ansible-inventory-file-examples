@@ -9,3 +9,4 @@
           - "db_site: {{ db_site }}"
           - "db_host: {{ db_host }}"
           - "db_port: {{ db_port }}"
+          - "db_url: {{ db_url }}"

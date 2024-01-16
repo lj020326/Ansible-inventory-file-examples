@@ -344,7 +344,8 @@ ansible-controller:[example4](develop-lj)$ cat ./inventory/group_vars/site1/db_s
 ---
 
 db_site: site1
-port: 4123
+db_port: 4123
+db_url: "{{ db_host }}:{{ db_port }}"
 
 ansible-controller:[example4](develop-lj)$ cat ./inventory/group_vars/site1/dev/db_settings.yml
 ---
@@ -363,6 +364,7 @@ ansible-controller:[example4](develop-lj)$ cat ./inventory/group_vars/site2/db_s
 
 db_site: site2
 db_port: 4123
+db_url: "{{ db_host }}:{{ db_port }}"
 
 ansible-controller:[example4](develop-lj)$ cat ./inventory/group_vars/site2/dev/db_settings.yml
 ---
@@ -378,9 +380,25 @@ db_host: db.prod.site1.example.int
 
 ```
 
+We perform some preliminary inventory variable checks for the host `host-s1-p01`:
+```shell
+ansible-controller:[example4](develop-lj)$ ansible -i inventory -m debug -a var=group_names host-s1-p01
+host-s1-p01 | SUCCESS => {
+    "group_names": [
+        "site1",
+        "site1_prod"
+    ]
+}
+ansible-controller:[example4](develop-lj)$ ansible -i inventory -m debug -a var=db_host,db_host,db_url host-s1-p01
+host-s1-p01 | SUCCESS => {
+    "db_host,db_host,db_url": "('db.prod.site1.example.int', 'db.prod.site1.example.int', 'db.prod.site1.example.int:4123')"
+}
+
+```
+
 In this example, we have a playbook with below content:
 
-File `ansible_group_vars_dir.yml`
+File `display_group_vars.yml`
 ```yaml
 ---
 
@@ -393,19 +411,7 @@ File `ansible_group_vars_dir.yml`
           - "db_site: {{ db_site }}"
           - "db_host: {{ db_host }}"
           - "db_port: {{ db_port }}"
-
-```
-
-We check the group names for the host `host-s1-p01`:
-```shell
-ansible-controller:[example4](develop-lj)$ ansible -i inventory -m debug -a var=group_names host-s1-p01
-host-s1-p01 | SUCCESS => {
-    "group_names": [
-        "site1",
-        "site1_prod"
-    ]
-}
-ansible-controller:[example4](develop-lj)$ 
+          - "db_url: {{ db_url }}"
 
 ```
 
@@ -427,9 +433,10 @@ TASK [Here we print the db setting variables from different host groups] *******
 ok: [host-s1-p01] => {
     "msg": [
         "username: testuser",
-        "db_site: site2",
+        "db_site: site1",
         "db_host: db.prod.site1.example.int",
-        "db_port: 4123"
+        "db_port: 4123",
+        "db_url: db.prod.site1.example.int:4123"
     ]
 }
 
@@ -437,7 +444,6 @@ PLAY RECAP *********************************************************************
 host-s1-p01                : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 
 ansible-controller:[example4](develop-lj)$ 
-
 ```
 
 

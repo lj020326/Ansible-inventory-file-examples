@@ -1,4 +1,5 @@
 ---
 
 db_site: site1
-port: 4123
+db_port: 4123
+db_url: "{{ db_host }}:{{ db_port }}"
