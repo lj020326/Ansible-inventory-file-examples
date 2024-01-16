@@ -396,8 +396,21 @@ File `ansible_group_vars_dir.yml`
 
 ```
 
+We check the group names for the host `host-s1-p01`:
+```shell
+ansible-controller:[example4](develop-lj)$ ansible -i inventory -m debug -a var=group_names host-s1-p01
+host-s1-p01 | SUCCESS => {
+    "group_names": [
+        "site1",
+        "site1_prod"
+    ]
+}
+ansible-controller:[example4](develop-lj)$ 
+
+```
+
 Using this playbook, we try to print variables from various directories in a hierarchy under `./inventory/group_vars`.
- 
+
 When running playbook like below, we get the following output:
 
 ```shell
