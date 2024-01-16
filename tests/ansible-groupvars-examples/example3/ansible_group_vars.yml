@@ -1,8 +1,0 @@
----
-
-- hosts: host-one
-  tasks:
-    - name: Here we copy the variable value to remote
-      copy:
-        content: "fruit variable valus is {{ fruit }}\n"
-        dest: /tmp/sample.ini

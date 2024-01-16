@@ -1,0 +1,6 @@
+---
+
+- hosts: host-one
+  tasks:
+    - name: Here we print the variables from different debug:
+      msg: "Username is {{ username }} and connection port is {{ port }}"

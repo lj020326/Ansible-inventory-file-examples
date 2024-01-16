@@ -249,8 +249,9 @@ port: 22
 
 ```
 
-In this example, we have a playbook with below content. Using this playbook, we try to print variables from various directories in a hierarchy under `./inventory/group_vars`.
+In this example, we have a playbook with below content:
 
+File `ansible_group_vars_dir.yml`
 ```yaml
 
 - hosts: host-one 
@@ -260,14 +261,13 @@ In this example, we have a playbook with below content. Using this playbook, we 
 
 ```
 
-  
-- When running playbook like below
+Using this playbook, we try to print variables from various directories in a hierarchy under `./inventory/group_vars`.
+ 
+When running playbook like below, we get the following output:
 
-`ansible-playbook ansible_group_vars_dir.yaml`
-
--   We get the following output where
-
-![running playbook](img/Ansible-group_vars-8.png)
+```shell
+ansible-playbook -i inventory -l host-one ansible_group_vars_dir.yml
+```
 
 ### Conclusion
 
