@@ -253,11 +253,13 @@ In this example, we have a playbook with below content:
 
 File `ansible_group_vars_dir.yml`
 ```yaml
+---
 
-- hosts: host-one 
+- hosts: host-one
   tasks:
-    - name: Here we print the variables from different debug:
-      msg: "Username is {{ username }} and connection port is {{ port }}"
+    - name: Here we print the variables from different host groups
+      debug:
+        msg: "Username is {{ username }} and connection port is {{ port }}"
 
 ```
 
@@ -266,7 +268,25 @@ Using this playbook, we try to print variables from various directories in a hie
 When running playbook like below, we get the following output:
 
 ```shell
-ansible-playbook -i inventory -l host-one ansible_group_vars_dir.yml
+ansible-controller:[example3](develop-lj)$ ansible-playbook -i inventory -l host-one ansible_group_vars_dir.yml
+[WARNING]: Invalid characters were found in group names but not replaced, use -vvvv to see details
+
+PLAY [host-one] ******************************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] ***********************************************************************************************************************************************************************************
+[WARNING]: Platform darwin on host host-one is using the discovered Python interpreter at /Users/ljohnson/.pyenv/shims/python3.11, but future installation of another Python interpreter could change the
+meaning of that path. See https://docs.ansible.com/ansible-core/2.15/reference_appendices/interpreter_discovery.html for more information.
+ok: [host-one]
+
+TASK [Here we print the variables from different host groups] ********************************************************************************************************************************************
+ok: [host-one] => {
+    "msg": "Username is testuser and connection port is 22"
+}
+
+PLAY RECAP ***********************************************************************************************************************************************************************************************
+host-one                   : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+ansible-controller:[example3](develop-lj)$ 
 ```
 
 ### Conclusion
