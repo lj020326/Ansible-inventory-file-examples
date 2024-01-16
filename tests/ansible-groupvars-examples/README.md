@@ -142,13 +142,12 @@ On checking, we will see that the value of the variable is pulled from
 
 ### Conclusion
 
-As we can see in this article, using group_vars I easy to define and can be very helpful in cases where we need to work on a group of hosts. This not only saves our efforts to sort the hosts but also enhance the flexibility in our code. Also, the reusability of these group variables makes it more relevant to use in a production environment.
+As we can see in this article, using group_vars I easy to define and can be very helpful in cases where we need to work on a group of hosts. This not only saves our efforts to sort the hosts but also enhance the flexibility in our code. Also, the re-usability (DRY) of these group variables makes it more relevant to use in a production environment.
 
-### Recommended Articles
+## Reference
 
-This is a guide to Ansible group_vars. Here we discuss an introduction to group_vars with syntax and respective examples to implement. You can also go through our other related articles to learn more –
-
-1.  [Ansible Vault](https://www.educba.com/ansible-vault/)
-2.  [Ansible Roles](https://www.educba.com/ansible-roles/)
-3.  [Ansible Loop](https://www.educba.com/ansible-loop/)
-4.  [Ansible Tags](https://www.educba.com/ansible-tags/)
+- https://www.educba.com/ansible-group_vars/
+- [Ansible Vault](https://www.educba.com/ansible-vault/)
+- [Ansible Roles](https://www.educba.com/ansible-roles/)
+- [Ansible Loop](https://www.educba.com/ansible-loop/)
+- [Ansible Tags](https://www.educba.com/ansible-tags/)
