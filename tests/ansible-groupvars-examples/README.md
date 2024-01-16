@@ -53,7 +53,7 @@ Here we define the control server named `ansible-controller` and two remotes hos
 
 Also, `group_vars` directory is defined as ./inventory/group_vars. The inventory file is ./inventory/hosts.
 
-**Example #1**
+## **Example #1**
 
 We create three files named as below: –
 
@@ -98,18 +98,10 @@ fruit: apple
 vegetable: tomato
 ```
 
-Now running debug module in ad-hoc command like below:
+Now running debug module in ad-hoc commands below, we get the following output where we can see that only variable defined in the file ./inventory/group_vars/alpha.yml for alpha group means the host-one host will be pulled.
 
 ```shell
-$ cd ./inventory/inventory
-$ ansible alpha -m debug -a "var=fruit"   ansible gamma -m debug -a "var=fruit"
-$ ansible beta -m debug -a "var=fruit"   ansible gamma -m debug -a "var=fruit"
-$ ansible gamma -m debug -a "var=fruit"   ansible gamma -m debug -a "var=fruit"
-```
-
-We get the following output where we can see that only variable defined in the file ./inventory/group_vars/alpha.yml for alpha group means the host-one host will be pulled.
-
-```shell
+ansible-controller:[ansible-groupvars-examples](develop-lj)$ cd ./example1
 ansible-controller:[example1](main)$ ansible alpha -i inventory/hosts.yml -m debug -a "var=fruit"
 [WARNING]: Invalid characters were found in group names but not replaced, use -vvvv to see details
 host-one | SUCCESS => {
@@ -131,7 +123,7 @@ host-two | SUCCESS => {
 ansible-controller:[example1](main)$ 
 ```
 
-**Example #2**
+## **Example #2**
 
 In this example, we have a playbook with below
 
@@ -147,50 +139,129 @@ In this example, we have a playbook with below
 
 ```
 
+To keep the example simple, we set the ansible connection to the localhost for the 2 example/demo logical hosts:
+
+File `./inventory/host_vars/host-one.yml`:
+```yaml
+---
+
+ansible_host: 127.0.0.1
+ansible_connection: local
+
+```
+
+File `./inventory/host_vars/host-two.yml`:
+```yaml
+---
+
+ansible_host: 127.0.0.1
+ansible_connection: local
+
+```
+
 Also, the `group_vars` directory is defined as `./inventory/group_vars` and the files with content under this directory are listed as below:
 
 -   cat ./inventory/group_vars/alpha.yml
 -   cat ./inventory/group_vars/beta.yml
 -   cat ./inventory/group_vars/gamma.yml
 
-When running playbook like below
+When running playbook like below, we get the following output where the variable value is copied to a file on the target host.
 
-`ansible-playbook -i inventory ansible_group_vars.yml`
+```shell
+ansible-controller:[ansible-groupvars-examples](develop-lj)$ cd ./example2
+ansible-controller:[example2](develop-lj)$ ansible-playbook -i inventory ansible_group_vars.yml
+[WARNING]: Invalid characters were found in group names but not replaced, use -vvvv to see details
 
-We get the following output where the variable value is copied to a file on the target host.
+PLAY [host-one] ******************************************************************************************************************************************************************************************
 
-![Ansible group_vars - 3](img/Ansible-group_vars-3.png)
+TASK [Gathering Facts] ***********************************************************************************************************************************************************************************
+[WARNING]: Platform darwin on host host-one is using the discovered Python interpreter at /Users/ljohnson/.pyenv/shims/python3.11, but future installation of another Python interpreter could change the
+meaning of that path. See https://docs.ansible.com/ansible-core/2.15/reference_appendices/interpreter_discovery.html for more information.
+ok: [host-one]
+
+TASK [Here we copy the variable value to remote] *********************************************************************************************************************************************************
+changed: [host-one]
+
+PLAY RECAP ***********************************************************************************************************************************************************************************************
+host-one                   : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+ansible-controller:[example2](develop-lj)$ 
+
+```
 
 On checking, we will see that the value of the variable is pulled from
 
 -   ./inventory/group_vars/gamma.yml.
--   ssh host-one “cat /tmp/sample.ini”
 
-![value of the variable](img/Ansible-group_vars-4.png)
+On checking, we will see that the results are set correctly:
 
--   In this example, we have a playbook with below content. Using this playbook, we try to print variables from various directories in a hierarchy under ./inventory/group_vars.
+```shell
+ansible-controller:[example2](develop-lj)$ cat /tmp/sample.ini 
+fruit variable valus is apple
+ansible-controller:[example2](develop-lj)$ 
 
-**Example #6**
+```
 
-`hosts: host-one tasks:   name: Here we print the variables from different debug:   msg: "Username is {{ username }} and connection port is {{ port }}"`
 
--   Also, group_vars directory is defined as ./inventory/group_vars, which have files like below
+## **Example #3**
 
-`ll ./inventory/group_vars/*/*`
+File `./inventory/hosts.yml`:
+```yaml
+---
 
-![etc/ansible/group_vars](img/Ansible-group_vars-5.png)
+all:
+  children:
+    ansible-controller:
+      hosts:
+        127.0.0.1: {}
+    alpha:
+      hosts:
+        host-one: {}
+    charlie:
+      hosts:
+        host-one: {}
 
--   The files under this directory have content like below
+```
 
-`cat ./inventory/group_vars/alpha/db_settings.yml`
+Also, the `group_vars` directory is defined as `./inventory/group_vars`, which have files like below
 
-![directory](img/Ansible-group_vars-6.png)
+```shell
+ansible-controller:[ansible-groupvars-examples](develop-lj)$ cd example3
+ansible-controller:[example3](develop-lj)$ find ./inventory/group_vars/ -type f
+./inventory/group_vars/charlie/connection_setting.yml
+./inventory/group_vars/alpha/db_settings.yml
 
-`cat ./inventory/group_vars/Charlie/connection_setting.yml`
+```
 
-![Ansible group_vars - 7](img/Ansible-group_vars-7.png)
 
--   When running playbook like below
+The files under this directory have content like below:
+
+```shell
+ansible-controller:[example3](develop-lj)$ cat ./inventory/group_vars/alpha/db_settings.yml
+---
+
+username: testuser
+
+ansible-controller:[example3](develop-lj)$ cat ./inventory/group_vars/charlie/connection_setting.yml 
+---
+
+port: 22
+
+```
+
+In this example, we have a playbook with below content. Using this playbook, we try to print variables from various directories in a hierarchy under `./inventory/group_vars`.
+
+```yaml
+
+- hosts: host-one 
+  tasks:
+    - name: Here we print the variables from different debug:
+      msg: "Username is {{ username }} and connection port is {{ port }}"
+
+```
+
+  
+- When running playbook like below
 
 `ansible-playbook ansible_group_vars_dir.yaml`
 
