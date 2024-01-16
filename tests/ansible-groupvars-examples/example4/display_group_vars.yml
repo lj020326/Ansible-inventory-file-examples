@@ -1,0 +1,11 @@
+---
+
+- hosts: all
+  tasks:
+    - name: Here we print the db setting variables from different host groups
+      debug:
+        msg:
+          - "username: {{ username }}"
+          - "db_site: {{ db_site }}"
+          - "db_host: {{ db_host }}"
+          - "db_port: {{ db_port }}"

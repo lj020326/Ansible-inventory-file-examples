@@ -49,7 +49,7 @@ Also, there are a few points which should be noted when using group_vars:
 
 Now by using examples, we will try to learn about Ansible `group_vars`, which you might have to use in day to day operations. We will take some examples, but before going there, we will first understand our lab, we will use for testing purpose.
 
-Here we define the control server named `ansible-controller` and two remotes hosts named `host-one` and `host-two`. We will create playbooks and run commands on the ansible-controller node and see the results on remote hosts.
+Here we define the control server named `ansible-controller` and two remotes hosts named `host-one` and `host-two`. We will create playbooks and run commands on theansible-controller node and see the results on remote hosts.
 
 Also, `group_vars` directory is defined as ./inventory/group_vars. The inventory file is ./inventory/hosts.
 
@@ -69,7 +69,7 @@ File `./inventory/hosts.yml`:
 
 all:
   children:
-    ansible-controller:
+    ansible_controller:
       hosts:
         127.0.0.1: {}
     alpha:
@@ -211,7 +211,7 @@ File `./inventory/hosts.yml`:
 
 all:
   children:
-    ansible-controller:
+    ansible_controller:
       hosts:
         127.0.0.1: {}
     alpha:
@@ -288,6 +288,145 @@ host-one                   : ok=2    changed=0    unreachable=0    failed=0    s
 
 ansible-controller:[example3](develop-lj)$ 
 ```
+
+
+## **Example #4**
+
+File `./inventory/hosts.yml`:
+```yaml
+---
+
+---
+
+all:
+  children:
+    ansible_controller:
+      hosts:
+        127.0.0.1: {}
+    site1:
+      children:
+        prod:
+          hosts:
+            host-s1-p01: {}
+        dev:
+          hosts:
+            host-s1-d01: {}
+    site2:
+      children:
+        prod:
+          hosts:
+            host-s2-p01: {}
+        dev:
+          hosts:
+            host-s2-d01: {}
+
+```
+
+Also, the `group_vars` directory is defined as `./inventory/group_vars`, which have files like below
+
+```shell
+ansible-controller:[ansible-groupvars-examples](develop-lj)$ cd example4
+ansible-controller:[example3](develop-lj)$ find ./inventory/group_vars/ -type f
+./inventory/group_vars/site2/prod/db_settings.yml
+./inventory/group_vars/site2/db_settings.yml
+./inventory/group_vars/site2/dev/db_settings.yml
+./inventory/group_vars/site1/prod/db_settings.yml
+./inventory/group_vars/site1/db_settings.yml
+./inventory/group_vars/site1/dev/db_settings.yml
+
+```
+
+
+The files under this directory have content like below:
+
+```shell
+ansible-controller:[example4](develop-lj)$ cat ./inventory/group_vars/site1/db_settings.yml
+---
+
+db_site: site1
+port: 4123
+
+ansible-controller:[example4](develop-lj)$ cat ./inventory/group_vars/site1/dev/db_settings.yml
+---
+
+username: testuser
+db_host: "db.dev.{{ db_site }}.example.int"
+
+ansible-controller:[example4](develop-lj)$ cat ./inventory/group_vars/site1/prod/db_settings.yml
+---
+
+username: testuser
+db_host: db.prod.site1.example.int
+
+ansible-controller:[example4](develop-lj)$ cat ./inventory/group_vars/site2/db_settings.yml
+---
+
+db_site: site2
+db_port: 4123
+
+ansible-controller:[example4](develop-lj)$ cat ./inventory/group_vars/site2/dev/db_settings.yml
+---
+
+username: testuser
+db_host: "db.dev.{{ db_site }}.example.int"
+
+ansible-controller:[example4](develop-lj)$ cat ./inventory/group_vars/site2/prod/db_settings.yml
+---
+
+username: testuser
+db_host: db.prod.site1.example.int
+
+```
+
+In this example, we have a playbook with below content:
+
+File `ansible_group_vars_dir.yml`
+```yaml
+---
+
+- hosts: all
+  tasks:
+    - name: Here we print the db setting variables from different host groups
+      debug:
+        msg:
+          - "username: {{ username }}"
+          - "db_site: {{ db_site }}"
+          - "db_host: {{ db_host }}"
+          - "db_port: {{ db_port }}"
+
+```
+
+Using this playbook, we try to print variables from various directories in a hierarchy under `./inventory/group_vars`.
+ 
+When running playbook like below, we get the following output:
+
+```shell
+ansible-controller:[example4](develop-lj)$ ansible-playbook -i inventory -l host-s1-p01 display_group_vars.yml
+
+PLAY [all] ***********************************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] ***********************************************************************************************************************************************************************************
+[WARNING]: Platform darwin on host host-s1-p01 is using the discovered Python interpreter at /Users/ljohnson/.pyenv/shims/python3.11, but future installation of another Python interpreter could change
+the meaning of that path. See https://docs.ansible.com/ansible-core/2.15/reference_appendices/interpreter_discovery.html for more information.
+ok: [host-s1-p01]
+
+TASK [Here we print the db setting variables from different host groups] *********************************************************************************************************************************
+ok: [host-s1-p01] => {
+    "msg": [
+        "username: testuser",
+        "db_site: site2",
+        "db_host: db.prod.site1.example.int",
+        "db_port: 4123"
+    ]
+}
+
+PLAY RECAP ***********************************************************************************************************************************************************************************************
+host-s1-p01                : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+ansible-controller:[example4](develop-lj)$ 
+
+```
+
 
 ### Conclusion
 
