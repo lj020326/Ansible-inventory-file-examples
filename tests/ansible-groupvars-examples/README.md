@@ -291,7 +291,9 @@ ansible-controller:[example3](develop-lj)$
 
 ### Conclusion
 
-As we can see in this article, using group_vars I easy to define and can be very helpful in cases where we need to work on a group of hosts. This not only saves our efforts to sort the hosts but also enhance the flexibility in our code. Also, the re-usability (DRY) of these group variables makes it more relevant to use in a production environment.
+As we can see in this article, using `group_vars` is easy to define and can be very helpful in cases where we need to work on a group of hosts. This not only saves our efforts to sort the hosts but also enhance the flexibility in our code. 
+
+The re-usability (DRY) of these group variables makes it more relevant to using in multi-stage environments to enable __configuration-as-code__ implementations for datacenter hosts.
 
 ## Reference
 
