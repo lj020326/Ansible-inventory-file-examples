@@ -296,8 +296,6 @@ File `./inventory/hosts.yml`:
 ```yaml
 ---
 
----
-
 all:
   children:
     ansible_controller:
