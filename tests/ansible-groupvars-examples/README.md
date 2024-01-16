@@ -325,12 +325,12 @@ Also, the `group_vars` directory is defined as `./inventory/group_vars`, which h
 ```shell
 ansible-controller:[ansible-groupvars-examples](develop-lj)$ cd example4
 ansible-controller:[example3](develop-lj)$ find ./inventory/group_vars/ -type f
-./inventory/group_vars/site2/prod/db_settings.yml
 ./inventory/group_vars/site2/db_settings.yml
-./inventory/group_vars/site2/dev/db_settings.yml
-./inventory/group_vars/site1/prod/db_settings.yml
+./inventory/group_vars/site2/site2_dev/db_settings.yml
+./inventory/group_vars/site2/site2_prod/db_settings.yml
 ./inventory/group_vars/site1/db_settings.yml
-./inventory/group_vars/site1/dev/db_settings.yml
+./inventory/group_vars/site1/site1_dev/db_settings.yml
+./inventory/group_vars/site1/site1_prod/db_settings.yml
 
 ```
 
@@ -345,13 +345,13 @@ db_site: site1
 db_port: 4123
 db_url: "{{ db_host }}:{{ db_port }}"
 
-ansible-controller:[example4](develop-lj)$ cat ./inventory/group_vars/site1/dev/db_settings.yml
+ansible-controller:[example4](develop-lj)$ cat ./inventory/group_vars/site1/site1_dev/db_settings.yml
 ---
 
 username: testuser
 db_host: "db.dev.{{ db_site }}.example.int"
 
-ansible-controller:[example4](develop-lj)$ cat ./inventory/group_vars/site1/prod/db_settings.yml
+ansible-controller:[example4](develop-lj)$ cat ./inventory/group_vars/site1/site1_prod/db_settings.yml
 ---
 
 username: testuser
@@ -364,13 +364,13 @@ db_site: site2
 db_port: 4123
 db_url: "{{ db_host }}:{{ db_port }}"
 
-ansible-controller:[example4](develop-lj)$ cat ./inventory/group_vars/site2/dev/db_settings.yml
+ansible-controller:[example4](develop-lj)$ cat ./inventory/group_vars/site2/site2_dev/db_settings.yml
 ---
 
 username: testuser
 db_host: "db.dev.{{ db_site }}.example.int"
 
-ansible-controller:[example4](develop-lj)$ cat ./inventory/group_vars/site2/prod/db_settings.yml
+ansible-controller:[example4](develop-lj)$ cat ./inventory/group_vars/site2/site2_prod/db_settings.yml
 ---
 
 username: testuser
