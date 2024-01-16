@@ -1,6 +1,0 @@
-loader1_var:
-  subvar1:
-    1:
-      - foo
-    2:
-      - bar
