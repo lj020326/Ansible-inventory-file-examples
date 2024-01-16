@@ -451,7 +451,7 @@ As we can see in this article, using `group_vars` is easy to define and can be v
 
 The re-usability, or the _don't-repeat-yourself_ principal format (__DRY__), of these group variables makes it an efficient method to implement in multi-stage environments to enable __configuration-as-code__ implementations for complex/advanced/elaborate datacenter host configurations.   
 
-Using the DRY principal also __greatly reduces inadvertent/unintended divergence of configuration settings__ by minimizing duplication of configuration settings shared across host hierarchies/ancestries with the `group_vars` based approach to maintaining settings at the appropriate group level in the group hierarchy/ancestry as seen in the aforementined example 4.
+Using the DRY principal also __greatly reduces inadvertent/unintended divergence of configuration settings__ by minimizing duplication of configuration settings shared across host hierarchies/ancestries with the `group_vars` based approach to maintaining settings at the appropriate group level in the group hierarchy/ancestry as seen in the aforementioned example 4.
 
 ## Reference
 
