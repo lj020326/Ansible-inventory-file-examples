@@ -483,8 +483,6 @@ ansible-controller:[example4](develop-lj)$ ansible-playbook -i inventory apply_g
 PLAY [host-foobar] *************************************************************************************************************************************************************************************************************************
 
 TASK [Gathering Facts] *********************************************************************************************************************************************************************************************************************
-[WARNING]: Platform darwin on host host-foobar is using the discovered Python interpreter at /usr/local/Cellar/python@3.12/3.12.2/bin/python3.12, but future installation of another Python interpreter could change the meaning of that
-path. See https://docs.ansible.com/ansible-core/2.16/reference_appendices/interpreter_discovery.html for more information.
 ok: [host-foobar]
 
 TASK [Apply host 'host-foobar' to group site1_prod] ****************************************************************************************************************************************************************************************
