@@ -455,10 +455,15 @@ File `apply_group_vars.yml`
 ```yaml
 ---
 
-- hosts: all
+- hosts: host-foobar
   tasks:
+
+    - name: Apply host 'host-foobar' to group site1_prod
+      group_by:
+        key: site1_prod
+
     - name: Here we print the db setting variables from different host groups
-      debug:
+      ansible.builtin.debug:
         msg:
           - "username: {{ username }}"
           - "db_site: {{ db_site }}"
@@ -468,22 +473,25 @@ File `apply_group_vars.yml`
 
 ```
 
-Using this playbook, we try to print variables from various directories in a hierarchy under `./inventory/group_vars`.
+Using this playbook, we print variables for the target host that will be grouped in the hierarchy under `./inventory/group_vars`.
 
 When running playbook like below, we get the following output:
 
 ```shell
-ansible-controller:[example4](develop-lj)$ ansible-playbook -i inventory -l host-s1-p01 display_group_vars.yml
+ansible-controller:[example4](develop-lj)$ ansible-playbook -i inventory apply_group_vars.yml 
 
-PLAY [all] ***********************************************************************************************************************************************************************************************
+PLAY [host-foobar] *************************************************************************************************************************************************************************************************************************
 
-TASK [Gathering Facts] ***********************************************************************************************************************************************************************************
-[WARNING]: Platform darwin on host host-s1-p01 is using the discovered Python interpreter at /Users/ljohnson/.pyenv/shims/python3.11, but future installation of another Python interpreter could change
-the meaning of that path. See https://docs.ansible.com/ansible-core/2.15/reference_appendices/interpreter_discovery.html for more information.
-ok: [host-s1-p01]
+TASK [Gathering Facts] *********************************************************************************************************************************************************************************************************************
+[WARNING]: Platform darwin on host host-foobar is using the discovered Python interpreter at /usr/local/Cellar/python@3.12/3.12.2/bin/python3.12, but future installation of another Python interpreter could change the meaning of that
+path. See https://docs.ansible.com/ansible-core/2.16/reference_appendices/interpreter_discovery.html for more information.
+ok: [host-foobar]
 
-TASK [Here we print the db setting variables from different host groups] *********************************************************************************************************************************
-ok: [host-s1-p01] => {
+TASK [Apply host 'host-foobar' to group site1_prod] ****************************************************************************************************************************************************************************************
+changed: [host-foobar]
+
+TASK [Here we print the db setting variables from different host groups] *******************************************************************************************************************************************************************
+ok: [host-foobar] => {
     "msg": [
         "username: testuser",
         "db_site: site1",
@@ -493,8 +501,8 @@ ok: [host-s1-p01] => {
     ]
 }
 
-PLAY RECAP ***********************************************************************************************************************************************************************************************
-host-s1-p01                : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+PLAY RECAP *********************************************************************************************************************************************************************************************************************************
+host-foobar                : ok=3    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
 
 ansible-controller:[example4](develop-lj)$ 
 ```
