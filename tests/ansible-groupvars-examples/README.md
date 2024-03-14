@@ -425,8 +425,6 @@ ansible-controller:[example4](develop-lj)$ ansible-playbook -i inventory -l host
 PLAY [all] ***********************************************************************************************************************************************************************************************
 
 TASK [Gathering Facts] ***********************************************************************************************************************************************************************************
-[WARNING]: Platform darwin on host host-s1-p01 is using the discovered Python interpreter at /Users/ljohnson/.pyenv/shims/python3.11, but future installation of another Python interpreter could change
-the meaning of that path. See https://docs.ansible.com/ansible-core/2.15/reference_appendices/interpreter_discovery.html for more information.
 ok: [host-s1-p01]
 
 TASK [Here we print the db setting variables from different host groups] *********************************************************************************************************************************
