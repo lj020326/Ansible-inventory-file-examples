@@ -3,6 +3,8 @@
 - hosts: all
   tasks:
     - name: Here we print the db setting variables from different host groups
+
+    - name: Here we print the db setting variables from different host groups
       ansible.builtin.debug:
         msg:
           - "username: {{ username }}"
