@@ -324,7 +324,7 @@ Also, the `group_vars` directory is defined as `./inventory/group_vars`, which h
 
 ```shell
 ansible-controller:[ansible-groupvars-examples](develop-lj)$ cd example4
-ansible-controller:[example3](develop-lj)$ find ./inventory/group_vars/ -type f
+ansible-controller:[example4](develop-lj)$ find ./inventory/group_vars/ -type f
 ./inventory/group_vars/site2/db_settings.yml
 ./inventory/group_vars/site2/site2_dev/db_settings.yml
 ./inventory/group_vars/site2/site2_prod/db_settings.yml
