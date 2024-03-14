@@ -509,7 +509,6 @@ ansible-controller:[example4](develop-lj)$
 
 
 
-
 ### Conclusion
 
 As we can see in this article, using `group_vars` is easy to define and can be very helpful in cases where we need to work on a group of hosts. This not only saves our efforts to sort the hosts but also enhance the flexibility in our code. 
