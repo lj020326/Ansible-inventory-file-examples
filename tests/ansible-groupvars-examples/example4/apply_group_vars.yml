@@ -2,15 +2,10 @@
 
 - hosts: host-foobar
   tasks:
-#    - name: Apply host 'host-foobar' to group site1
-#      group_by:
-#        key: site1
 
     - name: Apply host 'host-foobar' to group site1_prod
       group_by:
         key: site1_prod
-#        parents:
-#          - site1
 
     - name: Here we print the db setting variables from different host groups
       ansible.builtin.debug:

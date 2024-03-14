@@ -394,6 +394,8 @@ host-s1-p01 | SUCCESS => {
 
 ```
 
+### Example using playbook
+
 In this example, we have a playbook with below content:
 
 File `display_group_vars.yml`
@@ -443,6 +445,61 @@ host-s1-p01                : ok=2    changed=0    unreachable=0    failed=0    s
 
 ansible-controller:[example4](develop-lj)$ 
 ```
+
+
+### Example using dynamic group_by on host
+
+In this example, we have a playbook with below content:
+
+File `apply_group_vars.yml`
+```yaml
+---
+
+- hosts: all
+  tasks:
+    - name: Here we print the db setting variables from different host groups
+      debug:
+        msg:
+          - "username: {{ username }}"
+          - "db_site: {{ db_site }}"
+          - "db_host: {{ db_host }}"
+          - "db_port: {{ db_port }}"
+          - "db_url: {{ db_url }}"
+
+```
+
+Using this playbook, we try to print variables from various directories in a hierarchy under `./inventory/group_vars`.
+
+When running playbook like below, we get the following output:
+
+```shell
+ansible-controller:[example4](develop-lj)$ ansible-playbook -i inventory -l host-s1-p01 display_group_vars.yml
+
+PLAY [all] ***********************************************************************************************************************************************************************************************
+
+TASK [Gathering Facts] ***********************************************************************************************************************************************************************************
+[WARNING]: Platform darwin on host host-s1-p01 is using the discovered Python interpreter at /Users/ljohnson/.pyenv/shims/python3.11, but future installation of another Python interpreter could change
+the meaning of that path. See https://docs.ansible.com/ansible-core/2.15/reference_appendices/interpreter_discovery.html for more information.
+ok: [host-s1-p01]
+
+TASK [Here we print the db setting variables from different host groups] *********************************************************************************************************************************
+ok: [host-s1-p01] => {
+    "msg": [
+        "username: testuser",
+        "db_site: site1",
+        "db_host: db.prod.site1.example.int",
+        "db_port: 4123",
+        "db_url: db.prod.site1.example.int:4123"
+    ]
+}
+
+PLAY RECAP ***********************************************************************************************************************************************************************************************
+host-s1-p01                : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+
+ansible-controller:[example4](develop-lj)$ 
+```
+
+
 
 
 ### Conclusion
